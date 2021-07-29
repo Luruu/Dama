@@ -1,0 +1,35 @@
+indicazioni: Si vuole progettare e implementare una variante personale del gioco della dama.
+Ogni giocatore dispone di N pedine e K Arcieri (con N e K da definire in base alla dimensione del campo da gioco) di colore diverso rispetto a quelle dell'avversario (bianco o nere). Il giocatore bianco fa sempre la prima mossa.
+L'obiettivo del gioco è quello di mangiare tutti i pezzi dell'avversario.
+Sul campo da gioco sono presenti i seguenti pezzi
+
+
+Pedina: pezzo classico che si muove solamente in diagonale di una casella alla volta e soltanto in avanti.
+Quando una pedina raggiunge una delle caselle dell'ultima riga viene promossa diventando dama.
+Ogni pedina può mangiare quelle avversarie che si trovano in avanti sulla casella diagonale accanto alla propria e che abbiano la casella successiva libera. La pedina non può mangiare una dama.
+
+
+Dama: upgrade della pedina. Può muoversi in più direzioni ad un passo alla volta. Se mangia un qualsiasi pezzo ha a disposizione un ulteriore mossa. La dama può essere mangiata solo da un'altra dama o da un arciere.
+
+
+
+Arciere: Può muoversi in più direzioni ad un passo alla volta. Se l'arciere mangia un pezzo, resuscita una pedina. Invece se viene mangiato la pedina avversaria diventa dama. Un arciere non può diventare dama e non può mangiare un altro arciere.
+... Ulteriori pezzi potrebbero essere aggiunti.
+La partita termina quando uno dei due giocatori finisce tutti i pezzi, quando un giocatore abbandona o quando il timer scade e in questo caso vince il giocatore che ha il punteggio più alto.
+Il punteggio è dato dalla tipologia e dalla quantità di pezzi mangiati, in particolare:
+Pedina: 1 punto.
+Arciere: 3 punti.
+Dama: 5 punti.
+
+N.B: Le indicazioni appena fornite si ritengono indicative e subiranno variazioni durante lo sviluppo del progetto.
+
+
+
+Pattern candidati:
+Singleton (per il campo)
+Factory method
+Command (utente che impartisce ordini alle pedine)
+Memento ()
+Observer (Timer)
+State(Per la dama? Se è un upgrade della pedina base)
+Facade (Lo usiamo se dobbiamo pulire qualche operazione complessa, se serve lo rivediamo)
