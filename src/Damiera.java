@@ -25,7 +25,7 @@ public class Damiera{
         return Instance;
     }
 
-    public void inizializeWindow(){
+    private void inizializeWindow(){
         createFrame();
         createPanel();
         frame.add(panel, BorderLayout.CENTER);
