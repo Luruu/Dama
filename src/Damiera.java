@@ -26,17 +26,9 @@ public class Damiera{
     }
 
     public void inizializeWindow() throws InterruptedException{
-        frame = new JFrame("Dama");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(N_ROWS*DIM_RETTANGOLO, N_COLS*DIM_RETTANGOLO);
-        frame.setBackground(Color.white);
-        frame.setResizable(false);
-
-        panel = new JPanel();
-        panel.setLayout(new GridLayout(N_ROWS, N_COLS, 0, 0));
-        panel.setPreferredSize(new Dimension(N_ROWS*DIM_RETTANGOLO, N_COLS*DIM_RETTANGOLO));
-        panel.setBackground(Color.white);
-
+        createFrame("Dama");this.
+        createPanel();
+        this.
         frame.add(panel, BorderLayout.CENTER);
 
 
@@ -53,18 +45,30 @@ public class Damiera{
     public void addRectangles() throws InterruptedException{
         int k;
         for (int i = 0; i < N_ROWS; i++) {
-            k = (i%2 == 0) ?  1 : 0;
-            for (int j = DIM_RETTANGOLO * k; j < N_COLS * DIM_RETTANGOLO; j += DIM_RETTANGOLO) {
-                Rectangle rettangolo = new Rectangle(j, i * DIM_RETTANGOLO, DIM_RETTANGOLO, DIM_RETTANGOLO);
-                rettangolo.setColor(Color.blue);
+            for (int j = 0; j < N_COLS; j ++) {
+                if(i%2 == 0 && j%2 != 0 || j%2 == 0 && i%2 != 0)
+                    colore = setColor(i,j);
+                else
+                    colore = Color.white;
+
+                Rectangle rettangolo = new Rectangle(0, 0, DIM_RETTANGOLO, DIM_RETTANGOLO);
+                rettangolo.setColor(colore);
                 panel.add(rettangolo);
-                System.out.println("Rettangolo aggiunto alla posizione: " + j + " " + i * DIM_RETTANGOLO);
-                Thread.sleep(400); //Utilizzato per vedere come disegna. Spoiler: non lo fa.
             }
         }
     }
 
+    private Color setColor(int i, int j){
+        Color c;
+        if(i%2 == 0 && j%2 != 0 || j%2 == 0 && i%2 != 0)
+            c = Color.darkGray;
+        else
+            c = Color.white;
+        return c;
+    }
+
     public int get_nRows(){return N_ROWS;}
+
     public int get_nCols(){return N_COLS;}
 }
 
