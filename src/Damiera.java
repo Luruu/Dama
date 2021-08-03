@@ -12,23 +12,22 @@ public class Damiera{
     private JFrame frame;
     private JPanel panel;
 
-    private Damiera (final int N_ROWS,final int N_COLS) throws InterruptedException{
+    private Damiera (final int N_ROWS,final int N_COLS){
         this.N_ROWS = N_ROWS;
         this.N_COLS = N_COLS;
         inizializeWindow();
     }
 
-    public static synchronized Damiera getInstance(int n, int c) throws InterruptedException{
+    public static synchronized Damiera getInstance(int n, int c){
         if (Instance == null){
             Instance = new Damiera(n,c);
         }
         return Instance;
     }
 
-    public void inizializeWindow() throws InterruptedException{
-        createFrame("Dama");this.
+    public void inizializeWindow(){
+        createFrame();
         createPanel();
-        this.
         frame.add(panel, BorderLayout.CENTER);
 
 
@@ -38,7 +37,7 @@ public class Damiera{
         frame.setLocation(centro_schermo.x, centro_schermo.y);
 
         frame.setVisible(true);
-        
+
         addRectangles();
     }
 
