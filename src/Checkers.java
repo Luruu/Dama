@@ -3,8 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 
 //Singleton
-public class Damiera{
-    private static Damiera Instance;
+public class Checkers{
+    private static Checkers Instance;
 
     private final int N_ROWS, N_COLS;
     final int DIM_RETTANGOLO = 96;
@@ -12,15 +12,17 @@ public class Damiera{
     private JFrame frame;
     private JPanel panel;
 
-    private Damiera (final int N_ROWS,final int N_COLS){
+    private Piece piece;
+
+    private Checkers (final int N_ROWS,final int N_COLS){
         this.N_ROWS = N_ROWS;
         this.N_COLS = N_COLS;
         inizializeWindow();
     }
 
-    public static synchronized Damiera getInstance(int n, int c){
+    public static synchronized Checkers getInstance(int n, int c){
         if (Instance == null){
-            Instance = new Damiera(n,c);
+            Instance = new Checkers(n,c);
         }
         return Instance;
     }
@@ -29,20 +31,14 @@ public class Damiera{
         createFrame();
         createPanel();
         frame.add(panel, BorderLayout.CENTER);
-
-
-        //Centered JFrame
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        Point centro_schermo = new Point(dim.width/2-frame.getSize().width/2,dim.height/2-frame.getSize().height/2);
-        frame.setLocation(centro_schermo.x, centro_schermo.y);
-
         frame.setVisible(true);
 
-        addRectangles();
+        //addRectangles();
+        addPieces();
     }
 
-    public void addRectangles() throws InterruptedException{
-        int k;
+    private void addRectangles(){
+        Color colore;
         for (int i = 0; i < N_ROWS; i++) {
             for (int j = 0; j < N_COLS; j ++) {
                 if(i%2 == 0 && j%2 != 0 || j%2 == 0 && i%2 != 0)
@@ -55,6 +51,11 @@ public class Damiera{
                 panel.add(rettangolo);
             }
         }
+    }
+
+    private void addPieces(){
+        piece = new Pawn(Color.blue);
+        panel.add(piece.getImg());
     }
 
     private Color setColor(int i, int j){
