@@ -6,13 +6,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class Image extends JPanel {
-    public BufferedImage img;
+    public BufferedImage img = null;
 
     public Image(String imgName){
-        System.out.println(imgName);
-        System.out.println("../images/" + imgName);
         try {
-            img = ImageIO.read(new File("/home/renato/IdeaProjects/Dama/images/" + imgName));
+            img = ImageIO.read(new File("/home/renato/IdeaProjects/Dama/images/corona.png"));
         } catch (IOException ex) {
             System.out.println( ex.getMessage() );
         }

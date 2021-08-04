@@ -1,16 +1,18 @@
+import javax.swing.*;
 import java.awt.*;
 
-public abstract class Piece {
+public abstract class Piece extends JPanel {
    protected final Color color;
    protected  int points;
-   protected Image img;
+   protected Image objIMG;
+
    public Piece(Color c, int p, String imgName){
       color = c;
       points = p;
-      img = new Image(imgName);
+      objIMG = new Image(imgName);
    }
 
    protected Image getImg(){
-      return img;
+      return objIMG;
    }
 }

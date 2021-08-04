@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 //import javax.swing.border.Border; Attualmente inutile
 import java.awt.*;
 
@@ -33,6 +34,9 @@ public class Checkers{
         frame.setSize(N_ROWS*DIM_RETTANGOLO, N_COLS*DIM_RETTANGOLO);
         frame.setBackground(Color.white);
         frame.setResizable(false);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        Point centro_schermo = new Point(dim.width/2-frame.getSize().width/2,dim.height/2-frame.getSize().height/2);
+        frame.setLocation(centro_schermo.x, centro_schermo.y);
     }
 
     private void createPanel(){
@@ -40,41 +44,41 @@ public class Checkers{
         panel.setLayout(new GridLayout(N_ROWS,N_COLS,0,0));
         panel.setPreferredSize(new Dimension(N_ROWS*DIM_RETTANGOLO, N_COLS*DIM_RETTANGOLO));
         panel.setBackground(Color.gray);
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        Point centro_schermo = new Point(dim.width/2-frame.getSize().width/2,dim.height/2-frame.getSize().height/2);
-        frame.setLocation(centro_schermo.x, centro_schermo.y);
     }
 
     private void inizializeWindow(){
         createFrame();
         createPanel();
-        frame.add(panel, BorderLayout.CENTER);
-        frame.setVisible(true);
-
-        //addRectangles();
         addPieces();
+
+
+        frame.add(panel);
+        frame.setVisible(true);
     }
 
-    private void addRectangles(){
+    private void addPieces(){
         Color colore;
+        Pawn pedina = new Pawn(Color.white);
         for (int i = 0; i < N_ROWS; i++) {
             for (int j = 0; j < N_COLS; j ++) {
                 if(i%2 == 0 && j%2 != 0 || j%2 == 0 && i%2 != 0)
                     colore = setColor(i,j);
                 else
                     colore = Color.white;
-
+                //0 0 because it is the grid that arranges the rectangles
                 Rectangle rettangolo = new Rectangle(0, 0, DIM_RETTANGOLO, DIM_RETTANGOLO);
                 rettangolo.setColor(colore);
+
+                //Add Pieces
+
+                rettangolo.add(pedina, BorderLayout.CENTER);
+
+
                 panel.add(rettangolo);
             }
         }
     }
 
-    private void addPieces(){
-        piece = new Pawn(Color.blue);
-        panel.add(piece.getImg());
-    }
 
     private Color setColor(int i, int j){
         Color c;
