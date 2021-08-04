@@ -27,6 +27,24 @@ public class Checkers{
         return Instance;
     }
 
+    private void createFrame(){
+        frame = new JFrame("Dama");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(N_ROWS*DIM_RETTANGOLO, N_COLS*DIM_RETTANGOLO);
+        frame.setBackground(Color.white);
+        frame.setResizable(false);
+    }
+
+    private void createPanel(){
+        panel = new JPanel();
+        panel.setLayout(new GridLayout(N_ROWS,N_COLS,0,0));
+        panel.setPreferredSize(new Dimension(N_ROWS*DIM_RETTANGOLO, N_COLS*DIM_RETTANGOLO));
+        panel.setBackground(Color.gray);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        Point centro_schermo = new Point(dim.width/2-frame.getSize().width/2,dim.height/2-frame.getSize().height/2);
+        frame.setLocation(centro_schermo.x, centro_schermo.y);
+    }
+
     private void inizializeWindow(){
         createFrame();
         createPanel();
