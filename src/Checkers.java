@@ -1,5 +1,5 @@
 import javax.swing.*;
-import javax.swing.border.Border;
+
 //import javax.swing.border.Border; Attualmente inutile
 import java.awt.*;
 
@@ -13,10 +13,7 @@ public class Checkers{
     private JFrame frame;
     private JPanel panel;
 
-    private Piece piece;
-
-    private Rectangle[][] rectangles = null;
-
+    private final Rectangle[][] rectangles;
 
     private Checkers (final int N_ROWS,final int N_COLS){
         this.N_ROWS = N_ROWS;
@@ -94,12 +91,7 @@ public class Checkers{
 
     //Return the color according to position
     private Color getColor(int i, int j){
-        Color c = (i%2 == 0 && j%2 != 0 || j%2 == 0 && i%2 != 0) ? Color.darkGray : Color.white;
-        return c;
+        return  (i%2 == 0 && j%2 != 0 || j%2 == 0 && i%2 != 0) ? Color.darkGray : Color.white;
     }
-
-    public int get_nRows(){return N_ROWS;}
-
-    public int get_nCols(){return N_COLS;}
 }
 
