@@ -27,7 +27,7 @@ N.B: Le indicazioni appena fornite si ritengono indicative e subiranno variazion
 
 Pattern candidati:
 Singleton (per il campo)
-Factory method
+Factory method (Pedine.)
 Command (utente che impartisce ordini alle pedine)
 Memento ()
 Observer (Timer)

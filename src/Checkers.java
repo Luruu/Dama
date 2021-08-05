@@ -8,7 +8,7 @@ public class Checkers{
     private static Checkers Instance;
 
     private final int N_ROWS, N_COLS;
-    final int DIM_RETTANGOLO = 96;
+    final int DIM_RECT = 96;
 
     private JFrame frame;
     private JPanel panel;
@@ -17,6 +17,7 @@ public class Checkers{
 
     private Rectangle[][] rectangles = null;
 
+
     private Checkers (final int N_ROWS,final int N_COLS){
         this.N_ROWS = N_ROWS;
         this.N_COLS = N_COLS;
@@ -24,6 +25,7 @@ public class Checkers{
         inizializeWindow();
     }
 
+    //Singleton
     public static synchronized Checkers getInstance(int n, int c){
         if (Instance == null){
             Instance = new Checkers(n,c);
@@ -31,10 +33,11 @@ public class Checkers{
         return Instance;
     }
 
+    //Create and set the main Frame
     private void createFrame(){
         frame = new JFrame("Dama");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(N_ROWS*DIM_RETTANGOLO, N_COLS*DIM_RETTANGOLO);
+        frame.setSize(N_ROWS*DIM_RECT, N_COLS*DIM_RECT);
         frame.setBackground(Color.white);
         frame.setResizable(false);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -42,29 +45,42 @@ public class Checkers{
         frame.setLocation(centro_schermo.x, centro_schermo.y);
     }
 
+    //Create and set the Panel that  will contain all the elements of the game
     private void createPanel(){
         panel = new JPanel();
         panel.setLayout(new GridLayout(N_ROWS,N_COLS,0,0));
-        panel.setPreferredSize(new Dimension(N_ROWS*DIM_RETTANGOLO, N_COLS*DIM_RETTANGOLO));
+        panel.setPreferredSize(new Dimension(N_ROWS*DIM_RECT, N_COLS*DIM_RECT));
         panel.setBackground(Color.gray);
     }
 
+    
     private void inizializeWindow(){
         createFrame();
         createPanel();
-        addRectangles();
-        //Creo rect, creo pezzo, li aggiungo ai rect e aggiungo rect al panel
-        addPieces();
-
+        createRectangles();
+        addComponents();
 
         frame.add(panel);
         frame.setVisible(true);
     }
 
-    private void addPieces(){
-        Color colore;
 
+    private void createRectangles() {
+        Color color_rect;
+        for (int i = 0; i < N_ROWS; i++)
+            for (int j = 0; j < N_COLS; j++){
+                //Color the rectangles according to their position
+                if (i % 2 == 0 && j % 2 != 0 || j % 2 == 0 && i % 2 != 0)
+                    color_rect = getColor(i,j);
+                else
+                    color_rect = Color.white;
+                rectangles[i][j] = new Rectangle(0, 0, DIM_RECT, DIM_RECT);
+                rectangles[i][j].setColor(color_rect);
+            }
+    }
 
+    //Add pieces to rect and rect to Panel
+    private void addComponents(){
         for (int i = 0; i < N_ROWS; i++)
             for (int j = 0; j < N_COLS; j++){
                 //Add Pieces
@@ -73,21 +89,12 @@ public class Checkers{
                     rectangles[i][j].add(pedina, BorderLayout.CENTER);
                 panel.add(rectangles[i][j]);
             }
-
-
-
-                //panel.add(rettangolo);
     }
 
 
-
-
+    //Return the color according to position
     private Color getColor(int i, int j){
-        Color c;
-        if(i%2 == 0 && j%2 != 0 || j%2 == 0 && i%2 != 0)
-            c = Color.darkGray;
-        else
-            c = Color.white;
+        Color c = (i%2 == 0 && j%2 != 0 || j%2 == 0 && i%2 != 0) ? Color.darkGray : Color.white;
         return c;
     }
 
