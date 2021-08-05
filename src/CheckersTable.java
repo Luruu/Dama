@@ -4,18 +4,20 @@ import javax.swing.*;
 import java.awt.*;
 
 //Singleton
-public class Checkers{
-    private static Checkers Instance;
+public class CheckersTable {
+    private static CheckersTable Instance;
 
     private final int N_ROWS, N_COLS;
     final int DIM_RECT = 96;
 
+    //Used to create game's pieces
+    private final ConcreteFactoryM factory = new ConcreteFactoryM();
     private JFrame frame;
     private JPanel panel;
 
     private final Rectangle[][] rectangles;
 
-    private Checkers (final int N_ROWS,final int N_COLS){
+    private CheckersTable(final int N_ROWS, final int N_COLS){
         this.N_ROWS = N_ROWS;
         this.N_COLS = N_COLS;
         rectangles = new Rectangle[N_ROWS][N_COLS];
@@ -23,9 +25,9 @@ public class Checkers{
     }
 
     //Singleton
-    public static synchronized Checkers getInstance(int n, int c){
+    public static synchronized CheckersTable getInstance(int n, int c){
         if (Instance == null){
-            Instance = new Checkers(n,c);
+            Instance = new CheckersTable(n,c);
         }
         return Instance;
     }
@@ -78,12 +80,18 @@ public class Checkers{
 
     //Add pieces to rect and rect to Panel
     private void addComponents(){
+        Color pieceColor;
+        String typePiece;
         for (int i = 0; i < N_ROWS; i++)
             for (int j = 0; j < N_COLS; j++){
-                //Add Pieces
-                Pawn pedina = new Pawn(Color.white);
-                if ( (i < 3 || i > 4 ) && rectangles[i][j].getColor() == Color.darkGray)
-                    rectangles[i][j].add(pedina, BorderLayout.CENTER);
+                //Add Pieces in the correct position
+                if ( (i < 3 || i > 4 ) && rectangles[i][j].getColor() == Color.darkGray){
+                    pieceColor = (i<3) ? Color.green : Color.red;
+                    typePiece = ((i == 0 && j == 7) || (i == 7 && j == 0 )) ? "archer": "pawn";
+                    Piece piece = factory.factoryMethod(typePiece, pieceColor);
+                    rectangles[i][j].add(piece, BorderLayout.CENTER);
+                }
+
                 panel.add(rectangles[i][j]);
             }
     }

@@ -1,2 +1,2 @@
 # Dama
- Game of Checkers revised for university project
+ Game of CheckersTable revised for university project

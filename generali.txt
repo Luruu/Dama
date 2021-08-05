@@ -1,3 +1,9 @@
+Questione rettangolo JPanel
+Abbiamo messo N rettangoli (che sono pannelli) sul pannello principale perché a causa del Layout a griglia non potevamo sovrapporre più oggetti in una determinata
+posizione del pannello principale, per cui deciso che i rettangoli fossero anche loro dei pannelli che potevano contenere (quindi graficamente sovrapporre)
+dei pezzi.
+
+
 indicazioni: Si vuole progettare e implementare una variante personale del gioco della dama.
 Ogni giocatore dispone di N pedine e K Arcieri (con N e K da definire in base alla dimensione del campo da gioco) di colore diverso rispetto a quelle dell'avversario (bianco o nere). Il giocatore bianco fa sempre la prima mossa.
 L'obiettivo del gioco è quello di mangiare tutti i pezzi dell'avversario.
@@ -23,11 +29,24 @@ Dama: 5 punti.
 
 N.B: Le indicazioni appena fornite si ritengono indicative e subiranno variazioni durante lo sviluppo del progetto.
 
+Colori giocatori e pedine.
+Gicoatore 1 e le sue pedine -> Verde
+Giocatore 2 e le sue pedine -> Rosso
+
 
 
 Pattern candidati:
-Singleton (per il campo)
-Factory method (Pedine.)
+Singleton (per il campo) Fatto
+Factory method (Pedine.) Fatto
+
+Product -> Piece
+Concrete -> Pawn && Arcer
+
+Creator  concreateCreator
+
+
+
+
 Command (utente che impartisce ordini alle pedine)
 Memento ()
 Observer (Timer)
