@@ -1,10 +1,9 @@
 import java.awt.*;
 public class Pawn extends Piece{
     public Pawn(Color c){
-        super(c,1, "images/pedina.png");
+        super(c,1, "/images/pedina.png");
         setPreferredSize(new Dimension(82,82));
         //setLocation(43,43);
-        System.out.println(getSize());
     }
 
     protected void paintComponent(Graphics g){
@@ -14,5 +13,4 @@ public class Pawn extends Piece{
         //g.setColor(Color.green);
         //g.fillRect(0,0,180,180);
     }
-
 }

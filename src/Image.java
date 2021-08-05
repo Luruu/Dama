@@ -7,10 +7,12 @@ import java.io.IOException;
 
 public class Image extends JPanel {
     public BufferedImage img = null;
-
+    String filePath = new File("").getAbsolutePath();
+///home/renato/IdeaProjects/Dama/images/pedina.png
     public Image(String imgName){
+        filePath = filePath.concat(imgName);
         try {
-            img = ImageIO.read(new File("/home/renato/IdeaProjects/Dama/images/corona.png"));
+            img = ImageIO.read(new File(filePath));
         } catch (IOException ex) {
             System.out.println( ex.getMessage() );
         }

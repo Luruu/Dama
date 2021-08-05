@@ -15,9 +15,12 @@ public class Checkers{
 
     private Piece piece;
 
+    private Rectangle[][] rectangles = null;
+
     private Checkers (final int N_ROWS,final int N_COLS){
         this.N_ROWS = N_ROWS;
         this.N_COLS = N_COLS;
+        rectangles = new Rectangle[N_ROWS][N_COLS];
         inizializeWindow();
     }
 
@@ -49,6 +52,8 @@ public class Checkers{
     private void inizializeWindow(){
         createFrame();
         createPanel();
+        addRectangles();
+        //Creo rect, creo pezzo, li aggiungo ai rect e aggiungo rect al panel
         addPieces();
 
 
@@ -58,29 +63,26 @@ public class Checkers{
 
     private void addPieces(){
         Color colore;
-        Pawn pedina = new Pawn(Color.white);
-        for (int i = 0; i < N_ROWS; i++) {
-            for (int j = 0; j < N_COLS; j ++) {
-                if(i%2 == 0 && j%2 != 0 || j%2 == 0 && i%2 != 0)
-                    colore = setColor(i,j);
-                else
-                    colore = Color.white;
-                //0 0 because it is the grid that arranges the rectangles
-                Rectangle rettangolo = new Rectangle(0, 0, DIM_RETTANGOLO, DIM_RETTANGOLO);
-                rettangolo.setColor(colore);
 
+
+        for (int i = 0; i < N_ROWS; i++)
+            for (int j = 0; j < N_COLS; j++){
                 //Add Pieces
-
-                rettangolo.add(pedina, BorderLayout.CENTER);
-
-
-                panel.add(rettangolo);
+                Pawn pedina = new Pawn(Color.white);
+                if ( (i < 3 || i > 4 ) && rectangles[i][j].getColor() == Color.darkGray)
+                    rectangles[i][j].add(pedina, BorderLayout.CENTER);
+                panel.add(rectangles[i][j]);
             }
-        }
+
+
+
+                //panel.add(rettangolo);
     }
 
 
-    private Color setColor(int i, int j){
+
+
+    private Color getColor(int i, int j){
         Color c;
         if(i%2 == 0 && j%2 != 0 || j%2 == 0 && i%2 != 0)
             c = Color.darkGray;
