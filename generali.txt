@@ -50,6 +50,16 @@ Creator concreateCreator
 Command (utente che impartisce ordini alle pedine)
 Client-> invoker -> Ricevitore
 
+Client = player che al click invoca l'invoker per impartire i comandi
+Invoker  = nuova classe
+Command = interfaccia
+
+
+Concrete Command = è la classe che ha il compito di inviare
+il comando alla componente giusta
+
+Receiver = sono tutte le nostre componenti
+che implementano la logica dei loro movimento}
 
 
 Memento ()

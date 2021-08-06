@@ -4,11 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 
 //Singleton
+//Command Receiver
 public class CheckersTable {
     private static CheckersTable Instance;
 
-    private final int N_ROWS, N_COLS;
-    private final int DIM_RECT = 96;
+    private final int N_ROWS, N_COLS, DIM_RECT;
+    private Player p1,p2;
 
     //Used to create game's pieces
     private final ConcreteFactoryM factory = new ConcreteFactoryM();
@@ -17,17 +18,20 @@ public class CheckersTable {
 
     private final Rectangle[][] rectangles;
 
-    private CheckersTable(final int N_ROWS, final int N_COLS){
+    private CheckersTable(final int N_ROWS, final int N_COLS, final int dim, final String playerName, final String playerName2){
         this.N_ROWS = N_ROWS;
         this.N_COLS = N_COLS;
+        DIM_RECT = dim;
         rectangles = new Rectangle[N_ROWS][N_COLS];
+        p1 = new Player(Color.green,playerName);
+        p2 = new Player(Color.red, playerName2);
         inizializeWindow();
     }
 
     //Singleton
-    public static synchronized CheckersTable getInstance(int n, int c){
+    public static synchronized CheckersTable getInstance(final int n, final int c, final int dim, final String playerName1, final String playerName2){
         if (Instance == null){
-            Instance = new CheckersTable(n,c);
+            Instance = new CheckersTable(n,c,dim, playerName1, playerName2);
         }
         return Instance;
     }
@@ -57,7 +61,8 @@ public class CheckersTable {
         createFrame();
         createPanel();
         createRectangles();
-        addComponents();
+
+        addComponents(p1,p2);
 
         frame.add(panel);
         frame.setVisible(true);
@@ -79,7 +84,7 @@ public class CheckersTable {
     }
 
     //Add pieces to rect and rect to Panel
-    private void addComponents(){
+    private void addComponents(Player p1, Player p2){
         Color pieceColor;
         String typePiece;
         for (int i = 0; i < N_ROWS; i++)
@@ -89,11 +94,13 @@ public class CheckersTable {
                     pieceColor = (i<3) ? Color.green : Color.red;
                     typePiece = ((i == 0 && j == 7) || (i == 7 && j == 0 )) ? "archer": "pawn";
                     Piece piece = factory.factoryMethod(typePiece, pieceColor);
-                    piece.addMouseListener(new Player(pieceColor, "Renato"));
-                    rectangles[i][j].add(piece, BorderLayout.CENTER);
 
+                    //Assignment of the player based on the color of the pawn
+                    piece.addMouseListener((pieceColor == Color.red) ? p1 : p2);
+                    rectangles[i][j].add(piece, BorderLayout.CENTER);
                 }
                 panel.add(rectangles[i][j]);
+
             }
     }
 

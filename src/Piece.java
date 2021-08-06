@@ -6,6 +6,7 @@ public abstract class Piece extends JComponent {
    protected  int points;
    protected Image objIMG;
 
+
    public Piece(Color c, int p, String imgName){
       color = c;
       points = p;
