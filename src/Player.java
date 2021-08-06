@@ -10,7 +10,7 @@ public class Player extends MouseAdapter{
     private int points;
 
 
-    public Player(Color c, String n ){
+    public Player(Color c, String n){
         super();
         color = c;
         nome = n;

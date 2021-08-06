@@ -42,15 +42,15 @@ public  class Rectangle extends JPanel {
             for (int j = 0; j < N_COLS; j++){
                 //Add Pieces in the correct position
                 if ( (i < 3 || i > 4 ) && rectangles[i][j].color == Color.darkGray){
-                    pieceColor = (i<3) ? Color.green : Color.red;
                     typePiece = ((i == 0 && j == 7) || (i == 7 && j == 0 )) ? "archer": "pawn";
+                    pieceColor = (i<3) ? Color.green : Color.red;
+                    
                     Piece piece = factory.factoryMethod(typePiece, pieceColor);
 
                     //Assignment of the player based on the color of the pawn
                     piece.addMouseListener((pieceColor == Color.red) ? p1 : p2);
                     rectangles[i][j].add(piece, BorderLayout.CENTER);
                 }
-                
             }
     }
 
