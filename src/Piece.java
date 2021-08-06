@@ -1,12 +1,19 @@
 import javax.swing.*;
+import javax.swing.event.MouseInputListener;
+
 import java.awt.*;
 
-public abstract class Piece extends JComponent {
+public abstract class Piece extends JComponent{
    protected final Color color;
    protected  int points;
    protected Image objIMG;
    protected String IMG_Path;
-
+   int i,j;
+   
+   public void setIJ(int i, int j){
+      this.i=i;
+      this.j=j;
+   }
 
    public Piece(Color c, int p, String imgName){
       color = c;
@@ -19,4 +26,6 @@ public abstract class Piece extends JComponent {
       super.paintComponent(g);
       g.drawImage(objIMG.img,0,0,null);
    }
+
+
 }

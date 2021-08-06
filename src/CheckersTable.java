@@ -13,7 +13,7 @@ public class CheckersTable {
 
     private JFrame frame;
     private JPanel panel;
-
+    
     private static Rectangle[][] rectangles;
 
     private CheckersTable(final int N_ROWS, final int N_COLS, final int dim, final String playerName, final String playerName2){

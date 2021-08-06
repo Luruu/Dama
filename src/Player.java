@@ -18,6 +18,10 @@ public class Player extends MouseAdapter{
     }
 
     public void mouseClicked(MouseEvent e){
-        System.out.println(e.getLocationOnScreen());
-    }
+        System.out.println(e.getX() + " " + e.getY());
+        //Come otteniamo I E J della componente cliccata?
+        //Dobbiamo passare a invoker i e j
+        System.out.println(e.getComponent().getX());
+        
+     }
 }

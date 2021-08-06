@@ -46,10 +46,11 @@ public  class Rectangle extends JPanel {
                     pieceColor = (i<3) ? Color.green : Color.red;
                     
                     Piece piece = factory.factoryMethod(typePiece, pieceColor);
-
+                    
                     //Assignment of the player based on the color of the pawn
                     piece.addMouseListener((pieceColor == Color.red) ? p1 : p2);
                     rectangles[i][j].add(piece, BorderLayout.CENTER);
+                    piece.setIJ(i,j);
                 }
             }
     }
