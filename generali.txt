@@ -42,12 +42,16 @@ Factory method (Pedine.) Fatto
 Product -> Piece
 Concrete -> Pawn && Arcer
 
-Creator  concreateCreator
+Creator concreateCreator
 
 
 
 
 Command (utente che impartisce ordini alle pedine)
+Client-> invoker -> Ricevitore
+
+
+
 Memento ()
 Observer (Timer)
 State(Per la dama? Se è un upgrade della pedina base)

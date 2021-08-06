@@ -8,7 +8,7 @@ public class CheckersTable {
     private static CheckersTable Instance;
 
     private final int N_ROWS, N_COLS;
-    final int DIM_RECT = 96;
+    private final int DIM_RECT = 96;
 
     //Used to create game's pieces
     private final ConcreteFactoryM factory = new ConcreteFactoryM();
@@ -89,9 +89,10 @@ public class CheckersTable {
                     pieceColor = (i<3) ? Color.green : Color.red;
                     typePiece = ((i == 0 && j == 7) || (i == 7 && j == 0 )) ? "archer": "pawn";
                     Piece piece = factory.factoryMethod(typePiece, pieceColor);
+                    piece.addMouseListener(new Player(pieceColor, "Renato"));
                     rectangles[i][j].add(piece, BorderLayout.CENTER);
-                }
 
+                }
                 panel.add(rectangles[i][j]);
             }
     }
