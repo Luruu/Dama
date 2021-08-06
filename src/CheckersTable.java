@@ -11,18 +11,16 @@ public class CheckersTable {
     private final int N_ROWS, N_COLS, DIM_RECT;
     private Player p1,p2;
 
-    //Used to create game's pieces
-    private final ConcreteFactoryM factory = new ConcreteFactoryM();
     private JFrame frame;
     private JPanel panel;
 
-    private final Rectangle[][] rectangles;
+    private static Rectangle[][] rectangles;
 
     private CheckersTable(final int N_ROWS, final int N_COLS, final int dim, final String playerName, final String playerName2){
         this.N_ROWS = N_ROWS;
         this.N_COLS = N_COLS;
         DIM_RECT = dim;
-        rectangles = new Rectangle[N_ROWS][N_COLS];
+        //rectangles = new Rectangle[N_ROWS][N_COLS];
         p1 = new Player(Color.green,playerName);
         p2 = new Player(Color.red, playerName2);
         inizializeWindow();
@@ -60,54 +58,18 @@ public class CheckersTable {
     private void inizializeWindow(){
         createFrame();
         createPanel();
-        createRectangles();
-
-        addComponents(p1,p2);
+        
+        //Create and Set an array of game cells (Rectangle type) with and without pieces
+        rectangles =  Rectangle.createRectangles(N_ROWS,N_COLS, DIM_RECT, p1,p2);
+        //Add rect to Table
+        for (int i = 0; i< N_ROWS; i++)
+            for (int j = 0; j < N_COLS; j++){
+                panel.add(rectangles[i][j]);
+            }
 
         frame.add(panel);
         frame.setVisible(true);
     }
 
 
-    private void createRectangles() {
-        Color color_rect;
-        for (int i = 0; i < N_ROWS; i++)
-            for (int j = 0; j < N_COLS; j++){
-                //Color the rectangles according to their position
-                if (i % 2 == 0 && j % 2 != 0 || j % 2 == 0 && i % 2 != 0)
-                    color_rect = getColor(i,j);
-                else
-                    color_rect = Color.white;
-                rectangles[i][j] = new Rectangle(0, 0, DIM_RECT, DIM_RECT);
-                rectangles[i][j].setColor(color_rect);
-            }
-    }
-
-    //Add pieces to rect and rect to Panel
-    private void addComponents(Player p1, Player p2){
-        Color pieceColor;
-        String typePiece;
-        for (int i = 0; i < N_ROWS; i++)
-            for (int j = 0; j < N_COLS; j++){
-                //Add Pieces in the correct position
-                if ( (i < 3 || i > 4 ) && rectangles[i][j].getColor() == Color.darkGray){
-                    pieceColor = (i<3) ? Color.green : Color.red;
-                    typePiece = ((i == 0 && j == 7) || (i == 7 && j == 0 )) ? "archer": "pawn";
-                    Piece piece = factory.factoryMethod(typePiece, pieceColor);
-
-                    //Assignment of the player based on the color of the pawn
-                    piece.addMouseListener((pieceColor == Color.red) ? p1 : p2);
-                    rectangles[i][j].add(piece, BorderLayout.CENTER);
-                }
-                panel.add(rectangles[i][j]);
-
-            }
-    }
-
-
-    //Return the color according to position
-    private Color getColor(int i, int j){
-        return  (i%2 == 0 && j%2 != 0 || j%2 == 0 && i%2 != 0) ? Color.darkGray : Color.white;
-    }
 }
-
