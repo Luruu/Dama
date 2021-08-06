@@ -70,6 +70,4 @@ public class CheckersTable {
         frame.add(panel);
         frame.setVisible(true);
     }
-
-
 }
