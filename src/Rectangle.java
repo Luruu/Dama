@@ -20,10 +20,12 @@ public  class Rectangle extends JPanel{
             for (int i = 0; i < N_ROWS; i++)
                 for (int j = 0; j < N_COLS; j++){
                     //Color the rectangles according to their position
-                    if (i % 2 == 0 && j % 2 != 0 || j % 2 == 0 && i % 2 != 0)
-                        color_rect = myColor.getColor(i,j);
-                    else
-                        color_rect = Color.white;
+                    /* AGGIORNAMENTO 07.08.2021 LUCA: La condizione qui scritta viene fatta anche in getColor, per cui getColor ritorna sempre darkGray
+                    color_rect = (i % 2 == 0 && j % 2 != 0 || j % 2 == 0 && i % 2 != 0) ? myColor.getColor(i, j) : Color.white;
+                    */
+                    //CORREZIONE:
+                    color_rect = myColor.getColor(i, j);
+
                     rectangles[i][j] = new Rectangle(0, 0, DIM_RECT, DIM_RECT);
                     rectangles[i][j].color = color_rect;
                 }
@@ -38,14 +40,14 @@ public  class Rectangle extends JPanel{
         ConcreteFactoryM factory = new ConcreteFactoryM();
         Color pieceColor;
         String typePiece;
+        Piece piece;
         for (int i = 0; i < N_ROWS; i++)
             for (int j = 0; j < N_COLS; j++){
                 //Add Pieces in the correct position
-                if ( (i < 3 || i > 4 ) && rectangles[i][j].color == Color.darkGray){
-                    typePiece = ((i == 0 && j == 7) || (i == 7 && j == 0 )) ? "archer": "pawn";
+                if ( (i < N_COLS/2 - 1 || i > N_COLS/2 ) && rectangles[i][j].color == Color.darkGray){
+                    typePiece = ((i == 0 && j == N_ROWS-1) || (i == N_COLS-1 && j == 0 )) ? "archer": "pawn";
                     pieceColor = (i<3) ? Color.green : Color.red;
-                    
-                    Piece piece = factory.factoryMethod(typePiece, pieceColor);
+                    piece = factory.factoryMethod(typePiece, pieceColor);
                     
                     //Assignment of the player based on the color of the pawn
                     //Forse non serve. Basterebbe passargli un new Player a caso.
