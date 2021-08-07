@@ -8,7 +8,7 @@ public abstract class Piece extends JComponent{
    protected  int points;
    protected Image objIMG;
    protected String IMG_Path;
-   Point coord;
+   protected Point coord;
    
    public void setCoord(int i, int j){
       coord.x = i;
