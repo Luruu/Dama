@@ -1,11 +1,11 @@
 import javax.swing.*;
-import javax.swing.event.MouseInputListener;
+//import javax.swing.event.MouseInputListener; INUTILIZZATO!!!
 
 import java.awt.*;
 
 public abstract class Piece extends JComponent{
    protected final Color color;
-   protected  int points;
+   protected int points;
    protected Image objIMG;
    protected String IMG_Path;
    protected Point coord;
