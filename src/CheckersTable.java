@@ -1,6 +1,5 @@
 import javax.swing.*;
-
-//import javax.swing.border.Border; Attualmente inutile
+import java.lang.Exception;
 import java.awt.*;
 
 //Singleton
@@ -15,22 +14,30 @@ public class CheckersTable {
     private JPanel panel;
     
     private static Rectangle[][] rectangles;
-
-    private CheckersTable(final int N_ROWS, final int N_COLS, final int dim, final String playerName, final String playerName2){
+/*
+p1 = new Player(Color.green,playerName);
+        p2 = new Player(Color.red, playerName2);
+        inizializeWindow();
+ */
+    //Da modificare, invece delle stringe nome player passiamo gli oggetti player instanziati nel main (con eventuali interfacce etc.)
+    private CheckersTable(final int N_ROWS, final int N_COLS, final int dim){
         this.N_ROWS = N_ROWS;
         this.N_COLS = N_COLS;
         DIM_RECT = dim;
-        //rectangles = new Rectangle[N_ROWS][N_COLS];
-        p1 = new Player(Color.green,playerName);
-        p2 = new Player(Color.red, playerName2);
-        inizializeWindow();
     }
 
     //Singleton
-    public static synchronized CheckersTable getInstance(final int n, final int c, final int dim, final String playerName1, final String playerName2){
+    public static synchronized CheckersTable getInstance(final int n, final int c, final int dim){
         if (Instance == null){
-            Instance = new CheckersTable(n,c,dim, playerName1, playerName2);
+            Instance = new CheckersTable(n,c,dim);
         }
+        return Instance;
+    }
+
+    //Overload
+    public static synchronized CheckersTable getInstance() throws Exception {
+        if (Instance == null)
+            throw new Exception("Instance null, use getInstance(par1,par2, etc.)");
         return Instance;
     }
 
@@ -62,6 +69,7 @@ public class CheckersTable {
         //Create and Set an array of game cells (Rectangle type) with and without pieces
         rectangles =  Rectangle.createRectangles(N_ROWS,N_COLS, DIM_RECT, p1,p2);
         //Add rect to Table
+        int n = 0;
         for (int i = 0; i< N_ROWS; i++)
             for (int j = 0; j < N_COLS; j++){
                 panel.add(rectangles[i][j]);
@@ -69,5 +77,18 @@ public class CheckersTable {
 
         frame.add(panel);
         frame.setVisible(true);
+    }
+
+    protected void startGame(Player p1, Player p2) throws Exception{
+        this.p1 = p1;
+        this.p2 = p2;
+        inizializeWindow();
+    }
+
+    protected void suggestion(int i, int j){
+        if (!rectangles[i+1][j+1].getHasPiece()){
+            rectangles[i+1][j+1].setColor(Color.cyan);
+            rectangles[i+1][j+1].repaint();
+        }
     }
 }

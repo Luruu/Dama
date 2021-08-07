@@ -1,10 +1,10 @@
 import javax.swing.*;
 
 import java.awt.*;
-
-public  class Rectangle extends JPanel {
+public  class Rectangle extends JPanel{
     private final int x,y,wid,hei;
     private Color color;
+    private boolean hasPiece = false;
 
     public Rectangle(int x, int y, int wid, int hei){
         this.x = x;
@@ -48,9 +48,16 @@ public  class Rectangle extends JPanel {
                     Piece piece = factory.factoryMethod(typePiece, pieceColor);
                     
                     //Assignment of the player based on the color of the pawn
+                    //Forse non serve. Basterebbe passargli un new Player a caso.
+                    //Il controllo va fatto in base ai colori dei pezzi e del player
+                    //Probabilmente sarà una features o un bug o non serve a niente.
+                    //Questo if serve perché un player potrebbe cliccaere su un pezzo d icolore diverso dal suo
+                    //Quindi otterremo il mouselistener del pezzo selezionato e lo confrontiamo con il colore del pezzo
+                    // Tutto questo nella funzione player che invoca il click.
                     piece.addMouseListener((pieceColor == Color.red) ? p1 : p2);
                     rectangles[i][j].add(piece, BorderLayout.CENTER);
-                    piece.setIJ(i,j);
+                    rectangles[i][j].hasPiece = true;
+                    piece.setCoord(i,j);
                 }
             }
     }
@@ -60,6 +67,19 @@ public  class Rectangle extends JPanel {
         g.drawRect(x,y,wid,hei);
         g.setColor(color);
         g.fillRect(x,y,wid,hei);
+    }
+
+
+    public boolean getHasPiece(){
+        return hasPiece;
+    }
+
+    public void setHasPiece(boolean x){
+        hasPiece = x;
+    }
+
+    public void setColor(Color c){
+        color = c;
     }
 
 }

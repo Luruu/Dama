@@ -1,15 +1,13 @@
 public class ConcreteCommand implements Command{
     private Piece receiver = null;
-    private Rectangle[][] rectangles;
-
-    public ConcreteCommand(Rectangle[][] rectangleList){
-        rectangles = rectangleList;
+    //private Rectangle[][] rectangles;
+    private CheckersTable checkTable;
+    public ConcreteCommand(CheckersTable ct) {
+        checkTable = ct;
     }
 
     @Override
-    public void suggestion() {
-        //Devo trovare il pezzo selezionato dalla lista di rettangoli,
-        // impostarlo a receiver e inviargli il comando
-        // receiver.Do();
+    public void suggestion(int i, int j) {
+        checkTable.suggestion(i,j);
     }
 }

@@ -1,3 +1,3 @@
 public interface Command {
-    void suggestion();
+    void suggestion(int i, int j);
 }
