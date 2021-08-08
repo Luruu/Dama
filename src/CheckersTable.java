@@ -8,7 +8,7 @@ public class CheckersTable {
     private static CheckersTable Instance;
 
     private final int N_ROWS, N_COLS, DIM_RECT;
-    private Player p1,p2;
+    private Player p1, p2;
 
     private JFrame frame;
     private JPanel panel;
@@ -33,10 +33,10 @@ p1 = new Player(Color.green,playerName);
         return Instance;
     }
 
-    //Overload
+    //get the existing instance without specifying unnecessary parameters
     public static synchronized CheckersTable getInstance() throws Exception {
         if (Instance == null)
-            throw new Exception("Instance null, use getInstance(par1,par2, etc.)");
+            throw new Exception("ISTANCE NULL. Please use method: public static synchronized CheckersTable getInstance(final int n, final int c, final int dim)");
         return Instance;
     }
 
@@ -82,6 +82,7 @@ p1 = new Player(Color.green,playerName);
         inizializeWindow();
     }
 
+    //Shows the moves allowed to click on a piece
     protected void suggestion(int i, int j){
         if (!rectangles[i+1][j+1].getHasPiece()){
             rectangles[i+1][j+1].setColor(Color.cyan);
