@@ -4,7 +4,7 @@ import java.awt.*;
 
 
 
-public class Player extends MouseAdapter{
+public class Player extends MouseAdapter {
     private final Color color;
     private final String nome;
     private int points;
@@ -19,8 +19,9 @@ public class Player extends MouseAdapter{
     }
 
     public void mouseClicked(MouseEvent e){
+        invoker.clear();
         Piece tmp = (Piece)e.getSource();
         Point p = tmp.getCoord();
-        invoker.suggestion(p.x, p.y);
+        invoker.suggestion(tmp);
      }
 }

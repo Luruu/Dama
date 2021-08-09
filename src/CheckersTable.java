@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.lang.Exception;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 //Singleton
 //Command Receiver
@@ -14,8 +16,10 @@ public class CheckersTable {
     private JPanel panel;
     
     private static Rectangle[][] rectangles;
+
+    private List <Point> clearList = new ArrayList();
 /*-------------------------------------------------------------------------------------------------
-p1 = new Player(Color.green,playerName);
+        p1 = new Player(Color.green,playerName);
         p2 = new Player(Color.red, playerName2);
         inizializeWindow();
  ---------------------------------------------------------------------------------------------------*/
@@ -60,7 +64,7 @@ p1 = new Player(Color.green,playerName);
     }
 
     
-    private void inizializeWindow(){
+    private void inizializeWindow() throws Exception {
         createFrame();
         createPanel();
         
@@ -83,10 +87,48 @@ p1 = new Player(Color.green,playerName);
     }
 
     //Shows the moves allowed to click on a piece
-    protected void suggestion(int i, int j){
-        if (!rectangles[i+1][j+1].getHasPiece()){
-            rectangles[i+1][j+1].setColor(Color.cyan);
-            rectangles[i+1][j+1].repaint();
+    protected void suggestion(Piece p){
+        Point coord = p.getCoord();
+        switch (p.getClass().toString()){
+            case "class Pawn":
+                if(p.getColor() == Color.red)
+                    showSuggestion(coord.x-1,coord.y);
+                else //Pedine verdi
+                    showSuggestion(coord.x+1,coord.y);
+            case "class Archer":
+                if (p == null) {
+
+                }break;
+
+            default: System.out.println("Vediamo cosa fare per la DAMA");
         }
     }
+
+    //Show (paint the rect) the suggestions on the game's table
+    private void showSuggestion(int i, int j){
+        if ( j - 1 >= 0){
+            if(!rectangles[i][j-1].getHasPiece()){
+                rectangles[i][j-1].setColor(Color.cyan);
+                rectangles[i][j-1].repaint();
+                clearList.add(new Point(i,j-1));
+            }
+        }
+        if ( j + 1 < N_COLS){
+            if (!rectangles[i][j+1].getHasPiece()){
+                rectangles[i][j+1].setColor(Color.cyan);
+                rectangles[i][j+1].repaint();
+                clearList.add(new Point(i,j+1));
+            }
+        }
+    }
+
+    public void clear(){
+        for (Point p: clearList){
+            rectangles[p.x][p.y].setColor(Color.darkGray);
+            rectangles[p.x][p.y].repaint();
+        }
+        clearList.clear();
+    }
+
+
 }

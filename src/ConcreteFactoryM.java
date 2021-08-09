@@ -1,10 +1,12 @@
 import java.awt.*;
 
 public class ConcreteFactoryM extends Creator {
-    protected  Piece factoryMethod(String name, Color c){
+    protected  Object factoryMethod(String name, Color c) throws Exception {
         if (name.equals("pawn"))
             return new Pawn(c, (c == Color.green) ? "/images/PawnGreen.png" : "/images/PawnRed.png");
-        else
+        else if (name.equals("archer"))
             return new Archer(c, (c == Color.green) ? "/images/ArcherGreen.png" : "/images/ArcherRed.png");
+        else
+            return new Player(c,name);
     }
 }

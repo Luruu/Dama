@@ -1,3 +1,5 @@
+import java.awt.*;
 public interface Command {
-    void suggestion(int i, int j);
+    void suggestion(Piece p);
+    void clear();
 }

@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class ConcreteCommand implements Command{
     private Piece receiver = null;
     //private Rectangle[][] rectangles;
@@ -7,7 +9,8 @@ public class ConcreteCommand implements Command{
     }
 
     @Override
-    public void suggestion(int i, int j) {
-        checkTable.suggestion(i,j);
+    public void suggestion(Piece p) {
+        checkTable.suggestion(p);
     }
+    public void clear(){ checkTable.clear();}
 }

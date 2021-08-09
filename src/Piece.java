@@ -3,7 +3,7 @@ import javax.swing.*;
 
 import java.awt.*;
 
-public abstract class Piece extends JComponent{
+public abstract class Piece extends JComponent {
    protected final Color color;
    protected int points;
    protected Image objIMG;
@@ -32,5 +32,8 @@ public abstract class Piece extends JComponent{
       g.drawImage(objIMG.img,0,0,null);
    }
 
+   protected Color getColor(){
+      return color;
+   }
 
 }
