@@ -19,15 +19,12 @@ public  class Rectangle extends JPanel{
         Color color_rect;
             for (int i = 0; i < N_ROWS; i++)
                 for (int j = 0; j < N_COLS; j++){
-                    //Color the rectangles according to their position
-                    /* AGGIORNAMENTO 07.08.2021 LUCA: La condizione qui scritta viene fatta anche in getColor, per cui getColor ritorna sempre darkGray
-                    color_rect = (i % 2 == 0 && j % 2 != 0 || j % 2 == 0 && i % 2 != 0) ? myColor.getColor(i, j) : Color.white;
-                    */
-                    //CORREZIONE:
                     color_rect = myColor.getColor(i, j);
 
                     rectangles[i][j] = new Rectangle(0, 0, DIM_RECT, DIM_RECT);
                     rectangles[i][j].color = color_rect;
+                        //ADD Player that is also handler mouse event
+                        rectangles[i][j].addMouseListener(new Player());
                 }
         
         addPieces(rectangles, N_ROWS, N_COLS, p1,p2);
@@ -80,5 +77,9 @@ public  class Rectangle extends JPanel{
 
     public void setColor(Color c){
         color = c;
+    }
+
+    public Color getColor(){
+        return color;
     }
 }
