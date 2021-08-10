@@ -94,7 +94,7 @@ public class CheckersTable {
         pToMove = p;
         switch (p.getClass().toString()) {
             case "class Pawn":
-                if (p.getColor() == Color.red)
+                if (p.getColor() == Color.red) //Pedine rosse
                     showSuggestion(coord.x - 1, coord.y);
                 else //Pedine verdi
                     showSuggestion(coord.x + 1, coord.y);
@@ -109,8 +109,10 @@ public class CheckersTable {
         }
     }
 
+
+
     //Show (paint the rect) the suggestions on the game's table
-    private void showSuggestion(int i, int j) {
+    private  showSuggestion(int i, int j) {
         if (j - 1 >= 0 && i > -1 && i < N_ROWS) {
             if (!rectangles[i][j - 1].getHasPiece()) {
                 rectangles[i][j - 1].setColor(Color.cyan);
