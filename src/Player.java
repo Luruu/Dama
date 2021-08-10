@@ -24,21 +24,20 @@ public class Player extends MouseAdapter {
     }
 
     public void mouseClicked(MouseEvent e){
-        invoker.clear();
-       System.out.println(e.getSource().getClass());
         if (e.getSource().getClass().toString().equals("class Pawn") || e.getSource().getClass().toString().equals("class Archer") ){
+            invoker.clear();
             Piece tmp = (Piece)e.getSource();
-            Point p = tmp.getCoord();
             invoker.suggestion(tmp);
         }
-        else if (e.getSource().getClass().toString().equals("class Rectangle")){
+        else if(e.getSource().getClass().toString().equals("class Rectangle")){;
             Rectangle tmp = (Rectangle) e.getSource();
+            int i = tmp.getCoord().x;
+            int j = tmp.getCoord().y;
             if (tmp.getColor() == Color.cyan){
-                //RIprendiamo da qua-------------------------------------------------------
-                System.out.println("Riprendiamo da qua");
+                invoker.move(tmp, i,j);
+                invoker.clear();
             }
         }
-
     }
 
 }

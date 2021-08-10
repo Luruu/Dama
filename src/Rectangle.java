@@ -5,7 +5,7 @@ public  class Rectangle extends JPanel{
     private final int x,y,wid,hei;
     private Color color;
     private boolean hasPiece = false;
-
+    private Point Coord = new Point();
     public Rectangle(int x, int y, int wid, int hei){
         this.x = x;
         this.y = y;
@@ -22,6 +22,7 @@ public  class Rectangle extends JPanel{
                     color_rect = myColor.getColor(i, j);
 
                     rectangles[i][j] = new Rectangle(0, 0, DIM_RECT, DIM_RECT);
+                    rectangles[i][j].setCoord(i,j);
                     rectangles[i][j].color = color_rect;
                         //ADD Player that is also handler mouse event
                         rectangles[i][j].addMouseListener(new Player());
@@ -81,5 +82,14 @@ public  class Rectangle extends JPanel{
 
     public Color getColor(){
         return color;
+    }
+
+    private void setCoord(int i, int j){
+        Coord.x = i;
+        Coord.y = j;
+    }
+
+    public Point getCoord(){
+        return Coord;
     }
 }

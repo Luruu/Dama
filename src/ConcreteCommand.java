@@ -13,4 +13,5 @@ public class ConcreteCommand implements Command{
         checkTable.suggestion(p);
     }
     public void clear(){ checkTable.clear();}
+    public void move(Rectangle r, int i, int j ){ checkTable.move(r,i,j);}
 }
