@@ -92,12 +92,17 @@ public class CheckersTable {
     protected void suggestion(Piece p) {
         Point coord = p.getCoord();
         pToMove = p;
+        Point eatCoord;
         switch (p.getClass().toString()) {
             case "class Pawn":
-                if (p.getColor() == Color.red) //Pedine rosse
-                    showSuggestion(coord.x - 1, coord.y);
-                else //Pedine verdi
-                    showSuggestion(coord.x + 1, coord.y);
+                if (p.getColor() == Color.red) {
+                    //Pedine rosse
+                    if ((eatCoord = showSuggestion(coord.x - 1, coord.y)) != null)
+                        showEatSuggestion(eatCoord.x, eatCoord.y);
+                } else { //Pedine verdi
+                    if ((eatCoord = showSuggestion(coord.x + 1, coord.y)) != null)
+                        showEatSuggestion(eatCoord.x, eatCoord.y);
+                }
             case "class Archer":
                 if (p == null) {
 
@@ -110,15 +115,25 @@ public class CheckersTable {
     }
 
 
-
     //Show (paint the rect) the suggestions on the game's table
-    private  showSuggestion(int i, int j) {
+    //Return Point when can eat the piece.
+    private Point showSuggestion(int i, int j) {
+        int x;
+        System.out.println("i = " + i + " j = " + j);
         if (j - 1 >= 0 && i > -1 && i < N_ROWS) {
-            if (!rectangles[i][j - 1].getHasPiece()) {
+            if (!rectangles[i][j - 1].getHasPiece() && !rectangles[i][j + 1].getHasPiece()) {
                 rectangles[i][j - 1].setColor(Color.cyan);
                 rectangles[i][j - 1].repaint();
                 clearList.add(new Point(i, j - 1));
+            } else {
+                //return the coords of the piece that you can eat
+                if (rectangles[i][j - 1].getHasPiece())
+                    x = j - 1;
+                else
+                    x = j + 1;
+                return new Point(i, x);
             }
+
         }
 
         if (j + 1 < N_COLS && i > -1 && i < N_ROWS) {
@@ -126,8 +141,11 @@ public class CheckersTable {
                 rectangles[i][j + 1].setColor(Color.cyan);
                 rectangles[i][j + 1].repaint();
                 clearList.add(new Point(i, j + 1));
-            }
+            } else
+                return new Point(i, j + 1);
         }
+        //return null when you can't eat nobody
+        return null;
     }
 
     public void clear() {
@@ -139,18 +157,55 @@ public class CheckersTable {
     }
 
     //This function move pToMove into r
-    public void move(Rectangle r, int i, int j){
+    public void move(Rectangle r, int i, int j) {
         //This variable contains the rectangle containing the piece to be moved
         Rectangle tmpRect = rectangles[pToMove.getCoord().x][pToMove.getCoord().y];
-        pToMove.setCoord(i,j);
+        pToMove.setCoord(i, j);
         //Add the piece to move in new rectagle
-        r.add(tmpRect.getComponent(0) );
+        r.add(tmpRect.getComponent(0));
         r.setHasPiece(true);
         r.repaint();
         //remove the old piece from the previous rectangle
         tmpRect.removeAll();
         tmpRect.setHasPiece(false);
         tmpRect.repaint();
-
     }
+
+    private void showEatSuggestion(int i, int j) {
+        //Move to the right diagonal
+        if (pToMove.getCoord().y < j) {
+            if (!rectangles[i - 1][j + 1].getHasPiece()) {
+                rectangles[i - 1][j + 1].setColor(Color.cyan);
+                rectangles[i - 1][j + 1].repaint();
+                clearList.add(new Point(i - 1, j + 1));
+                return;
+            } else {
+                //Can't eat on the diagonal
+                if (!rectangles[pToMove.getCoord().x - 1][pToMove.getCoord().y - 1].getHasPiece()) {
+                    rectangles[pToMove.getCoord().x - 1][pToMove.getCoord().y - 1].setColor(Color.cyan);
+                    rectangles[pToMove.getCoord().x - 1][pToMove.getCoord().y - 1].repaint();
+                    clearList.add(new Point(pToMove.getCoord().x - 1, pToMove.getCoord().y - 1));
+                    return;
+                }
+            }
+        } else {
+            //Move to the left diagonal
+            if (!rectangles[i - 1][j - 1].getHasPiece()) {
+                rectangles[i - 1][j - 1].setColor(Color.cyan);
+                rectangles[i - 1][j - 1].repaint();
+                clearList.add(new Point(i - 1, j - 1));
+                return;
+            } else {
+                if (!rectangles[pToMove.getCoord().x - 1][pToMove.getCoord().y + 1].getHasPiece()) {
+                    rectangles[pToMove.getCoord().x - 1][pToMove.getCoord().y + 1].setColor(Color.cyan);
+                    rectangles[pToMove.getCoord().x - 1][pToMove.getCoord().y + 1].repaint();
+                    clearList.add(new Point(pToMove.getCoord().x - 1, pToMove.getCoord().y + 1));
+                    return;
+                }
+            }
+        }
+    }
+
 }
+
+

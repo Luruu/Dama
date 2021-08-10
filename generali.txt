@@ -1,3 +1,6 @@
+
+
+
 Questione rettangolo JPanel
 Abbiamo messo N rettangoli (che sono pannelli) sul pannello principale perché a causa del Layout a griglia non potevamo sovrapporre più oggetti in una determinata
 posizione del pannello principale, per cui deciso che i rettangoli fossero anche loro dei pannelli che potevano contenere (quindi graficamente sovrapporre)
