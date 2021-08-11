@@ -123,7 +123,7 @@ public class CheckersTable {
         int left = j - 1, right = j + 1;
         System.out.println("i_row = " + i_row + " j = " + j);
 
-        if (left >= 0 && i_row > -1 && i_row < N_ROWS) {
+        if (i_row >= 0 && i_row < N_ROWS && left >= 0)  {
 
             if (right == N_COLS) { //on the border
                 if (!rectangles[i_row][left].getHasPiece()){
@@ -147,7 +147,7 @@ public class CheckersTable {
             }
         }
 
-        if (right < N_COLS && i_row > -1 && i_row < N_ROWS)
+        if (i_row >= 0 && i_row < N_ROWS && right < N_COLS)
             if (!rectangles[i_row][right].getHasPiece()) //If rectangle is free from pieces
                 showFreeRectangle(i_row, right); //add new coordinates to clear
             else
