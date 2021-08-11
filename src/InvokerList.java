@@ -1,4 +1,4 @@
-import java.awt.*;
+// import java.awt.*; MAI USATO
 
 public class InvokerList {
     private Command command;

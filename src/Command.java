@@ -1,4 +1,4 @@
-import java.awt.*;
+// import java.awt.*; NON USATO
 public interface Command {
     void suggestion(Piece p);
     void clear();

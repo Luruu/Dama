@@ -1,5 +1,4 @@
-import java.awt.*;
-
+// import java.awt.*; NON USATO
 public class ConcreteCommand implements Command{
     private Piece receiver = null;
     //private Rectangle[][] rectangles;
@@ -12,6 +11,6 @@ public class ConcreteCommand implements Command{
     public void suggestion(Piece p) {
         checkTable.suggestion(p);
     }
-    public void clear(){ checkTable.clear();}
+    public void clear(){ checkTable.clearSuggestions();}
     public void move(Rectangle r, int i, int j ){ checkTable.move(r,i,j);}
 }
