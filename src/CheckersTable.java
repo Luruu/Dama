@@ -97,15 +97,9 @@ public class CheckersTable {
         Point eatCoord;
         switch (classSelectedPiece){
             case "class Pawn":
-                if (colorSelectedPiece == Color.red){
-                    if ((eatCoord = showSuggestion(coord.x - 1, coord.y)) != null)
-                        showEatSuggestion(eatCoord.x, eatCoord.y);
-                } // parenthesis required!
-                else if (colorSelectedPiece == Color.green)
-                    if ((eatCoord = showSuggestion(coord.x + 1, coord.y)) != null) 
-                        showEatSuggestion(eatCoord.x, eatCoord.y);
+                eatCoord = (colorSelectedPiece == Color.red) ? showSuggestion(coord.x - 1, coord.y) : showSuggestion(coord.x + 1, coord.y);
+                if (eatCoord != null)   showEatSuggestion(eatCoord.x, eatCoord.y);
                 break;
-
             case "class Archer":
                 /* DEAD CODE: NON CI VA MAI. (ERRORE SEGNALATO DA VSCODE)
                 if (p == null) { } */ 
