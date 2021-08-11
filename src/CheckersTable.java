@@ -150,24 +150,24 @@ public class CheckersTable {
     private void showEatSuggestion(int i_pToEat, int j_pToEat) {
         int i_bottom = i_pToEat - 1, j_right = j_pToEat + 1, j_left = j_pToEat - 1;
 
-        int pToMove_Bottom = pToMove.getCoord().x - 1;
-        int pToMove_left = pToMove.getCoord().y - 1;
-        int pToMove_right = pToMove.getCoord().y + 1;
+        int pToMove_bottom  = pToMove.getCoord().x - 1;
+        int pToMove_left    = pToMove.getCoord().y - 1;
+        int pToMove_right   = pToMove.getCoord().y + 1;
 
         boolean eating_byleft = pToMove.getCoord().y < j_pToEat;
         if (eating_byleft) {                        //Move to the RIGHT DIAGONAL
             if (showFreeRectangle(i_bottom, j_right))
                 pointsListToClear.add(new Point(i_bottom, j_right));
             else //Can't eat on the diagonal
-                if (showFreeRectangle(pToMove_Bottom, pToMove_left))
-                    pointsListToClear.add(new Point(pToMove_Bottom, pToMove_left));
+                if (showFreeRectangle(pToMove_bottom, pToMove_left))
+                    pointsListToClear.add(new Point(pToMove_bottom, pToMove_left));
         } 
         else {                                      //Move to the LEFT DIAGONAL
             if (showFreeRectangle(i_bottom, j_left))
                 pointsListToClear.add(new Point(i_bottom, j_left));
             else
-                if (showFreeRectangle(pToMove_Bottom, pToMove_right)) 
-                    pointsListToClear.add(new Point(pToMove_Bottom, pToMove_right));
+                if (showFreeRectangle(pToMove_bottom, pToMove_right)) 
+                    pointsListToClear.add(new Point(pToMove_bottom, pToMove_right));
         }
 
     }
