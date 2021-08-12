@@ -120,24 +120,69 @@ public class CheckersTable {
 
     //Show (paint the rect) the suggestions on the game's table: Return Point when can eat the piece.
     private Point showSuggestion(int i_row, int j) {
-        int j_coordPieceToEat;
+        int j_coordPieceToEat = -1;
+        int j_notPieceToEat = -1;
         int left = j - 1, right = j + 1;
         boolean EATFIND = false;
-        System.out.println("i_row = " + i_row + " j = " + j);
+        //System.out.println("i_row = " + i_row + " j = " + j);
         if (i_row >= 0 && i_row < N_ROWS) {
+            System.out.println("1");
             if (left >= 0 && right < N_COLS) {
-                //SEI A CAMPO PIENO E PUOI MOVERTI A DX O SX OVVIAMENTE È DA CONTROLLARE
-                System.out.println("Campo pieno");
-                //SE TROVO UNA COLONNA CHE HA UN PEZZO E QUINDI POTREI MANGIARE SETTO EATFIND TRUE
-            } else if (left >= 0) {
-                //SEI SUL BORDO DESTRO QUINDI TI MUOVI SOLO VERSO SX
-                System.out.println("Bordo destro ti muovi verso sx");
-            } else {
-                System.out.println("Bordo sinistro ti muovi verso dx");
+                System.out.println("2");
+            // YOU ARE IN A FULL FIELD AND YOU CAN MOVE RIGHT OR LEFT OBVIOUSLY IT IS TO BE CHECKED
+                if (!rectangles[i_row][left].getHasPiece() && !rectangles[i_row][right].getHasPiece()){
+                    System.out.println("3");
+                    //Left and Right are free, can move.
+                    showFreeRectangle(i_row,left);
+                    showFreeRectangle(i_row,right);
+                }
+                else {
+                    System.out.println("4");
+                    j_coordPieceToEat = rectangles[i_row][left].getHasPiece() ? left : right;
+                    if (rectangles[i_row][j_coordPieceToEat].getColor() == pToMove.getColor()) { //Are the same player's Pieces
+                        j_notPieceToEat = !rectangles[i_row][left].getHasPiece() ? left : right;
+                        showFreeRectangle(i_row, j_notPieceToEat);
+                    }
+                    else
+                        EATFIND = true;
+                }
+            }
+            else if (left >= 0) {
+                System.out.println("5");
+                // YOU ARE ON THE RIGHT EDGE SO YOU MOVE ONLY TO THE LEFT
+                if (!rectangles[i_row][left].getHasPiece())
+                    showFreeRectangle(i_row,left);
+                else{
+                    System.out.println("6");
+                    j_coordPieceToEat = left;
+                    if (rectangles[i_row][j_coordPieceToEat].getColor() == pToMove.getColor()) { //Are the same player's Pieces
+                        j_notPieceToEat = right;
+                        showFreeRectangle(i_row, j_notPieceToEat);
+                    }
+                    else
+                    EATFIND = true;
+                }
+
+            }
+            else {
+                System.out.println("7");
+                if (!rectangles[i_row][right].getHasPiece())
+                    showFreeRectangle(i_row,right);
+                else{
+                    j_coordPieceToEat = right;
+                    if (rectangles[i_row][j_coordPieceToEat].getColor() == pToMove.getColor()) { //Are the same player's Pieces
+                        j_notPieceToEat = left;
+                        showFreeRectangle(i_row, j_notPieceToEat);
+                    }
+                    else
+                        EATFIND = true;
+                }
             }
         }
 
-        //ELSE EAT FIND TRUE ALLORA PRENDO LE SUE COORDINATE E CREO IL POINT E LO RITORNO.
+        if (EATFIND)
+            return new Point(i_row,j_coordPieceToEat);
+
         return null;
     }
         /*
@@ -176,12 +221,46 @@ public class CheckersTable {
     private void showEatSuggestion(int i_pToEat, int j_pToEat) {
         int i_pToMove = pToMove.getCoord().x;
         int j_pToMove = pToMove.getCoord().y;
+        boolean isRed;
+        int i,j;//indici per mangiare
+        int i_nwSuggestion, j_nwSuggestion; // se non posso mangiare controllo se la cella opposta è libera
+        int k; // se la cella opposta è libera controllo se posso mangiare quelli.
         //if you have to move to the right diagonal. For example: if you are red and piece to eat is right side, coordinates are (i = x - 2, j = y - 2)
-        int i = (pToMove.getColor() == Color.red) ? i_pToMove - 2 : i_pToMove + 2;
-        int j = (j_pToMove < j_pToEat) ? j_pToMove + 2 : j_pToMove - 2;
+        isRed = (pToMove.getColor() == Color.red);
+        if (isRed){
+            i = i_pToMove - 2;
+            i_nwSuggestion = i_pToMove - 1;
+        }
+        else {
+            i = i_pToMove + 2;
+            i_nwSuggestion = i_pToMove + 1;
+        }
+        //Check the diagonal's direction
+        if (j_pToMove < j_pToEat){
+            j = j_pToMove + 2;
+            j_nwSuggestion = j_pToMove - 1;
+            k = j_nwSuggestion - 1;
+        }
+        else
+        {
+            j = j_pToMove - 2;
+            j_nwSuggestion = j_pToMove + 1;
+            k = j_nwSuggestion + 1;
+        }
+
 
         if (!rectangles[i][j].getHasPiece()) //if rectangle(i,j) is free then you can move your piece here
             showFreeRectangle(i, j);
+        else{
+                if (!rectangles[i_nwSuggestion][j_nwSuggestion].getHasPiece()){
+                    showFreeRectangle(i_nwSuggestion,j_nwSuggestion);
+                }
+                else {
+                    System.out.println("In teoria devo mangiare quello a dx");
+                    if (!rectangles[i][k].getHasPiece())
+                        showFreeRectangle(i,k);
+                }
+        }
     }
 
         /*int pToEat_bottom = i_pToEat - 1, pToEat_right = j_pToEat + 1, pToEat_left = j_pToEat - 1;
@@ -206,13 +285,9 @@ public class CheckersTable {
     }*/
 
     protected void showFreeRectangle(int row, int col){
-       // if (!rectangles[row][col].getHasPiece()){ //if Rectangle is free, then..
             rectangles[row][col].setColor(Color.cyan);
             rectangles[row][col].repaint();
             pointsListToClear.add(new Point(row, col));
-         //   return true; //cyan suggestion is shown
-        //}
-        //return false; // Rectangle has a piece, so cyan suggestion is not shown
     }
 
    
@@ -240,4 +315,5 @@ public class CheckersTable {
         }
         pointsListToClear.clear();
     }
+
 }

@@ -4,11 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public abstract class Piece extends JComponent {
-   protected final Color color;
-   protected int points;
-   protected Image objIMG;
-   protected String IMG_Path;
-   protected Point coord;
+   private final Color color;
+   private int points;
+   private Image objIMG;
+   private String IMG_Path;
+   private Point coord;
    
    public void setCoord(int i, int j){
       coord.x = i;
