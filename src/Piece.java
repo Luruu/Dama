@@ -2,6 +2,7 @@ import javax.swing.*;
 //import javax.swing.event.MouseInputListener; INUTILIZZATO!!!
 
 import java.awt.*;
+import java.util.Objects;
 
 public abstract class Piece extends JComponent {
    private final Color color;
@@ -35,5 +36,6 @@ public abstract class Piece extends JComponent {
    protected Color getColor(){
       return color;
    }
+
 
 }
