@@ -123,6 +123,10 @@ public class CheckersTable {
     //Show (paint the rect) the suggestions on the game's table: Return Point when can eat the piece.
     //I_row è la riga già incrementata in base alla direzione che dipende dal colore
     //j rappresenta la posizione del pezzo selezionato (i_row - 1, j)
+    /*
+    L'obiettivo è trovare le coordinate del rettangolo da mostare, se invece si deve mangiare occorre settare EATFIND e le variabili
+    che rappresentano il o i rettangoli accessibili e ovviamente colorarli di ciano
+     */
     private Point showSuggestion(int i_row, int j) {
         Piece tmp;
         int j_coordPieceToEat = -1;
