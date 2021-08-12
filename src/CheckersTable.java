@@ -75,8 +75,8 @@ public class CheckersTable {
 
         //Add rect to Table
         for (Rectangle[] row : rectangles)
-            for (Rectangle rec_rowj : row)
-                panel.add(rec_rowj);
+            for (Rectangle rect : row)
+                panel.add(rect);
 
         frame.add(panel);
         frame.setVisible(true);
@@ -91,19 +91,20 @@ public class CheckersTable {
     //Shows the moves allowed to click on a piece
     protected void suggestion(Piece p) {
         pToMove = p; //pToMove is a istance variable which stores piece to be moved
-        Point coord = pToMove.getCoord();
+        Point coordpToMove = pToMove.getCoord();
         String classSelectedPiece = pToMove.getClass().toString();
         Color colorSelectedPiece = pToMove.getColor();
-        Point eatCoord;
+
+        Point pieceToeat_Coord;
+
         switch (classSelectedPiece){
             case "class Pawn":
-                eatCoord = (colorSelectedPiece == Color.red) ? showSuggestion(coord.x - 1, coord.y) : showSuggestion(coord.x + 1, coord.y);
-                //eatCoord are the coordinates of the piece to eat
-                if (eatCoord != null)   showEatSuggestion(eatCoord.x, eatCoord.y);
+            pieceToeat_Coord = (colorSelectedPiece == Color.red) ? showSuggestion(coordpToMove.x - 1, coordpToMove.y) : showSuggestion(coordpToMove.x + 1, coordpToMove.y);
+                if (pieceToeat_Coord != null)   //if there a piece to eat, then show suggestion
+                    showEatSuggestion(pieceToeat_Coord.x, pieceToeat_Coord.y);
                 break;
             case "class Archer":
-                /* DEAD CODE: NON CI VA MAI. (ERRORE SEGNALATO DA VSCODE)
-                if (p == null) { } */ 
+                /* DEAD CODE: NON CI VA MAI. (ERRORE SEGNALATO DA VSCODE)  if (p == null) { } */ 
                 System.out.println("CASA ARCHER: Vediamo cosa fare per l'arciere");
                 break;
 
@@ -175,18 +176,12 @@ public class CheckersTable {
     private void showEatSuggestion(int i_pToEat, int j_pToEat) {
         int i_pToMove = pToMove.getCoord().x;
         int j_pToMove = pToMove.getCoord().y;
-        int i, j;
+        //if you have to move to the right diagonal. For example: if you are red and piece to eat is right side, coordinates are (i = x - 2, j = y - 2)
+        int i = (pToMove.getColor() == Color.red) ? i_pToMove - 2 : i_pToMove + 2;
+        int j = (j_pToMove < j_pToEat) ? j_pToMove + 2 : j_pToMove - 2;
 
-        i = (pToMove.getColor() == Color.red) ? i_pToMove - 2 : i_pToMove + 2;
-        //if you have to move to the right diagonal
-
-        //Check if you have to move to the right diagonal
-        j = (j_pToMove < j_pToEat) ? j_pToMove + 2 : j_pToMove - 2;
-
-        if (!rectangles[i][j].getHasPiece())
+        if (!rectangles[i][j].getHasPiece()) //if rectangle(i,j) is free then you can move your piece here
             showFreeRectangle(i, j);
-        else
-            return;
     }
 
         /*int pToEat_bottom = i_pToEat - 1, pToEat_right = j_pToEat + 1, pToEat_left = j_pToEat - 1;
