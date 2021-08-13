@@ -103,41 +103,49 @@ public class CheckersTable {
     protected void suggestion(Piece p) {
         pToMove = p; //pToMove is a istance variable which stores piece to be moved
         String classSelectedPiece = pToMove.getClass().toString();
-        final int LEFT = pToMove.getCoord().y - 1, RIGHT = pToMove.getCoord().y + 1;
-        int esito_left, esito_right = 0;
-        int row = setRowonEat();
+       
         switch (classSelectedPiece){
             case "class Pawn":
-            esito_left = checkMove(setRowbyColor(), LEFT);
-                //Se ritorna 2 devo mangiare quindi non coloro right
-                //Se ritorna 0 o 1 controllo a dx, se a dx ritorna 0 coloro sia dx che sx
-                
-                if (esito_left == 0 || esito_left == 1){ // Se a sx non pouoi mangiare
-                    esito_right = checkMove(setRowbyColor(), RIGHT); //Se non devo mangiare posso vedere se anche a destra posso muovermi o mangiare
-                    if (esito_right == 2) //Sei obbligato a mangiare verso dx
-                        showFreeRectangle(row, j_eat);
-                    else{ // Coloro i rect liberi
-                        if (esito_right == 0)
-                            showFreeRectangle(setRowbyColor(), RIGHT);
-                        if (esito_left == 0)
-                            showFreeRectangle(setRowbyColor(), LEFT);    
-                    }
-                }
-                else if (esito_left == 2){ //Puoi mangiare a sx 
-                    showFreeRectangle(row, j_eat);
-                }
+                showSuggestions();
                 break;
             case "class Archer":
-                /* DEAD CODE: NON CI VA MAI. (ERRORE SEGNALATO DA VSCODE)  if (p == null) { } */ 
+                showSuggestions();
+                //Ulteriori suggerimenti da aggiungere
                 System.out.println("CASA ARCHER: Vediamo cosa fare per l'arciere");
                 break;
 
             case "class Dama":
+                showSuggestions();
+                //Ulteriori suggerimenti da aggiungere
                 System.out.println("CASE DAMA: Vediamo cosa fare per la DAMA");
                 break;
 
             default:
              System.out.println("CASE DEFAULT: vediamo se lasciarlo.");
+        }
+    }
+
+    protected void showSuggestions(){
+        final int LEFT = pToMove.getCoord().y - 1, RIGHT = pToMove.getCoord().y + 1;
+        int esito_left, esito_right = 0;
+        int row = setRowonEat();
+        esito_left = checkMove(setRowbyColor(), LEFT);
+        //Se ritorna 2 devo mangiare quindi non coloro right
+        //Se ritorna 0 o 1 controllo a dx, se a dx ritorna 0 coloro sia dx che sx
+        
+        if (esito_left == 0 || esito_left == 1){ // Se a sx non pouoi mangiare
+            esito_right = checkMove(setRowbyColor(), RIGHT); //Se non devo mangiare posso vedere se anche a destra posso muovermi o mangiare
+            if (esito_right == 2) //Sei obbligato a mangiare verso dx
+                showFreeRectangle(row, j_eat);
+            else{ // Coloro i rect liberi
+                if (esito_right == 0)
+                    showFreeRectangle(setRowbyColor(), RIGHT);
+                if (esito_left == 0)
+                    showFreeRectangle(setRowbyColor(), LEFT);    
+            }
+        }
+        else if (esito_left == 2){ //Puoi mangiare a sx 
+            showFreeRectangle(row, j_eat);
         }
     }
     protected int setRowonEat(){
