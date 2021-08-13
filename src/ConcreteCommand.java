@@ -8,8 +8,8 @@ public class ConcreteCommand implements Command{
     }
 
     @Override
-    public void suggestion(Piece p) {
-        checkTable.suggestion(p);
+    public void suggestions(Piece p) {
+        checkTable.suggestions(p);
     }
     public void clear(){ checkTable.clearSuggestions();}
     public void move(Rectangle r, int i, int j ){ checkTable.move(r,i,j);}

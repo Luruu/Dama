@@ -1,5 +1,5 @@
-import javax.lang.model.util.ElementScanner6;
-import javax.management.MBeanAttributeInfo;
+//import javax.lang.model.util.ElementScanner6;
+//import javax.management.MBeanAttributeInfo;
 import javax.swing.*;
 
 //import org.graalvm.compiler.nodes.calc.RightShiftNode;
@@ -8,10 +8,10 @@ import javax.swing.*;
 
 import java.lang.Exception;
 import java.awt.*;
-import java.sql.Struct;
+//import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+//import java.util.Objects;
 
 //Singleton
 //Command Receiver
@@ -100,7 +100,7 @@ public class CheckersTable {
     }
 
     //Shows the moves allowed to click on a piece
-    protected void suggestion(Piece p) {
+    protected void suggestions(Piece p) {
         pToMove = p; //pToMove is a istance variable which stores piece to be moved
         String classSelectedPiece = pToMove.getClass().toString();
        
@@ -152,8 +152,6 @@ public class CheckersTable {
         return (pToMove.getColor() == Color.red) ? setRowbyColor() - 1 : setRowbyColor() + 1 ; // Indica la riga da colorare quando occorre mangiare
     }
     protected int setColonEat(int j){
-        System.out.println(pToMove.getCoord().y + " j = " + j
-        );
         return (j > pToMove.getCoord().y) ? j + 1 : j - 1;
     }
 
@@ -163,14 +161,13 @@ public class CheckersTable {
         else
             return pToMove.getCoord().x + 1;
     }
-    // Comment
+    //Comment
     protected int checkMove(int i, int j){
         Point position = new Point(i,j); // Indica le coordinate del rettangolo da analizzare
-        System.out.println("Analizzo il rettangolo "+ i + " " + j);
         boolean mustEat;
         int result = enemyPiece_inRect(position);
-        System.out.println("Result = " + result);
-        //AGGIORNARE POSITION CON LA POSIZIONE SUCCESSIVA AL PEZZO DA MANGIARE
+    // System.out.println("Analizzo il rettangolo "+ i + " " + j);
+     //   System.out.println("Result = " + result);
         
         if(result == 2){ //hai trovato un pezzo avversario DA MANGIARE per cui c'è un pezzo ed è un pezzo avversario in rect_xy
             position.x = setRowonEat();
@@ -184,14 +181,14 @@ public class CheckersTable {
             return 0;//può muoversi qui
         else if(result == 1)
             return 1; // Non posso né mangiare, né muovermi.
-        return 1; 
+        return 1; //Se nessuna condizione è valida allora non posso né mangiare, né muovermi
     }
 
     protected int enemyPiece_inRect(Point position){
         if(rectangles[position.x][position.y].getHasPiece()){
             // Se c'è un pezzo vediamo se è dello stesso colore di chi si muove
             Piece tmp = (Piece) rectangles[position.x][position.y].getComponent(0);
-            boolean pezzo_avversario = !checkColors(pToMove.getColor(),tmp.getColor());
+            boolean pezzo_avversario = !myColor.checkColors(pToMove.getColor(),tmp.getColor());
             if (pezzo_avversario)
                 return 2; //pezzo avversario, forse posso mangiarlo
             else
@@ -200,6 +197,7 @@ public class CheckersTable {
         else
             return 0; //non c'è un pezzo, la casella libera
     }
+
     protected boolean canIeat(Point position){
         int result = enemyPiece_inRect(position);
         if(result == 0) //il secondo rettangolo è libero. SI DEVE MANGIARE.
@@ -239,17 +237,6 @@ public class CheckersTable {
         pointsListToClear.clear();
     }
 
-    //Dobbiamo passare solo la riga corretta
-    private boolean checkLeft(int i, int j){
-        return (rectangles[i][j - 1].getHasPiece()) ? true : false;
-    }
 
-    //Dobbiamo passare solo la riga corretta
-    private boolean checkRight(int i, int j){
-        return (rectangles[i][j + 1].getHasPiece()) ? true : false;
-    }
-
-    private boolean checkColors(Color a, Color b){
-        return (a == b) ? true : false;
-    }
+    
 }

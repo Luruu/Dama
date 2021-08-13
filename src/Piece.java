@@ -2,7 +2,7 @@ import javax.swing.*;
 //import javax.swing.event.MouseInputListener; INUTILIZZATO!!!
 
 import java.awt.*;
-import java.util.Objects;
+//import java.util.Objects;
 
 public abstract class Piece extends JComponent {
    private final Color color;
@@ -27,6 +27,8 @@ public abstract class Piece extends JComponent {
       objIMG = new Image(imgName);
       coord = new Point();
    }
+
+   
 
    protected void paintComponent(Graphics g){
       super.paintComponent(g);

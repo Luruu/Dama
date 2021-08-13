@@ -6,8 +6,8 @@ public class InvokerList {
         this.command = command;
     }
 
-    public void suggestion(Piece p){
-        command.suggestion(p);
+    public void suggestions(Piece p){
+        command.suggestions(p);
     }
 
     public void clear() {

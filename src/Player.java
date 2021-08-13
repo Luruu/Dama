@@ -24,17 +24,16 @@ public class Player extends MouseAdapter {
     }
 
     public void mouseClicked(MouseEvent e){
-        if (e.getSource().getClass().toString().equals("class Pawn") || e.getSource().getClass().toString().equals("class Archer") ){
+        String nameClass = e.getSource().getClass().toString();
+        if (nameClass.equals("class Pawn") || nameClass.equals("class Archer") ){
             invoker.clear();
-            Piece tmp = (Piece)e.getSource();
-            invoker.suggestion(tmp);
+            Piece pieceClicked = (Piece)e.getSource();
+            invoker.suggestions(pieceClicked);
         }
-        else if(e.getSource().getClass().toString().equals("class Rectangle")){;
-            Rectangle tmp = (Rectangle) e.getSource();
-            int i = tmp.getCoord().x;
-            int j = tmp.getCoord().y;
-            if (tmp.getColor() == Color.cyan){
-                invoker.move(tmp, i,j);
+        else if(nameClass.equals("class Rectangle")){;
+            Rectangle rectClicked = (Rectangle) e.getSource();
+            if (rectClicked.getColor() == Color.cyan){
+                invoker.move(rectClicked, rectClicked.getCoord().x, rectClicked.getCoord().y);
                 invoker.clear();
             }
         }
