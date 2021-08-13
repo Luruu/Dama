@@ -163,7 +163,7 @@ public class CheckersTable {
         else
             return pToMove.getCoord().x + 1;
     }
-    
+    // Comment
     protected int checkMove(int i, int j){
         Point position = new Point(i,j); // Indica le coordinate del rettangolo da analizzare
         System.out.println("Analizzo il rettangolo "+ i + " " + j);
