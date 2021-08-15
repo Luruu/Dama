@@ -6,6 +6,7 @@ public  class Rectangle extends JPanel{
     private Color color;
     private boolean hasPiece = false;
     private Point Coord = new Point();
+    
     public Rectangle(int x, int y, int wid, int hei){
         this.x = x;
         this.y = y;

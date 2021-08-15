@@ -20,7 +20,7 @@ public class CheckersTable {
 
     private final int N_ROWS, N_COLS, DIM_RECT;
     private Player p1, p2;
-    private Piece pToMove;
+    
 
     private JFrame frame;
     private JPanel panel;
@@ -29,7 +29,7 @@ public class CheckersTable {
 
     private List<Point> pointsListToClear = new ArrayList<Point>();
 
-    private Point posAfterMove = new Point(); //free position on which to show suggestion 
+    
 
     /*-------------------------------------------------------------------------------------------------
             p1 = new Player(Color.green,playerName);
@@ -100,21 +100,23 @@ public class CheckersTable {
 
     //Shows the moves allowed to click on a piece
     protected void suggestions(Piece p) {
-        pToMove = p; //pToMove is a istance variable which stores piece to be moved
-        String classSelectedPiece = pToMove.getClass().toString();
+        Piece.setPtoMove(p); //set istance of piece to move p 
+        Piece ptoMove = Piece.getPtoMove(); //get static istance pToMove of Piece Class.
+        String classSelectedPiece = ptoMove.getClass().toString();
         switch (classSelectedPiece){
             case "class Pawn":
-                showSuggestions();
+            //Qui sarebbe sufficiente pToMove.showSuggetions() ma lo faccio per test
+                Pawn piecePawn = (Pawn)ptoMove;
+                piecePawn.showSuggestions();
                 break;
             case "class Archer":
-                showSuggestions();
-                //Ulteriori suggerimenti da aggiungere
-                System.out.println("CASA ARCHER: Vediamo cosa fare per l'arciere");
+                Archer pieceArcher = (Archer)ptoMove;
+                pieceArcher.showSuggestions();
                 break;
 
             case "class Dama":
-                showSuggestions();
-                //Ulteriori suggerimenti da aggiungere
+            //QUI Non posso fare il test perché manca ancora la classe Dama!
+                ptoMove.showSuggestions();
                 System.out.println("CASE DAMA: Vediamo cosa fare per la DAMA");
                 break;
 
@@ -123,86 +125,13 @@ public class CheckersTable {
         }
     }
 
-    protected void showSuggestions(){
-        final int GOLEFTCOL = pToMove.getCoord().y - 1, GORIGHTCOL = pToMove.getCoord().y + 1;
-        int esito_left, esito_right;
-
-        posAfterMove.x = setRowbyColor();
-        esito_left = checkMove(posAfterMove.x, GOLEFTCOL);
-
-        if (esito_left == 0 || esito_left == 1){ // Se a sinistra non si può mangiare
-            esito_right = checkMove(posAfterMove.x, GORIGHTCOL); //Vedo se a destra posso muovermi o mangiare
-            if (esito_right == 2){ //DEVO mangiare a DESTRA
-                posAfterMove.x = setRowonEat();
-                showFreeRectangle(posAfterMove.x, posAfterMove.y);
-            }
-            else{ //Se nemmeno a destra si può mangiare allora..
-                if (esito_left == 0) //Se posso muovermi a sinistra
-                    showFreeRectangle(posAfterMove.x, GOLEFTCOL);   
-                if (esito_right == 0) //Se posso muovermi a destra
-                    showFreeRectangle(posAfterMove.x, GORIGHTCOL); 
-            }
-        }
-        else if (esito_left == 2){ //DEVO mangiare a SINISTRA
-            posAfterMove.x = setRowonEat();
-            showFreeRectangle(posAfterMove.x, posAfterMove.y);
-        }
-    }
-    // Indica la riga da colorare quando occorre mangiare
-    protected int setRowonEat(){
-        return (pToMove.getColor() == Color.red) ? pToMove.getCoord().x - 2 : pToMove.getCoord().x + 2; 
-    }
-    // Indica la colonna da colorare quando occorre mangiare
-    protected int setColonEat(int col){
-        return (col > pToMove.getCoord().y) ? pToMove.getCoord().y + 2 : pToMove.getCoord().y - 2;
-    }
-
-    protected int setRowbyColor(){
-        return  (pToMove.getColor() == Color.red) ? pToMove.getCoord().x - 1 : pToMove.getCoord().x + 1;
-    }
-    
-    protected int checkMove(int row, final int COL_DIRECTION){
-        Point position = new Point(row, COL_DIRECTION); // Indica le coordinate del rettangolo da analizzare
-        int result = enemyPiece_inRect(position);
-        // System.out.println("Analizzo il rettangolo "+ i + " " + j); // System.out.println("Result = " + result);
-        if(result == 2){ //ho trovato un pezzo avversario da mangiare (ma non so se posso mangiarlo)
-            position.x = setRowonEat();
-            position.y = setColonEat(position.y);
-            posAfterMove.y = position.y;
-            return (canIeat(position)) ? 2 : 1; //2: Devo mangiarlo. -- 1: Non posso mangiare, né posso muovermi.
-        }
-        else if(result == 0) //Se la casella è libera..
-            return 0; //posso muovermi qui
-        else
-            return 1; //Non posso mangiare, né posso muovermi.
-    }
-
-    protected int enemyPiece_inRect(Point position){
-        if(rectangles[position.x][position.y].getHasPiece()){
-            // Se c'è un pezzo vediamo se è dello stesso colore di chi si muove
-            Piece tmp = (Piece) rectangles[position.x][position.y].getComponent(0);
-            boolean pezzo_avversario = !myColor.checkColors(pToMove.getColor(),tmp.getColor());
-            return (pezzo_avversario) ? 2 : 1; // 2: pezzo avversario, forse è mangiabile 
-        }                                      // 1: c'è un mio pezzo, non posso mangiarlo
-        else
-            return 0; //non c'è un pezzo, casella libera
-    }
-
-    protected boolean canIeat(Point position){
-        return (enemyPiece_inRect(position) == 0) ? true : false; //true: il secondo rect è libero. SI DEVE MANGIARE.
-    }                        //false: Non posso mangiare. Il secondo rect è occupato da un pezzo rosso o verde.
-
-    protected void showFreeRectangle(int row, int col){
-            rectangles[row][col].setColor(Color.cyan);
-            rectangles[row][col].repaint();
-            pointsListToClear.add(new Point(row, col));
-    }
-
-    //This function move pToMove into destRectangle
+     //This function move pToMove into destRectangle
     public void move(Rectangle destRectangle, int i, int j) {
-        Rectangle srcRectangle = rectangles[pToMove.getCoord().x][pToMove.getCoord().y]; //this rectangle contain the piece to be moved
+        Piece ptoMove = Piece.getPtoMove();
+        Rectangle srcRectangle = rectangles[ptoMove.getCoord().x][ptoMove.getCoord().y]; //this rectangle contain the piece to be moved
         Component component_pToMove = srcRectangle.getComponent(0); // first component with index 0
-        pToMove.setCoord(i, j);
+        
+        ptoMove.setCoord(i, j);
 
         //Add piece to move in new rectagle
         destRectangle.add(component_pToMove);
@@ -213,6 +142,12 @@ public class CheckersTable {
         srcRectangle.removeAll(); //remove all components by panel Rectangle (but it only has 1 component with index 0)
         srcRectangle.setHasPiece(false);
         srcRectangle.repaint();
+    }
+
+    protected void showFreeRectangle(int row, int col){
+            rectangles[row][col].setColor(Color.cyan);
+            rectangles[row][col].repaint();
+            pointsListToClear.add(new Point(row, col));
     }
 
     public void clearSuggestions(){
@@ -233,6 +168,10 @@ public class CheckersTable {
 
     public final int getN_COLS(){
         return N_COLS;
+    }
+
+    public Rectangle getRectanglefromList(int row, int col){
+        return rectangles[row][col];
     }
 
 }
