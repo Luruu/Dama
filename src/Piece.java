@@ -8,6 +8,7 @@ public abstract class Piece extends JComponent {
    private final Color color;
    private int points;
    private Image objIMG;
+   final int DIM_IMG = 86;
    private String IMG_Path;
    private Point coord;
    
