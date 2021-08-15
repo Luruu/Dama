@@ -17,17 +17,14 @@ public  class Rectangle extends JPanel{
     public static Rectangle[][] createRectangles(int N_ROWS, int N_COLS, int DIM_RECT, Player p1, Player p2) throws Exception {
         Rectangle[][] rectangles = new Rectangle[N_ROWS][N_COLS];
         Color color_rect;
-            for (int i = 0; i < N_ROWS; i++)
-                for (int j = 0; j < N_COLS; j++){
-                    color_rect = myColor.getColor(i, j);
-
-                    rectangles[i][j] = new Rectangle(0, 0, DIM_RECT, DIM_RECT);
-                    rectangles[i][j].setCoord(i,j);
-                    rectangles[i][j].color = color_rect;
-                        //ADD Player that is also handler mouse event
-                        rectangles[i][j].addMouseListener(new Player());
-                }
-        
+        for (int i = 0; i < N_ROWS; i++)
+            for (int j = 0; j < N_COLS; j++){
+                color_rect = myColor.getColor(i, j);
+                rectangles[i][j] = new Rectangle(0, 0, DIM_RECT, DIM_RECT);
+                rectangles[i][j].setCoord(i,j);
+                rectangles[i][j].color = color_rect;
+                rectangles[i][j].addMouseListener(new Player()); //ADD Player that is also handler mouse event
+            }
         addPieces(rectangles, N_ROWS, N_COLS, p1,p2);
         return rectangles;
     }
@@ -38,12 +35,12 @@ public  class Rectangle extends JPanel{
         Color pieceColor;
         String typePiece;
         Piece piece;
-        for (int i = 0; i < N_ROWS; i++)
+        for (int i = 0; i < N_ROWS; i++){
             for (int j = 0; j < N_COLS; j++){
                 //Add Pieces in the correct position
                 if ( (i < N_COLS/2 - 1 || i > N_COLS/2 ) && rectangles[i][j].color == Color.darkGray){
                     typePiece = ((i == 0 && j == N_ROWS-1) || (i == N_COLS-1 && j == 0 )) ? "archer": "pawn";
-                    pieceColor = (i<3) ? Color.green : Color.red;
+                    pieceColor = (i< N_ROWS/2 - 1) ? Color.green : Color.red;
                     piece = (Piece) factory.factoryMethod(typePiece, pieceColor);
                     
                     //Assignment of the player based on the color of the pawn
@@ -59,6 +56,7 @@ public  class Rectangle extends JPanel{
                     piece.setCoord(i,j);
                 }
             }
+        }
     }
 
     protected void paintComponent(Graphics g){

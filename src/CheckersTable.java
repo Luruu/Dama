@@ -161,21 +161,20 @@ public class CheckersTable {
         return  (pToMove.getColor() == Color.red) ? pToMove.getCoord().x - 1 : pToMove.getCoord().x + 1;
     }
     
-    protected int checkMove(int row, int col_direction){
-        Point position = new Point(row, col_direction); // Indica le coordinate del rettangolo da analizzare
+    protected int checkMove(int row, final int COL_DIRECTION){
+        Point position = new Point(row, COL_DIRECTION); // Indica le coordinate del rettangolo da analizzare
         int result = enemyPiece_inRect(position);
         // System.out.println("Analizzo il rettangolo "+ i + " " + j); // System.out.println("Result = " + result);
-        
-        if(result == 2){ //hai trovato un pezzo avversario DA MANGIARE per cui c'è un pezzo ed è un pezzo avversario in rect_xy
+        if(result == 2){ //ho trovato un pezzo avversario da mangiare (ma non so se posso mangiarlo)
             position.x = setRowonEat();
             position.y = setColonEat(position.y);
             posAfterMove.y = position.y;
-            return (canIeat(position)) ? 2 : 1; //2: Devo mangiarlo. -- 1: Non posso mangiarlo né posso muovermi.
+            return (canIeat(position)) ? 2 : 1; //2: Devo mangiarlo. -- 1: Non posso mangiare, né posso muovermi.
         }
-        else if(result == 0)
-            return 0;//può muoversi qui
+        else if(result == 0) //Se la casella è libera..
+            return 0; //posso muovermi qui
         else
-            return 1; // Non posso né mangiare, né muovermi.
+            return 1; //Non posso mangiare, né posso muovermi.
     }
 
     protected int enemyPiece_inRect(Point position){
@@ -224,6 +223,16 @@ public class CheckersTable {
         pointsListToClear.clear();
     }
 
+    public final int getDIM_RECT(){
+        return DIM_RECT;
+    }
 
-    
+    public final int getN_ROWS(){
+        return N_ROWS;
+    }
+
+    public final int getN_COLS(){
+        return N_COLS;
+    }
+
 }
