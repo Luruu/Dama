@@ -25,6 +25,8 @@ public class CheckersTable {
     private JFrame frame;
     private JPanel panel;
 
+    private Piece pToMove; 
+
     private static Rectangle[][] rectangles;
 
     private List<Point> pointsListToClear = new ArrayList<Point>();
@@ -100,38 +102,42 @@ public class CheckersTable {
 
     //Shows the moves allowed to click on a piece
     protected void suggestions(Piece p) {
-        Piece.setPtoMove(p); //set istance of piece to move p 
-        Piece ptoMove = Piece.getPtoMove(); //get static istance pToMove of Piece Class.
-        String classSelectedPiece = ptoMove.getClass().toString();
+       //Piece.setPtoMove(p); //set istance of piece to move p 
+        //Piece ptoMove = Piece.getPtoMove(); //get static istance pToMove of Piece Class.
+        String classSelectedPiece = p.getClass().toString();
+        pToMove = p; 
         switch (classSelectedPiece){
             case "class Pawn":
             //Qui sarebbe sufficiente pToMove.showSuggetions() ma lo faccio per test
-                Pawn piecePawn = (Pawn)ptoMove;
-                piecePawn.showSuggestions();
+                pToMove = (Pawn)p;
+                //Pawn piecePawn = (Pawn)p;
+                
                 break;
             case "class Archer":
-                Archer pieceArcher = (Archer)ptoMove;
-                pieceArcher.showSuggestions();
+                //Archer pieceArcher = (Archer)p;
+                pToMove = (Archer)p;
+               // pieceArcher.showSuggestions();
                 break;
 
             case "class Dama":
             //QUI Non posso fare il test perché manca ancora la classe Dama!
-                ptoMove.showSuggestions();
+            //Dama pieceArcher = (Dama)p;
+              //  pToMove.showSuggestions();
                 System.out.println("CASE DAMA: Vediamo cosa fare per la DAMA");
                 break;
 
             default:
-             System.out.println("CASE DEFAULT: vediamo se lasciarlo.");
+                System.out.println("CASE DEFAULT: vediamo se lasciarlo.");
         }
+        pToMove.showSuggestions();
     }
 
      //This function move pToMove into destRectangle
-    public void move(Rectangle destRectangle, int i, int j) {
-        Piece ptoMove = Piece.getPtoMove();
-        Rectangle srcRectangle = rectangles[ptoMove.getCoord().x][ptoMove.getCoord().y]; //this rectangle contain the piece to be moved
+    public void move(Rectangle destRectangle, int i_src, int j_src) {
+        Rectangle srcRectangle = rectangles[pToMove.getCoord().x][pToMove.getCoord().y]; //this rectangle contain the piece to be moved
         Component component_pToMove = srcRectangle.getComponent(0); // first component with index 0
         
-        ptoMove.setCoord(i, j);
+        pToMove.setCoord(i_src, j_src);
 
         //Add piece to move in new rectagle
         destRectangle.add(component_pToMove);

@@ -13,8 +13,6 @@ public abstract class Piece extends JComponent {
    private Point coord;
 
    private final CheckersTable TABLE;
-
-   private static Piece pToMove; //pToMove is a istance variable which stores piece to be moved
    private static Point posAfterMove = new Point(); //free position on which to show suggestion 
    
    public void setCoord(int i, int j){
@@ -39,38 +37,35 @@ public abstract class Piece extends JComponent {
 
    protected void paintComponent(Graphics g){
       super.paintComponent(g);
-      g.drawImage(objIMG.img,0,0,null);
+      g.drawImage(objIMG.img, 0, 0,null);
    }
 
    protected Color getColor(){
       return color;
    }
 
-   public static Piece getPtoMove(){
-      return pToMove;
-   }
-   public static void setPtoMove(Piece pieceToMove){
-      pToMove = pieceToMove;
+   public Piece getPtoMove(){
+      return this;
    }
 
    protected void showSuggestions(){
-      final int GOLEFTCOL = pToMove.getCoord().y - 1, GORIGHTCOL = pToMove.getCoord().y + 1;
+      final int GOLEFT_COL = getCoord().y - 1, GORIGHT_COL = getCoord().y + 1;
       int esito_left, esito_right;
 
       posAfterMove.x = setRowbyColor();
-      esito_left = checkMove(posAfterMove.x, GOLEFTCOL);
+      esito_left = checkMove(posAfterMove.x, GOLEFT_COL);
 
       if (esito_left == 0 || esito_left == 1){ // Se a sinistra non si può mangiare
-          esito_right = checkMove(posAfterMove.x, GORIGHTCOL); //Vedo se a destra posso muovermi o mangiare
+          esito_right = checkMove(posAfterMove.x, GORIGHT_COL); //Vedo se a destra posso muovermi o mangiare
           if (esito_right == 2){ //DEVO mangiare a DESTRA
               posAfterMove.x = setRowonEat();
               TABLE.showFreeRectangle(posAfterMove.x, posAfterMove.y);
           }
           else{ //Se nemmeno a destra si può mangiare allora..
               if (esito_left == 0) //Se posso muovermi a sinistra
-              TABLE.showFreeRectangle(posAfterMove.x, GOLEFTCOL);   
+              TABLE.showFreeRectangle(posAfterMove.x, GOLEFT_COL);   
               if (esito_right == 0) //Se posso muovermi a destra
-              TABLE.showFreeRectangle(posAfterMove.x, GORIGHTCOL); 
+              TABLE.showFreeRectangle(posAfterMove.x, GORIGHT_COL); 
           }
       }
       else if (esito_left == 2){ //DEVO mangiare a SINISTRA
@@ -81,16 +76,16 @@ public abstract class Piece extends JComponent {
   
    //Indica la colonna da colorare quando occorre mangiare
    protected int setColonEat(int col){
-      return (col > pToMove.getCoord().y) ? pToMove.getCoord().y + 2 : pToMove.getCoord().y - 2;
+      return (col > getCoord().y) ? getCoord().y + 2 : getCoord().y - 2;
    }
   
    // Indica la riga da colorare quando occorre mangiare
    protected int setRowonEat(){
-      return (pToMove.getColor() == Color.red) ? pToMove.getCoord().x - 2 : pToMove.getCoord().x + 2; 
+      return (getColor() == Color.red) ? getCoord().x - 2 : getCoord().x + 2; 
    }
 
    protected int setRowbyColor(){
-      return (pToMove.getColor() == Color.red) ? pToMove.getCoord().x - 1 : pToMove.getCoord().x + 1;
+      return (getColor() == Color.red) ? getCoord().x - 1 : getCoord().x + 1;
    }
   
    protected int checkMove(int row, final int COL_DIRECTION){
@@ -114,7 +109,7 @@ public abstract class Piece extends JComponent {
       if(rect.getHasPiece()){
          // Se c'è un pezzo vediamo se è dello stesso colore di chi si muove
          Piece tmp = (Piece) rect.getComponent(0);
-         boolean pezzo_avversario = !myColor.checkColors(pToMove.getColor(),tmp.getColor());
+         boolean pezzo_avversario = !myColor.checkColors(getColor(),tmp.getColor());
          return (pezzo_avversario) ? 2 : 1; // 2: pezzo avversario, forse è mangiabile 
       }                                      // 1: c'è un mio pezzo, non posso mangiarlo
       else

@@ -10,7 +10,7 @@ public  class Rectangle extends JPanel{
     public Rectangle(int x, int y, int wid, int hei){
         this.x = x;
         this.y = y;
-        this.wid = wid;
+        this.wid = wid;s
         this.hei = hei;
     }
 
