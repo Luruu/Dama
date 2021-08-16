@@ -1,8 +1,9 @@
 import java.awt.*;
 
-public class Archer extends Piece{
-    public Archer(Color c, String path_name) throws Exception{
-        super(c, 3, path_name);
+public class Checkers extends Piece{
+    
+    public Checkers(Color c, String path_name) throws Exception{
+        super(c, 5, path_name);
     }
 
     @Override
@@ -11,4 +12,6 @@ public class Archer extends Piece{
         // DA IMPLEMENTARE!!!!
         System.out.println("Archer ha richiamato showSuggestion di Piece!");
     }
+
+
 }

@@ -31,7 +31,7 @@ public abstract class Piece extends JComponent {
       objIMG = new Image(imgName);
       TABLE = CheckersTable.getInstance();
       DIM_IMG = TABLE.getDIM_RECT() - 10; //Dimension of a rectangle - margin
-      setPreferredSize(new Dimension(DIM_IMG, DIM_IMG)); 
+      setPreferredSize(new Dimension(DIM_IMG, DIM_IMG));
       coord = new Point();
    }
 

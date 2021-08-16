@@ -1,17 +1,11 @@
-//import javax.lang.model.util.ElementScanner6;
-//import javax.management.MBeanAttributeInfo;
 import javax.swing.*;
 
-//import org.graalvm.compiler.nodes.calc.RightShiftNode;
-
-//import jdk.internal.org.jline.terminal.spi.Pty;
 
 import java.lang.Exception;
 import java.awt.*;
-//import java.sql.Struct;
+
 import java.util.ArrayList;
 import java.util.List;
-//import java.util.Objects;
 
 //Singleton
 //Command Receiver
