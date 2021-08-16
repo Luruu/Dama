@@ -20,7 +20,7 @@ public  class Rectangle extends JPanel{
         Color color_rect;
         for (int i = 0; i < N_ROWS; i++)
             for (int j = 0; j < N_COLS; j++){
-                color_rect = myColor.getColor(i, j);
+                color_rect = ColorFunctions.getColor_PlayableOrNot(i, j);
                 rectangles[i][j] = new Rectangle(0, 0, DIM_RECT, DIM_RECT);
                 rectangles[i][j].setCoord(i,j);
                 rectangles[i][j].color = color_rect;
