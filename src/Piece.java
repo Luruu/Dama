@@ -114,7 +114,7 @@ public abstract class Piece extends JComponent {
       if(rect.getHasPiece()){
          // Se c'è un pezzo vediamo se è dello stesso colore di chi si muove
          Piece tmp = (Piece) rect.getComponent(0);
-         boolean pezzo_avversario = !myColor.checkColors(getColor(),tmp.getColor());
+         boolean pezzo_avversario = ! ColorFunctions.checkColors(getColor(), tmp.getColor());
          return (pezzo_avversario) ? 2 : 1; // 2: pezzo avversario, forse è mangiabile 
       }                                      // 1: c'è un mio pezzo, non posso mangiarlo
       else
