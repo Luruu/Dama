@@ -1,9 +1,8 @@
-import javax.swing.*;
 
+import javax.swing.*;
 
 import java.lang.Exception;
 import java.awt.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,21 +127,28 @@ public class CheckersTable {
 
      //This function move pToMove into destRectangle
     public void move(Rectangle destRectangle, int i_src, int j_src) {
+        int i,j;
+        Rectangle pToEatRect;
         Rectangle srcRectangle = rectangles[pToMove.getCoord().x][pToMove.getCoord().y]; //this rectangle contain the piece to be moved
-        Component component_pToMove = srcRectangle.getComponent(0); // first component with index 0
+                
+        //If have to eat 
+        if (srcRectangle.getCoord().x - destRectangle.getCoord().y >= 1 || srcRectangle.getCoord().x - destRectangle.getCoord().y <= -1){
+            i = pToMove.setRowbyColor();
+            //Choose direction
+            j = (srcRectangle.getCoord().y < destRectangle.getCoord().y) ? pToMove.getCoord().y + 1 : pToMove.getCoord().y - 1;
+            pToEatRect = rectangles[i][j];
+            AddorRemove(pToEatRect, false);
+        }
+        
+    
         
         pToMove.setCoord(i_src, j_src);
-
         //Add piece to move in new rectagle
-        destRectangle.add(component_pToMove);
-        destRectangle.setHasPiece(true); // now rectangles has a piece.
-        destRectangle.repaint();
-
+        AddorRemove(destRectangle, true);
         //remove the old piece from the previous rectangle
-        srcRectangle.removeAll(); //remove all components by panel Rectangle (but it only has 1 component with index 0)
-        srcRectangle.setHasPiece(false);
-        srcRectangle.repaint();
+        AddorRemove(srcRectangle, false);
     }
+       
 
     protected void showFreeRectangle(int row, int col){
             rectangles[row][col].setColor(Color.cyan);
@@ -174,4 +180,17 @@ public class CheckersTable {
         return rectangles[row][col];
     }
 
+    public boolean illegalMove(int k){
+        return (k >= N_ROWS || k < 0) ? true : false;
+    }
+
+    private void AddorRemove(Rectangle rect, boolean action){
+        if(action == true)
+            rect.add(pToMove);
+        else
+            rect.removeAll();
+        rect.setHasPiece(action);
+        rect.repaint();
+    }
+    
 }

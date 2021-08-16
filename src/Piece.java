@@ -51,7 +51,7 @@ public abstract class Piece extends JComponent {
    protected void showSuggestions(){
       final int GOLEFT_COL = getCoord().y - 1, GORIGHT_COL = getCoord().y + 1;
       int esito_left, esito_right;
-
+      
       posAfterMove.x = setRowbyColor();
       esito_left = checkMove(posAfterMove.x, GOLEFT_COL);
 
@@ -89,6 +89,10 @@ public abstract class Piece extends JComponent {
    }
   
    protected int checkMove(int row, final int COL_DIRECTION){
+
+      if (TABLE.illegalMove(row) || TABLE.illegalMove(COL_DIRECTION))
+         return 1;//Non può moversi.
+
       Point position = new Point(row, COL_DIRECTION); // Indica le coordinate del rettangolo da analizzare
       int result = enemyPiece_inRect(position);
       // System.out.println("Analizzo il rettangolo "+ i + " " + j); // System.out.println("Result = " + result);
@@ -106,6 +110,7 @@ public abstract class Piece extends JComponent {
 
    protected int enemyPiece_inRect(Point position){
       Rectangle rect = TABLE.getRectanglefromList(position.x, position.y);
+       
       if(rect.getHasPiece()){
          // Se c'è un pezzo vediamo se è dello stesso colore di chi si muove
          Piece tmp = (Piece) rect.getComponent(0);
@@ -117,7 +122,10 @@ public abstract class Piece extends JComponent {
    }
 
    protected boolean canIeat(Point position){
-      return (enemyPiece_inRect(position) == 0) ? true : false; //true: il secondo rect è libero. SI DEVE MANGIARE.
+      if (TABLE.illegalMove(position.x) || TABLE.illegalMove(position.y))
+         return false;//Non può mangiare perché il nemico è su un bordo
+      else
+         return (enemyPiece_inRect(position) == 0) ? true : false; //true: il secondo rect è libero. SI DEVE MANGIARE.
    }           //false: Non posso mangiare. Il secondo rect è occupato da un pezzo rosso o verde.
 
 }

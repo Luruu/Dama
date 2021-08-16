@@ -17,6 +17,8 @@ public class Player extends MouseAdapter {
         invoker = new InvokerList(new ConcreteCommand(CheckersTable.getInstance()));
     }
 
+    //Overload del costruttore
+    //Usato per i rettangoli che hanno bisogno di un mouseadapter.
     public Player() throws Exception {
         color = null;
         nome = null;
@@ -41,10 +43,3 @@ public class Player extends MouseAdapter {
 
 }
 
-/*
-if (tmp.getClass().toString().equals("class Pawn") || tmp.getClass().toString().equals("class Archer") ){
-            Point p = (Piece)tmp.getCoord();
-            invoker.suggestion(tmp);
-        }
-        else if (tmp.getClass().toString().equals("class Rectangle") && )
- */
