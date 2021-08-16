@@ -115,6 +115,8 @@ public abstract class Piece extends JComponent {
          // Se c'è un pezzo vediamo se è dello stesso colore di chi si muove
          Piece tmp = (Piece) rect.getComponent(0);
          boolean pezzo_avversario = ! ColorFunctions.checkColors(getColor(), tmp.getColor());
+         System.out.println("Riga 118 in Piece - Colore avversario: " + ! getColor().equals(tmp.getColor()));
+
          return (pezzo_avversario) ? 2 : 1; // 2: pezzo avversario, forse è mangiabile 
       }                                      // 1: c'è un mio pezzo, non posso mangiarlo
       else
@@ -123,7 +125,7 @@ public abstract class Piece extends JComponent {
 
    protected boolean canIeat(Point position){
       if (TABLE.illegalMove(position.x) || TABLE.illegalMove(position.y))
-         return false;//Non può mangiare perché il nemico è su un bordo
+         return false; //Non può mangiare perché il nemico è su un bordo
       else
          return (enemyPiece_inRect(position) == 0) ? true : false; //true: il secondo rect è libero. SI DEVE MANGIARE.
    }           //false: Non posso mangiare. Il secondo rect è occupato da un pezzo rosso o verde.

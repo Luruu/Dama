@@ -36,12 +36,13 @@ public  class Rectangle extends JPanel{
         Color pieceColor;
         String typePiece;
         Piece piece;
+        int mid_table = N_COLS/2;
         for (int i = 0; i < N_ROWS; i++){
             for (int j = 0; j < N_COLS; j++){
                 //Add Pieces in the correct position
-                if ( (i < N_COLS/2 - 1 || i > N_COLS/2 ) && rectangles[i][j].color == Color.darkGray){
-                    typePiece = ((i == 0 && j == N_ROWS-1) || (i == N_COLS-1 && j == 0 )) ? "archer": "pawn";
-                    pieceColor = (i< N_ROWS/2 - 1) ? Color.green : Color.red;
+                if ( (i < mid_table - 1 || i > mid_table) && rectangles[i][j].color == Color.darkGray){
+                    typePiece = ((i == 0 && j == N_ROWS - 1) || (i == N_COLS - 1 && j == 0)) ? "archer": "pawn";
+                    pieceColor = (i < mid_table - 1) ? Color.green : Color.red;
                     piece = (Piece) factory.factoryMethod(typePiece, pieceColor);
                     
                     //Assignment of the player based on the color of the pawn
