@@ -130,7 +130,7 @@ public class CheckersTable {
         int i,j;
         Rectangle pToEatRect;
         Rectangle srcRectangle = rectangles[pToMove.getCoord().x][pToMove.getCoord().y]; //this rectangle contain the piece to be moved
-                
+        
         //If have to eat 
         if (srcRectangle.getCoord().x - destRectangle.getCoord().y >= 1 || srcRectangle.getCoord().x - destRectangle.getCoord().y <= -1){
             i = pToMove.setRowbyColor();
@@ -140,8 +140,7 @@ public class CheckersTable {
             AddorRemove(pToEatRect, false);
         }
         
-    
-        
+
         pToMove.setCoord(i_src, j_src);
         //Add piece to move in new rectagle
         AddorRemove(destRectangle, true);
