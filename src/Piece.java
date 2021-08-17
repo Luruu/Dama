@@ -56,7 +56,6 @@ public abstract class Piece extends JComponent {
       posAfterMove.x = setRowbyColor();
       esito_left = checkMove(posAfterMove.x, GOLEFT_COL);
 
-      
       if (esito_left == 0 || esito_left == 1){ // Se a sinistra non si può mangiare
          esito_right = checkMove(posAfterMove.x, GORIGHT_COL); //Vedo se a destra posso muovermi o mangiare
          if (esito_right == 2){ //DEVO mangiare a DESTRA

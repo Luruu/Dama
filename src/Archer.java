@@ -6,9 +6,12 @@ public class Archer extends Piece{
     }
 
     @Override
-    public void showSuggestions(){
+    public int showSuggestions(){
         super.showSuggestions(); //show basics movement for a piece
         // DA IMPLEMENTARE!!!!
         System.out.println("Archer ha richiamato showSuggestion di Piece!");
+
+        final int QUALCOSA = 400; //poi si vede cosa ritornare
+        return QUALCOSA;
     }
 }
