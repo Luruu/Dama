@@ -5,7 +5,4 @@ public interface ColorFunctions {
         Boolean quadrato_giocabile = (i%2 == 0 && j%2 != 0 || j%2 == 0 && i%2 != 0);
         return  (quadrato_giocabile) ? Color.darkGray : Color.white;
     }
-    public static boolean checkColors(Color a, Color b){
-        return (a == b) ? true : false;
-    }
 }

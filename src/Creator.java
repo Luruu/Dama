@@ -1,6 +1,5 @@
 import java.awt.*;
 
-public abstract class Creator {
-        protected abstract Object factoryMethod(String name, Color c) throws Exception;
+public interface Creator {
+        public abstract Object factoryMethod(String name, Color c) throws Exception;
     }
-

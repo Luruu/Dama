@@ -1,1 +1,0 @@
-Fixare il caso in cui una pedina può mangiare sia a sx che a dx vedi screenshot 1
