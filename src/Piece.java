@@ -48,30 +48,35 @@ public abstract class Piece extends JComponent {
       return this;
    }
 
-   protected void showSuggestions(){
+   //return values: 2 (deve mangiare) -  0(si può muovere o meno (non verificato!!))
+   protected int showSuggestions(){
       final int GOLEFT_COL = getCoord().y - 1, GORIGHT_COL = getCoord().y + 1;
       int esito_left, esito_right;
       
       posAfterMove.x = setRowbyColor();
       esito_left = checkMove(posAfterMove.x, GOLEFT_COL);
 
+      
       if (esito_left == 0 || esito_left == 1){ // Se a sinistra non si può mangiare
-          esito_right = checkMove(posAfterMove.x, GORIGHT_COL); //Vedo se a destra posso muovermi o mangiare
-          if (esito_right == 2){ //DEVO mangiare a DESTRA
-              posAfterMove.x = setRowonEat();
-              TABLE.showFreeRectangle(posAfterMove.x, posAfterMove.y);
-          }
-          else{ //Se nemmeno a destra si può mangiare allora..
-              if (esito_left == 0) //Se posso muovermi a sinistra
-              TABLE.showFreeRectangle(posAfterMove.x, GOLEFT_COL);   
-              if (esito_right == 0) //Se posso muovermi a destra
-              TABLE.showFreeRectangle(posAfterMove.x, GORIGHT_COL); 
-          }
+         esito_right = checkMove(posAfterMove.x, GORIGHT_COL); //Vedo se a destra posso muovermi o mangiare
+         if (esito_right == 2){ //DEVO mangiare a DESTRA
+            posAfterMove.x = setRowonEat();
+            TABLE.showFreeRectangle(posAfterMove.x, posAfterMove.y);
+            return 2;
+         }
+         else{ //Se nemmeno a destra si può mangiare allora..
+            if (esito_left == 0) //Se posso muovermi a sinistra
+               TABLE.showFreeRectangle(posAfterMove.x, GOLEFT_COL);   
+            if (esito_right == 0) //Se posso muovermi a destra
+               TABLE.showFreeRectangle(posAfterMove.x, GORIGHT_COL); 
+         }
       }
       else if (esito_left == 2){ //DEVO mangiare a SINISTRA
-          posAfterMove.x = setRowonEat();
-          TABLE.showFreeRectangle(posAfterMove.x, posAfterMove.y);
+         posAfterMove.x = setRowonEat();
+         TABLE.showFreeRectangle(posAfterMove.x, posAfterMove.y);
+         return 2;
       }
+      return 0;
   }
   
    //Indica la colonna da colorare quando occorre mangiare

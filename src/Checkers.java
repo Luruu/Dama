@@ -7,10 +7,17 @@ public class Checkers extends Piece{
     }
 
     @Override
-    public void showSuggestions(){
-        super.showSuggestions(); //show basics movement for a piece
-        // DA IMPLEMENTARE!!!!
+    public int showSuggestions(){
+        boolean showMoreSuggestions = super.showSuggestions() != 2;
         System.out.println("Archer ha richiamato showSuggestion di Piece!");
+        if(showMoreSuggestions)
+
+        
+
+
+
+        final int QUALCOSA = 400; //poi si vede cosa ritornare
+        return QUALCOSA;
     }
 
 
