@@ -122,7 +122,7 @@ public class CheckersTable {
             default:
                 System.out.println("CASE DEFAULT: vediamo se lasciarlo.");
         }
-        pToMove.showSuggestions();
+        pToMove.showSuggestions(pToMove.setRowbyColor());
     }
 
      //This function move pToMove into destRectangle
@@ -132,11 +132,13 @@ public class CheckersTable {
         Rectangle srcRectangle = rectangles[pToMove.getCoord().x][pToMove.getCoord().y]; //this rectangle contain the piece to be moved
         
         //If have to eat 
-        if (srcRectangle.getCoord().x - destRectangle.getCoord().y >= 1 || srcRectangle.getCoord().x - destRectangle.getCoord().y <= -1){
+        if (srcRectangle.getCoord().x - destRectangle.getCoord().x > 1 || srcRectangle.getCoord().x - destRectangle.getCoord().x < -1){
             i = pToMove.setRowbyColor();
             //Choose direction
             j = (srcRectangle.getCoord().y < destRectangle.getCoord().y) ? pToMove.getCoord().y + 1 : pToMove.getCoord().y - 1;
             pToEatRect = rectangles[i][j];
+            System.out.println("devi mangiare qui: ");
+            System.out.println(i + " " + j);
             AddorRemove(pToEatRect, false);
         }
         

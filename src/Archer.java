@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.List;
 
 public class Archer extends Piece{
     public Archer(Color c, String path_name) throws Exception{
@@ -6,12 +7,18 @@ public class Archer extends Piece{
     }
 
     @Override
-    public int showSuggestions(){
-        super.showSuggestions(); //show basics movement for a piece
-        // DA IMPLEMENTARE!!!!
-        System.out.println("Archer ha richiamato showSuggestion di Piece!");
-
-        final int QUALCOSA = 400; //poi si vede cosa ritornare
-        return QUALCOSA;
+    public int showSuggestions(int direction){
+        int oppositeDirection;
+        List <Point> direction_suggestion;
+        boolean showMoreSuggestions = super.showSuggestions(direction) != 2; //vero se non trova da mangiare
+        if(showMoreSuggestions){
+            TABLE.clearSuggestions(); // se non deve mangiare verso direction pulisco i suggerimenti e se non mangia neanche veros oppositeDirection 
+            //cerco di nuovo i suggerimenti verso direction
+            oppositeDirection = (getColor().equals(Color.red)) ? getCoord().x + 1 : getCoord().x - 1;
+             if (super.showSuggestions(oppositeDirection) != 2){
+                super.showSuggestions(direction);
+             }
+        }
+        return 1;
     }
 }

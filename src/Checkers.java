@@ -7,21 +7,14 @@ public class Checkers extends Piece{
     }
 
     @Override
-    public int showSuggestions(){
-
-        boolean showMoreSuggestions = super.showSuggestions() != 2;
-        System.out.println("Archer ha richiamato showSuggestion di Piece!");
-        if(showMoreSuggestions)
-            showCheckersSuggestions();
-        
-        final int QUALCOSA = 400; //poi si vede cosa ritornare
-        return QUALCOSA;
-    }
-
-
-    public int showCheckersSuggestions(){
-        
-        return 0;
+    public int showSuggestions(int direction){
+        int oppositeDirection;
+        boolean showMoreSuggestions = super.showSuggestions(direction) != 2;
+        if(showMoreSuggestions){
+            oppositeDirection = (getColor().equals(Color.red)) ? getCoord().x + 1 : getCoord().x - 1;
+            super.showSuggestions(oppositeDirection);
+        }
+        return 1;
     }
 
 }

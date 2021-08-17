@@ -12,7 +12,7 @@ public abstract class Piece extends JComponent {
    private String IMG_Path;
    private Point coord;
 
-   private final CheckersTable TABLE;
+   protected final CheckersTable TABLE;
    private static Point posAfterMove = new Point(); //free position on which to show suggestion 
    
    public void setCoord(int i, int j){
@@ -49,17 +49,17 @@ public abstract class Piece extends JComponent {
    }
 
    //return values: 2 (deve mangiare) -  0(si può muovere o meno (non verificato!!))
-   protected int showSuggestions(){
-      final int GOLEFT_COL = getCoord().y - 1, GORIGHT_COL = getCoord().y + 1;
+   protected int showSuggestions(int direction){
+      final int GOLEFT_COL = coord.y - 1, GORIGHT_COL = coord.y + 1;
       int esito_left, esito_right;
       
-      posAfterMove.x = setRowbyColor();
+      posAfterMove.x = direction;
       esito_left = checkMove(posAfterMove.x, GOLEFT_COL);
 
       if (esito_left == 0 || esito_left == 1){ // Se a sinistra non si può mangiare
          esito_right = checkMove(posAfterMove.x, GORIGHT_COL); //Vedo se a destra posso muovermi o mangiare
          if (esito_right == 2){ //DEVO mangiare a DESTRA
-            posAfterMove.x = setRowonEat();
+            posAfterMove.x = setRowonEat(posAfterMove);
             TABLE.showFreeRectangle(posAfterMove.x, posAfterMove.y);
             return 2;
          }
@@ -71,7 +71,8 @@ public abstract class Piece extends JComponent {
          }
       }
       else if (esito_left == 2){ //DEVO mangiare a SINISTRA
-         posAfterMove.x = setRowonEat();
+         posAfterMove.x = setRowonEat(posAfterMove);
+         System.out.println("A");
          TABLE.showFreeRectangle(posAfterMove.x, posAfterMove.y);
          return 2;
       }
@@ -80,16 +81,17 @@ public abstract class Piece extends JComponent {
   
    //Indica la colonna da colorare quando occorre mangiare
    protected int setColonEat(int col){
-      return (col > getCoord().y) ? getCoord().y + 2 : getCoord().y - 2;
+      return (col > coord.y) ? coord.y + 2 : coord.y - 2;
    }
   
    // Indica la riga da colorare quando occorre mangiare
-   protected int setRowonEat(){
-      return (getColor() == Color.red) ? getCoord().x - 2 : getCoord().x + 2; 
+   //Position indica il rettangolo nel quale si trova il pezzo da mangiare.
+   protected int setRowonEat(Point position){
+      return (coord.x - position.x > 0) ? coord.x - 2 : coord.x + 2; 
    }
 
    protected int setRowbyColor(){
-      return (getColor() == Color.red) ? getCoord().x - 1 : getCoord().x + 1;
+      return (getColor() == Color.red) ? coord.x - 1 : coord.x + 1;
    }
   
    protected int checkMove(int row, final int COL_DIRECTION){
@@ -99,11 +101,13 @@ public abstract class Piece extends JComponent {
 
       Point position = new Point(row, COL_DIRECTION); // Indica le coordinate del rettangolo da analizzare
       int result = enemyPiece_inRect(position);
-      // System.out.println("Analizzo il rettangolo "+ i + " " + j); // System.out.println("Result = " + result);
+      System.out.println("Analizzo il rettangolo "+ position.x + " " + position.y); // System.out.println("Result = " + result);
       if(result == 2){ //ho trovato un pezzo avversario da mangiare (ma non so se posso mangiarlo)
-         position.x = setRowonEat();
+         System.out.println("Ho trovato un pezzo da mangiare in "+ position.x + " " + position.y);
+         position.x = setRowonEat(position);
          position.y = setColonEat(position.y);
          posAfterMove.y = position.y; //save new position to Move (for suggestion)
+         System.out.println(position);
          return (canIeat(position)) ? 2 : 1; //2: Devo mangiarlo. -- 1: Non posso mangiare, né posso muovermi.
       }
       else if(result == 0) //Se la casella è libera..
@@ -119,7 +123,7 @@ public abstract class Piece extends JComponent {
          // Se c'è un pezzo vediamo se è dello stesso colore di chi si muove
          Piece tmp = (Piece) rect.getComponent(0);
          boolean pezzo_avversario = ! getColor().equals(tmp.getColor());
-
+         System.out.println("C");
          return (pezzo_avversario) ? 2 : 1; // 2: pezzo avversario, forse è mangiabile 
       }                                      // 1: c'è un mio pezzo, non posso mangiarlo
       else
