@@ -190,11 +190,12 @@ public class CheckersTable {
         rect.repaint();
     }
 
-    private boolean canUppgrade(){
-        boolean clPiece = pToMove.getClass().equals("class Piece");
-        boolean ifRedOnEnemyFstLine = pToMove.getColor() == Color.red && pToMove.getCoord().x == 0;
-        boolean ifGreenOnEnemyFstLine = pToMove.getColor() == Color.green && pToMove.getCoord().x == N_ROWS - 1;
-        return (pToMove.getClass().equals(clPiece) && (ifGreenOnEnemyFstLine || ifRedOnEnemyFstLine)) ? true : false;
+    private boolean canPieceUpgrade(){
+        String StrPiece = pToMove.getClass().getClass().toString();
+        boolean isRedOnEnemyFstLine = pToMove.getColor() == Color.red && pToMove.getCoord().x == 0;
+        boolean isGreenOnEnemyFstLine = pToMove.getColor() == Color.green && pToMove.getCoord().x == N_ROWS - 1;
+
+        return (StrPiece.equals("class Piece") && (isGreenOnEnemyFstLine || isRedOnEnemyFstLine)) ? true : false;
     }
 
 }
