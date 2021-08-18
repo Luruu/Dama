@@ -1,6 +1,6 @@
 
 import javax.swing.*;
-
+import java.lang.System;
 import java.lang.Exception;
 import java.awt.*;
 import java.util.ArrayList;
@@ -130,19 +130,16 @@ public class CheckersTable {
         int i,j;
         Rectangle pToEatRect;
         Rectangle srcRectangle = rectangles[pToMove.getCoord().x][pToMove.getCoord().y]; //this rectangle contain the piece to be moved
-        
-        //If have to eat 
-        if (srcRectangle.getCoord().x - destRectangle.getCoord().x > 1 || srcRectangle.getCoord().x - destRectangle.getCoord().x < -1){
-            i = pToMove.setRowbyColor();
+        int diff = srcRectangle.getCoord().x - destRectangle.getCoord().x;
+        //If have to eat
+        if (diff > 1 || diff < -1){
+            i = (diff > 1 ) ? pToMove.getCoord().x - 1 : pToMove.getCoord().x + 1;
             //Choose direction
-            j = (srcRectangle.getCoord().y < destRectangle.getCoord().y) ? pToMove.getCoord().y + 1 : pToMove.getCoord().y - 1;
+            j = (srcRectangle.getCoord().y > destRectangle.getCoord().y) ? pToMove.getCoord().y - 1 : pToMove.getCoord().y + 1;
             pToEatRect = rectangles[i][j];
-            System.out.println("devi mangiare qui: ");
-            System.out.println(i + " " + j);
             AddorRemove(pToEatRect, false);
         }
         
-
         pToMove.setCoord(i_src, j_src);
         //Add piece to move in new rectagle
         AddorRemove(destRectangle, true);
@@ -185,6 +182,7 @@ public class CheckersTable {
         return (k >= N_ROWS || k < 0) ? true : false;
     }
 
+    //When true add pieces, false remove.
     private void AddorRemove(Rectangle rect, boolean action){
         if(action == true)
             rect.add(pToMove);
