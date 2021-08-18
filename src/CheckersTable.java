@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
+
 import java.lang.Exception;
 import java.awt.*;
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ public class CheckersTable {
 
     private JFrame frame;
     private JPanel panel;
-
+    
     private Piece pToMove; 
 
     private static Rectangle[][] rectangles;
@@ -93,38 +95,13 @@ public class CheckersTable {
 
     //Shows the moves allowed to click on a piece
     protected void suggestions(Piece p) {
-       //Piece.setPtoMove(p); //set istance of piece to move p 
-        //Piece ptoMove = Piece.getPtoMove(); //get static istance pToMove of Piece Class.
-        String classSelectedPiece = p.getClass().toString();
         pToMove = p; 
-        switch (classSelectedPiece){
-            case "class Pawn":
-            //Qui sarebbe sufficiente pToMove.showSuggetions() ma lo faccio per test
-                pToMove = (Pawn)p;
-                //Pawn piecePawn = (Pawn)p;
-                
-                break;
-            case "class Archer":
-                //Archer pieceArcher = (Archer)p;
-                pToMove = (Archer)p;
-               // pieceArcher.showSuggestions();
-                break;
-
-            case "class Dama":
-            //QUI Non posso fare il test perché manca ancora la classe Dama!
-            //Dama pieceArcher = (Dama)p;
-              //  pToMove.showSuggestions();
-                System.out.println("CASE DAMA: Vediamo cosa fare per la DAMA");
-                break;
-
-            default:
-                System.out.println("CASE DEFAULT: vediamo se lasciarlo.");
-        }
         pToMove.showSuggestions(pToMove.setRowbyColor());
     }
 
-     //This function move pToMove into destRectangle
-    public void move(Rectangle destRectangle, int i_src, int j_src) {
+    //This function move pToMove into destRectangle
+    public void move(Rectangle destRectangle, int i_src, int j_src) throws Exception {
+        Piece checkers;
         int i,j;
         Rectangle pToEatRect;
         Rectangle srcRectangle = rectangles[pToMove.getCoord().x][pToMove.getCoord().y]; //this rectangle contain the piece to be moved
@@ -135,14 +112,22 @@ public class CheckersTable {
             //Choose direction
             j = (srcRectangle.getCoord().y > destRectangle.getCoord().y) ? pToMove.getCoord().y - 1 : pToMove.getCoord().y + 1;
             pToEatRect = rectangles[i][j];
-            AddorRemove(pToEatRect, false);
+            addOrRemove(pToEatRect, false);
         }
-        
-        pToMove.setCoord(i_src, j_src);
-        //Add piece to move in new rectagle
-        AddorRemove(destRectangle, true);
+        pToMove.setCoord(destRectangle.getCoord().x, destRectangle.getCoord().y);
+        Point pieceCoord = pToMove.getCoord();
         //remove the old piece from the previous rectangle
-        AddorRemove(srcRectangle, false);
+        addOrRemove(srcRectangle, false);
+        if (canPieceUpgrade()){
+            Creator factory = new ConcreteFactoryM();
+            pToMove = (Piece) factory.factoryMethod("checkers", pToMove.getColor());
+            pToMove.setCoord(pieceCoord.x, pieceCoord.y);
+            addOrRemove(destRectangle, true);
+            pToMove.addMouseListener((pToMove.getColor() == Color.red) ? p1 : p2);
+        }
+        else //Add piece to move in new rectagle
+            addOrRemove(destRectangle, true);
+        
     }
        
 
@@ -181,21 +166,21 @@ public class CheckersTable {
     }
 
     //When true add pieces, false remove.
-    private void AddorRemove(Rectangle rect, boolean action){
+    private void addOrRemove(Rectangle rect, boolean action){
         if(action == true)
-            rect.add(pToMove);
+            rect.add(pToMove, BorderLayout.CENTER);
         else
             rect.removeAll();
         rect.setHasPiece(action);
+        rect.revalidate();
         rect.repaint();
     }
 
     private boolean canPieceUpgrade(){
-        String StrPiece = pToMove.getClass().getClass().toString();
+        String StrPiece = pToMove.getClass().toString();
         boolean isRedOnEnemyFstLine = pToMove.getColor() == Color.red && pToMove.getCoord().x == 0;
         boolean isGreenOnEnemyFstLine = pToMove.getColor() == Color.green && pToMove.getCoord().x == N_ROWS - 1;
-
-        return (StrPiece.equals("class Piece") && (isGreenOnEnemyFstLine || isRedOnEnemyFstLine)) ? true : false;
+        return (StrPiece.equals("class Pawn") && (isGreenOnEnemyFstLine || isRedOnEnemyFstLine)) ? true : false;
     }
-
+    
 }

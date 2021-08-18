@@ -9,7 +9,6 @@ public abstract class Piece extends JComponent {
    protected int points;
    private Image objIMG;
    private final int DIM_IMG;
-   private String IMG_Path;
    private Point coord;
 
    protected final CheckersTable TABLE;
@@ -24,16 +23,17 @@ public abstract class Piece extends JComponent {
       return coord;
    }
 
-   public Piece(Color c, int p, String imgName) throws Exception{
+   public Piece(Color c, int p) throws Exception{
       color = c;
       points = p;
-      IMG_Path = imgName;
-      objIMG = new Image(imgName);
+      objIMG = new Image(setPath());
       TABLE = CheckersTable.getInstance();
       DIM_IMG = TABLE.getDIM_RECT() - 10; //Dimension of a rectangle - margin
       setPreferredSize(new Dimension(DIM_IMG, DIM_IMG));
       coord = new Point();
    }
+
+   protected abstract String setPath();
 
    protected void paintComponent(Graphics g){
       super.paintComponent(g);
@@ -82,7 +82,7 @@ public abstract class Piece extends JComponent {
    protected int setColonEat(int col){
       return (col > coord.y) ? coord.y + 2 : coord.y - 2;
    }
-  
+      
    // Indica la riga da colorare quando occorre mangiare
    //Position indica il rettangolo nel quale si trova il pezzo da mangiare.
    protected int setRowonEat(Point position){
@@ -131,4 +131,5 @@ public abstract class Piece extends JComponent {
       else
          return (enemyPiece_inRect(position) == 0) ? true : false; //true: il secondo rect è libero. SI DEVE MANGIARE.
    }           //false: Non posso mangiare. Il secondo rect è occupato da un pezzo rosso o verde.
+
 }

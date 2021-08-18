@@ -10,5 +10,5 @@ public class ConcreteCommand implements Command{
         checkTable.suggestions(p);
     }
     public void clear(){ checkTable.clearSuggestions();}
-    public void move(Rectangle r, int i, int j){ checkTable.move(r, i, j);}
+    public void move(Rectangle r, int i, int j) throws Exception{ checkTable.move(r, i, j);}
 }

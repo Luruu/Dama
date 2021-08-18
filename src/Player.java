@@ -27,7 +27,7 @@ public class Player extends MouseAdapter {
 
     public void mouseClicked(MouseEvent e){
         String nameClass = e.getSource().getClass().toString();
-        if (nameClass.equals("class Pawn") || nameClass.equals("class Archer") ){
+        if (nameClass.equals("class Pawn") || nameClass.equals("class Archer") ||  nameClass.equals("class Checkers")){
             invoker.clear();
             Piece pieceClicked = (Piece)e.getSource();
             invoker.suggestions(pieceClicked); //Show suggestions for pieceClicked
@@ -35,7 +35,11 @@ public class Player extends MouseAdapter {
         else if(nameClass.equals("class Rectangle")){;
             Rectangle rectClicked = (Rectangle) e.getSource();
             if (rectClicked.getColor() == Color.cyan){
-                invoker.move(rectClicked, rectClicked.getCoord().x, rectClicked.getCoord().y);
+                try {
+                    invoker.move(rectClicked, rectClicked.getCoord().x, rectClicked.getCoord().y);
+                } catch (Exception e1) {
+                    e1.getMessage();
+                }
                 invoker.clear();
             }
         }

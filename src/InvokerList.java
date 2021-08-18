@@ -13,7 +13,7 @@ public class InvokerList {
     public void clear() {
         command.clear();
     }
-    public void move(Rectangle r, int i , int j){
+    public void move(Rectangle r, int i , int j) throws Exception{
         command.move(r,i,j);
     }
 }

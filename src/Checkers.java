@@ -2,8 +2,8 @@ import java.awt.*;
 
 public class Checkers extends Piece{
     
-    public Checkers(Color c, String path_name) throws Exception{
-        super(c, 5, path_name);
+    public Checkers(Color c) throws Exception{
+        super(c, 5);
     }
 
     @Override
@@ -19,6 +19,11 @@ public class Checkers extends Piece{
              }
         }
         return 1;
+    }
+
+    @Override
+    public String setPath(){
+        return (getColor() == Color.red) ? "/images/CheckersRed.png" : "/images/CheckersGreen.png";
     }
 
 }

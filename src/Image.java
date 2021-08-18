@@ -8,7 +8,6 @@ import java.io.IOException;
 public class Image extends JPanel {
     public BufferedImage img = null;
     String filePath = new File("").getAbsolutePath();
-///home/renato/IdeaProjects/Dama/images/pedina.png 
     public Image(String imgName){
         filePath = filePath.concat(imgName);
         try {
