@@ -1,6 +1,4 @@
-
 import javax.swing.*;
-import java.lang.System;
 import java.lang.Exception;
 import java.awt.*;
 import java.util.ArrayList;
@@ -191,5 +189,12 @@ public class CheckersTable {
         rect.setHasPiece(action);
         rect.repaint();
     }
-    
+
+    private boolean canUppgrade(){
+        boolean clPiece = pToMove.getClass().equals("class Piece");
+        boolean ifRedOnEnemyFstLine = pToMove.getColor() == Color.red && pToMove.getCoord().x == 0;
+        boolean ifGreenOnEnemyFstLine = pToMove.getColor() == Color.green && pToMove.getCoord().x == N_ROWS - 1;
+        return (pToMove.getClass().equals(clPiece) && (ifGreenOnEnemyFstLine || ifRedOnEnemyFstLine)) ? true : false;
+    }
+
 }

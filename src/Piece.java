@@ -72,7 +72,6 @@ public abstract class Piece extends JComponent {
       }
       else if (esito_left == 2){ //DEVO mangiare a SINISTRA
          posAfterMove.x = setRowonEat(posAfterMove);
-         System.out.println("A");
          TABLE.showFreeRectangle(posAfterMove.x, posAfterMove.y);
          return 2;
       }
@@ -101,13 +100,10 @@ public abstract class Piece extends JComponent {
 
       Point position = new Point(row, COL_DIRECTION); // Indica le coordinate del rettangolo da analizzare
       int result = enemyPiece_inRect(position);
-      System.out.println("Analizzo il rettangolo "+ position.x + " " + position.y); // System.out.println("Result = " + result);
       if(result == 2){ //ho trovato un pezzo avversario da mangiare (ma non so se posso mangiarlo)
-         System.out.println("Ho trovato un pezzo da mangiare in "+ position.x + " " + position.y);
          position.x = setRowonEat(position);
          position.y = setColonEat(position.y);
          posAfterMove.y = position.y; //save new position to Move (for suggestion)
-         System.out.println(position);
          return (canIeat(position)) ? 2 : 1; //2: Devo mangiarlo. -- 1: Non posso mangiare, né posso muovermi.
       }
       else if(result == 0) //Se la casella è libera..
@@ -123,7 +119,6 @@ public abstract class Piece extends JComponent {
          // Se c'è un pezzo vediamo se è dello stesso colore di chi si muove
          Piece tmp = (Piece) rect.getComponent(0);
          boolean pezzo_avversario = ! getColor().equals(tmp.getColor());
-         System.out.println("C");
          return (pezzo_avversario) ? 2 : 1; // 2: pezzo avversario, forse è mangiabile 
       }                                      // 1: c'è un mio pezzo, non posso mangiarlo
       else

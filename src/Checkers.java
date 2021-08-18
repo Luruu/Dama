@@ -9,10 +9,14 @@ public class Checkers extends Piece{
     @Override
     public int showSuggestions(int direction){
         int oppositeDirection;
-        boolean showMoreSuggestions = super.showSuggestions(direction) != 2;
+        boolean showMoreSuggestions = super.showSuggestions(direction) != 2; //vero se non trova da mangiare
         if(showMoreSuggestions){
+            TABLE.clearSuggestions(); // se non deve mangiare verso direction pulisco i suggerimenti e se non mangia neanche veros oppositeDirection 
+            //cerco di nuovo i suggerimenti verso direction
             oppositeDirection = (getColor().equals(Color.red)) ? getCoord().x + 1 : getCoord().x - 1;
-            super.showSuggestions(oppositeDirection);
+             if (super.showSuggestions(oppositeDirection) != 2){
+                super.showSuggestions(direction);
+             }
         }
         return 1;
     }
