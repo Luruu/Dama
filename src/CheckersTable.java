@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import java.lang.Exception;
 import java.awt.*;
@@ -101,23 +100,22 @@ public class CheckersTable {
 
     //This function move pToMove into destRectangle
     public void move(Rectangle destRectangle, int i_src, int j_src) throws Exception {
-        Piece checkers;
         int i,j;
         Rectangle pToEatRect;
         Rectangle srcRectangle = rectangles[pToMove.getCoord().x][pToMove.getCoord().y]; //this rectangle contain the piece to be moved
         int diff = srcRectangle.getCoord().x - destRectangle.getCoord().x;
-        //If have to eat
-        if (diff > 1 || diff < -1){
-            i = (diff > 1 ) ? pToMove.getCoord().x - 1 : pToMove.getCoord().x + 1;
-            //Choose direction
+       
+        if (diff > 1 || diff < -1){  //If have to eat difference is > 1 or < -1
+            i = (diff > 1) ? pToMove.getCoord().x - 1 : pToMove.getCoord().x + 1;
             j = (srcRectangle.getCoord().y > destRectangle.getCoord().y) ? pToMove.getCoord().y - 1 : pToMove.getCoord().y + 1;
             pToEatRect = rectangles[i][j];
             addOrRemove(pToEatRect, false);
         }
         pToMove.setCoord(destRectangle.getCoord().x, destRectangle.getCoord().y);
         Point pieceCoord = pToMove.getCoord();
-        //remove the old piece from the previous rectangle
-        addOrRemove(srcRectangle, false);
+      
+        addOrRemove(srcRectangle, false);  //remove the old piece from the previous rectangle
+
         if (canPieceUpgrade()){
             Creator factory = new ConcreteFactoryM();
             pToMove = (Piece) factory.factoryMethod("checkers", pToMove.getColor());
@@ -129,8 +127,7 @@ public class CheckersTable {
             addOrRemove(destRectangle, true);
         
     }
-       
-
+    
     protected void showFreeRectangle(int row, int col){
             rectangles[row][col].setColor(Color.cyan);
             rectangles[row][col].repaint();
@@ -180,6 +177,7 @@ public class CheckersTable {
         String StrPiece = pToMove.getClass().toString();
         boolean isRedOnEnemyFstLine = pToMove.getColor() == Color.red && pToMove.getCoord().x == 0;
         boolean isGreenOnEnemyFstLine = pToMove.getColor() == Color.green && pToMove.getCoord().x == N_ROWS - 1;
+
         return (StrPiece.equals("class Pawn") && (isGreenOnEnemyFstLine || isRedOnEnemyFstLine)) ? true : false;
     }
     

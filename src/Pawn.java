@@ -11,7 +11,7 @@ public class Pawn extends Piece{
     }
 
     @Override
-    public String setPath(){
+    public String getPathIMG(){
         return (getColor() == Color.red) ? "/images/PawnRed.png" : "/images/PawnGreen.png";
     }
 }

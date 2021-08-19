@@ -7,13 +7,12 @@ public class Archer extends Piece{
 
     @Override
     public int showSuggestions(int direction){
-        
         //Poi vediamo per archer
         return 1;
     }
 
     @Override
-    public String setPath(){
+    public String getPathIMG(){
         return (getColor() == Color.red) ? "/images/ArcherRed.png" : "/images/ArcherGreen.png";
     }
 }

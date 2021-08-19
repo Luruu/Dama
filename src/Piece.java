@@ -14,39 +14,26 @@ public abstract class Piece extends JComponent {
    protected final CheckersTable TABLE;
    private static Point posAfterMove = new Point(); //free position on which to show suggestion 
    
-   public void setCoord(int i, int j){
-      coord.x = i;
-      coord.y = j;
-   }
-
-   public Point getCoord() {
-      return coord;
-   }
+   
 
    public Piece(Color c, int p) throws Exception{
       color = c;
       points = p;
-      objIMG = new Image(setPath());
+      objIMG = new Image(getPathIMG());
       TABLE = CheckersTable.getInstance();
       DIM_IMG = TABLE.getDIM_RECT() - 10; //Dimension of a rectangle - margin
       setPreferredSize(new Dimension(DIM_IMG, DIM_IMG));
       coord = new Point();
    }
 
-   protected abstract String setPath();
+   protected abstract String getPathIMG();
 
    protected void paintComponent(Graphics g){
       super.paintComponent(g);
       g.drawImage(objIMG.img, 0, 0,null);
    }
 
-   protected Color getColor(){
-      return color;
-   }
-
-   public Piece getPtoMove(){
-      return this;
-   }
+ 
 
    //return values: 2 (deve mangiare) -  0(si può muovere o meno (non verificato!!))
    protected int showSuggestions(int direction){
@@ -132,4 +119,23 @@ public abstract class Piece extends JComponent {
          return (enemyPiece_inRect(position) == 0) ? true : false; //true: il secondo rect è libero. SI DEVE MANGIARE.
    }           //false: Non posso mangiare. Il secondo rect è occupato da un pezzo rosso o verde.
 
+
+// Getters and Setters methods..
+
+   public void setCoord(int x, int y){
+      coord.x = x;
+      coord.y = y;
+   }
+
+   public Point getCoord() {
+      return coord;
+   }
+
+   protected Color getColor(){
+      return color;
+   }
+
+   public Piece getPtoMove(){
+      return this;
+   }
 }
