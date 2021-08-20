@@ -1,4 +1,5 @@
-Dobbiamo implementaere le mosse
-cioè il teniamo conto del numero di mosse dei player. 
 
-gestire l'eccezione nel factory mathedo, cioè se non passano niente di corretto lanciamo un eccezione;
+Dobbiamo gestire la turnazione
+Implementare il timer con la\ sua funzionalità + patthern observer.
+mostrare a schermo timer e chi deve fare la mossa + i punteggi 
+Tenere conto del numero di mosse e mostrarle a schermo
