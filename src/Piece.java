@@ -17,9 +17,11 @@ public abstract class Piece extends JComponent {
    
 
 
-   public Piece(Color c, int p) throws Exception{
+   public Piece(Color c, int p, Player ply) throws Exception{
       color = c;
       points = p;
+      owner = ply;
+      addMouseListener(owner);
       objIMG = new Image(getPathIMG());
       TABLE = CheckersTable.getInstance();
       DIM_IMG = TABLE.getDIM_RECT() - 10; //Dimension of a rectangle - margin
@@ -160,8 +162,8 @@ public abstract class Piece extends JComponent {
       return owner;
    }
 
-   public void setOwner(Player p){
-      owner = p;
+   public int getPoints(){
+      return points;
    }
 
 }

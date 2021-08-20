@@ -117,7 +117,9 @@ public class CheckersTable {
                     upgrade = true;
             //Se un arciere mangia
             if ( (enemy.getClass().toString().equals("class Pawn") || enemy.getClass().toString().equals("class Checkers") )&& pToMove.getClass().toString().equals("class Archer"))
-                    respwan(pToEatRect);
+                    respawn(pToEatRect);
+        //Ogni volta che qualcuno mangia occorre incrementare il punteggio di chi ha mangiato 
+            pToMove.getOwner().addPlayerPoints(enemy.getPoints());
         }
 
 
@@ -128,12 +130,9 @@ public class CheckersTable {
 
         if (canPieceUpgrade() || upgrade){
             Creator factory = new ConcreteFactoryM();
-            Player owner = pToMove.getOwner();
-            pToMove = (Piece) factory.factoryMethod("checkers", pToMove.getColor());
+            pToMove = (Piece) factory.factoryMethod("checkers", pToMove.getColor(), pToMove.getOwner());
             pToMove.setCoord(pieceCoord.x, pieceCoord.y);
-            pToMove.setOwner(owner);
             addOrRemove(destRectangle, true);
-            pToMove.addMouseListener(owner);
         }
         else //Add piece to move in new rectagle
             addOrRemove(destRectangle, true);
@@ -141,9 +140,9 @@ public class CheckersTable {
     }
     
     //In rect will respawn a piece
-    private void respwan(Rectangle rect) throws Exception{
+    private void respawn(Rectangle rect) throws Exception{
         Creator factory = new ConcreteFactoryM();
-        Piece piece = (Piece) factory.factoryMethod("pawn", pToMove.getColor());
+        Piece piece = (Piece) factory.factoryMethod("pawn", pToMove.getColor(), pToMove.getOwner());
         addOrRemove(rect, true, piece);
     }
 
@@ -151,7 +150,6 @@ public class CheckersTable {
             rectangles[row][col].setColor(Color.cyan);
             rectangles[row][col].repaint();
             pointsListToClear.add(new Point(row, col));
-            System.out.println(pToMove.getOwner());
     }
 
     public void clearSuggestions(){
@@ -203,7 +201,6 @@ public class CheckersTable {
             rect.setHasPiece(action);
             rect.revalidate();
             rect.repaint();
-            System.out.println("in rect " + rect + " ho inserito " + piece);
     }
 
     private boolean canPieceUpgrade(){

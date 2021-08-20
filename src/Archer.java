@@ -1,8 +1,8 @@
 import java.awt.*;
 
 public class Archer extends Piece{
-    public Archer(Color c) throws Exception{
-        super(c, 3);
+    public Archer(Color c, Player p) throws Exception{
+        super(c, 3, p);
     }
 
     @Override

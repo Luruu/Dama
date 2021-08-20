@@ -45,8 +45,9 @@ public class Player extends MouseAdapter {
         }
     }
 
-    public void addPoints(int value){
+    public void addPlayerPoints(int value){
         points += value;
+        System.out.println("il nuovo punteggio è " + points);
     }
     
 }
