@@ -44,6 +44,5 @@ public class Player extends MouseAdapter {
             }
         }
     }
-
+    
 }
-

@@ -101,22 +101,32 @@ public class CheckersTable {
     //This function move pToMove into destRectangle
     public void move(Rectangle destRectangle, int i_src, int j_src) throws Exception {
         int i,j;
+        boolean upgrade = false; 
         Rectangle pToEatRect;
         Rectangle srcRectangle = rectangles[pToMove.getCoord().x][pToMove.getCoord().y]; //this rectangle contain the piece to be moved
         int diff = srcRectangle.getCoord().x - destRectangle.getCoord().x;
-       
+
         if (diff > 1 || diff < -1){  //If have to eat difference is > 1 or < -1
             i = (diff > 1) ? pToMove.getCoord().x - 1 : pToMove.getCoord().x + 1;
             j = (srcRectangle.getCoord().y > destRectangle.getCoord().y) ? pToMove.getCoord().y - 1 : pToMove.getCoord().y + 1;
             pToEatRect = rectangles[i][j];
+            Piece enemy = (Piece) rectangles[i][j].getComponent(0);
             addOrRemove(pToEatRect, false);
+            //se un arciere viene mangiato
+            if (enemy.getClass().toString().equals("class Archer") && pToMove.getClass().toString().equals("class Pawn"))
+                    upgrade = true;
+            //Se un arciere mangia
+            if ( (enemy.getClass().toString().equals("class Pawn") || enemy.getClass().toString().equals("class Checkers") )&& pToMove.getClass().toString().equals("class Archer"))
+                    respwan(pToEatRect);
         }
+
+
         pToMove.setCoord(destRectangle.getCoord().x, destRectangle.getCoord().y);
         Point pieceCoord = pToMove.getCoord();
       
         addOrRemove(srcRectangle, false);  //remove the old piece from the previous rectangle
 
-        if (canPieceUpgrade()){
+        if (canPieceUpgrade() || upgrade){
             Creator factory = new ConcreteFactoryM();
             pToMove = (Piece) factory.factoryMethod("checkers", pToMove.getColor());
             pToMove.setCoord(pieceCoord.x, pieceCoord.y);
@@ -128,6 +138,13 @@ public class CheckersTable {
         
     }
     
+    //In rect will respawn a piece
+    private void respwan(Rectangle rect) throws Exception{
+        Creator factory = new ConcreteFactoryM();
+        Piece piece = (Piece) factory.factoryMethod("pawn", pToMove.getColor());
+        addOrRemove(rect, true, piece);
+    }
+
     protected void showFreeRectangle(int row, int col){
             rectangles[row][col].setColor(Color.cyan);
             rectangles[row][col].repaint();
@@ -171,6 +188,19 @@ public class CheckersTable {
         rect.setHasPiece(action);
         rect.revalidate();
         rect.repaint();
+    }
+
+    private void addOrRemove(Rectangle rect, boolean action, Piece piece){
+            if(action == true){
+                piece.setCoord(rect.getCoord().x, rect.getCoord().y);
+                rect.add(piece, BorderLayout.CENTER);
+            }
+            else
+                rect.removeAll();
+            rect.setHasPiece(action);
+            rect.revalidate();
+            rect.repaint();
+            System.out.println("in rect " + rect + " ho inserito " + piece);
     }
 
     private boolean canPieceUpgrade(){

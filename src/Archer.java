@@ -7,7 +7,14 @@ public class Archer extends Piece{
 
     @Override
     public int showSuggestions(int direction){
-        //Poi vediamo per archer
+        int oppositeDirection;
+        boolean showMoreSuggestions = super.showSuggestions(direction) != 2; //true if you have not to eat
+        if(showMoreSuggestions){ //Show more suggestions if you have not to eat 
+            TABLE.clearSuggestions(); 
+            oppositeDirection = (getColor().equals(Color.red)) ? getCoord().x + 1 : getCoord().x - 1;
+            if (super.showSuggestions(oppositeDirection) != 2)  //true if you have not to eat
+            super.showSuggestions(direction); //Show again base suggestions
+        }
         return 1;
     }
 

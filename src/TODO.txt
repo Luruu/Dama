@@ -1,0 +1,4 @@
+Dobbiamo implementaere le mosse
+cioè il teniamo conto del numero di mosse dei player. 
+
+gestire l'eccezione nel factory mathedo, cioè se non passano niente di corretto lanciamo un eccezione;

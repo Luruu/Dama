@@ -15,14 +15,13 @@ Sul campo da gioco sono presenti i seguenti pezzi
 
 Pedina: pezzo classico che si muove solamente in diagonale di una casella alla volta e soltanto in avanti.
 Quando una pedina raggiunge una delle caselle dell'ultima riga viene promossa diventando dama.
-Ogni pedina può mangiare quelle avversarie che si trovano in avanti sulla casella diagonale accanto alla propria e che abbiano la casella successiva libera. La pedina non può mangiare una dama.
 
 
-Dama: upgrade della pedina. Può muoversi in più direzioni ad un passo alla volta. Se mangia un qualsiasi pezzo ha a disposizione un ulteriore mossa. La dama può essere mangiata solo da un'altra dama o da un arciere.
+Dama: upgrade della pedina. Può muoversi in più direzioni ad un passo alla volta.
 
 
-
-Arciere: Può muoversi in più direzioni ad un passo alla volta. Se l'arciere mangia un pezzo, resuscita una pedina. Invece se viene mangiato la pedina avversaria diventa dama. Un arciere non può diventare dama e non può mangiare un altro arciere.
+Arciere: Se l'arciere mangia un pezzo, resuscita una pedina. Invece se viene mangiato la pedina avversaria diventa dama.
+Un arciere non può diventare dama e non può mangiare un altro arciere.
 ... Ulteriori pezzi potrebbero essere aggiunti.
 La partita termina quando uno dei due giocatori finisce tutti i pezzi, quando un giocatore abbandona o quando il timer scade e in questo caso vince il giocatore che ha il punteggio più alto.
 Il punteggio è dato dalla tipologia e dalla quantità di pezzi mangiati, in particolare:

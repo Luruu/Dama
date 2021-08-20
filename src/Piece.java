@@ -79,24 +79,37 @@ public abstract class Piece extends JComponent {
    protected int setRowbyColor(){
       return (getColor() == Color.red) ? coord.x - 1 : coord.x + 1;
    }
-  
+
    protected int checkMove(int row, final int COL_DIRECTION){
 
       if (TABLE.illegalMove(row) || TABLE.illegalMove(COL_DIRECTION))
          return 1;//Non può moversi.
 
       Point position = new Point(row, COL_DIRECTION); // Indica le coordinate del rettangolo da analizzare
+      Point positionToSuggestion = new Point();
       int result = enemyPiece_inRect(position);
-      if(result == 2){ //ho trovato un pezzo avversario da mangiare (ma non so se posso mangiarlo)
-         position.x = setRowonEat(position);
-         position.y = setColonEat(position.y);
-         posAfterMove.y = position.y; //save new position to Move (for suggestion)
-         return (canIeat(position)) ? 2 : 1; //2: Devo mangiarlo. -- 1: Non posso mangiare, né posso muovermi.
+      
+      if(result == 2 && !arcTryEatArch(position)){ //ho trovato un pezzo avversario da mangiare (ma non so se posso mangiarlo)
+         positionToSuggestion.x = setRowonEat(position);
+         positionToSuggestion.y = setColonEat(position.y);
+         posAfterMove.y = positionToSuggestion.y; //save new position to Move (for suggestion)
+         return (canIeat(positionToSuggestion)) ? 2 : 1; //2: Devo mangiarlo. -- 1: Non posso mangiare, né posso muovermi.
       }
       else if(result == 0) //Se la casella è libera..
          return 0; //posso muovermi qui
       else
          return 1; //Non posso mangiare, né posso muovermi.
+   }
+   
+   //Ritorna vero se un arciere sta cercando di mangiare un altro arciere
+   //altrimenti falso.
+   private boolean arcTryEatArch(Point position) {
+      Rectangle rect = TABLE.getRectanglefromList(position.x, position.y);
+      Piece enemy = (Piece) rect.getComponent(0);
+      
+      if (getClass().toString().equals("class Archer") && enemy.getClass().toString().equals("class Archer"))
+         return true;
+      return false;
    }
 
    protected int enemyPiece_inRect(Point position){
@@ -112,12 +125,15 @@ public abstract class Piece extends JComponent {
          return 0; //non c'è un pezzo, casella libera
    }
 
+   //Controlla se in position c'è un pezzo o meno
+   //Position indica il rettangolo su cui posizionarsi dopo aver mangiato
    protected boolean canIeat(Point position){
       if (TABLE.illegalMove(position.x) || TABLE.illegalMove(position.y))
          return false; //Non può mangiare perché il nemico è su un bordo
-      else
-         return (enemyPiece_inRect(position) == 0) ? true : false; //true: il secondo rect è libero. SI DEVE MANGIARE.
-   }           //false: Non posso mangiare. Il secondo rect è occupato da un pezzo rosso o verde.
+      
+      return (enemyPiece_inRect(position) == 0) ? true : false;//true: il secondo rect è libero. SI DEVE MANGIARE.  
+      //false: Non posso mangiare. Il secondo rect è occupato da un pezzo rosso o verde
+   }           
 
 
 // Getters and Setters methods..
