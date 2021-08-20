@@ -6,8 +6,8 @@ public class ConcreteCommand implements Command{
     }
 
     @Override
-    public void suggestions(Piece p) {
-        checkTable.suggestions(p);
+    public void suggestions(Piece pClicked) {
+        checkTable.suggestions(pClicked);
     }
 
     public void clear(){

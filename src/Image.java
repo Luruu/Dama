@@ -13,13 +13,13 @@ public class Image extends JPanel {
         try {
             img = ImageIO.read(new File(filePath));
         } catch (IOException ex) {
-            System.out.println( ex.getMessage() );
+            System.out.println(ex.getMessage());
         }
     }
 
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(img,0,0,this);
+        g.drawImage(img, 0, 0, this);
     }
 }

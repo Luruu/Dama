@@ -4,24 +4,30 @@ import java.awt.*;
 
 
 public class Player extends MouseAdapter {
-    private final Color color;
-    private final String nome;
-    private int points;
+    public static int count_players = 0;
+    public static final int MAX_NPLAYERS = 2;
+    private final Color PlayerColor;
+    private final String PlayerName;
+    private int PlayerScore;
     private final InvokerList invoker;
 
     public Player(Color c, String n) throws Exception {
         super();
-        color = c;
-        nome = n;
-        points = 0;
+
+        if (count_players++ == MAX_NPLAYERS)
+            throw new Exception("Maximum number of players exceeded! Please remove the last player instance");
+
+        PlayerColor = c;
+        PlayerName = n;
+        PlayerScore = 0;
         invoker = new InvokerList(new ConcreteCommand(CheckersTable.getInstance()));
     }
 
     //Overload del costruttore
     //Usato per i rettangoli che hanno bisogno di un mouseadapter.
     public Player() throws Exception {
-        color = null;
-        nome = null;
+        PlayerColor  = null;
+        PlayerName = null;
         invoker = new InvokerList(new ConcreteCommand(CheckersTable.getInstance()));
     }
 
@@ -45,9 +51,26 @@ public class Player extends MouseAdapter {
         }
     }
 
-    public void addPlayerPoints(int value){
-        points += value;
-        System.out.println("il nuovo punteggio è " + points);
+
+    // Getters and Setters methods..
+    
+    public void addPlayerPoints(int points){
+        PlayerScore += points;
+        System.out.println(PlayerName + " score: " + PlayerScore); 
+    }
+
+    //
+
+    public Color getPlayerColor(){
+        return PlayerColor;
+    }
+
+    public String getPlayerName(){
+        return PlayerName;
+    }
+
+    public int getPlayerScore(){
+        return PlayerScore;
     }
     
 }

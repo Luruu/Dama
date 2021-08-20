@@ -3,16 +3,16 @@ import javax.swing.*;
 import java.lang.Exception;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 //Singleton
 //Command Receiver
 public class CheckersTable {
-    private static CheckersTable Instance;
+
+    private static CheckersTable Instance; //Singleton
 
     private final int N_ROWS, N_COLS, DIM_RECT;
-    private Player p1, p2;
     
+    private Player p1, p2;
 
     private JFrame frame;
     private JPanel panel;
@@ -21,20 +21,12 @@ public class CheckersTable {
 
     private static Rectangle[][] rectangles;
 
-    private List<Point> pointsListToClear = new ArrayList<Point>();
+    private ArrayList<Point> pointsListToClear = new ArrayList<Point>();
 
-    
-
-    /*-------------------------------------------------------------------------------------------------
-            p1 = new Player(Color.green,playerName);
-            p2 = new Player(Color.red, playerName2);
-            inizializeWindow();
-     ---------------------------------------------------------------------------------------------------*/
-    //Da modificare, invece delle stringe nome player passiamo gli oggetti player instanziati nel main (con eventuali interfacce etc.)
-    private CheckersTable(final int N_ROWS, final int N_COLS, final int DIM) {
+    private CheckersTable(final int N_ROWS, final int N_COLS, final int DIM_RECT) {
         this.N_ROWS = N_ROWS;
         this.N_COLS = N_COLS;
-        DIM_RECT = DIM;
+        this.DIM_RECT = DIM_RECT;
     }
 
     //Singleton
@@ -44,7 +36,7 @@ public class CheckersTable {
         return Instance;
     }
 
-    //get the existing instance without specifying unnecessary parameters
+    //Singleton, but get the existing instance without specifying unnecessary parameters
     public static synchronized CheckersTable getInstance() throws Exception {
         if (Instance == null)
             throw new Exception("ISTANCE NULL. Please use method: public static synchronized CheckersTable getInstance(final int N_ROWS, final int N_COLS, final int DIM)");
@@ -71,11 +63,11 @@ public class CheckersTable {
     }
 
 
-    private void inizializeWindow() throws Exception {
+    private void initializeWindow() throws Exception {
         createFrame();
         createPanel();
 
-        //Create and Set an array of game cells (Rectangle type) with and without pieces
+        //Create and Set an array of game cells (Rectangle type)
         rectangles = Rectangle.createRectangles(N_ROWS, N_COLS, DIM_RECT, p1, p2);
 
         //Add rect to Table
@@ -89,16 +81,16 @@ public class CheckersTable {
     protected void startGame(Player p1, Player p2) throws Exception {
         this.p1 = p1;
         this.p2 = p2;
-        inizializeWindow();
+        initializeWindow();
     }
 
     //Shows the moves allowed to click on a piece
-    protected void suggestions(Piece p) {
-        pToMove = p; 
+    protected void suggestions(Piece pClicked) {
+        pToMove = pClicked; 
         pToMove.showSuggestions(pToMove.setRowbyColor());
     }
 
-    //This function move pToMove into destRectangle
+    //Move pToMove into destRectangle
     public void move(Rectangle destRectangle, int i_src, int j_src) throws Exception {
         int i,j;
         boolean upgrade = false; 
@@ -110,16 +102,19 @@ public class CheckersTable {
             i = (diff > 1) ? pToMove.getCoord().x - 1 : pToMove.getCoord().x + 1;
             j = (srcRectangle.getCoord().y > destRectangle.getCoord().y) ? pToMove.getCoord().y - 1 : pToMove.getCoord().y + 1;
             pToEatRect = rectangles[i][j];
-            Piece enemy = (Piece) rectangles[i][j].getComponent(0);
+            Piece enemyPiece = (Piece) rectangles[i][j].getPiece();
+            String enemyPieceClass = enemyPiece.getClass().toString();
+            String pToMoveClass = pToMove.getClass().toString();
             addOrRemove(pToEatRect, false);
-            //se un arciere viene mangiato
-            if (enemy.getClass().toString().equals("class Archer") && pToMove.getClass().toString().equals("class Pawn"))
-                    upgrade = true;
-            //Se un arciere mangia
-            if ( (enemy.getClass().toString().equals("class Pawn") || enemy.getClass().toString().equals("class Checkers") )&& pToMove.getClass().toString().equals("class Archer"))
-                    respawn(pToEatRect);
-        //Ogni volta che qualcuno mangia occorre incrementare il punteggio di chi ha mangiato 
-            pToMove.getOwner().addPlayerPoints(enemy.getPoints());
+            
+            if (enemyPieceClass.equals("class Archer") && pToMoveClass.equals("class Pawn")) //if archer is eaten
+                upgrade = true;
+            
+            if ((enemyPieceClass.equals("class Pawn") || enemyPieceClass.equals("class Checkers")) && pToMoveClass.equals("class Archer")) //if archer eat
+                respawn(pToEatRect);
+            
+            Player player = pToMove.getOwner();
+            player.addPlayerPoints(enemyPiece.getPoints()); // increase player's score after eating
         }
 
 
@@ -160,6 +155,47 @@ public class CheckersTable {
         pointsListToClear.clear();
     }
 
+    
+
+    //When true add pieces, false remove.
+    private void addOrRemove(Rectangle rect, boolean action){
+        if(action == true)
+            rect.add(pToMove, BorderLayout.CENTER);
+        else
+            rect.removeAll();
+        rect.HasPiece(action);
+        rect.revalidate();
+        rect.repaint();
+    }
+
+    private void addOrRemove(Rectangle rect, boolean action, Piece piece){
+        if(action == true){
+            piece.setCoord(rect.getCoord().x, rect.getCoord().y);
+            rect.add(piece, BorderLayout.CENTER);
+        }
+        else
+            rect.removeAll();
+        rect.HasPiece(action);
+        rect.revalidate();
+        rect.repaint();
+    }
+
+    private boolean canPieceUpgrade(){
+        String StrPiece = pToMove.getClass().toString();
+        boolean isRedOnEnemyFstLine = pToMove.getColor() == Color.red && pToMove.getCoord().x == 0;
+        boolean isGreenOnEnemyFstLine = pToMove.getColor() == Color.green && pToMove.getCoord().x == N_ROWS - 1;
+
+        return (StrPiece.equals("class Pawn") && (isGreenOnEnemyFstLine || isRedOnEnemyFstLine)) ? true : false;
+    }
+
+    public boolean illegalMove(int k){
+        return (k >= N_ROWS || k < 0) ? true : false;
+    }
+
+    public Rectangle getRectanglefromList(int row, int col){
+        return rectangles[row][col];
+    }
+    
     public final int getDIM_RECT(){
         return DIM_RECT;
     }
@@ -171,44 +207,4 @@ public class CheckersTable {
     public final int getN_COLS(){
         return N_COLS;
     }
-
-    public Rectangle getRectanglefromList(int row, int col){
-        return rectangles[row][col];
-    }
-
-    public boolean illegalMove(int k){
-        return (k >= N_ROWS || k < 0) ? true : false;
-    }
-
-    //When true add pieces, false remove.
-    private void addOrRemove(Rectangle rect, boolean action){
-        if(action == true)
-            rect.add(pToMove, BorderLayout.CENTER);
-        else
-            rect.removeAll();
-        rect.setHasPiece(action);
-        rect.revalidate();
-        rect.repaint();
-    }
-
-    private void addOrRemove(Rectangle rect, boolean action, Piece piece){
-            if(action == true){
-                piece.setCoord(rect.getCoord().x, rect.getCoord().y);
-                rect.add(piece, BorderLayout.CENTER);
-            }
-            else
-                rect.removeAll();
-            rect.setHasPiece(action);
-            rect.revalidate();
-            rect.repaint();
-    }
-
-    private boolean canPieceUpgrade(){
-        String StrPiece = pToMove.getClass().toString();
-        boolean isRedOnEnemyFstLine = pToMove.getColor() == Color.red && pToMove.getCoord().x == 0;
-        boolean isGreenOnEnemyFstLine = pToMove.getColor() == Color.green && pToMove.getCoord().x == N_ROWS - 1;
-
-        return (StrPiece.equals("class Pawn") && (isGreenOnEnemyFstLine || isRedOnEnemyFstLine)) ? true : false;
-    }
-    
 }

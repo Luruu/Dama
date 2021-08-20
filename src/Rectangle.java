@@ -66,12 +66,17 @@ public  class Rectangle extends JPanel{
         g.setColor(color);
         g.fillRect(x,y,wid,hei);
     }
+    
 
-    public boolean getHasPiece(){
+    // Getters and Setters methods..
+
+    //gets a value indicating whether the rectangle contains a piece 
+    public boolean HasPiece(){
         return hasPiece;
     }
 
-    public void setHasPiece(boolean x){
+    //sets a value indicating whether the rectangle contains a piece 
+    public void HasPiece(boolean x){
         hasPiece = x;
     }
 
@@ -91,4 +96,10 @@ public  class Rectangle extends JPanel{
     public Point getCoord(){
         return Coord;
     }
+
+    //get the only component present in a rectangle, one piece
+    public Piece getPiece(){
+        return (Piece)getComponent(0);
+    }
+
 }

@@ -84,33 +84,32 @@ public abstract class Piece extends JComponent {
    }
 
    protected int checkMove(int row, final int COL_DIRECTION){
-
       if (TABLE.illegalMove(row) || TABLE.illegalMove(COL_DIRECTION))
-         return 1;//Non può moversi.
+         return 1; //Non può moversi.
 
-      Point position = new Point(row, COL_DIRECTION); // Indica le coordinate del rettangolo da analizzare
-      Point positionToSuggestion = new Point();
-      int result = enemyPiece_inRect(position);
+      Point posToAnalize = new Point(row, COL_DIRECTION); //Indica le coordinate del rettangolo da analizzare
+      Point posToSuggestion = new Point();
+      int r = enemyPiece_inRect(posToAnalize);
       
-      if(result == 2 && !arcTryEatArch(position)){ //ho trovato un pezzo avversario da mangiare (ma non so se posso mangiarlo)
-         positionToSuggestion.x = setRowonEat(position);
-         positionToSuggestion.y = setColonEat(position.y);
-         posAfterMove.y = positionToSuggestion.y; //save new position to Move (for suggestion)
-         return (canIeat(positionToSuggestion)) ? 2 : 1; //2: Devo mangiarlo. -- 1: Non posso mangiare, né posso muovermi.
+      if(r == 2 && !arcTryEatArch(posToAnalize)){ //Enemy piece found but I don't know if I can eat (at the moment)
+         posToSuggestion.x = setRowonEat(posToAnalize);
+         posToSuggestion.y = setColonEat(posToAnalize.y);
+         posAfterMove.y = posToSuggestion.y; //save new position to Move (for suggestion)
+         return (canIeat(posToSuggestion)) ? 2 : 1; // 2: I MUST EAT ----- 1: I cannot eat or move
       }
-      else if(result == 0) //Se la casella è libera..
-         return 0; //posso muovermi qui
+      else if(r == 0) //if rectangle is free
+         return 0; //I can move
       else
-         return 1; //Non posso mangiare, né posso muovermi.
+         return 1; //I cannot eat or move
    }
    
-   //Ritorna vero se un arciere sta cercando di mangiare un altro arciere
-   //altrimenti falso.
+   //returns true if an archer try eat another archer, else returns false
    private boolean arcTryEatArch(Point position) {
       Rectangle rect = TABLE.getRectanglefromList(position.x, position.y);
-      Piece enemy = (Piece) rect.getComponent(0);
+      String enemyPieceClass = rect.getPiece().getClass().toString();
+      String pieceClass = getClass().toString();
       
-      if (getClass().toString().equals("class Archer") && enemy.getClass().toString().equals("class Archer"))
+      if (pieceClass.equals("class Archer") && enemyPieceClass.equals("class Archer"))
          return true;
       return false;
    }
@@ -118,8 +117,8 @@ public abstract class Piece extends JComponent {
    protected int enemyPiece_inRect(Point position){
       Rectangle rect = TABLE.getRectanglefromList(position.x, position.y);
        
-      if(rect.getHasPiece()){
-         // Se c'è un pezzo vediamo se è dello stesso colore di chi si muove
+      if(rect.HasPiece()){ // Se c'è un pezzo
+         // vediamo se è un pezzo avversario
          Piece tmp = (Piece) rect.getComponent(0);
          boolean pezzo_avversario = ! getColor().equals(tmp.getColor());
          return (pezzo_avversario) ? 2 : 1; // 2: pezzo avversario, forse è mangiabile 
@@ -135,11 +134,10 @@ public abstract class Piece extends JComponent {
          return false; //Non può mangiare perché il nemico è su un bordo
       
       return (enemyPiece_inRect(position) == 0) ? true : false;//true: il secondo rect è libero. SI DEVE MANGIARE.  
-      //false: Non posso mangiare. Il secondo rect è occupato da un pezzo rosso o verde
-   }           
+   }                          //false: Non posso mangiare. Il secondo rect è occupato da un pezzo rosso o verde
 
 
-// Getters and Setters methods..
+   // Getters and Setters methods..
 
    public void setCoord(int x, int y){
       coord.x = x;

@@ -16,7 +16,7 @@ public class Checkers extends Piece{
             if (super.showSuggestions(oppositeDirection) != 2)  //true if you have not to eat
             super.showSuggestions(direction); //Show again base suggestions
         }
-        return 1;
+        return 1; //It's useless but necessary because of override
     }
 
     @Override
