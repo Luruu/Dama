@@ -128,10 +128,12 @@ public class CheckersTable {
 
         if (canPieceUpgrade() || upgrade){
             Creator factory = new ConcreteFactoryM();
+            Player owner = pToMove.getOwner();
             pToMove = (Piece) factory.factoryMethod("checkers", pToMove.getColor());
             pToMove.setCoord(pieceCoord.x, pieceCoord.y);
+            pToMove.setOwner(owner);
             addOrRemove(destRectangle, true);
-            pToMove.addMouseListener((pToMove.getColor() == Color.red) ? p1 : p2);
+            pToMove.addMouseListener(owner);
         }
         else //Add piece to move in new rectagle
             addOrRemove(destRectangle, true);
@@ -149,6 +151,7 @@ public class CheckersTable {
             rectangles[row][col].setColor(Color.cyan);
             rectangles[row][col].repaint();
             pointsListToClear.add(new Point(row, col));
+            System.out.println(pToMove.getOwner());
     }
 
     public void clearSuggestions(){

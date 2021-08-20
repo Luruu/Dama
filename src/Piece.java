@@ -10,11 +10,12 @@ public abstract class Piece extends JComponent {
    private Image objIMG;
    private final int DIM_IMG;
    private Point coord;
-
+   private Player owner;
+   
    protected final CheckersTable TABLE;
    private static Point posAfterMove = new Point(); //free position on which to show suggestion 
    
-   
+
 
    public Piece(Color c, int p) throws Exception{
       color = c;
@@ -154,4 +155,13 @@ public abstract class Piece extends JComponent {
    public Piece getPtoMove(){
       return this;
    }
+
+   public Player getOwner(){
+      return owner;
+   }
+
+   public void setOwner(Player p){
+      owner = p;
+   }
+
 }

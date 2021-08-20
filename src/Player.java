@@ -44,5 +44,9 @@ public class Player extends MouseAdapter {
             }
         }
     }
+
+    public void addPoints(int value){
+        points += value;
+    }
     
 }

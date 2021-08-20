@@ -43,8 +43,9 @@ public  class Rectangle extends JPanel{
                 if ( (i < mid_table - 1 || i > mid_table) && rectangles[i][j].color == Color.darkGray){
                     typePiece = ((i == 0 && j == N_ROWS - 1) || (i == N_COLS - 1 && j == 0)) ? "archer": "pawn";
                     pieceColor = (i < mid_table - 1) ? Color.green : Color.red;
+                    Player owner = (pieceColor == Color.red) ? p1 : p2;
                     piece = (Piece) factory.factoryMethod(typePiece, pieceColor);
-                    
+                    piece.setOwner(owner);
                     //Assignment of the player based on the color of the pawn
                     //Forse non serve. Basterebbe passargli un new Player a caso.
                     //Il controllo va fatto in base ai colori dei pezzi e del player
@@ -52,7 +53,7 @@ public  class Rectangle extends JPanel{
                     //Questo if serve perché un player potrebbe cliccaere su un pezzo di colore diverso dal suo
                     //Quindi otterremo il mouselistener del pezzo selezionato e lo confrontiamo con il colore del pezzo
                     // Tutto questo nella funzione player che invoca il click.
-                    piece.addMouseListener((pieceColor == Color.red) ? p1 : p2);
+                    piece.addMouseListener(owner);
                     rectangles[i][j].add(piece, BorderLayout.CENTER);
                     rectangles[i][j].hasPiece = true;
                     piece.setCoord(i,j);

@@ -66,5 +66,4 @@ che implementano la logica dei loro movimento}
 
 Memento ()
 Observer (Timer)
-State(Per la dama? Se è un upgrade della pedina base)
 Facade (Lo usiamo se dobbiamo pulire qualche operazione complessa, se serve lo rivediamo)
