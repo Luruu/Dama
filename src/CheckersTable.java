@@ -102,16 +102,16 @@ public class CheckersTable {
             i = (diff > 1) ? pToMove.getCoord().x - 1 : pToMove.getCoord().x + 1;
             j = (srcRectangle.getCoord().y > destRectangle.getCoord().y) ? pToMove.getCoord().y - 1 : pToMove.getCoord().y + 1;
             pToEatRect = rectangles[i][j];
-            Piece enemyPiece = (Piece) rectangles[i][j].getPiece();
+            Piece enemyPiece = rectangles[i][j].getPiece();
             String enemyPieceClass = enemyPiece.getClass().toString();
             String pToMoveClass = pToMove.getClass().toString();
             addOrRemove(pToEatRect, false);
             
-            if (enemyPieceClass.equals("class Archer") && pToMoveClass.equals("class Pawn")) //if archer is eaten
-                upgrade = true;
+            if (enemyPieceClass.equals("class Archer") && pToMoveClass.equals("class Pawn")) //if pawn eat archer
+                upgrade = true; //Pawn will be a new checkers
             
             if ((enemyPieceClass.equals("class Pawn") || enemyPieceClass.equals("class Checkers")) && pToMoveClass.equals("class Archer")) //if archer eat
-                respawn(pToEatRect);
+                respawn(pToEatRect); //add a new piece
             
             Player player = pToMove.getOwner();
             player.addPlayerPoints(enemyPiece.getPoints()); // increase player's score after eating
@@ -123,13 +123,13 @@ public class CheckersTable {
       
         addOrRemove(srcRectangle, false);  //remove the old piece from the previous rectangle
 
-        if (canPieceUpgrade() || upgrade){
+        if (canPieceUpgrade() || upgrade){ //If pawn can upgrade
             Creator factory = new ConcreteFactoryM();
             pToMove = (Piece) factory.factoryMethod("checkers", pToMove.getColor(), pToMove.getOwner());
             pToMove.setCoord(pieceCoord.x, pieceCoord.y);
             addOrRemove(destRectangle, true);
         }
-        else //Add piece to move in new rectagle
+        else //Add a piece to move in new rectagle
             addOrRemove(destRectangle, true);
         
     }

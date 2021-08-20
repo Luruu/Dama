@@ -14,8 +14,8 @@ public class Player extends MouseAdapter {
     public Player(Color c, String n) throws Exception {
         super();
 
-        if (count_players++ == MAX_NPLAYERS)
-            throw new Exception("Maximum number of players exceeded! Please remove the last player instance");
+        if (++count_players > MAX_NPLAYERS)
+            throw new Exception("Maximum number of players exceeded [MAXIMUM " + MAX_NPLAYERS + "]");
 
         PlayerColor = c;
         PlayerName = n;

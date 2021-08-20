@@ -1,9 +1,10 @@
 import java.awt.*;
 
 public class Checkers extends Piece{
+    public final static int CHECKERS_POINTS = 5;
     
-    public Checkers(Color c, Player p) throws Exception{
-        super(c, 5, p);
+    public Checkers(Color colorPiece, Player playerowner) throws Exception{
+        super(colorPiece, CHECKERS_POINTS, playerowner);
     }
 
     @Override
