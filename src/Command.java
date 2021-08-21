@@ -1,4 +1,3 @@
-// import java.awt.*; NON USATO
 public interface Command {
     void suggestions(Piece p);
     void clear();
