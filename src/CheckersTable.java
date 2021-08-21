@@ -4,8 +4,7 @@ import java.lang.Exception;
 import java.awt.*;
 import java.util.ArrayList;
 
-//Singleton
-//Command Receiver
+
 public class CheckersTable {
 
     private static CheckersTable Instance; //Singleton
