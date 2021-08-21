@@ -10,29 +10,28 @@ public class CheckersTable {
 
     private static CheckersTable Instance; //Singleton
 
-    private final int N_ROWS, N_COLS, DIM_RECT;
+    private final int N_ROWS, N_COLS;
     
     private Player p1, p2;
 
     private JFrame frame;
     private JPanel panel;
     
-    private Piece pToMove; 
+    private Piece pToMove; // Piece to move when a rectangle is clicked by a player
 
-    private static Rectangle[][] rectangles;
+    private static Rectangle[][] rectangles; // Matrix of all the rectangles of the board 
 
     private ArrayList<Point> pointsListToClear = new ArrayList<Point>();
 
-    private CheckersTable(final int N_ROWS, final int N_COLS, final int DIM_RECT) {
+    private CheckersTable(final int N_ROWS, final int N_COLS) {
         this.N_ROWS = N_ROWS;
         this.N_COLS = N_COLS;
-        this.DIM_RECT = DIM_RECT;
     }
 
     //Singleton
-    public static synchronized CheckersTable getInstance(final int N_ROWS, final int N_COLS, final int DIM) {
+    public static synchronized CheckersTable getInstance(final int N_ROWS, final int N_COLS) {
         if (Instance == null)
-            Instance = new CheckersTable(N_ROWS, N_COLS, DIM);
+            Instance = new CheckersTable(N_ROWS, N_COLS);
         return Instance;
     }
 
@@ -45,20 +44,21 @@ public class CheckersTable {
 
     //Create and set the main Frame
     private void createFrame() {
-        frame = new JFrame("Dama");
+        frame = new JFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(N_ROWS * DIM_RECT, N_COLS * DIM_RECT);
+        frame.setSize(N_ROWS * Rectangle.DIM_RECT, N_COLS * Rectangle.DIM_RECT);
         frame.setBackground(Color.white);
         frame.setResizable(false);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
+        Point centerScreen = new Point(dim.width / 2 - frame.getSize().width / 2 , dim.height / 2 - frame.getSize().height / 2);
+        frame.setLocation(centerScreen);
     }
 
     //Create and set the Panel that  will contain all the elements of the game
     private void createPanel() {
         panel = new JPanel();
         panel.setLayout(new GridLayout(N_ROWS, N_COLS, 0, 0));
-        panel.setPreferredSize(new Dimension(N_ROWS * DIM_RECT, N_COLS * DIM_RECT));
+        panel.setPreferredSize(new Dimension(N_ROWS * Rectangle.DIM_RECT, N_COLS * Rectangle.DIM_RECT));
         panel.setBackground(Color.gray);
     }
 
@@ -68,7 +68,7 @@ public class CheckersTable {
         createPanel();
 
         //Create and Set an array of game cells (Rectangle type)
-        rectangles = Rectangle.createRectangles(N_ROWS, N_COLS, DIM_RECT, p1, p2);
+        rectangles = Rectangle.createRectangles(N_ROWS, N_COLS, Rectangle.DIM_RECT, p1, p2);
 
         //Add rect to Table
         for (Rectangle[] row : rectangles)
@@ -91,20 +91,20 @@ public class CheckersTable {
     }
 
     //Move pToMove into destRectangle
-    public void move(Rectangle destRectangle, int i_src, int j_src) throws Exception {
-        int i,j;
+    public void move(Rectangle dstRectangle) throws Exception {
         boolean upgrade = false; 
-        Rectangle pToEatRect;
+
         Rectangle srcRectangle = rectangles[pToMove.getCoord().x][pToMove.getCoord().y]; //this rectangle contain the piece to be moved
-        int diff = srcRectangle.getCoord().x - destRectangle.getCoord().x;
+        int diff = srcRectangle.getCoord().x - dstRectangle.getCoord().x;
 
         if (diff > 1 || diff < -1){  //If have to eat difference is > 1 or < -1
-            i = (diff > 1) ? pToMove.getCoord().x - 1 : pToMove.getCoord().x + 1;
-            j = (srcRectangle.getCoord().y > destRectangle.getCoord().y) ? pToMove.getCoord().y - 1 : pToMove.getCoord().y + 1;
-            pToEatRect = rectangles[i][j];
+            int i = (diff > 1) ? pToMove.getCoord().x - 1 : pToMove.getCoord().x + 1;
+            int j = (srcRectangle.getCoord().y > dstRectangle.getCoord().y) ? pToMove.getCoord().y - 1 : pToMove.getCoord().y + 1;
+            Rectangle pToEatRect = rectangles[i][j];
             Piece enemyPiece = rectangles[i][j].getPiece();
             String enemyPieceClass = enemyPiece.getClass().toString();
             String pToMoveClass = pToMove.getClass().toString();
+
             addOrRemove(pToEatRect, false);
             
             if (enemyPieceClass.equals("class Archer") && pToMoveClass.equals("class Pawn")) //if pawn eat archer
@@ -118,7 +118,7 @@ public class CheckersTable {
         }
 
 
-        pToMove.setCoord(destRectangle.getCoord().x, destRectangle.getCoord().y);
+        pToMove.setCoord(dstRectangle.getCoord().x, dstRectangle.getCoord().y);
         Point pieceCoord = pToMove.getCoord();
       
         addOrRemove(srcRectangle, false);  //remove the old piece from the previous rectangle
@@ -127,11 +127,10 @@ public class CheckersTable {
             Creator factory = new ConcreteFactoryM();
             pToMove = (Piece) factory.factoryMethod("checkers", pToMove.getColor(), pToMove.getOwner());
             pToMove.setCoord(pieceCoord.x, pieceCoord.y);
-            addOrRemove(destRectangle, true);
+            addOrRemove(dstRectangle, true);
         }
         else //Add a piece to move in new rectagle
-            addOrRemove(destRectangle, true);
-        
+            addOrRemove(dstRectangle, true);
     }
     
     //In rect will respawn a piece
@@ -194,10 +193,6 @@ public class CheckersTable {
 
     public Rectangle getRectanglefromList(int row, int col){
         return rectangles[row][col];
-    }
-    
-    public final int getDIM_RECT(){
-        return DIM_RECT;
     }
 
     public final int getN_ROWS(){

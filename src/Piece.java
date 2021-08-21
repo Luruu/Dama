@@ -1,8 +1,5 @@
 import javax.swing.*;
-//import javax.swing.event.MouseInputListener; INUTILIZZATO!!!
-
 import java.awt.*;
-//import java.util.Objects;
 
 public abstract class Piece extends JComponent {
    private final Color color;
@@ -24,7 +21,7 @@ public abstract class Piece extends JComponent {
       addMouseListener(owner);
       objIMG = new Image(getPathIMG());
       TABLE = CheckersTable.getInstance();
-      DIM_IMG = TABLE.getDIM_RECT() - 10; //Dimension of a rectangle - margin
+      DIM_IMG = Rectangle.DIM_RECT - 10; //Dimension of a rectangle - margin
       setPreferredSize(new Dimension(DIM_IMG, DIM_IMG));
       coord = new Point();
    }
@@ -136,6 +133,7 @@ public abstract class Piece extends JComponent {
       return (enemyPiece_inRect(position) == 0) ? true : false;//true: il secondo rect è libero. SI DEVE MANGIARE.  
    }                          //false: Non posso mangiare. Il secondo rect è occupato da un pezzo rosso o verde
 
+   
 
    // Getters and Setters methods..
 

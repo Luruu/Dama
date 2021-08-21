@@ -2,16 +2,16 @@ import javax.swing.*;
 
 import java.awt.*;
 public  class Rectangle extends JPanel{
-    private final int x,y,wid,hei;
+    public static int DIM_RECT = 96; //Default value. It can be changed by Main Class.
+    private final int x,y;
     private Color color;
     private boolean hasPiece = false;
     private Point Coord = new Point();
     
-    public Rectangle(int x, int y, int wid, int hei){
+    public Rectangle(int x, int y, int dim){
         this.x = x;
         this.y = y;
-        this.wid = wid;
-        this.hei = hei;
+        DIM_RECT = dim;
     }
 
 //This function create and Set an array of game cells (Rectangle type) and return it to the CheckersTable
@@ -21,7 +21,7 @@ public  class Rectangle extends JPanel{
         for (int i = 0; i < N_ROWS; i++)
             for (int j = 0; j < N_COLS; j++){
                 color_rect = ColorFunctions.getColor_PlayableOrNot(i, j);
-                rectangles[i][j] = new Rectangle(0, 0, DIM_RECT, DIM_RECT);
+                rectangles[i][j] = new Rectangle(0, 0, DIM_RECT);
                 rectangles[i][j].setCoord(i,j);
                 rectangles[i][j].color = color_rect;
                 rectangles[i][j].addMouseListener(new Player()); //ADD Player that is also handler mouse event
@@ -62,9 +62,9 @@ public  class Rectangle extends JPanel{
 
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawRect(x,y,wid,hei);
+        g.drawRect(x, y, DIM_RECT, DIM_RECT);
         g.setColor(color);
-        g.fillRect(x,y,wid,hei);
+        g.fillRect(x, y, DIM_RECT, DIM_RECT);
     }
     
 
