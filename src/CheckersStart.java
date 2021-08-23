@@ -74,13 +74,23 @@ public class CheckersStart implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
-        if (action.equals("1")) {
-            System.out.println("Button pressed!");
-        }
-        if (action.equals("2")) {
-            System.out.println("Checkbox pressed!");
+        switch(action){
+            case "1":
+                System.out.println("Button pressed!");
+                try {
+                    startGame("Renato", "Luca", dimTable, Rectangle.DIM_RECT);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+                break;
+            case "2":
+                System.out.println("Checkbox pressed!");
+                break;
+            default:
+                System.out.println("Checkbox pressed!");
         }
     }
+    
     
     private void startGame(String p1Name, String p2Name, int DIM_TABLE, int DIM_RECT) throws Exception{
         final int DIM = 8;
@@ -98,5 +108,4 @@ public class CheckersStart implements ActionListener{
         return ICON_PATH;
     }
         
-
 }
