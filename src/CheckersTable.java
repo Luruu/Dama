@@ -104,7 +104,7 @@ public class CheckersTable {
         Point pieceCoord = pToMove.getCoord();
       
         addOrRemove(srcRectangle, false);  //remove the old piece from the previous rectangle
-
+//////////////////////////////// DA SISTEMARE QUESTO IF. (E' UN PO' BRUTTO).
         if (canPieceUpgrade() || upgrade){ //If pawn can upgrade
             Creator factory = new ConcreteFactoryM();
             pToMove = (Piece) factory.factoryMethod("checkers", pToMove.getColor(), pToMove.getOwner());
