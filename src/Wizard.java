@@ -1,10 +1,10 @@
 import java.awt.*;
 
-public class Archer extends Piece{
-    public final static int ARCHER_POINTS = 3;
+public class Wizard extends Piece{
+    public final static int WIZARD_POINTS = 3;
     
-    public Archer(Color colorPiece, Player playerowner) throws Exception{
-        super(colorPiece, ARCHER_POINTS, playerowner);
+    public Wizard(Color colorPiece, Player playerowner) throws Exception{
+        super(colorPiece, WIZARD_POINTS, playerowner);
     }
 
     @Override
@@ -22,10 +22,10 @@ public class Archer extends Piece{
 
     @Override
     public String getPathIMG(){
-        return (getColor() == Color.red) ? "/images/ArcherRed.png" : "/images/ArcherGreen.png";
+        return (getColor() == Color.red) ? "/images/WizardRed.png" : "/images/WizardGreen.png";
     }
 
-    public static boolean is_archerStartPosition(int i_row, int j_col, int n_rows, int n_cols){
+    public static boolean is_WizardStartPosition(int i_row, int j_col, int n_rows, int n_cols){
         return (i_row == 0 && j_col == n_rows - 1) || (i_row == n_cols - 1 && j_col == 0);
     }
 }

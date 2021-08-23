@@ -102,13 +102,13 @@ public abstract class Piece extends JComponent {
          return 1; //I cannot eat or move
    }
    
-   //returns true if an archer try eat another archer, else returns false
+   //returns true if an Wizard try eat another Wizard, else returns false
    private boolean arcTryEatArch(Point position) {
       Rectangle rect = TABLE.getRectanglefromList(position.x, position.y);
       String enemyPieceClass = rect.getPiece().getClass().toString();
       String pieceClass = getClass().toString();
       
-      return pieceClass.equals("class Archer") && enemyPieceClass.equals("class Archer");
+      return pieceClass.equals("class Wizard") && enemyPieceClass.equals("class Wizard");
    }
 
    protected int enemyPiece_inRect(Point position){

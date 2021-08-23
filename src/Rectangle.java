@@ -42,7 +42,7 @@ public  class Rectangle extends JPanel{
             for (int j = 0; j < N_COLS; j++){
                 //Add Pieces in the correct position
                 if ( (i < MID_TABLE - 1 || i > MID_TABLE) && rectangles[i][j].color == Color.darkGray){
-                    typePiece = (Archer.is_archerStartPosition(i, j, N_ROWS, N_COLS)) ? "archer": "pawn";
+                    typePiece = (Wizard.is_WizardStartPosition(i, j, N_ROWS, N_COLS)) ? "wizard": "pawn";
                     pieceColor = (i < N_ROWS/2 - 1) ? Color.green : Color.red;
                     Player owner = (pieceColor == Color.red) ? p1 : p2;
                     piece = (Piece) factory.factoryMethod(typePiece, pieceColor, owner);

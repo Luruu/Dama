@@ -89,10 +89,10 @@ public class CheckersTable {
 
             addOrRemove(pToEatRect, false);
             
-            if (enemyPieceClass.equals("class Archer") && pToMoveClass.equals("class Pawn")) //if pawn eat archer
+            if (enemyPieceClass.equals("class Wizard") && pToMoveClass.equals("class Pawn")) //if pawn eat Wizard
                 upgrade = true; //Pawn will be a new checkers
             
-            if ((enemyPieceClass.equals("class Pawn") || enemyPieceClass.equals("class Checkers")) && pToMoveClass.equals("class Archer")) //if archer eat
+            if ((enemyPieceClass.equals("class Pawn") || enemyPieceClass.equals("class Checkers")) && pToMoveClass.equals("class Wizard")) //if Wizard eat
                 respawn(pToEatRect); //add a new piece
             
             Player player = pToMove.getOwner();

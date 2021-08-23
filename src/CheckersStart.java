@@ -28,6 +28,13 @@ public class CheckersStart {
 
     public void AddButton(){
         JButton obj = new JButton("Play");
+        obj.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+             System.out.println("boh");
+            }
+        }
         frame.add(obj);
     }
 

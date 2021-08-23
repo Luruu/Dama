@@ -39,7 +39,7 @@ public class Player extends MouseAdapter {
 
     public void mouseClicked(MouseEvent e){
         String nameClass = e.getSource().getClass().toString();
-        if (nameClass.equals("class Pawn") || nameClass.equals("class Archer") ||  nameClass.equals("class Checkers")){
+        if (nameClass.equals("class Pawn") || nameClass.equals("class Wizard") ||  nameClass.equals("class Checkers")){
             invoker.clear();
             Piece pieceClicked = (Piece)e.getSource();
             invoker.suggestions(pieceClicked); //Show suggestions for pieceClicked
