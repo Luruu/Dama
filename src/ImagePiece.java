@@ -6,9 +6,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class ImagePiece extends JPanel {
-
     public BufferedImage img = null;
     String filePath = new File("").getAbsolutePath();
+
     public ImagePiece(String imgName){
         filePath = filePath.concat(imgName);
         try {
@@ -19,16 +19,18 @@ public class ImagePiece extends JPanel {
     }
 
     public static BufferedImage scale(BufferedImage imgIn, int wid, int hei) {
-        BufferedImage imgOut = null;
-        if (imgIn != null) {
-            imgOut = new BufferedImage(wid, hei, imgIn.getType());
-            Graphics2D g = imgOut.createGraphics();
-            g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-            g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g.drawImage(imgIn, 0, 0, wid, hei, null);
-            g.dispose();
-        }
+        if (imgIn == null)
+            return null;
+        BufferedImage imgOut = new BufferedImage(wid, hei, imgIn.getType());
+        Graphics2D g2D = imgOut.createGraphics();
+        
+        //Increase image quality
+        g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2D.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        g2D.drawImage(imgIn, 0, 0, wid, hei, null);
+        g2D.dispose();
         return imgOut;
     }
 

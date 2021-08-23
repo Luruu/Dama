@@ -108,9 +108,7 @@ public abstract class Piece extends JComponent {
       String enemyPieceClass = rect.getPiece().getClass().toString();
       String pieceClass = getClass().toString();
       
-      if (pieceClass.equals("class Archer") && enemyPieceClass.equals("class Archer"))
-         return true;
-      return false;
+      return pieceClass.equals("class Archer") && enemyPieceClass.equals("class Archer");
    }
 
    protected int enemyPiece_inRect(Point position){
@@ -132,7 +130,7 @@ public abstract class Piece extends JComponent {
       if (TABLE.illegalMove(position.x) || TABLE.illegalMove(position.y))
          return false; //Non può mangiare perché il nemico è su un bordo
       
-      return (enemyPiece_inRect(position) == 0) ? true : false;//true: il secondo rect è libero. SI DEVE MANGIARE.  
+      return (enemyPiece_inRect(position) == 0); //true: il secondo rect è libero. SI DEVE MANGIARE.  
    }                          //false: Non posso mangiare. Il secondo rect è occupato da un pezzo rosso o verde
 
    

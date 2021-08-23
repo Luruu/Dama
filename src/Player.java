@@ -10,8 +10,10 @@ public class Player extends MouseAdapter {
     public static boolean GreenChosen = false;
     private final Color PlayerColor;
     private final String PlayerName;
-    private int PlayerScore;
+    
     private final InvokerList invoker;
+
+    private int PlayerScore;
 
     public Player(Color c, String n) throws Exception {
         super();

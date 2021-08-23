@@ -1,7 +1,7 @@
 import javax.swing.*;
+import java.awt.*;
 
 import java.lang.Exception;
-import java.awt.*;
 import java.util.ArrayList;
 
 
@@ -13,8 +13,8 @@ public class CheckersTable {
     
     private Player p1, p2;
 
-    private JFrame frame;
-    private JPanel panel;
+    private JFrame frameTable;
+    private JPanel panelTable;
     
     private Piece pToMove; // Piece to move when a rectangle is clicked by a player
 
@@ -41,40 +41,23 @@ public class CheckersTable {
         return Instance;
     }
 
-    //Create and set the main Frame
-    private void createFrame() {
-        frame = new JFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(N_ROWS * Rectangle.DIM_RECT, N_COLS * Rectangle.DIM_RECT);
-        frame.setBackground(Color.white);
-        frame.setResizable(false);
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        Point centerScreen = new Point(dim.width / 2 - frame.getSize().width / 2 , dim.height / 2 - frame.getSize().height / 2);
-        frame.setLocation(centerScreen);
-    }
-
-    //Create and set the Panel that  will contain all the elements of the game
-    private void createPanel() {
-        panel = new JPanel();
-        panel.setLayout(new GridLayout(N_ROWS, N_COLS, 0, 0));
-        panel.setPreferredSize(new Dimension(N_ROWS * Rectangle.DIM_RECT, N_COLS * Rectangle.DIM_RECT));
-        panel.setBackground(Color.gray);
-    }
-
 
     private void initializeWindow() throws Exception {
-        createFrame();
-        createPanel();
-
-        //Create and Set an array of game cells (Rectangle type) WITH PIECES OR NOT 
+        frameTable = CGO.createFrame("Checkers Table", N_ROWS * Rectangle.DIM_RECT, N_COLS * Rectangle.DIM_RECT, Color.WHITE, false, new BorderLayout(0,0));
+        panelTable = CGO.createPanel(N_ROWS * Rectangle.DIM_RECT, N_COLS * Rectangle.DIM_RECT, Color.blue, new GridLayout(N_ROWS, N_COLS, 0, 0));
+ 
+        //create new rectangles (all game table) and add them to the new panel
         rectangles = Rectangle.createRectangles(N_ROWS, N_COLS, Rectangle.DIM_RECT, p1, p2);
+        addRectsToPanel();
 
-        //Add rect to Table
+        frameTable.add(panelTable);
+        frameTable.setVisible(true);
+    }
+
+    private void addRectsToPanel(){
         for (Rectangle[] row : rectangles)
             for (Rectangle rect : row)
-                panel.add(rect);
-        frame.add(panel);
-        frame.setVisible(true);
+                panelTable.add(rect);
     }
 
     protected void startGame(Player p1, Player p2) throws Exception {
@@ -184,12 +167,15 @@ public class CheckersTable {
         boolean isRedOnEnemyFstLine = pToMove.getColor() == Color.red && pToMove.getCoord().x == 0;
         boolean isGreenOnEnemyFstLine = pToMove.getColor() == Color.green && pToMove.getCoord().x == N_ROWS - 1;
 
-        return (StrPiece.equals("class Pawn") && (isGreenOnEnemyFstLine || isRedOnEnemyFstLine)) ? true : false;
+        return StrPiece.equals("class Pawn") && (isGreenOnEnemyFstLine || isRedOnEnemyFstLine);
     }
 
     public boolean illegalMove(int k){
-        return (k >= N_ROWS || k < 0) ? true : false;
+        return k >= N_ROWS || k < 0;
     }
+
+
+    // Getters and Setters methods..
 
     public Rectangle getRectanglefromList(int row, int col){
         return rectangles[row][col];
