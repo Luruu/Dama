@@ -17,6 +17,7 @@ public  class Rectangle extends JPanel{
 //This function create and Set an array of game cells (Rectangle type) and return it to the CheckersTable
     public static Rectangle[][] createRectangles(int N_ROWS, int N_COLS, int DIM_RECT, Player p1, Player p2) throws Exception {
         Rectangle[][] rectangles = new Rectangle[N_ROWS][N_COLS];
+
         Color color_rect;
         for (int i = 0; i < N_ROWS; i++)
             for (int j = 0; j < N_COLS; j++){
@@ -36,13 +37,13 @@ public  class Rectangle extends JPanel{
         Color pieceColor;
         String typePiece;
         Piece piece;
-        int mid_table = N_COLS/2;
+        final int MID_TABLE = N_COLS/2;
         for (int i = 0; i < N_ROWS; i++){
             for (int j = 0; j < N_COLS; j++){
                 //Add Pieces in the correct position
-                if ( (i < mid_table - 1 || i > mid_table) && rectangles[i][j].color == Color.darkGray){
-                    typePiece = ((i == 0 && j == N_ROWS - 1) || (i == N_COLS - 1 && j == 0)) ? "archer": "pawn";
-                    pieceColor = (i < mid_table - 1) ? Color.green : Color.red;
+                if ( (i < MID_TABLE - 1 || i > MID_TABLE) && rectangles[i][j].color == Color.darkGray){
+                    typePiece = (Archer.is_archerStartPosition(i, j, N_ROWS, N_COLS)) ? "archer": "pawn";
+                    pieceColor = (i < N_ROWS/2 - 1) ? Color.green : Color.red;
                     Player owner = (pieceColor == Color.red) ? p1 : p2;
                     piece = (Piece) factory.factoryMethod(typePiece, pieceColor, owner);
                     //Assignment of the player based on the color of the pawn

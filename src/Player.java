@@ -6,6 +6,8 @@ import java.awt.*;
 public class Player extends MouseAdapter {
     public static int count_players = 0;
     public static final int MAX_NPLAYERS = 2;
+    public static boolean RedChosen = false;
+    public static boolean GreenChosen = false;
     private final Color PlayerColor;
     private final String PlayerName;
     private int PlayerScore;
@@ -16,6 +18,8 @@ public class Player extends MouseAdapter {
 
         if (++count_players > MAX_NPLAYERS)
             throw new Exception("Maximum number of players exceeded [MAXIMUM " + MAX_NPLAYERS + "]");
+
+      //  if (count_players > 1 && )
 
         PlayerColor = c;
         PlayerName = n;

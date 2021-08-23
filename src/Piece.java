@@ -1,10 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 
+
 public abstract class Piece extends JComponent {
    private final Color color;
    protected int points;
-   private Image objIMG;
+   private ImagePiece objIMG;
    private final int DIM_IMG;
    private Point coord;
    private Player owner;
@@ -19,9 +20,10 @@ public abstract class Piece extends JComponent {
       points = p;
       owner = ply;
       addMouseListener(owner);
-      objIMG = new Image(getPathIMG());
+      objIMG = new ImagePiece(getPathIMG());
       TABLE = CheckersTable.getInstance();
       DIM_IMG = Rectangle.DIM_RECT - 10; //Dimension of a rectangle - margin
+      objIMG.img = ImagePiece.scale(objIMG.img, DIM_IMG, DIM_IMG);
       setPreferredSize(new Dimension(DIM_IMG, DIM_IMG));
       coord = new Point();
    }

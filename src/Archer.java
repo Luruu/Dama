@@ -24,4 +24,8 @@ public class Archer extends Piece{
     public String getPathIMG(){
         return (getColor() == Color.red) ? "/images/ArcherRed.png" : "/images/ArcherGreen.png";
     }
+
+    public static boolean is_archerStartPosition(int i_row, int j_col, int n_rows, int n_cols){
+        return (i_row == 0 && j_col == n_rows - 1) || (i_row == n_cols - 1 && j_col == 0);
+    }
 }

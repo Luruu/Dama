@@ -27,7 +27,7 @@ public class CheckersTable {
         this.N_COLS = N_COLS;
     }
 
-    //Singleton
+    //Singleton (Lazy Initialization because constructor parameters)
     public static synchronized CheckersTable getInstance(final int N_ROWS, final int N_COLS) {
         if (Instance == null)
             Instance = new CheckersTable(N_ROWS, N_COLS);
@@ -37,7 +37,7 @@ public class CheckersTable {
     //Singleton, but get the existing instance without specifying unnecessary parameters
     public static synchronized CheckersTable getInstance() throws Exception {
         if (Instance == null)
-            throw new Exception("ISTANCE NULL. Please use method: public static synchronized CheckersTable getInstance(final int N_ROWS, final int N_COLS, final int DIM)");
+            throw new Exception("ISTANCE NULL. Please use method: public static synchronized CheckersTable getInstance(final int N_ROWS, final int N_COLS)");
         return Instance;
     }
 
@@ -66,7 +66,7 @@ public class CheckersTable {
         createFrame();
         createPanel();
 
-        //Create and Set an array of game cells (Rectangle type)
+        //Create and Set an array of game cells (Rectangle type) WITH PIECES OR NOT 
         rectangles = Rectangle.createRectangles(N_ROWS, N_COLS, Rectangle.DIM_RECT, p1, p2);
 
         //Add rect to Table
@@ -155,7 +155,7 @@ public class CheckersTable {
 
     
 
-    //When true add pieces, false remove.
+    //true: adds existing piece - false: remove a piece
     private void addOrRemove(Rectangle rect, boolean action){
         if(action == true)
             rect.add(pToMove, BorderLayout.CENTER);
@@ -166,6 +166,7 @@ public class CheckersTable {
         rect.repaint();
     }
 
+    //true: adds a new piece - false: remove a piece
     private void addOrRemove(Rectangle rect, boolean action, Piece piece){
         if(action == true){
             piece.setCoord(rect.getCoord().x, rect.getCoord().y);
