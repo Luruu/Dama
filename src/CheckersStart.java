@@ -27,12 +27,12 @@ public class CheckersStart {
     }
 
     public void AddButton(){
-        JButton obj = new JButton("Gioca");
+        JButton obj = new JButton("Play");
         frame.add(obj);
     }
 
     public void AddLabel(){
-        JLabel obj = new JLabel("Scegli dimensione damiera: ");
+        JLabel obj = new JLabel("Choose size Checkers Table: ");
         frame.add(obj);
     }
 }
