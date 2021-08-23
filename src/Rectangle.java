@@ -17,11 +17,12 @@ public  class Rectangle extends JPanel{
 //This function create and Set an array of game cells (Rectangle type) and return it to the CheckersTable
     public static Rectangle[][] createRectangles(int N_ROWS, int N_COLS, int DIM_RECT, Player p1, Player p2) throws Exception {
         Rectangle[][] rectangles = new Rectangle[N_ROWS][N_COLS];
-
+        Boolean rectanglePlayable;
         Color color_rect;
         for (int i = 0; i < N_ROWS; i++)
             for (int j = 0; j < N_COLS; j++){
-                color_rect = ColorFunctions.getColor_PlayableOrNot(i, j);
+                rectanglePlayable = (i%2 == 0 && j%2 != 0 || j%2 == 0 && i%2 != 0);
+                color_rect = (rectanglePlayable) ? Color.darkGray : Color.white;
                 rectangles[i][j] = new Rectangle(0, 0, DIM_RECT);
                 rectangles[i][j].setCoord(i,j);
                 rectangles[i][j].color = color_rect;

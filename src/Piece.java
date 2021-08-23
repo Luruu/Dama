@@ -13,8 +13,6 @@ public abstract class Piece extends JComponent {
    protected final CheckersTable TABLE;
    private static Point posAfterMove = new Point(); //free position on which to show suggestion 
    
-
-
    public Piece(Color c, int p, Player ply) throws Exception{
       color = c;
       points = p;
@@ -23,7 +21,7 @@ public abstract class Piece extends JComponent {
       objIMG = new ImagePiece(getPathIMG());
       TABLE = CheckersTable.getInstance();
       DIM_IMG = Rectangle.DIM_RECT - 10; //Dimension of a rectangle - margin
-      objIMG.img = ImagePiece.scale(objIMG.img, DIM_IMG, DIM_IMG);
+      objIMG.setImg(ImageFunctions.scale(objIMG.getImg(), DIM_IMG, DIM_IMG));
       setPreferredSize(new Dimension(DIM_IMG, DIM_IMG));
       coord = new Point();
    }
@@ -32,7 +30,7 @@ public abstract class Piece extends JComponent {
 
    protected void paintComponent(Graphics g){
       super.paintComponent(g);
-      g.drawImage(objIMG.img, 0, 0,null);
+      g.drawImage(objIMG.getImg(), 0, 0,null);
    }
 
  
