@@ -112,14 +112,13 @@ public abstract class Piece extends JComponent {
    protected int enemyPiece_inRect(Point position){
       Box rect = TABLE.getBoxfromList(position.x, position.y);
        
-      if(rect.HasPiece()){ // Se c'è un pezzo
-         // vediamo se è un pezzo avversario
-         Piece tmp = (Piece) rect.getComponent(0);
-         boolean pezzo_avversario = ! getColor().equals(tmp.getColor());
-         return (pezzo_avversario) ? 2 : 1; // 2: pezzo avversario, forse è mangiabile 
-      }                                      // 1: c'è un mio pezzo, non posso mangiarlo
+      if(rect.HasPiece()){ // if there is a piece
+         Piece piece = rect.getPiece();
+         boolean pezzo_avversario = ! getColor().equals(piece.getColor());
+         return (pezzo_avversario) ? 2 : 1; // 2: enemy piece, maybe I can eat it
+      }                                      // 1: my piece,  I cannot eat it
       else
-         return 0; //non c'è un pezzo, casella libera
+         return 0; // rectangle is free
    }
 
    //Controlla se in position c'è un pezzo o meno
