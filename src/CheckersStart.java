@@ -27,38 +27,43 @@ public class CheckersStart implements ActionListener{
     private String stringAction = "0";
     private ArrayList<String> listActionCommands = new ArrayList<String>();
 
-  
+    public static void main (String [] args){
+        CheckersStart firstWindow = CheckersStart.getIstance();
+    }
+
     private CheckersStart(){
-        frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 320, 200, Color.GREEN, false, new SpringLayout(), ICON_PATH);
+
+        frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 180, 240, Color.GREEN, false, new FlowLayout(), ICON_PATH);
     
         l1 = CGO.addLabel("Choose table size");
-        frameStart.add(l1);
         
         String[] someStrings = { "4", "6", "8", "10", "12", "14", "16"};
-
         c1 = CGO.addComboBoxString(someStrings, 2, false, this, stringAction);
         addcommandtoList("combobox1");
-        frameStart.add(c1);
-
+        
         l2 = CGO.addLabel("Choose name Player 1");
-        frameStart.add(l2);
+        
         t1 = CGO.addTextField("Player1", new Dimension(100, 20), true);
-        frameStart.add(t1);
+        
         l3 = CGO.addLabel("Choose name Player 2");
-        frameStart.add(l3);
+        
         t2 = CGO.addTextField("Player2", new Dimension(100, 20), true);
-        frameStart.add(t2);
-
         
         b1 = CGO.addButton("Play", this, stringAction);
         addcommandtoList("button1");
-        frameStart.add(b1);
-
+        
         bReg = CGO.addButton("Regolamento", this, stringAction);
         addcommandtoList("Regolamento");
-        frameStart.add(bReg);
         
-
+        
+        frameStart.add(l1);
+        frameStart.add(c1);
+        frameStart.add(l2);
+        frameStart.add(t1);
+        frameStart.add(l3);
+        frameStart.add(t2);
+        frameStart.add(b1);
+        frameStart.add(bReg);
         frameStart.setVisible(true);
     }
 

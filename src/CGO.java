@@ -50,12 +50,12 @@ public interface CGO {
     }
 
     public static JTextField addTextField(String str, Dimension dim, boolean opaque){
-        JTextField textField = new JTextField(str);
+        JTextField newTextField = new JTextField(str);
         Font smallFont = new Font("Monospaced", Font.PLAIN, 14);  
-        textField.setPreferredSize(new Dimension(dim.width, dim.height)); 
-        textField.setOpaque(opaque);
-        textField.setFont(smallFont);
-        return textField;
+        newTextField.setPreferredSize(new Dimension(dim.width, dim.height)); 
+        newTextField.setOpaque(opaque);
+        newTextField.setFont(smallFont);
+        return newTextField;
     }
 
     public static JLabel addLabel(String str){
