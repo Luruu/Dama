@@ -39,6 +39,12 @@ public interface CGO {
         newButton.setActionCommand(action);
         return newButton;
     }
+    public static JComboBox<?> addComboBoxString(String [] str, int SelectedIndex, boolean editablebyUser) {
+        JComboBox<?> newCombobox = new JComboBox<String>(str);
+        newCombobox.setSelectedIndex(SelectedIndex);
+        newCombobox.setEditable(editablebyUser);
+        return newCombobox;
+    }
 
     public static JComboBox<?> addComboBoxString(String [] str, int SelectedIndex, boolean editablebyUser, ActionListener listener, String action) {
         JComboBox<?> newCombobox = new JComboBox<String>(str);

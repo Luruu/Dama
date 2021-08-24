@@ -36,13 +36,14 @@ public  class Box extends JPanel{
         Creator factory = new ConcreteFactoryM();
         Color pieceColor;
         String typePiece;
+        Boolean revisedChecker = CheckersTable.getInstance().getRevisedChecker();
         Piece piece;
         final int MID_TABLE = N_COLS/2;
         for (int i = 0; i < N_ROWS; i++){
             for (int j = 0; j < N_COLS; j++){
                 //Add Pieces in the correct position
                 if ((i < MID_TABLE - 1 || i > MID_TABLE) && Boxes[i][j].color == Color.darkGray){
-                    typePiece = (Wizard.is_WizardStartPosition(i, j, N_ROWS, N_COLS)) ? "wizard": "pawn";
+                    typePiece = (revisedChecker && Wizard.is_WizardStartPosition(i, j, N_ROWS, N_COLS)) ? "wizard": "pawn";
                     pieceColor = (i < N_ROWS/2 - 1) ? Color.green : Color.red;
                     Player owner = (pieceColor == Color.red) ? p1 : p2;
                     piece = (Piece) factory.factoryMethod(typePiece, pieceColor, owner);

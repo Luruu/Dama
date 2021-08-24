@@ -10,7 +10,9 @@ public class CheckersTable {
     private static CheckersTable Instance; //Singleton
 
     private final int N_ROWS, N_COLS;
-    
+
+    private boolean revisedChecker;
+
     private Player p1, p2;
 
     private JFrame frameTable;
@@ -22,15 +24,16 @@ public class CheckersTable {
 
     private ArrayList<Point> pointsListToClear = new ArrayList<Point>();
 
-    private CheckersTable(final int N_ROWS, final int N_COLS) {
+    private CheckersTable(final int N_ROWS, final int N_COLS, boolean revisedChecker) {
         this.N_ROWS = N_ROWS;
         this.N_COLS = N_COLS;
+        this.revisedChecker = revisedChecker;
     }
 
     //Singleton (Lazy Initialization because constructor parameters)
-    public static synchronized CheckersTable getInstance(final int N_ROWS, final int N_COLS) {
+    public static synchronized CheckersTable getInstance(final int N_ROWS, final int N_COLS, boolean revisedChecker) {
         if (Instance == null)
-            Instance = new CheckersTable(N_ROWS, N_COLS);
+            Instance = new CheckersTable(N_ROWS, N_COLS, revisedChecker);
         return Instance;
     }
 
@@ -188,4 +191,40 @@ public class CheckersTable {
     public final int getN_COLS(){
         return N_COLS;
     }
+
+    public Player getP1() {
+        return p1;
+    }
+
+    public void setP1(Player p1) {
+        this.p1 = p1;
+    }
+
+    public Player getP2() {
+        return p2;
+    }
+
+    public void setP2(Player p2) {
+        this.p2 = p2;
+    }
+
+    public Piece getPToMove() {
+        return this.pToMove;
+    }
+
+    public void setPToMove(Piece pToMove) {
+        this.pToMove = pToMove;
+    }
+    public boolean getRevisedChecker(){
+        return revisedChecker;
+    }
+
+    public ArrayList<Point> getPointsListToClear() {
+        return this.pointsListToClear;
+    }
+
+    public void setPointsListToClear(ArrayList<Point> pointsListToClear) {
+        this.pointsListToClear = pointsListToClear;
+    }
+
 }

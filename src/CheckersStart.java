@@ -16,13 +16,13 @@ public class CheckersStart implements ActionListener{
     private final String ICON_PATH = "/images/WizardRed.png";
 
     private String firstPlayerName, secondPlayerName;
-
     private int dimTable;
+    private Boolean modeRevised;
 
     private JTextField      t1,t2;
-    private JLabel          l0,l1,l2,l3;
+    private JLabel          l0,l1,l2,l3,l4;
     private JButton         b1,bReg;
-    private JComboBox<?>    c1;
+    private JComboBox<?>    c1,c2;
 
     private String stringAction = "0";
     private ArrayList<String> listActionCommands = new ArrayList<String>();
@@ -33,15 +33,20 @@ public class CheckersStart implements ActionListener{
 
     private CheckersStart(){
 
-        frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 180, 260, Color.GREEN, false, new FlowLayout(), ICON_PATH);
+        frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 190, 300, Color.GREEN, false, new FlowLayout(), ICON_PATH);
     
         l0 = CGO.addLabel("CheckersGame",new Font("Verdana", Font.PLAIN, 18));
-        
+
         l1 = CGO.addLabel("table size");
         
-        String[] someStrings = { "4", "6", "8", "10", "12", "14", "16"};
-        c1 = CGO.addComboBoxString(someStrings, 2, false, this, stringAction);
+        String[] dimensionStrings = { "4", "6", "8", "10", "12", "14", "16"};
+        c1 = CGO.addComboBoxString(dimensionStrings, 2, false, this, stringAction);
         addcommandtoList("combobox1");
+
+        l4 = CGO.addLabel("game mode");
+
+        String[] modeStrings = { "classic", "revised"};
+        c2 = CGO.addComboBoxString(modeStrings, 1, false);
         
         l2 = CGO.addLabel("Choose name Player 1");
         
@@ -51,7 +56,7 @@ public class CheckersStart implements ActionListener{
         
         t2 = CGO.addTextField("Player2", new Dimension(100, 20), true);
         
-        b1 = CGO.addButton("Play", this, stringAction);
+        b1 = CGO.addButton("Start Game", this, stringAction);
         addcommandtoList("button1");
         
         bReg = CGO.addButton("Regolamento", this, stringAction);
@@ -60,6 +65,8 @@ public class CheckersStart implements ActionListener{
         frameStart.add(l0);
         frameStart.add(l1);
         frameStart.add(c1);
+        frameStart.add(l4);
+        frameStart.add(c2);
         frameStart.add(l2);
         frameStart.add(t1);
         frameStart.add(l3);
@@ -93,10 +100,11 @@ public class CheckersStart implements ActionListener{
                 firstPlayerName = t1.getText();
                 secondPlayerName = t2.getText();
                 dimTable = Integer.parseInt((String)c1.getSelectedItem());
+                modeRevised = c2.getSelectedItem().equals("revised"); //true revised, false classic
                 if (firstPlayerName.isBlank() || secondPlayerName.isBlank()) return;
                 try {
                     frameStart.setVisible(false); //hide CheckersStart Window
-                    startGame(firstPlayerName, secondPlayerName, dimTable, Box.DIM_BOX);
+                    startGame(firstPlayerName, secondPlayerName, dimTable, Box.DIM_BOX, modeRevised);
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
@@ -131,10 +139,10 @@ public class CheckersStart implements ActionListener{
     }
     
     
-    private void startGame(String p1Name, String p2Name, int DIM_TABLE, int DIM_BOX) throws Exception{
+    private void startGame(String p1Name, String p2Name, int DIM_TABLE, int DIM_BOX, boolean revisedChecker) throws Exception{
         Box.DIM_BOX = DIM_BOX;
         scaleDimensionTable(); //N.B: Game Table sizes are always (DIM * Box.DIM_BOX, Box.DIM * DIM_BOX)
-        CheckersTable table = CheckersTable.getInstance(DIM_TABLE, DIM_TABLE);
+        CheckersTable table = CheckersTable.getInstance(DIM_TABLE, DIM_TABLE, revisedChecker);
         Creator factoryM = new ConcreteFactoryM();
         Player pl1 = (Player) factoryM.factoryMethod(p1Name, Color.red, null);
         Player pl2 = (Player) factoryM.factoryMethod(p2Name, Color.green, null);
