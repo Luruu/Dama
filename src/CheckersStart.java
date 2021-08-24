@@ -58,10 +58,10 @@ public class CheckersStart implements ActionListener{
         t2 = CGO.addTextField("Player2", new Dimension(100, 20), true);
         
         b1 = CGO.addButton("Start Game", this, stringAction);
-        addcommandtoList("button1");
+        addcommandtoList("bStart Game");
         
-        bReg = CGO.addButton("Regolamento", this, stringAction);
-        addcommandtoList("Regolamento");
+        bReg = CGO.addButton("Game Rules", this, stringAction);
+        addcommandtoList("game rules");
         
         frameStart.add(l0);
         frameStart.add(l1);
@@ -112,11 +112,13 @@ public class CheckersStart implements ActionListener{
                 break;
             case "2":
                 System.out.println("label info pressed!");
-                JOptionPane.showMessageDialog(frameStart, "Ogni giocatore dispone di N pedine e 2 Arcieri (N in base alla dimensione del campo da gioco) di colore diverso rispetto a quelle dell'avversario.\n Il giocatore verde fa sempre la prima mossa." +
+                JOptionPane.showMessageDialog(frameStart, "REVISED MODE: Ogni giocatore dispone di N pedine e 2 Arcieri (N in base alla dimensione del campo da gioco) di colore diverso rispetto a quelle dell'avversario.\n Il giocatore verde fa sempre la prima mossa.\n" +
                 "L'obiettivo del gioco è quello di mangiare tutti i pezzi dell'avversario o di fare il miglior punteggio entro il tempo limite\n" +
-                "Sul campo da gioco sono presenti i seguenti pezzi:\n" + "Pedina: pezzo classico che si muove solamente in diagonale di una casella alla volta e soltanto in avanti. Quando una pedina raggiunge una delle caselle dell'ultima riga viene promossa diventando dama.Dama: upgrade della pedina.\n Può muoversi in più direzioni ad un passo alla volta."+
-                "\nMago: Se il mago mangia un pezzo, resuscita una pedina. Invece se viene mangiato la pedina avversaria diventa dama. Un mago non può diventare dama e non può mangiare un altro mago.\n" +
-                "\nIl punteggio è dato dalla tipologia e dalla quantità di pezzi mangiati, in particolare:\n Pedina: 1 punto.\n Mago: 3 punti.\n Dama: 5 punti");
+                "Sul campo da gioco sono presenti i seguenti pezzi:\n" + 
+                "Pedina: pezzo classico che si muove solamente in diagonale di una casella alla volta e soltanto in avanti. Quando una pedina raggiunge una delle caselle dell'ultima riga viene promossa diventando dama.\n" +
+                "Dama: upgrade della pedina.\n Può muoversi in più direzioni ad un passo alla volta.\n"+
+                "Mago: Se il mago mangia un pezzo, resuscita una pedina. Invece se viene mangiato la pedina avversaria diventa dama. Un mago non può diventare dama e non può mangiare un altro mago.\n" +
+                "Il punteggio è dato dalla tipologia e dalla quantità di pezzi mangiati, in particolare:\n Pedina: 1 punto.\n Mago: 3 punti.\n Dama: 5 punti");
             default:
                 System.out.println("case default: " + action + listActionCommands.get(Integer.parseInt((String)action)) + ": pressed!");
         }
