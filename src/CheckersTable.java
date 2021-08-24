@@ -45,7 +45,7 @@ public class CheckersTable {
     }
 
     private void initializeWindow() throws Exception {
-        frameTable = CGO.addFrame("Checkers Table", N_ROWS * Box.DIM_BOX, N_COLS * Box.DIM_BOX, Color.black, false, new BorderLayout(0,0), CheckersStart.getIstance().geticonPath());
+        frameTable = CGO.addFrame("Checkers Table", N_ROWS * Box.DIM_BOX, N_COLS * Box.DIM_BOX, Color.white, false, new BorderLayout(0,0), CheckersStart.getIstance().geticonPath(), true, CheckersStart.getIstance().centerTableY);
         panelTable = CGO.addPanel(N_ROWS * Box.DIM_BOX, N_COLS * Box.DIM_BOX, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
  
         //create new Boxes (all game table) and add them to the new panel
@@ -54,6 +54,7 @@ public class CheckersTable {
 
         frameTable.add(panelTable);
         frameTable.setVisible(true);
+        frameTable.pack();
     }
 
     private void addBoxesToPanel(){

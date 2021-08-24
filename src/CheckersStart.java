@@ -27,13 +27,14 @@ public class CheckersStart implements ActionListener{
     private String stringAction = "0";
     private ArrayList<String> listActionCommands = new ArrayList<String>();
 
+    public boolean centerTableY = true;
+
     public static void main (String [] args){
         CheckersStart firstWindow = CheckersStart.getIstance();
     }
 
     private CheckersStart(){
-
-        frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 190, 300, Color.GREEN, false, new FlowLayout(), ICON_PATH);
+        frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 190, 300, Color.GREEN, false, new FlowLayout(), ICON_PATH, true, true);
     
         l0 = CGO.addLabel("CheckersGame",new Font("Verdana", Font.PLAIN, 18));
 
@@ -124,17 +125,18 @@ public class CheckersStart implements ActionListener{
         Dimension dimensionTableFrame = new Dimension(dimTable * Box.DIM_BOX, dimTable * Box.DIM_BOX);
         Dimension dimensionScreenPC = Toolkit.getDefaultToolkit().getScreenSize();
         Boolean dimensions_Too_large = dimensionTableFrame.height > dimensionScreenPC.height || dimensionTableFrame.width > dimensionScreenPC.width;
-        int diff;
         if (dimensions_Too_large){
-            diff = dimensionTableFrame.height - dimensionScreenPC.height;
+            int diff = dimensionTableFrame.height - dimensionScreenPC.height;
+            //System.out.println(diff);
+            centerTableY = false; //Table will start at the position (x,15)
             if (diff > 400)
-                Box.DIM_BOX -= (Box.DIM_BOX/2 - 15);
+                Box.DIM_BOX -= (Box.DIM_BOX/2 - 14);
             else if (diff > 300)
-                Box.DIM_BOX -= (Box.DIM_BOX/2 - 15);
+                Box.DIM_BOX -= (Box.DIM_BOX/2 - 18);
             else if (diff > 200)
-                Box.DIM_BOX -= (Box.DIM_BOX/2 - 20);
+                Box.DIM_BOX -= (Box.DIM_BOX/2 - 22);
             else if (diff > 50)
-                Box.DIM_BOX -= (Box.DIM_BOX/2 - 35);
+                Box.DIM_BOX -= (Box.DIM_BOX/2 - 33);
         }
     }
     
