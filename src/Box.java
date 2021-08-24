@@ -33,7 +33,6 @@ public  class Box extends JPanel{
     }
 
     private static void addPieces(Box[][] Boxes , int N_ROWS, int N_COLS, Player p1, Player p2) throws Exception {
-        //Used to create game's pieces
         Creator factory = new ConcreteFactoryM();
         Color pieceColor;
         String typePiece;
@@ -42,18 +41,15 @@ public  class Box extends JPanel{
         for (int i = 0; i < N_ROWS; i++){
             for (int j = 0; j < N_COLS; j++){
                 //Add Pieces in the correct position
-                if ( (i < MID_TABLE - 1 || i > MID_TABLE) && Boxes[i][j].color == Color.darkGray){
+                if ((i < MID_TABLE - 1 || i > MID_TABLE) && Boxes[i][j].color == Color.darkGray){
                     typePiece = (Wizard.is_WizardStartPosition(i, j, N_ROWS, N_COLS)) ? "wizard": "pawn";
                     pieceColor = (i < N_ROWS/2 - 1) ? Color.green : Color.red;
                     Player owner = (pieceColor == Color.red) ? p1 : p2;
                     piece = (Piece) factory.factoryMethod(typePiece, pieceColor, owner);
                     //Assignment of the player based on the color of the pawn
-                    //Forse non serve. Basterebbe passargli un new Player a caso.
-                    //Il controllo va fatto in base ai colori dei pezzi e del player
-                    //Probabilmente sarà una features o un bug o non serve a niente.
-                    //Questo if serve perché un player potrebbe cliccaere su un pezzo di colore diverso dal suo
-                    //Quindi otterremo il mouselistener del pezzo selezionato e lo confrontiamo con il colore del pezzo
-                    // Tutto questo nella funzione player che invoca il click.
+                    //Forse non serve. Basterebbe passargli un new Player a caso. Il controllo va fatto in base ai colori dei pezzi e del player
+                    //Probabilmente sarà una features o un bug o non serve a niente. Questo if serve perché un player potrebbe cliccaere su un pezzo di colore diverso dal suo
+                    //Quindi otterremo il mouselistener del pezzo selezionato e lo confrontiamo con il colore del pezzo. Tutto questo nella funzione player che invoca il click.
                     Boxes[i][j].add(piece, BorderLayout.CENTER);
                     Boxes[i][j].hasPiece = true;
                     piece.setCoord(i,j);

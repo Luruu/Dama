@@ -57,9 +57,15 @@ public interface CGO {
         newTextField.setFont(smallFont);
         return newTextField;
     }
-
+    //if font is null use default font
     public static JLabel addLabel(String str){
         JLabel newLabel = new JLabel(str);
+        return newLabel;
+    }
+    public static JLabel addLabel(String str, Font font){
+        JLabel newLabel = new JLabel(str);
+        if (font != null)
+            newLabel.setFont(font);
         return newLabel;
     }
 

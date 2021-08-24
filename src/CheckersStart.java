@@ -1,6 +1,6 @@
 import javax.swing.*;
-
 import java.awt.*;
+
 import java.awt.event.*;  
 
 import java.awt.event.ActionListener;
@@ -20,8 +20,8 @@ public class CheckersStart implements ActionListener{
     private int dimTable;
 
     private JTextField      t1,t2;
-    private JLabel          l1,l2,l3;
-    private JButton         b1, bReg;
+    private JLabel          l0,l1,l2,l3;
+    private JButton         b1,bReg;
     private JComboBox<?>    c1;
 
     private String stringAction = "0";
@@ -33,9 +33,10 @@ public class CheckersStart implements ActionListener{
 
     private CheckersStart(){
 
-        frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 180, 240, Color.GREEN, false, new FlowLayout(), ICON_PATH);
+        frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 180, 260, Color.GREEN, false, new FlowLayout(), ICON_PATH);
     
-        l1 = CGO.addLabel("Choose table size");
+        l0 = CGO.addLabel("CheckersGame",new Font("Verdana", Font.PLAIN, 18));
+        l1 = CGO.addLabel("table size");
         
         String[] someStrings = { "4", "6", "8", "10", "12", "14", "16"};
         c1 = CGO.addComboBoxString(someStrings, 2, false, this, stringAction);
@@ -55,7 +56,7 @@ public class CheckersStart implements ActionListener{
         bReg = CGO.addButton("Regolamento", this, stringAction);
         addcommandtoList("Regolamento");
         
-        
+        frameStart.add(l0);
         frameStart.add(l1);
         frameStart.add(c1);
         frameStart.add(l2);
@@ -110,10 +111,28 @@ public class CheckersStart implements ActionListener{
                 System.out.println("case default: " + action + listActionCommands.get(Integer.parseInt((String)action)) + ": pressed!");
         }
     }
+    private void scaleDimensionTable(){
+        Dimension dimensionTableFrame = new Dimension(dimTable * Box.DIM_BOX, dimTable * Box.DIM_BOX);
+        Dimension dimensionScreenPC = Toolkit.getDefaultToolkit().getScreenSize();
+        Boolean dimensions_Too_large = dimensionTableFrame.height > dimensionScreenPC.height || dimensionTableFrame.width > dimensionScreenPC.width;
+        int diff;
+        if (dimensions_Too_large){
+            diff = dimensionTableFrame.height - dimensionScreenPC.height;
+            if (diff > 400)
+                Box.DIM_BOX -= (Box.DIM_BOX/2 - 15);
+            else if (diff > 300)
+                Box.DIM_BOX -= (Box.DIM_BOX/2 - 15);
+            else if (diff > 200)
+                Box.DIM_BOX -= (Box.DIM_BOX/2 - 20);
+            else if (diff > 50)
+                Box.DIM_BOX -= (Box.DIM_BOX/2 - 35);
+        }
+    }
     
     
     private void startGame(String p1Name, String p2Name, int DIM_TABLE, int DIM_BOX) throws Exception{
         Box.DIM_BOX = DIM_BOX;
+        scaleDimensionTable();
         //N.B: Game Window sizes are (DIM * Box.DIM_BOX, Box.DIM * DIM_BOX)
         CheckersTable table = CheckersTable.getInstance(DIM_TABLE, DIM_TABLE);
         Creator factoryM = new ConcreteFactoryM();
