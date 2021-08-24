@@ -6,42 +6,61 @@ import java.awt.event.ActionListener;
 
 
 public class CheckersStart implements ActionListener{
-    private static JFrame frameStart;
-    private static final String ICON_PATH = "/images/WizardGreen.png";
 
-    private static String firstPlayerName, secondPlayerName;
+    //Singleton Eager initialization
+    private static final CheckersStart Instance = new CheckersStart();
 
-    private static int dimTable;
+    private JFrame frameStart;
+    private final String ICON_PATH = "/images/WizardRed.png";
+
+    private String firstPlayerName, secondPlayerName;
+
+    private int dimTable;
+
+    private JTextField      t1,t2;
+    private JLabel          l1,l2,l3;
+    private JButton         b1;
+    private JComboBox<?>    c1;
+
+    private String counterActionCommand = "0";
+
   
-    public CheckersStart(){
-        frameStart = CGO.createFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 640, 480, Color.GREEN, false, new FlowLayout(), ICON_PATH);
+    private CheckersStart(){
+        frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 640, 480, Color.GREEN, false, new FlowLayout(), ICON_PATH);
     
-        JLabel l1 = CGO.addLabel("Choose table size");
+        l1 = CGO.addLabel("Choose table size");
         frameStart.add(l1);
-        addComboBox();
-
-        JLabel l2 = CGO.addLabel("Choose name Player 1");
-        frameStart.add(l2);
-        JTextField t1 = CGO.addTextField("Prova", new Dimension(100, 20), true);
-        frameStart.add(t1);
-        JLabel l3 = CGO.addLabel("Choose name Player 2");
-        frameStart.add(l3);
-        JTextField t2 =CGO.addTextField("Prova2", new Dimension(100, 20), true);
-        frameStart.add(t2);
-        JButton b1 = addButton();
-        frameStart.add(b1);
-        frameStart.setVisible(true);
         
+        String[] someStrings = { "4", "6", "8", "10", "12", "14", "16"};
+        counterActionCommand = incrementStringCounter(counterActionCommand);
+        c1 = CGO.addComboBoxString(someStrings, 2, false, this, counterActionCommand);
+        frameStart.add(c1);
+
+        l2 = CGO.addLabel("Choose name Player 1");
+        frameStart.add(l2);
+        t1 = CGO.addTextField("Prova", new Dimension(100, 20), true);
+        frameStart.add(t1);
+        l3 = CGO.addLabel("Choose name Player 2");
+        frameStart.add(l3);
+        t2 = CGO.addTextField("Prova2", new Dimension(100, 20), true);
+        frameStart.add(t2);
+
+        counterActionCommand = incrementStringCounter(counterActionCommand);
+        b1 = CGO.addButton("test", this, counterActionCommand);
+        frameStart.add(b1);
+
+        frameStart.setVisible(true);
     }
 
-    public void addComboBox(){
-        String[] someStrings = { "4x4", "6x6", "8x8", "9x9", "10x10", "12x12", "14x14", "16x16"};
-        JComboBox<?> comboBox = CGO.addComboBoxString(someStrings, 2, false);
-        comboBox.addActionListener(this);
-        comboBox.setActionCommand("2");;
-        frameStart.add(comboBox);
+    //Singleton Eager initialization
+    public static CheckersStart getIstance(){
+        return Instance;
     }
 
+    public String incrementStringCounter(String counter){
+        int action = Integer.parseInt((String)counterActionCommand);
+        return String.valueOf(++action);
+    }
 
 //METODO FOLLE ---------------------------- LASCIATO SOLO PER RIVEDERLO!!
    /* public void addButton(){
@@ -63,48 +82,45 @@ public class CheckersStart implements ActionListener{
         });  
     } */
 
-    public JButton addButton(){
-        JButton button = new JButton("test");
-        button.addActionListener(this);
-        button.setActionCommand("1");
-        return button;
-    }
-
-
+  
     @Override
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
         switch(action){
             case "1":
+                System.out.println("Checkbox pressed!");
+                break;
+            case "2":
                 System.out.println("Button pressed!");
+                firstPlayerName = t1.getText();
+                secondPlayerName = t2.getText();
+                dimTable = Integer.parseInt((String)c1.getSelectedItem());
+                if (firstPlayerName.isBlank() || secondPlayerName.isBlank()) return;
                 try {
-                    startGame("Renato", "Luca", dimTable, Box.DIM_BOX);
+                    frameStart.setVisible(false); //hide CheckersStart Window
+                    startGame(firstPlayerName, secondPlayerName, dimTable, Box.DIM_BOX);
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
                 break;
-            case "2":
-                System.out.println("Checkbox pressed!");
-                break;
+
             default:
-                System.out.println("Checkbox pressed!");
+                System.out.println("Qualcosa pressed!");
         }
     }
     
     
     private void startGame(String p1Name, String p2Name, int DIM_TABLE, int DIM_BOX) throws Exception{
-        final int DIM = 8;
-        Box.DIM_BOX = 96;
-
+        Box.DIM_BOX = DIM_BOX;
         //N.B: Game Window sizes are (DIM * Box.DIM_BOX, Box.DIM * DIM_BOX)
-        CheckersTable table = CheckersTable.getInstance(DIM, DIM);
+        CheckersTable table = CheckersTable.getInstance(DIM_TABLE, DIM_TABLE);
         Creator factoryM = new ConcreteFactoryM();
         Player pl1 = (Player) factoryM.factoryMethod(p1Name, Color.red, null);
         Player pl2 = (Player) factoryM.factoryMethod(p2Name, Color.green, null);
         table.startGame(pl1, pl2); 
     }
 
-    public static String geticonPath(){
+    public String geticonPath(){
         return ICON_PATH;
     }
         

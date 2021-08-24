@@ -1,10 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 // Create Graphic Objects interface
 public interface CGO {
-    //Create and set a new Frame
-    public static JFrame createFrame(String titleFrame, int width, int height, Color backGroundColor, boolean resizable, LayoutManager layout, String icon) {
+    //Add and set a new Frame
+    public static JFrame addFrame(String titleFrame, int width, int height, Color backGroundColor, boolean resizable, LayoutManager layout, String icon) {
         JFrame newFrame = new JFrame(titleFrame);
        
         newFrame.setSize(width, height);
@@ -22,8 +23,8 @@ public interface CGO {
         return newFrame;
     }
 
-    //Create and set a new Panel
-    public static JPanel createPanel(int width, int height, Color backGroundColor, LayoutManager layout) {
+    //Add and set a new Panel
+    public static JPanel addPanel(int width, int height, Color backGroundColor, LayoutManager layout) {
         JPanel newPanel = new JPanel();
         newPanel.setLayout(layout);
         newPanel.setPreferredSize(new Dimension(width, height));
@@ -31,10 +32,20 @@ public interface CGO {
         return newPanel;
     }
 
-    public static JComboBox<?> addComboBoxString(String [] str, int SelectedIndex, boolean editablebyUser) {
+
+    public static JButton addButton(String text, ActionListener listener, String action){
+        JButton newButton = new JButton("test");
+        newButton.addActionListener(listener);
+        newButton.setActionCommand(action);
+        return newButton;
+    }
+
+    public static JComboBox<?> addComboBoxString(String [] str, int SelectedIndex, boolean editablebyUser, ActionListener listener, String action) {
         JComboBox<?> newCombobox = new JComboBox<String>(str);
         newCombobox.setSelectedIndex(SelectedIndex);
         newCombobox.setEditable(editablebyUser);
+        newCombobox.addActionListener(listener);
+        newCombobox.setActionCommand(action);
         return newCombobox;
     }
 
@@ -51,5 +62,6 @@ public interface CGO {
         JLabel label = new JLabel(str);
         return label;
     }
+
 
 }
