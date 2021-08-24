@@ -15,8 +15,8 @@ public class CheckersStart implements ActionListener{
     private JFrame frameStart;
     private final String ICON_PATH = "/images/WizardRed.png";
 
-    private String firstPlayerName, secondPlayerName;
-    private int dimTable;
+    private String  firstPlayerName, secondPlayerName;
+    private int     dimTable;
     private Boolean modeRevised;
 
     private JTextField      t1,t2;
@@ -141,7 +141,7 @@ public class CheckersStart implements ActionListener{
     
     private void startGame(String p1Name, String p2Name, int DIM_TABLE, int DIM_BOX, boolean revisedChecker) throws Exception{
         Box.DIM_BOX = DIM_BOX;
-        scaleDimensionTable(); //N.B: Game Table sizes are always (DIM * Box.DIM_BOX, Box.DIM * DIM_BOX)
+        scaleDimensionTable(); //N.B: Game Table sizes are always (DIM * Box.DIM_BOX, DIM * DIM_BOX)
         CheckersTable table = CheckersTable.getInstance(DIM_TABLE, DIM_TABLE, revisedChecker);
         Creator factoryM = new ConcreteFactoryM();
         Player pl1 = (Player) factoryM.factoryMethod(p1Name, Color.red, null);

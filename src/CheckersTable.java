@@ -44,7 +44,6 @@ public class CheckersTable {
         return Instance;
     }
 
-
     private void initializeWindow() throws Exception {
         frameTable = CGO.addFrame("Checkers Table", N_ROWS * Box.DIM_BOX, N_COLS * Box.DIM_BOX, Color.black, false, new BorderLayout(0,0), CheckersStart.getIstance().geticonPath());
         panelTable = CGO.addPanel(N_ROWS * Box.DIM_BOX, N_COLS * Box.DIM_BOX, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
