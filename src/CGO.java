@@ -34,7 +34,7 @@ public interface CGO {
 
 
     public static JButton addButton(String text, ActionListener listener, String action){
-        JButton newButton = new JButton("test");
+        JButton newButton = new JButton(text);
         newButton.addActionListener(listener);
         newButton.setActionCommand(action);
         return newButton;
@@ -63,5 +63,24 @@ public interface CGO {
         return label;
     }
 
+    //METODO FOLLE ---------------------------- LASCIATO SOLO PER RIVEDERLO!!
+   /* public void addButton(){
+        JButton obj = new JButton("Play");
+        //obj.setActionCommand("disable");
+        frameStart.add(obj);
+
+        obj.addActionListener(new ActionListener(){  
+            public void actionPerformed(ActionEvent e){  
+                System.out.println("CLICK");
+                try {
+                    frameStart.setVisible(false);
+                    startGame("Renato", "Luca", dimTable, Box.DIM_BOX);
+                } 
+                catch (Exception e1){
+                    e1.printStackTrace();
+                }
+            }
+        });  
+    } */
 
 }

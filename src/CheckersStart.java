@@ -2,7 +2,9 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;  
+
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class CheckersStart implements ActionListener{
@@ -22,31 +24,34 @@ public class CheckersStart implements ActionListener{
     private JButton         b1;
     private JComboBox<?>    c1;
 
-    private String counterActionCommand = "0";
+    private String stringAction = "0";
+    private ArrayList<String> listActionCommands = new ArrayList<String>();
 
   
     private CheckersStart(){
-        frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 640, 480, Color.GREEN, false, new FlowLayout(), ICON_PATH);
+        frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 320, 200, Color.GREEN, false, new FlowLayout(), ICON_PATH);
     
         l1 = CGO.addLabel("Choose table size");
         frameStart.add(l1);
         
         String[] someStrings = { "4", "6", "8", "10", "12", "14", "16"};
-        counterActionCommand = incrementStringCounter(counterActionCommand);
-        c1 = CGO.addComboBoxString(someStrings, 2, false, this, counterActionCommand);
+
+        c1 = CGO.addComboBoxString(someStrings, 2, false, this, stringAction);
+        addcommandtoList("combobox1");
         frameStart.add(c1);
 
         l2 = CGO.addLabel("Choose name Player 1");
         frameStart.add(l2);
-        t1 = CGO.addTextField("Prova", new Dimension(100, 20), true);
+        t1 = CGO.addTextField("Player1", new Dimension(100, 20), true);
         frameStart.add(t1);
         l3 = CGO.addLabel("Choose name Player 2");
         frameStart.add(l3);
-        t2 = CGO.addTextField("Prova2", new Dimension(100, 20), true);
+        t2 = CGO.addTextField("Player2", new Dimension(100, 20), true);
         frameStart.add(t2);
 
-        counterActionCommand = incrementStringCounter(counterActionCommand);
-        b1 = CGO.addButton("test", this, counterActionCommand);
+        
+        b1 = CGO.addButton("Play", this, stringAction);
+        addcommandtoList("button1");
         frameStart.add(b1);
 
         frameStart.setVisible(true);
@@ -57,40 +62,21 @@ public class CheckersStart implements ActionListener{
         return Instance;
     }
 
-    public String incrementStringCounter(String counter){
-        int action = Integer.parseInt((String)counterActionCommand);
-        return String.valueOf(++action);
+    public void addcommandtoList(String nameObject){
+        listActionCommands.add(nameObject);
+        int intAction = Integer.parseInt((String)stringAction);
+        stringAction = String.valueOf(++intAction); //Increase action because a nameObject is added
+        System.out.println(nameObject + ": action " + stringAction);
     }
 
-//METODO FOLLE ---------------------------- LASCIATO SOLO PER RIVEDERLO!!
-   /* public void addButton(){
-        JButton obj = new JButton("Play");
-        //obj.setActionCommand("disable");
-        frameStart.add(obj);
-
-        obj.addActionListener(new ActionListener(){  
-            public void actionPerformed(ActionEvent e){  
-                System.out.println("CLICK");
-                try {
-                    frameStart.setVisible(false);
-                    startGame("Renato", "Luca", dimTable, Box.DIM_BOX);
-                } 
-                catch (Exception e1){
-                    e1.printStackTrace();
-                }
-            }
-        });  
-    } */
-
-  
     @Override
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
         switch(action){
-            case "1":
+            case "0":
                 System.out.println("Checkbox pressed!");
                 break;
-            case "2":
+            case "1":
                 System.out.println("Button pressed!");
                 firstPlayerName = t1.getText();
                 secondPlayerName = t2.getText();
@@ -105,7 +91,7 @@ public class CheckersStart implements ActionListener{
                 break;
 
             default:
-                System.out.println("Qualcosa pressed!");
+                System.out.println("case default: " + action + listActionCommands.get(Integer.parseInt((String)action)) + ": pressed!");
         }
     }
     
