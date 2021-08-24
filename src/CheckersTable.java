@@ -40,7 +40,7 @@ public class CheckersTable {
     //Singleton, but get the existing instance without specifying unnecessary parameters
     public static synchronized CheckersTable getInstance() throws Exception {
         if (Instance == null)
-            throw new Exception("ISTANCE NULL. Please use method: public static synchronized CheckersTable getInstance(final int N_ROWS, final int N_COLS)");
+            throw new Exception("ISTANCE NULL. Please use method: public static synchronized CheckersTable getInstance(<see args into code>)");
         return Instance;
     }
 
