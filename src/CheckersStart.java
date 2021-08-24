@@ -21,7 +21,7 @@ public class CheckersStart implements ActionListener{
 
     private JTextField      t1,t2;
     private JLabel          l1,l2,l3;
-    private JButton         b1;
+    private JButton         b1, bReg;
     private JComboBox<?>    c1;
 
     private String stringAction = "0";
@@ -29,7 +29,7 @@ public class CheckersStart implements ActionListener{
 
   
     private CheckersStart(){
-        frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 320, 200, Color.GREEN, false, new FlowLayout(), ICON_PATH);
+        frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 320, 200, Color.GREEN, false, new SpringLayout(), ICON_PATH);
     
         l1 = CGO.addLabel("Choose table size");
         frameStart.add(l1);
@@ -53,6 +53,11 @@ public class CheckersStart implements ActionListener{
         b1 = CGO.addButton("Play", this, stringAction);
         addcommandtoList("button1");
         frameStart.add(b1);
+
+        bReg = CGO.addButton("Regolamento", this, stringAction);
+        addcommandtoList("Regolamento");
+        frameStart.add(bReg);
+        
 
         frameStart.setVisible(true);
     }
@@ -89,7 +94,13 @@ public class CheckersStart implements ActionListener{
                     e1.printStackTrace();
                 }
                 break;
-
+            case "2":
+                System.out.println("label info pressed!");
+                JOptionPane.showMessageDialog(frameStart, "Ogni giocatore dispone di N pedine e K Arcieri (con N e K da definire in base alla dimensione del campo da gioco) di colore diverso rispetto a quelle dell'avversario (bianco o nere).\n Il giocatore bianco fa sempre la prima mossa." +
+                "L'obiettivo del gioco è quello di mangiare tutti i pezzi dell'avversario.\n" +
+                "Sul campo da gioco sono presenti i seguenti pezzi:\n" + "Pedina: pezzo classico che si muove solamente in diagonale di una casella alla volta e soltanto in avanti. Quando una pedina raggiunge una delle caselle dell'ultima riga viene promossa diventando dama.Dama: upgrade della pedina.\n Può muoversi in più direzioni ad un passo alla volta."+
+                "\nArciere: Se l'arciere mangia un pezzo, resuscita una pedina. Invece se viene mangiato la pedina avversaria diventa dama. Un mago non può diventare dama e non può mangiare un altro mago.... Ulteriori pezzi potrebbero essere aggiunti.\nLa partita termina quando uno dei due giocatori finisce tutti i pezzi, quando un giocatore abbandona o quando il timer scade e in questo caso vince il giocatore che ha il punteggio più alto." +
+                "\nIl punteggio è dato dalla tipologia e dalla quantità di pezzi mangiati, in particolare:\n Pedina: 1 punto.\n Mago: 3 punti.");
             default:
                 System.out.println("case default: " + action + listActionCommands.get(Integer.parseInt((String)action)) + ": pressed!");
         }

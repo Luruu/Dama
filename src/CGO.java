@@ -59,8 +59,8 @@ public interface CGO {
     }
 
     public static JLabel addLabel(String str){
-        JLabel label = new JLabel(str);
-        return label;
+        JLabel newLabel = new JLabel(str);
+        return newLabel;
     }
 
     //METODO FOLLE ---------------------------- LASCIATO SOLO PER RIVEDERLO!!
