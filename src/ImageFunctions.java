@@ -16,7 +16,8 @@ public interface ImageFunctions {
         }
         return img;
     }
-
+    
+    //this method is necessary to access file on the file system
     public static String getAbsolutePath(String pathRelative){
         String filePath = new File("").getAbsolutePath();
         return filePath.concat(pathRelative);

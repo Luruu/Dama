@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-public class CheckersStart implements ActionListener{
+public class CheckersStart implements ActionListener {
 
     //Singleton Eager initialization
     private static final CheckersStart Instance = new CheckersStart();
