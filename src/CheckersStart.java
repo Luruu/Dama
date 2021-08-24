@@ -54,7 +54,7 @@ public class CheckersStart implements ActionListener{
                 System.out.println("CLICK");
                 try {
                     frameStart.setVisible(false);
-                    startGame("Renato", "Luca", dimTable, Rectangle.DIM_RECT);
+                    startGame("Renato", "Luca", dimTable, Box.DIM_BOX);
                 } 
                 catch (Exception e1){
                     e1.printStackTrace();
@@ -78,7 +78,7 @@ public class CheckersStart implements ActionListener{
             case "1":
                 System.out.println("Button pressed!");
                 try {
-                    startGame("Renato", "Luca", dimTable, Rectangle.DIM_RECT);
+                    startGame("Renato", "Luca", dimTable, Box.DIM_BOX);
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
@@ -92,11 +92,11 @@ public class CheckersStart implements ActionListener{
     }
     
     
-    private void startGame(String p1Name, String p2Name, int DIM_TABLE, int DIM_RECT) throws Exception{
+    private void startGame(String p1Name, String p2Name, int DIM_TABLE, int DIM_BOX) throws Exception{
         final int DIM = 8;
-        Rectangle.DIM_RECT = 96;
+        Box.DIM_BOX = 96;
 
-        //N.B: Game Window sizes are (DIM * Rectangle.DIM_RECT, Rectangle.DIM * DIM_RECT)
+        //N.B: Game Window sizes are (DIM * Box.DIM_BOX, Box.DIM * DIM_BOX)
         CheckersTable table = CheckersTable.getInstance(DIM, DIM);
         Creator factoryM = new ConcreteFactoryM();
         Player pl1 = (Player) factoryM.factoryMethod(p1Name, Color.red, null);

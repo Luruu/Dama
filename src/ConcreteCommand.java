@@ -1,4 +1,3 @@
-
 public class ConcreteCommand implements Command{
     private CheckersTable checkTable;
     public ConcreteCommand(CheckersTable ct) {
@@ -14,7 +13,7 @@ public class ConcreteCommand implements Command{
         checkTable.clearSuggestions();
     }
     
-    public void move(Rectangle r, int i, int j) throws Exception{ 
-        checkTable.move(r);
+    public void move(Box b, int i, int j) throws Exception{ 
+        checkTable.move(b);
     }
 }

@@ -44,11 +44,11 @@ public class Player extends MouseAdapter {
             Piece pieceClicked = (Piece)e.getSource();
             invoker.suggestions(pieceClicked); //Show suggestions for pieceClicked
         }
-        else if(nameClass.equals("class Rectangle")){;
-            Rectangle rectClicked = (Rectangle) e.getSource();
-            if (rectClicked.getColor() == Color.cyan){
+        else if(nameClass.equals("class Box")){;
+            Box boxClicked = (Box) e.getSource();
+            if (boxClicked.getColor() == Color.cyan){
                 try {
-                    invoker.move(rectClicked, rectClicked.getCoord().x, rectClicked.getCoord().y);
+                    invoker.move(boxClicked, boxClicked.getCoord().x, boxClicked.getCoord().y);
                 } catch (Exception e1) {
                     e1.getMessage();
                 }

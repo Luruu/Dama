@@ -11,7 +11,7 @@ public class InvokerList {
     public void clear() {
         command.clear();
     }
-    public void move(Rectangle r, int i , int j) throws Exception{
-        command.move(r,i,j);
+    public void move(Box b, int i , int j) throws Exception{
+        command.move(b,i,j);
     }
 }

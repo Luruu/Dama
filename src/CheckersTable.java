@@ -16,9 +16,9 @@ public class CheckersTable {
     private JFrame frameTable;
     private JPanel panelTable;
     
-    private Piece pToMove; // Piece to move when a rectangle is clicked by a player
+    private Piece pToMove; // Piece to move when a Box is clicked by a player
 
-    private static Rectangle[][] rectangles; // Matrix of all the rectangles of the board 
+    private static Box[][] Boxes; // Matrix of all the Boxes of the board 
 
     private ArrayList<Point> pointsListToClear = new ArrayList<Point>();
 
@@ -43,21 +43,21 @@ public class CheckersTable {
 
 
     private void initializeWindow() throws Exception {
-        frameTable = CGO.createFrame("Checkers Table", N_ROWS * Rectangle.DIM_RECT, N_COLS * Rectangle.DIM_RECT, Color.WHITE, false, new BorderLayout(0,0), CheckersStart.geticonPath());
-        panelTable = CGO.createPanel(N_ROWS * Rectangle.DIM_RECT, N_COLS * Rectangle.DIM_RECT, Color.blue, new GridLayout(N_ROWS, N_COLS, 0, 0));
+        frameTable = CGO.createFrame("Checkers Table", N_ROWS * Box.DIM_BOX, N_COLS * Box.DIM_BOX, Color.WHITE, false, new BorderLayout(0,0), CheckersStart.geticonPath());
+        panelTable = CGO.createPanel(N_ROWS * Box.DIM_BOX, N_COLS * Box.DIM_BOX, Color.blue, new GridLayout(N_ROWS, N_COLS, 0, 0));
  
-        //create new rectangles (all game table) and add them to the new panel
-        rectangles = Rectangle.createRectangles(N_ROWS, N_COLS, Rectangle.DIM_RECT, p1, p2);
-        addRectsToPanel();
+        //create new Boxes (all game table) and add them to the new panel
+        Boxes = Box.createBoxes(N_ROWS, N_COLS, Box.DIM_BOX, p1, p2);
+        addBoxesToPanel();
 
         frameTable.add(panelTable);
         frameTable.setVisible(true);
     }
 
-    private void addRectsToPanel(){
-        for (Rectangle[] row : rectangles)
-            for (Rectangle rect : row)
-                panelTable.add(rect);
+    private void addBoxesToPanel(){
+        for (Box[] row : Boxes)
+            for (Box box : row)
+                panelTable.add(box);
     }
 
     protected void startGame(Player p1, Player p2) throws Exception {
@@ -72,66 +72,66 @@ public class CheckersTable {
         pToMove.showSuggestions(pToMove.setRowbyColor());
     }
 
-    //Move pToMove into destRectangle
-    public void move(Rectangle dstRectangle) throws Exception {
+    //Move pToMove into destBox
+    public void move(Box dstBox) throws Exception {
         boolean upgrade = false; 
 
-        Rectangle srcRectangle = rectangles[pToMove.getCoord().x][pToMove.getCoord().y]; //this rectangle contain the piece to be moved
-        int diff = srcRectangle.getCoord().x - dstRectangle.getCoord().x;
+        Box srcBox = Boxes[pToMove.getCoord().x][pToMove.getCoord().y]; //this Box contain the piece to be moved
+        int diff = srcBox.getCoord().x - dstBox.getCoord().x;
 
         if (diff > 1 || diff < -1){  //If have to eat difference is > 1 or < -1
             int i = (diff > 1) ? pToMove.getCoord().x - 1 : pToMove.getCoord().x + 1;
-            int j = (srcRectangle.getCoord().y > dstRectangle.getCoord().y) ? pToMove.getCoord().y - 1 : pToMove.getCoord().y + 1;
-            Rectangle pToEatRect = rectangles[i][j];
-            Piece enemyPiece = rectangles[i][j].getPiece();
+            int j = (srcBox.getCoord().y > dstBox.getCoord().y) ? pToMove.getCoord().y - 1 : pToMove.getCoord().y + 1;
+            Box pToEatBox = Boxes[i][j];
+            Piece enemyPiece = Boxes[i][j].getPiece();
             String enemyPieceClass = enemyPiece.getClass().toString();
             String pToMoveClass = pToMove.getClass().toString();
 
-            addOrRemove(pToEatRect, false);
+            addOrRemove(pToEatBox, false);
             
             if (enemyPieceClass.equals("class Wizard") && pToMoveClass.equals("class Pawn")) //if pawn eat Wizard
                 upgrade = true; //Pawn will be a new checkers
             
             if ((enemyPieceClass.equals("class Pawn") || enemyPieceClass.equals("class Checkers")) && pToMoveClass.equals("class Wizard")) //if Wizard eat
-                respawn(pToEatRect); //add a new piece
+                respawn(pToEatBox); //add a new piece
             
             Player player = pToMove.getOwner();
             player.addPlayerPoints(enemyPiece.getPoints()); // increase player's score after eating
         }
 
 
-        pToMove.setCoord(dstRectangle.getCoord().x, dstRectangle.getCoord().y);
+        pToMove.setCoord(dstBox.getCoord().x, dstBox.getCoord().y);
         Point pieceCoord = pToMove.getCoord();
       
-        addOrRemove(srcRectangle, false);  //remove the old piece from the previous rectangle
+        addOrRemove(srcBox, false);  //remove the old piece from the previous Box
 
         if (canPieceUpgrade() || upgrade){ //If pawn can upgrade
             Creator factory = new ConcreteFactoryM();
             pToMove = (Piece) factory.factoryMethod("checkers", pToMove.getColor(), pToMove.getOwner());
             pToMove.setCoord(pieceCoord.x, pieceCoord.y);
-            addOrRemove(dstRectangle, true);
+            addOrRemove(dstBox, true);
         }
-        else //Add a piece to move in new rectagle
-            addOrRemove(dstRectangle, true);
+        else //Add a piece to move in new Box
+            addOrRemove(dstBox, true);
     }
     
-    //In rect will respawn a piece
-    private void respawn(Rectangle rect) throws Exception{
+    //In Box will respawn a piece
+    private void respawn(Box box) throws Exception{
         Creator factory = new ConcreteFactoryM();
         Piece piece = (Piece) factory.factoryMethod("pawn", pToMove.getColor(), pToMove.getOwner());
-        addOrRemove(rect, true, piece);
+        addOrRemove(box, true, piece);
     }
 
-    protected void showFreeRectangle(int row, int col){
-            rectangles[row][col].setColor(Color.cyan);
-            rectangles[row][col].repaint();
+    protected void showFreeBox(int row, int col){
+            Boxes[row][col].setColor(Color.cyan);
+            Boxes[row][col].repaint();
             pointsListToClear.add(new Point(row, col));
     }
 
     public void clearSuggestions(){
         for (Point pointToClear : pointsListToClear){
-            rectangles[pointToClear.x][pointToClear.y].setColor(Color.darkGray);
-            rectangles[pointToClear.x][pointToClear.y].repaint();
+            Boxes[pointToClear.x][pointToClear.y].setColor(Color.darkGray);
+            Boxes[pointToClear.x][pointToClear.y].repaint();
         }
         pointsListToClear.clear();
     }
@@ -139,27 +139,27 @@ public class CheckersTable {
     
 
     //true: adds existing piece - false: remove a piece
-    private void addOrRemove(Rectangle rect, boolean action){
+    private void addOrRemove(Box box, boolean action){
         if(action == true)
-            rect.add(pToMove, BorderLayout.CENTER);
+            box.add(pToMove, BorderLayout.CENTER);
         else
-            rect.removeAll();
-        rect.HasPiece(action);
-        rect.revalidate();
-        rect.repaint();
+            box.removeAll();
+        box.HasPiece(action);
+        box.revalidate();
+        box.repaint();
     }
 
     //true: adds a new piece - false: remove a piece
-    private void addOrRemove(Rectangle rect, boolean action, Piece piece){
+    private void addOrRemove(Box box, boolean action, Piece piece){
         if(action == true){
-            piece.setCoord(rect.getCoord().x, rect.getCoord().y);
-            rect.add(piece, BorderLayout.CENTER);
+            piece.setCoord(box.getCoord().x, box.getCoord().y);
+            box.add(piece, BorderLayout.CENTER);
         }
         else
-            rect.removeAll();
-        rect.HasPiece(action);
-        rect.revalidate();
-        rect.repaint();
+            box.removeAll();
+        box.HasPiece(action);
+        box.revalidate();
+        box.repaint();
     }
 
     private boolean canPieceUpgrade(){
@@ -177,8 +177,8 @@ public class CheckersTable {
 
     // Getters and Setters methods..
 
-    public Rectangle getRectanglefromList(int row, int col){
-        return rectangles[row][col];
+    public Box getBoxfromList(int row, int col){
+        return Boxes[row][col];
     }
 
     public final int getN_ROWS(){

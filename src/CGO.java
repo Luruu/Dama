@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 // Create Graphic Objects interface
 public interface CGO {

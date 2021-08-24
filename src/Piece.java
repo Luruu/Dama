@@ -20,7 +20,7 @@ public abstract class Piece extends JComponent {
       addMouseListener(owner);
       objIMG = new ImagePiece(getPathIMG());
       TABLE = CheckersTable.getInstance();
-      DIM_IMG = Rectangle.DIM_RECT - 10; //Dimension of a rectangle - margin
+      DIM_IMG = Box.DIM_BOX - 10; //Dimension of a Box - margin
       objIMG.setImg(ImageFunctions.scale(objIMG.getImg(), DIM_IMG, DIM_IMG));
       setPreferredSize(new Dimension(DIM_IMG, DIM_IMG));
       coord = new Point();
@@ -47,19 +47,19 @@ public abstract class Piece extends JComponent {
          esito_right = checkMove(posAfterMove.x, GORIGHT_COL); //Vedo se a destra posso muovermi o mangiare
          if (esito_right == 2){ //DEVO mangiare a DESTRA
             posAfterMove.x = setRowonEat(posAfterMove);
-            TABLE.showFreeRectangle(posAfterMove.x, posAfterMove.y);
+            TABLE.showFreeBox(posAfterMove.x, posAfterMove.y);
             return 2;
          }
          else{ //Se nemmeno a destra si può mangiare allora..
             if (esito_left == 0) //Se posso muovermi a sinistra
-               TABLE.showFreeRectangle(posAfterMove.x, GOLEFT_COL);   
+               TABLE.showFreeBox(posAfterMove.x, GOLEFT_COL);   
             if (esito_right == 0) //Se posso muovermi a destra
-               TABLE.showFreeRectangle(posAfterMove.x, GORIGHT_COL); 
+               TABLE.showFreeBox(posAfterMove.x, GORIGHT_COL); 
          }
       }
       else if (esito_left == 2){ //DEVO mangiare a SINISTRA
          posAfterMove.x = setRowonEat(posAfterMove);
-         TABLE.showFreeRectangle(posAfterMove.x, posAfterMove.y);
+         TABLE.showFreeBox(posAfterMove.x, posAfterMove.y);
          return 2;
       }
       return 0;
@@ -94,7 +94,7 @@ public abstract class Piece extends JComponent {
          posAfterMove.y = posToSuggestion.y; //save new position to Move (for suggestion)
          return (canIeat(posToSuggestion)) ? 2 : 1; // 2: I MUST EAT ----- 1: I cannot eat or move
       }
-      else if(r == 0) //if rectangle is free
+      else if(r == 0) //if Box is free
          return 0; //I can move
       else
          return 1; //I cannot eat or move
@@ -102,7 +102,7 @@ public abstract class Piece extends JComponent {
    
    //returns true if an Wizard try eat another Wizard, else returns false
    private boolean arcTryEatArch(Point position) {
-      Rectangle rect = TABLE.getRectanglefromList(position.x, position.y);
+      Box rect = TABLE.getBoxfromList(position.x, position.y);
       String enemyPieceClass = rect.getPiece().getClass().toString();
       String pieceClass = getClass().toString();
       
@@ -110,7 +110,7 @@ public abstract class Piece extends JComponent {
    }
 
    protected int enemyPiece_inRect(Point position){
-      Rectangle rect = TABLE.getRectanglefromList(position.x, position.y);
+      Box rect = TABLE.getBoxfromList(position.x, position.y);
        
       if(rect.HasPiece()){ // Se c'è un pezzo
          // vediamo se è un pezzo avversario
