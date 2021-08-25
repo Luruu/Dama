@@ -21,7 +21,7 @@ public class CheckersStart implements ActionListener {
 
     private JTextField      t1,t2;
     private JLabel          l0,l1,l2,l3,l4;
-    private JButton         b1,bReg;
+    private JButton         b1,b2;
     private JComboBox<?>    c1,c2;
 
     private String stringAction = "0";
@@ -60,7 +60,7 @@ public class CheckersStart implements ActionListener {
         b1 = CGO.addButton("Start Game", this, stringAction);
         addcommandtoList("bStart Game");
         
-        bReg = CGO.addButton("Game Rules", this, stringAction);
+        b2 = CGO.addButton("Game Rules", this, stringAction);
         addcommandtoList("game rules");
         
         frameStart.add(l0);
@@ -73,7 +73,7 @@ public class CheckersStart implements ActionListener {
         frameStart.add(l3);
         frameStart.add(t2);
         frameStart.add(b1);
-        frameStart.add(bReg);
+        frameStart.add(b2);
         frameStart.setVisible(true);
     }
 
@@ -116,7 +116,7 @@ public class CheckersStart implements ActionListener {
                 "L'obiettivo del gioco è quello di mangiare tutti i pezzi dell'avversario o di fare il miglior punteggio entro il tempo limite\n" +
                 "Sul campo da gioco sono presenti i seguenti pezzi:\n" + 
                 "Pedina: pezzo classico che si muove solamente in diagonale di una casella alla volta e soltanto in avanti. Quando una pedina raggiunge una delle caselle dell'ultima riga viene promossa diventando dama.\n" +
-                "Dama: upgrade della pedina.\n Può muoversi in più direzioni ad un passo alla volta.\n"+
+                "Dama: upgrade della pedina. Può muoversi in più direzioni ad un passo alla volta.\n"+
                 "Mago: Se il mago mangia un pezzo, resuscita una pedina. Invece se viene mangiato la pedina avversaria diventa dama. Un mago non può diventare dama e non può mangiare un altro mago.\n" +
                 "Il punteggio è dato dalla tipologia e dalla quantità di pezzi mangiati, in particolare:\n Pedina: 1 punto.\n Mago: 3 punti.\n Dama: 5 punti");
             default:
