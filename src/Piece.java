@@ -81,56 +81,40 @@ public abstract class Piece extends JComponent {
    }
 
    protected int checkMove(int row, final int COL_DIRECTION){
-      if (TABLE.illegalMove(row) || TABLE.illegalMove(COL_DIRECTION))
-         return 1; //Non può moversi.
-
-      Point posToAnalize = new Point(row, COL_DIRECTION); //Indica le coordinate del rettangolo da analizzare
-      Point posToSuggestion = new Point();
-      int r = enemyPiece_inRect(posToAnalize);
-      
-      if(r == 2 && !arcTryEatArch(posToAnalize)){ //Enemy piece found but I don't know if I can eat (at the moment)
-         posToSuggestion.x = setRowonEat(posToAnalize);
-         posToSuggestion.y = setColonEat(posToAnalize.y);
-         posAfterMove.y = posToSuggestion.y; //save new position to Move (for suggestion)
-         return (canIeat(posToSuggestion)) ? 2 : 1; // 2: I MUST EAT ----- 1: I cannot eat or move
-      }
-      else if(r == 0) //if Box is free
-         return 0; //I can move
-      else
-         return 1; //I cannot eat or move
-   }
+      Point boxToAnalize = new Point(row, COL_DIRECTION); //First Box to analyze
+      int r = enemyPiece_inBox(boxToAnalize);
+      if(r == 2 && !arcTryEatArch(boxToAnalize)){ //if piece is in first box && piece is not a Wizard trying eat enemy Wizard
+         //Enemy piece found but I don't know if I can eat because I have to check if SECONDBOX BEHIND boxToAnalize is free
+         Point second_boxToAnalize = new Point(setRowonEat(boxToAnalize), setColonEat(boxToAnalize.y));
+         posAfterMove.y = second_boxToAnalize.y; //save new position to Move (for suggestion)
+         return (enemyPiece_inBox(second_boxToAnalize) == 0) ? 2 : 1; // 2: second box is FREE and I MUST EAT piece in first box
+      }                                                                // 1: second box is NOT FREE, so I cannot eat first box or move 
+      else 
+         return (r == 0) ? 0 : 1; // 0: FIRST box is free so I can move.
+   }                             // 1: FIRST box is not free, so I cannot eat first box or move 
    
    //returns true if an Wizard try eat another Wizard, else returns false
    private boolean arcTryEatArch(Point position) {
-      Box rect = TABLE.getBoxfromList(position.x, position.y);
-      String enemyPieceClass = rect.getPiece().getClass().toString();
+      Box box = TABLE.getBoxfromList(position.x, position.y);
+      String enemy_pieceClass = box.getPiece().getClass().toString();
       String pieceClass = getClass().toString();
       
-      return pieceClass.equals("class Wizard") && enemyPieceClass.equals("class Wizard");
+      return pieceClass.equals("class Wizard") && enemy_pieceClass.equals("class Wizard");
    }
 
-   protected int enemyPiece_inRect(Point position){
-      Box rect = TABLE.getBoxfromList(position.x, position.y);
-       
-      if(rect.HasPiece()){ // if there is a piece
-         Piece piece = rect.getPiece();
-         boolean pezzo_avversario = ! getColor().equals(piece.getColor());
-         return (pezzo_avversario) ? 2 : 1; // 2: enemy piece, maybe I can eat it
+   protected int enemyPiece_inBox(Point position){
+      if (TABLE.illegalMove(position.x) || TABLE.illegalMove(position.y))
+         return 1; //Piece cannot go over the table (ex: for 6x6 matrix piece cannot go in -1,-1 or 6,6: only 0 to 5)
+
+      Box box = TABLE.getBoxfromList(position.x, position.y);
+      if(box.HasPiece()){ // if there is a piece
+         Piece piece = box.getPiece();
+         boolean enemy_piece = ! getColor().equals(piece.getColor());
+         return (enemy_piece) ? 2 : 1; // 2: enemy piece, maybe I can eat it
       }                                      // 1: my piece,  I cannot eat it
       else
          return 0; // rectangle is free
    }
-
-   //Controlla se in position c'è un pezzo o meno
-   //Position indica il rettangolo su cui posizionarsi dopo aver mangiato
-   protected boolean canIeat(Point position){
-      if (TABLE.illegalMove(position.x) || TABLE.illegalMove(position.y))
-         return false; //Non può mangiare perché il nemico è su un bordo
-      
-      return (enemyPiece_inRect(position) == 0); //true: il secondo rect è libero. SI DEVE MANGIARE.  
-   }                          //false: Non posso mangiare. Il secondo rect è occupato da un pezzo rosso o verde
-
-   
 
    // Getters and Setters methods..
 
