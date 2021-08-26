@@ -84,14 +84,13 @@ public abstract class Piece extends JComponent {
       Point boxToAnalize = new Point(row, COL_DIRECTION); //First Box to analyze
       int r = enemyPiece_inBox(boxToAnalize);
       if(r == 2 && !arcTryEatArch(boxToAnalize)){ //if piece is in first box && piece is not a Wizard trying eat enemy Wizard
-         //Enemy piece found but I don't know if I can eat because I have to check if SECONDBOX BEHIND boxToAnalize is free
+         //Enemy piece found but I don't know if piece can eat because I have to check if SECONDBOX BEHIND boxToAnalize is free
          Point second_boxToAnalize = new Point(setRowonEat(boxToAnalize), setColonEat(boxToAnalize.y));
          posAfterMove.y = second_boxToAnalize.y; //save new position to Move (for suggestion)
-         return (enemyPiece_inBox(second_boxToAnalize) == 0) ? 2 : 1; // 2: second box is FREE and I MUST EAT piece in first box
-      }                                                                // 1: second box is NOT FREE, so I cannot eat first box or move 
-      else 
-         return (r == 0) ? 0 : 1; // 0: FIRST box is free so I can move.
-   }                             // 1: FIRST box is not free, so I cannot eat first box or move 
+         return (enemyPiece_inBox(second_boxToAnalize) == 0) ? 2 : 1; // 2: second box is FREE and Piece MUST EAT enemy piece in first box
+      }      
+      return r; //values can be r are: 0 or 1:  
+   }           // 0 (FIRST box is free so piece can eat) or 1 (FIRST box is not free, so piece cannot eat first box or move)
    
    //returns true if an Wizard try eat another Wizard, else returns false
    private boolean arcTryEatArch(Point position) {
