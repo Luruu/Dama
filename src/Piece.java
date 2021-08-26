@@ -109,8 +109,8 @@ public abstract class Piece extends JComponent {
       if(box.HasPiece()){ // if there is a piece
          Piece piece = box.getPiece();
          boolean enemy_piece = ! getColor().equals(piece.getColor());
-         return (enemy_piece) ? 2 : 1; // 2: enemy piece, maybe I can eat it
-      }                                      // 1: my piece,  I cannot eat it
+         return (enemy_piece) ? 2 : 1; // 2: enemy piece --- 1: my piece
+      } 
       else
          return 0; // rectangle is free
    }
