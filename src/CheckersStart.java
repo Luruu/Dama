@@ -83,10 +83,9 @@ public class CheckersStart implements ActionListener {
     }
 
     public void addcommandtoList(String nameObject){
-        listActionCommands.add(nameObject);
+        listActionCommands.add(nameObject);//EVENTUALMENTE DA ELIMINAREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
         int intAction = Integer.parseInt((String)stringAction);
         stringAction = String.valueOf(++intAction); //Increase action because a nameObject is added
-        System.out.println(nameObject + ": action " + stringAction);
     }
 
     @Override
@@ -129,7 +128,6 @@ public class CheckersStart implements ActionListener {
         Boolean dimensions_Too_large = dimensionTableFrame.height > dimensionScreenPC.height || dimensionTableFrame.width > dimensionScreenPC.width;
         if (dimensions_Too_large){
             int diff = dimensionTableFrame.height - dimensionScreenPC.height;
-            //System.out.println(diff);
             centerTableY = false; //Table will start at the position (x,15)
             if (diff > 400)
                 Box.DIM_BOX -= (Box.DIM_BOX/2 - 14);

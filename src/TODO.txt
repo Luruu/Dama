@@ -3,3 +3,4 @@ Dobbiamo gestire la turnazione
 Implementare il timer con la\ sua funzionalità + patthern observer.
 mostrare a schermo timer e chi deve fare la mossa + i punteggi 
 Tenere conto del numero di mosse e mostrarle a schermo
+Tasto destro mostra l'info della pedina.

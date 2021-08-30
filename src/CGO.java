@@ -2,8 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-// Create Graphic Objects interface
-public interface CGO {
+// Create Graphic Objects 
+public abstract class CGO {
     //Add and set a new Frame
     public static JFrame addFrame(String titleFrame, int width, int height, Color backGroundColor, boolean resizable, LayoutManager layout, String icon, boolean centerX, boolean centerY) {
         JFrame newFrame = new JFrame(titleFrame);

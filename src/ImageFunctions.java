@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
-public interface ImageFunctions {
+public abstract class ImageFunctions {
 
     public static BufferedImage readFile(String pathRelative){
         String absPath = getAbsolutePath(pathRelative);
@@ -30,7 +30,7 @@ public interface ImageFunctions {
         Graphics2D g2D = imgOut.createGraphics();
 
         //Increase image quality
-//sono da testare bene.. forse non sono necessari tutti e 3
+        //sono da testare bene.. forse non sono necessari tutti e 3
         g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g2D.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

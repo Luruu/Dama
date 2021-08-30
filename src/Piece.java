@@ -1,11 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 
 public abstract class Piece extends JComponent {
    private final Color color;
    protected int points;
-   private ImagePiece objIMG;
+   private BufferedImage img;
    private final int DIM_IMG;
    private Point coord;
    private Player owner;
@@ -18,10 +19,9 @@ public abstract class Piece extends JComponent {
       points = p;
       owner = ply;
       addMouseListener(owner);
-      objIMG = new ImagePiece(getPathIMG());
       TABLE = CheckersTable.getInstance();
       DIM_IMG = Box.DIM_BOX - 10; //Dimension of a Box - margin
-      objIMG.setImg(ImageFunctions.scale(objIMG.getImg(), DIM_IMG, DIM_IMG));
+      img = ImageFunctions.scale(ImageFunctions.readFile(getPathIMG()), DIM_IMG, DIM_IMG);
       setPreferredSize(new Dimension(DIM_IMG, DIM_IMG));
       coord = new Point();
    }
@@ -30,10 +30,8 @@ public abstract class Piece extends JComponent {
 
    protected void paintComponent(Graphics g){
       super.paintComponent(g);
-      g.drawImage(objIMG.getImg(), 0, 0,null);
+      g.drawImage(img, 0, 0,null);
    }
-
- 
 
    //return values: 2 (deve mangiare) -  0(si può muovere o meno (non verificato!!))
    protected int showSuggestions(int direction){
