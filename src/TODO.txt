@@ -1,6 +1,7 @@
-
-Dobbiamo gestire la turnazione
-Implementare il timer con la\ sua funzionalità + patthern observer.
+Implementare il timer con la sua funzionalità + pattern observer.
 mostrare a schermo timer e chi deve fare la mossa + i punteggi 
 Tenere conto del numero di mosse e mostrarle a schermo
 Tasto destro mostra l'info della pedina.
+AGGIORNARE JAVADOC E PACKAGE
+Dobbiamo usare i thread
+cambiare colore dei suggerimenti in base al colore del pezzo

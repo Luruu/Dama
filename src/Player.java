@@ -38,13 +38,24 @@ public class Player extends MouseAdapter {
     }
 
     public void mouseClicked(MouseEvent e){
+        CheckersTable TABLE = null;
+        try {
+            TABLE = CheckersTable.getInstance();
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
         String nameClass = e.getSource().getClass().toString();
         if (nameClass.equals("class Pawn") || nameClass.equals("class Wizard") ||  nameClass.equals("class Checkers")){
+            if (!checkTurn(TABLE.activePlayer))
+                return;
             invoker.clear();
             Piece pieceClicked = (Piece)e.getSource();
-            invoker.suggestions(pieceClicked); //Show suggestions for pieceClicked
+            if ( pieceClicked.getColor() == PlayerColor )
+                invoker.suggestions(pieceClicked); //Show suggestions for pieceClicked
+            else
+                return;
         }
-        else if(nameClass.equals("class Box")){;
+        else if(nameClass.equals("class Box")){
             Box boxClicked = (Box) e.getSource();
             if (boxClicked.getColor() == Color.cyan){
                 try {
@@ -52,11 +63,15 @@ public class Player extends MouseAdapter {
                 } catch (Exception e1) {
                     e1.getMessage();
                 }
+                TABLE.switchTurn();
                 invoker.clear();
             }
         }
     }
 
+    private Boolean checkTurn(Color c){
+        return (PlayerColor.equals(c));
+    }
 
     // Getters and Setters methods..
     

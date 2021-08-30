@@ -1,4 +1,6 @@
 import javax.swing.*;
+
+
 import java.awt.*;
 
 import java.lang.Exception;
@@ -17,12 +19,15 @@ public class CheckersTable {
 
     private JFrame frameTable;
     private JPanel panelTable;
+    private PanelInfo panelInfo;
     
     private Piece pToMove; // Piece to move when a Box is clicked by a player
 
-    private static Box[][] Boxes; // Matrix of all the Boxes of the board 
+    private Box[][] Boxes; // Matrix of all the Boxes of the board 
 
     private ArrayList<Point> pointsListToClear = new ArrayList<Point>();
+
+    public  Color activePlayer = Color.red;
 
     private CheckersTable(final int N_ROWS, final int N_COLS, boolean revisedChecker) {
         this.N_ROWS = N_ROWS;
@@ -47,12 +52,13 @@ public class CheckersTable {
     private void initializeWindow() throws Exception {
         frameTable = CGO.addFrame("Checkers Table", N_ROWS * Box.DIM_BOX, N_COLS * Box.DIM_BOX, Color.white, false, new BorderLayout(0,0), CheckersStart.getIstance().geticonPath(), true, CheckersStart.getIstance().centerTableY);
         panelTable = CGO.addPanel(N_ROWS * Box.DIM_BOX, N_COLS * Box.DIM_BOX, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
- 
+        panelInfo = new PanelInfo(200, N_COLS *Box.DIM_BOX, Color.ORANGE, new FlowLayout(), p1,p2);
         //create new Boxes (all game table) and add them to the new panel
         Boxes = Box.createBoxes(N_ROWS, N_COLS, Box.DIM_BOX, p1, p2);
         addBoxesToPanel();
 
         frameTable.add(panelTable);
+        frameTable.add(panelInfo.getpanelInfo(),BorderLayout.LINE_END);
         frameTable.setVisible(true);
         frameTable.pack();
     }
@@ -67,6 +73,7 @@ public class CheckersTable {
         this.p1 = p1;
         this.p2 = p2;
         initializeWindow();
+        
     }
 
     //Shows the moves allowed to click on a piece
@@ -175,6 +182,10 @@ public class CheckersTable {
 
     public boolean illegalMove(int k){
         return k >= N_ROWS || k < 0;
+    }
+
+    public void switchTurn(){
+        activePlayer = (activePlayer.equals(Color.red)) ? Color.green : Color.red;
     }
 
 
