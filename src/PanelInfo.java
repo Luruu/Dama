@@ -1,9 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-
-import java.awt.event.*;  
-
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 public class PanelInfo{
 

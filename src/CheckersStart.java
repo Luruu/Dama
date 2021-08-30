@@ -19,13 +19,10 @@ public class CheckersStart implements ActionListener {
     private int     dimTable;
     private Boolean modeRevised;
 
-    private JTextField      t1,t2;
-    private JLabel          l0,l1,l2,l3,l4;
-    private JButton         b1,b2;
-    private JComboBox<?>    c1,c2;
+    private ArrayList<Component> jComponentList = new ArrayList<>();
 
     private String stringAction = "0";
-    private ArrayList<String> listActionCommands = new ArrayList<String>();
+    private ArrayList<String> listActionCommands = new ArrayList<>();
 
     public boolean centerTableY = true;
 
@@ -36,45 +33,47 @@ public class CheckersStart implements ActionListener {
     private CheckersStart(){
         frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 190, 300, Color.GREEN, false, new FlowLayout(), ICON_PATH, true, true);
     
-        l0 = CGO.addLabel("CheckersGame",new Font("Verdana", Font.PLAIN, 18));
+        jComponentList.add(CGO.addLabel("CheckersGame",new Font("Verdana", Font.PLAIN, 18))); 
 
-        l1 = CGO.addLabel("table size");
+        jComponentList.add(CGO.addLabel("table size"));
         
         String[] dimensionStrings = { "4", "6", "8", "10", "12", "14", "16"};
-        c1 = CGO.addComboBoxString(dimensionStrings, 2, false, this, stringAction);
+        jComponentList.add(CGO.addComboBoxString(dimensionStrings, 2, false, this, stringAction));
         addcommandtoList("combobox1");
 
-        l4 = CGO.addLabel("game mode");
+        jComponentList.add(CGO.addLabel("game mode"));
 
         String[] modeStrings = { "classic", "revised"};
-        c2 = CGO.addComboBoxString(modeStrings, 1, false);
+        jComponentList.add(CGO.addComboBoxString(modeStrings, 1, false));
         
-        l2 = CGO.addLabel("Choose name Player 1");
+        jComponentList.add(CGO.addLabel("Choose name Player 1"));
         
-        t1 = CGO.addTextField("Player1", new Dimension(100, 20), true);
+        jComponentList.add(CGO.addTextField("Player1", new Dimension(100, 20), true));
         
-        l3 = CGO.addLabel("Choose name Player 2");
+        jComponentList.add(CGO.addLabel("Choose name Player 2"));
         
-        t2 = CGO.addTextField("Player2", new Dimension(100, 20), true);
+        jComponentList.add(CGO.addTextField("Player2", new Dimension(100, 20), true));
         
-        b1 = CGO.addButton("Start Game", this, stringAction);
+        jComponentList.add(CGO.addButton("Start Game", this, stringAction));
         addcommandtoList("bStart Game");
         
-        b2 = CGO.addButton("Game Rules", this, stringAction);
+        jComponentList.add(CGO.addButton("Game Rules", this, stringAction));
         addcommandtoList("game rules");
-        
-        frameStart.add(l0);
-        frameStart.add(l1);
-        frameStart.add(c1);
-        frameStart.add(l4);
-        frameStart.add(c2);
-        frameStart.add(l2);
-        frameStart.add(t1);
-        frameStart.add(l3);
-        frameStart.add(t2);
-        frameStart.add(b1);
-        frameStart.add(b2);
+
+        for (Component jb : jComponentList)
+            frameStart.add(jb);
+
+        printComponentsList();
+
         frameStart.setVisible(true);
+    }
+
+    public void printComponentsList(){
+        int i=0;
+        System.out.println("CheckersStart Components List:");
+        for (Component jb : jComponentList)
+            System.out.println(i++ + ": " + jb.getClass().toString());
+        System.out.println("----------------------------------");
     }
 
     //Singleton Eager initialization
@@ -97,10 +96,11 @@ public class CheckersStart implements ActionListener {
                 break;
             case "1":
                 System.out.println("Button pressed!");
-                firstPlayerName = t1.getText();
-                secondPlayerName = t2.getText();
-                dimTable = Integer.parseInt((String)c1.getSelectedItem());
-                modeRevised = c2.getSelectedItem().equals("revised"); //true revised, false classic
+                firstPlayerName = ((JTextField) jComponentList.get(6)).getText();
+                secondPlayerName = ((JTextField) jComponentList.get(8)).getText();
+                
+                dimTable = Integer.parseInt((String)(((JComboBox<?>)jComponentList.get(2)).getSelectedItem()));
+                modeRevised = ((JComboBox<?>)jComponentList.get(4)).getSelectedItem().equals("revised"); //true revised, false classic
                 if (firstPlayerName.isBlank() || secondPlayerName.isBlank()) return;
                 try {
                     frameStart.setVisible(false); //hide CheckersStart Window
