@@ -14,9 +14,13 @@ public class PanelInfo{
         jlabelList.add(CGO.addLabel("Informazioni di Gioco",new Font("Verdana", Font.PLAIN, 18)));
 
         jlabelList.add(CGO.addLabel("Player1: " + p1.getPlayerName()));
-        jlabelList.add(CGO.addLabel("Punteggio: "+p1.getPlayerScore()));
+        jlabelList.add(CGO.addLabel("Score: "+p1.getPlayerScore()));
+        jlabelList.add(CGO.addLabel("Mosse: " + "boh"));
         jlabelList.add(CGO.addLabel("Player2: " + p2.getPlayerName()));
-        jlabelList.add(CGO.addLabel("Punteggio: " + p2.getPlayerScore()));
+        jlabelList.add(CGO.addLabel("Score: " + p2.getPlayerScore()));
+        jlabelList.add(CGO.addLabel("Mosse: " + "boh"));
+        jlabelList.add(CGO.addLabel("Turno: " + "boh"));
+        jlabelList.add(CGO.addLabel("Time: " + "boh"));
         
         for (JLabel jb : jlabelList)
             panelInfo.add(jb);
