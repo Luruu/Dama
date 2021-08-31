@@ -57,7 +57,7 @@ public class Player extends MouseAdapter {
         }
         else if(nameClass.equals("class Box")){
             Box boxClicked = (Box) e.getSource();
-            if (boxClicked.getColor() == Color.cyan){
+            if (Boolean.logicalOr(boxClicked.getColor().equals(Color.red), boxClicked.getColor().equals(Color.green))){
                 try {
                     invoker.move(boxClicked, boxClicked.getCoord().x, boxClicked.getCoord().y);
                 } catch (Exception e1) {

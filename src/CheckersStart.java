@@ -1,4 +1,6 @@
 import javax.swing.*;
+
+
 import java.awt.*;
 
 import java.awt.event.*;  
@@ -7,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-public class CheckersStart implements ActionListener {
+public class CheckersStart implements ActionListener{
 
     //Singleton Eager initialization
     private static final CheckersStart Instance = new CheckersStart();
@@ -19,16 +21,16 @@ public class CheckersStart implements ActionListener {
     private int     dimTable;
     private Boolean modeRevised;
 
-    private ArrayList<Component> jComponentList = new ArrayList<>();
+    private ArrayList<JComponent> jComponentList = new ArrayList<>();
 
     private String stringAction = "0";
     private ArrayList<String> listActionCommands = new ArrayList<>();
 
     public boolean centerTableY = true;
 
-    public static void main (String [] args){
-        CheckersStart firstWindow = CheckersStart.getIstance();
-    }
+   
+
+
 
     private CheckersStart(){
         frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 190, 300, Color.GREEN, false, new FlowLayout(), ICON_PATH, true, true);
@@ -60,7 +62,7 @@ public class CheckersStart implements ActionListener {
         jComponentList.add(CGO.addButton("Game Rules", this, stringAction));
         addcommandtoList("game rules");
 
-        for (Component jb : jComponentList)
+        for (JComponent jb : jComponentList)
             frameStart.add(jb);
 
         printComponentsList();
@@ -71,7 +73,7 @@ public class CheckersStart implements ActionListener {
     public void printComponentsList(){
         int i=0;
         System.out.println("CheckersStart Components List:");
-        for (Component jb : jComponentList)
+        for (JComponent jb : jComponentList)
             System.out.println(i++ + ": " + jb.getClass().toString());
         System.out.println("----------------------------------");
     }

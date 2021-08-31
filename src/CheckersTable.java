@@ -50,9 +50,10 @@ public class CheckersTable {
     }
 
     private void initializeWindow() throws Exception {
+        Dimension size = new Dimension(N_ROWS *Box.DIM_BOX, N_COLS * Box.DIM_BOX);
         frameTable = CGO.addFrame("Checkers Table", N_ROWS * Box.DIM_BOX, N_COLS * Box.DIM_BOX, Color.white, false, new BorderLayout(0,0), CheckersStart.getIstance().geticonPath(), true, CheckersStart.getIstance().centerTableY);
         panelTable = CGO.addPanel(N_ROWS * Box.DIM_BOX, N_COLS * Box.DIM_BOX, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
-        panelInfo = new PanelInfo(200, N_COLS *Box.DIM_BOX, Color.ORANGE, new FlowLayout(), p1,p2);
+        panelInfo = new PanelInfo(200, N_COLS *Box.DIM_BOX, Color.getHSBColor(0, 0, 15), new FlowLayout(FlowLayout.CENTER,size.width/10,size.height/10 - 30), p1,p2);
         //create new Boxes (all game table) and add them to the new panel
         Boxes = Box.createBoxes(N_ROWS, N_COLS, Box.DIM_BOX, p1, p2);
         addBoxesToPanel();
@@ -107,6 +108,7 @@ public class CheckersTable {
             
             Player player = pToMove.getOwner();
             player.addPlayerPoints(enemyPiece.getPoints()); // increase player's score after eating
+            panelInfo.updateScore(player);
         }
 
 
@@ -133,7 +135,8 @@ public class CheckersTable {
     }
 
     protected void showFreeBox(int row, int col){
-            Boxes[row][col].setColor(Color.cyan);
+        Color c = (pToMove.getColor().equals(Color.red)) ? Color.red : Color.green;
+            Boxes[row][col].setColor(c);
             Boxes[row][col].repaint();
             pointsListToClear.add(new Point(row, col));
     }
@@ -186,6 +189,8 @@ public class CheckersTable {
 
     public void switchTurn(){
         activePlayer = (activePlayer.equals(Color.red)) ? Color.green : Color.red;
+        Player p = (activePlayer.equals(Color.red)) ? p1 : p2;
+        panelInfo.switchTurn(p);
     }
 
 

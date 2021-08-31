@@ -1,7 +1,4 @@
 Implementare il timer con la sua funzionalità + pattern observer.
-mostrare a schermo timer e chi deve fare la mossa + i punteggi 
-Tenere conto del numero di mosse e mostrarle a schermo
+mostrare a schermo timer
 Tasto destro mostra l'info della pedina.
 AGGIORNARE JAVADOC E PACKAGE
-Dobbiamo usare i thread
-cambiare colore dei suggerimenti in base al colore del pezzo
