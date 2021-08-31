@@ -12,6 +12,14 @@ import java.awt.*;
 import java.lang.Exception;
 import java.util.ArrayList;
 
+/**
+ * <h1>CheckersTable Class</h1> 
+ * it is the class that has all the features and methods that concern the <b>creation</b> and <b>management</b> of the board.
+ * @author <a href="https://github.com/Luruu">Luca Rubino</a>
+ * @author <a href="https://github.com/RenatoEsposito1999">Renato Esposito</a>
+ * @version 1.0
+ * @since 31-08-2021
+ */
 
 public class CheckersTable {
 
@@ -41,14 +49,24 @@ public class CheckersTable {
         this.revisedChecker = revisedChecker;
     }
 
-    //Singleton (Lazy Initialization because constructor parameters)
+    /**
+     * Singleton (Lazy Initialization because constructor parameters)
+     * @param N_ROWS number of rows in the board
+     * @param N_COLS number of columns in the board
+     * @param revisedChecker game mode chosen by user
+     * @return Singleton Istance
+     */
     public static synchronized CheckersTable getInstance(final int N_ROWS, final int N_COLS, boolean revisedChecker) {
         if (Instance == null)
             Instance = new CheckersTable(N_ROWS, N_COLS, revisedChecker);
         return Instance;
     }
-
-    //Singleton, but get the existing instance without specifying unnecessary parameters
+    
+    /**
+     * Singleton method overload: get the existing instance without specifying unnecessary parameters
+     * @return Singleton Istance
+     * @throws Exception if the instance does not exist it must be created using <code>getInstance(final int N_ROWS, final int N_COLS, boolean revisedChecker)</code>
+     */
     public static synchronized CheckersTable getInstance() throws Exception {
         if (Instance == null)
             throw new Exception("ISTANCE NULL. Please use method: public static synchronized CheckersTable getInstance(<see args into code>)");

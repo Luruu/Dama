@@ -1,0 +1,2 @@
+vai in \Dama
+usa: javadoc -d documentation -sourcepath src -subpackages Game
