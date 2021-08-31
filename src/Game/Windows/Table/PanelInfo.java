@@ -1,4 +1,8 @@
+package Game.Windows.Table;
 import javax.swing.*;
+
+import Game.FactoryM.Players.Player;
+import Game.Windows.CGO;
 
 import java.awt.*;
 import java.util.ArrayList;

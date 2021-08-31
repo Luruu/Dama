@@ -1,6 +1,15 @@
+package Game.FactoryM.Pieces;
 import javax.swing.*;
+
+import Game.ImageFunctions;
+import Game.FactoryM.Players.Player;
+import Game.Windows.Table.Box;
+import Game.Windows.Table.CheckersTable;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
+
+
 
 
 public abstract class Piece extends JComponent {
@@ -34,7 +43,7 @@ public abstract class Piece extends JComponent {
    }
 
    //return values: 2 (deve mangiare) -  0(si può muovere o meno (non verificato!!))
-   protected int showSuggestions(int direction){
+   public int showSuggestions(int direction){
       final int GOLEFT_COL = coord.y - 1, GORIGHT_COL = coord.y + 1;
       int esito_left, esito_right;
       
@@ -64,21 +73,21 @@ public abstract class Piece extends JComponent {
   }
   
    //Indica la colonna da colorare quando occorre mangiare
-   protected int setColonEat(int col){
+   public int setColonEat(int col){
       return (col > coord.y) ? coord.y + 2 : coord.y - 2;
    }
       
    // Indica la riga da colorare quando occorre mangiare
    //Position indica il rettangolo nel quale si trova il pezzo da mangiare.
-   protected int setRowonEat(Point position){
+   public int setRowonEat(Point position){
       return (coord.x - position.x > 0) ? coord.x - 2 : coord.x + 2; 
    }
 
-   protected int setRowbyColor(){
+   public int setRowbyColor(){
       return (getColor() == Color.red) ? coord.x - 1 : coord.x + 1;
    }
 
-   protected int checkMove(int row, final int COL_DIRECTION){
+   public int checkMove(int row, final int COL_DIRECTION){
       Point boxToAnalize = new Point(row, COL_DIRECTION); //First Box to analyze
       int r = enemyPiece_inBox(boxToAnalize);
       if(r == 2 && !arcTryEatArch(boxToAnalize)){ //if piece is in first box && piece is not a Wizard trying eat enemy Wizard
@@ -91,7 +100,7 @@ public abstract class Piece extends JComponent {
    }           // 0 (FIRST box is free so piece can eat) or 1 (FIRST box is not free, so piece cannot eat first box or move)
    
    //returns true if an Wizard try eat another Wizard, else returns false
-   private boolean arcTryEatArch(Point position) {
+   public boolean arcTryEatArch(Point position) {
       Box box = TABLE.getBoxfromList(position.x, position.y);
       String enemy_pieceClass = box.getPiece().getClass().toString();
       String pieceClass = getClass().toString();
@@ -99,7 +108,7 @@ public abstract class Piece extends JComponent {
       return pieceClass.equals("class Wizard") && enemy_pieceClass.equals("class Wizard");
    }
 
-   protected int enemyPiece_inBox(Point position){
+   public int enemyPiece_inBox(Point position){
       if (TABLE.illegalMove(position.x) || TABLE.illegalMove(position.y))
          return 1; //Piece cannot go over the table (ex: for 6x6 matrix piece cannot go in -1,-1 or 6,6: only 0 to 5)
 
@@ -124,7 +133,7 @@ public abstract class Piece extends JComponent {
       return coord;
    }
 
-   protected Color getColor(){
+   public Color getColor(){
       return color;
    }
 

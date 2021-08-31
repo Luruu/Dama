@@ -1,4 +1,8 @@
+package Game.Windows;
 import javax.swing.*;
+
+import Game.ImageFunctions;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 

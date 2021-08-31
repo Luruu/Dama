@@ -1,3 +1,6 @@
+package Game.Windows.Table;
+import Game.FactoryM.Pieces.*;
+
 public interface Command {
     void suggestions(Piece pClicked);
     void clear();

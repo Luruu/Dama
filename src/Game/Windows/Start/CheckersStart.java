@@ -1,10 +1,15 @@
+package Game.Windows.Start;
 import javax.swing.*;
 
+import Game.FactoryM.ConcreteFactoryM;
+import Game.FactoryM.Creator;
+import Game.FactoryM.Players.Player;
+import Game.Windows.CGO;
+import Game.Windows.Table.Box;
+import Game.Windows.Table.CheckersTable;
 
 import java.awt.*;
-
 import java.awt.event.*;  
-
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 

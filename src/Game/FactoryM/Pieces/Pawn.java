@@ -1,4 +1,8 @@
+package Game.FactoryM.Pieces;
 import java.awt.*;
+
+import Game.FactoryM.Players.Player;
+
 public class Pawn extends Piece{
     public Pawn(Color c, Player p) throws Exception{
         super(c, 1, p);

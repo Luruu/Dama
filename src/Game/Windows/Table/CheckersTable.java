@@ -1,8 +1,14 @@
+package Game.Windows.Table;
 import javax.swing.*;
 
+import Game.FactoryM.ConcreteFactoryM;
+import Game.FactoryM.Creator;
+import Game.FactoryM.Pieces.Piece;
+import Game.FactoryM.Players.Player;
+import Game.Windows.CGO;
+import Game.Windows.Start.CheckersStart;
 
 import java.awt.*;
-
 import java.lang.Exception;
 import java.util.ArrayList;
 
@@ -50,12 +56,12 @@ public class CheckersTable {
     }
 
     private void initializeWindow() throws Exception {
-        Dimension size = new Dimension(N_ROWS *Box.DIM_BOX, N_COLS * Box.DIM_BOX);
-        frameTable = CGO.addFrame("Checkers Table", N_ROWS * Box.DIM_BOX, N_COLS * Box.DIM_BOX, Color.white, false, new BorderLayout(0,0), CheckersStart.getIstance().geticonPath(), true, CheckersStart.getIstance().centerTableY);
-        panelTable = CGO.addPanel(N_ROWS * Box.DIM_BOX, N_COLS * Box.DIM_BOX, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
-        panelInfo = new PanelInfo(200, N_COLS *Box.DIM_BOX, Color.getHSBColor(0, 0, 15), new FlowLayout(FlowLayout.CENTER,size.width/10,size.height/10 - 30), p1,p2);
-        //create new Boxes (all game table) and add them to the new panel
-        Boxes = Box.createBoxes(N_ROWS, N_COLS, Box.DIM_BOX, p1, p2);
+        Dimension sizeFrame = new Dimension(N_ROWS *Box.DIM_BOX, N_COLS * Box.DIM_BOX);
+        frameTable = CGO.addFrame("Checkers Table", sizeFrame.width, sizeFrame.height, Color.black, false, new BorderLayout(0,0), CheckersStart.getIstance().geticonPath(), true, CheckersStart.getIstance().centerTableY);
+        panelTable = CGO.addPanel(sizeFrame.width, sizeFrame.height, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
+        panelInfo = new PanelInfo(200, sizeFrame.height, Color.getHSBColor(0, 0, 15), new FlowLayout(FlowLayout.CENTER, sizeFrame.width/10, sizeFrame.height/10 - 30), p1, p2);
+       
+        Boxes = Box.createBoxes(N_ROWS, N_COLS, Box.DIM_BOX, p1, p2); //create new Boxes (all game table)
         addBoxesToPanel();
 
         frameTable.add(panelTable);
@@ -70,7 +76,7 @@ public class CheckersTable {
                 panelTable.add(box);
     }
 
-    protected void startGame(Player p1, Player p2) throws Exception {
+    public void startGame(Player p1, Player p2) throws Exception {
         this.p1 = p1;
         this.p2 = p2;
         initializeWindow();
@@ -95,15 +101,15 @@ public class CheckersTable {
             int j = (srcBox.getCoord().y > dstBox.getCoord().y) ? pToMove.getCoord().y - 1 : pToMove.getCoord().y + 1;
             Box pToEatBox = Boxes[i][j];
             Piece enemyPiece = Boxes[i][j].getPiece();
-            String enemyPieceClass = enemyPiece.getClass().toString();
-            String pToMoveClass = pToMove.getClass().toString();
+            String enemyPieceClass = enemyPiece.getClass().getSimpleName();
+            String pToMoveClass = pToMove.getClass().getSimpleName();
 
             addOrRemove(pToEatBox, false);
             
-            if (enemyPieceClass.equals("class Wizard") && pToMoveClass.equals("class Pawn")) //if pawn eat Wizard
+            if (enemyPieceClass.equals("Wizard") && pToMoveClass.equals("Pawn")) //if pawn eat Wizard
                 upgrade = true; //Pawn will be a new checkers
             
-            if ((enemyPieceClass.equals("class Pawn") || enemyPieceClass.equals("class Checkers")) && pToMoveClass.equals("class Wizard")) //if Wizard eat
+            if ((enemyPieceClass.equals("Pawn") || enemyPieceClass.equals("Checkers")) && pToMoveClass.equals("Wizard")) //if Wizard eat
                 respawn(pToEatBox); //add a new piece
             
             Player player = pToMove.getOwner();
@@ -134,7 +140,7 @@ public class CheckersTable {
         addOrRemove(box, true, piece);
     }
 
-    protected void showFreeBox(int row, int col){
+    public void showFreeBox(int row, int col){
         Color c = (pToMove.getColor().equals(Color.red)) ? Color.red : Color.green;
             Boxes[row][col].setColor(c);
             Boxes[row][col].repaint();
@@ -176,11 +182,11 @@ public class CheckersTable {
     }
 
     private boolean canPieceUpgrade(){
-        String StrPiece = pToMove.getClass().toString();
+        String StrPiece = pToMove.getClass().getSimpleName();
         boolean isRedOnEnemyFstLine = pToMove.getColor() == Color.red && pToMove.getCoord().x == 0;
         boolean isGreenOnEnemyFstLine = pToMove.getColor() == Color.green && pToMove.getCoord().x == N_ROWS - 1;
 
-        return StrPiece.equals("class Pawn") && (isGreenOnEnemyFstLine || isRedOnEnemyFstLine);
+        return StrPiece.equals("Pawn") && (isGreenOnEnemyFstLine || isRedOnEnemyFstLine);
     }
 
     public boolean illegalMove(int k){

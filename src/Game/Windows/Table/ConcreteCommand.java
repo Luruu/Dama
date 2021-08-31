@@ -1,3 +1,7 @@
+package Game.Windows.Table;
+
+import Game.FactoryM.Pieces.Piece;
+
 public class ConcreteCommand implements Command{
     private CheckersTable checkTable;
     public ConcreteCommand(CheckersTable ct) {

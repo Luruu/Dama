@@ -1,7 +1,14 @@
+package Game.Windows.Table;
 import javax.swing.*;
 
+import Game.FactoryM.ConcreteFactoryM;
+import Game.FactoryM.Creator;
+import Game.FactoryM.Pieces.*;
+import Game.FactoryM.Players.Player;
+
 import java.awt.*;
-public  class Box extends JPanel{
+
+public class Box extends JPanel{
     public static int DIM_BOX = 96; //Default value. It can be changed by Main Class.
     private final int x,y;
     private Color color;
@@ -87,7 +94,7 @@ public  class Box extends JPanel{
         return color;
     }
 
-    private void setCoord(int i, int j){
+    public void setCoord(int i, int j){
         Coord.x = i;
         Coord.y = j;
     }

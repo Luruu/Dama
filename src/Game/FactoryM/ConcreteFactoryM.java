@@ -1,4 +1,8 @@
+package Game.FactoryM;
 import java.awt.*;
+
+import Game.FactoryM.Pieces.*;
+import Game.FactoryM.Players.*;
 
 
 public class ConcreteFactoryM implements Creator {

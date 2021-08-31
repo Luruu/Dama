@@ -1,3 +1,4 @@
+package Game.Windows.Start;
 public class MyThread implements Runnable {
     
     public void run(){

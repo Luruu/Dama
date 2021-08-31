@@ -1,5 +1,10 @@
+package Game.FactoryM.Players;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import Game.FactoryM.Pieces.*;
+import Game.Windows.Table.*;
+
 import java.awt.*;
 
 
@@ -44,8 +49,8 @@ public class Player extends MouseAdapter {
         } catch (Exception e2) {
             e2.printStackTrace();
         }
-        String nameClass = e.getSource().getClass().toString();
-        if (nameClass.equals("class Pawn") || nameClass.equals("class Wizard") ||  nameClass.equals("class Checkers")){
+        String nameClass = e.getSource().getClass().getSimpleName();
+        if (nameClass.equals("Pawn") || nameClass.equals("Wizard") ||  nameClass.equals("Checkers")){
             if (!checkTurn(TABLE.activePlayer))
                 return;
             invoker.clear();
@@ -55,7 +60,7 @@ public class Player extends MouseAdapter {
             else
                 return;
         }
-        else if(nameClass.equals("class Box")){
+        else if(nameClass.equals("Box")){
             Box boxClicked = (Box) e.getSource();
             if (Boolean.logicalOr(boxClicked.getColor().equals(Color.red), boxClicked.getColor().equals(Color.green))){
                 try {

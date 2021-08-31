@@ -1,3 +1,6 @@
+package Game.Windows.Table;
+import Game.FactoryM.Pieces.*;
+
 public class InvokerList {
     private Command command;
     public InvokerList(Command command){
