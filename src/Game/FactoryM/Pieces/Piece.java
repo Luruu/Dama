@@ -90,22 +90,25 @@ public abstract class Piece extends JComponent {
    public int checkMove(int row, final int COL_DIRECTION){
       Point boxToAnalize = new Point(row, COL_DIRECTION); //First Box to analyze
       int r = enemyPiece_inBox(boxToAnalize);
-      if(r == 2 && !arcTryEatArch(boxToAnalize)){ //if piece is in first box && piece is not a Wizard trying eat enemy Wizard
+      if(r == 2 && !WizardTryEatWizard(boxToAnalize)){ //if piece is in first box && piece is not a Wizard trying eat enemy Wizard
          //Enemy piece found but I don't know if piece can eat because I have to check if SECONDBOX BEHIND boxToAnalize is free
          Point second_boxToAnalize = new Point(setRowonEat(boxToAnalize), setColonEat(boxToAnalize.y));
          posAfterMove.y = second_boxToAnalize.y; //save new position to Move (for suggestion)
-         return (enemyPiece_inBox(second_boxToAnalize) == 0) ? 2 : 1; // 2: second box is FREE and Piece MUST EAT enemy piece in first box
-      }      
-      return r; //values can be r are: 0 or 1:  
-   }           // 0 (FIRST box is free so piece can eat) or 1 (FIRST box is not free, so piece cannot eat first box or move)
-   
+         return  (enemyPiece_inBox(second_boxToAnalize) == 0) ? 2 : 1; // 2: second box is FREE and Piece MUST EAT enemy piece in first box
+      }
+      else if (r == 0 || r==1)   
+         return  r; //values can be r are: 0 or 1:  
+            // 0 (FIRST box is free so piece can move) or 1 (FIRST box is not free, so piece cannot eat first box or move)
+      else //r == 2 but wizard trying eat another wizard
+         return 1; 
+   }
    //returns true if an Wizard try eat another Wizard, else returns false
-   public boolean arcTryEatArch(Point position) {
+   public boolean WizardTryEatWizard(Point position) {
       Box box = TABLE.getBoxfromList(position.x, position.y);
-      String enemy_pieceClass = box.getPiece().getClass().toString();
-      String pieceClass = getClass().toString();
+      String enemy_pieceClass = box.getPiece().getClass().getSimpleName();
+      String pieceClass = getClass().getSimpleName();
       
-      return pieceClass.equals("class Wizard") && enemy_pieceClass.equals("class Wizard");
+      return pieceClass.equals("Wizard") && enemy_pieceClass.equals("Wizard");
    }
 
    public int enemyPiece_inBox(Point position){

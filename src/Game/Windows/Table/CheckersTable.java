@@ -7,7 +7,6 @@ import Game.FactoryM.Pieces.Piece;
 import Game.FactoryM.Players.Player;
 import Game.Windows.CGO;
 import Game.Windows.Start.CheckersStart;
-
 import java.awt.*;
 import java.lang.Exception;
 import java.util.ArrayList;
@@ -109,7 +108,7 @@ public class CheckersTable {
 
     //Move pToMove into destBox
     public void move(Box dstBox) throws Exception {
-        boolean upgrade = false; 
+        boolean wizardEated = false; 
 
         Box srcBox = Boxes[pToMove.getCoord().x][pToMove.getCoord().y]; //this Box contain the piece to be moved
         int diff = srcBox.getCoord().x - dstBox.getCoord().x;
@@ -119,13 +118,15 @@ public class CheckersTable {
             int j = (srcBox.getCoord().y > dstBox.getCoord().y) ? pToMove.getCoord().y - 1 : pToMove.getCoord().y + 1;
             Box pToEatBox = Boxes[i][j];
             Piece enemyPiece = Boxes[i][j].getPiece();
+            enemyPiece.getOwner().decreaseNpieces();
+            checkGameEnd(enemyPiece);
             String enemyPieceClass = enemyPiece.getClass().getSimpleName();
             String pToMoveClass = pToMove.getClass().getSimpleName();
 
-            addOrRemove(pToEatBox, false);
+            addOrRemove(pToEatBox, false, pToMove);
             
             if (enemyPieceClass.equals("Wizard") && pToMoveClass.equals("Pawn")) //if pawn eat Wizard
-                upgrade = true; //Pawn will be a new checkers
+                wizardEated = true; //Pawn will be a new checkers
             
             if ((enemyPieceClass.equals("Pawn") || enemyPieceClass.equals("Checkers")) && pToMoveClass.equals("Wizard")) //if Wizard eat
                 respawn(pToEatBox); //add a new piece
@@ -133,28 +134,27 @@ public class CheckersTable {
             Player player = pToMove.getOwner();
             player.addPlayerPoints(enemyPiece.getPoints()); // increase player's score after eating
             panelInfo.updateScore(player);
-        }
 
+        }
 
         pToMove.setCoord(dstBox.getCoord().x, dstBox.getCoord().y);
         Point pieceCoord = pToMove.getCoord();
       
-        addOrRemove(srcBox, false);  //remove the old piece from the previous Box
+        addOrRemove(srcBox, false, pToMove);  //remove the old piece from the previous Box
 
-        if (canPieceUpgrade() || upgrade){ //If pawn can upgrade
+        if (canPieceUpgrade() || wizardEated){ //If pawn can upgrade
             Creator factory = new ConcreteFactoryM();
             pToMove = (Piece) factory.factoryMethod("checkers", pToMove.getColor(), pToMove.getOwner());
             pToMove.setCoord(pieceCoord.x, pieceCoord.y);
-            addOrRemove(dstBox, true);
         }
-        else //Add a piece to move in new Box
-            addOrRemove(dstBox, true);
+        addOrRemove(dstBox, true, pToMove);
     }
     
     //In Box will respawn a piece
     private void respawn(Box box) throws Exception{
         Creator factory = new ConcreteFactoryM();
         Piece piece = (Piece) factory.factoryMethod("pawn", pToMove.getColor(), pToMove.getOwner());
+        pToMove.getOwner().increaseNpieces();
         addOrRemove(box, true, piece);
     }
 
@@ -173,23 +173,12 @@ public class CheckersTable {
         pointsListToClear.clear();
     }
 
-    
-
-    //true: adds existing piece - false: remove a piece
-    private void addOrRemove(Box box, boolean action){
-        if(action == true)
-            box.add(pToMove, BorderLayout.CENTER);
-        else
-            box.removeAll();
-        box.HasPiece(action);
-        box.revalidate();
-        box.repaint();
-    }
-
     //true: adds a new piece - false: remove a piece
     private void addOrRemove(Box box, boolean action, Piece piece){
         if(action == true){
-            piece.setCoord(box.getCoord().x, box.getCoord().y);
+            if (!piece.equals(pToMove)) {
+                piece.setCoord(box.getCoord().x, box.getCoord().y);
+            }
             box.add(piece, BorderLayout.CENTER);
         }
         else
@@ -217,6 +206,12 @@ public class CheckersTable {
         panelInfo.switchTurn(p);
     }
 
+    private void checkGameEnd(Piece enemyPiece){
+        if (enemyPiece.getOwner().getNpieces() == 0){
+            JOptionPane.showMessageDialog(null, "Game over! " + enemyPiece.getOwner().getPlayerName() + " lost.");
+        }
+    }
+
 
     // Getters and Setters methods..
 
@@ -238,6 +233,10 @@ public class CheckersTable {
 
     public void setP1(Player p1) {
         this.p1 = p1;
+    }
+
+    public Player getActivePlayer(){
+        return (activePlayer.equals(Color.red)) ? p1 : p2;
     }
 
     public Player getP2() {

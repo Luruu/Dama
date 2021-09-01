@@ -2,7 +2,6 @@ package Game.FactoryM.Pieces;
 import java.awt.*;
 
 import Game.FactoryM.Players.Player;
-
 public class Checkers extends Piece{
     public final static int CHECKERS_POINTS = 5;
     

@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-public class CheckersStart implements ActionListener{
+public class CheckersStart extends CGO implements ActionListener{
 
     //Singleton Eager initialization
     private static final CheckersStart Instance = new CheckersStart();
@@ -74,6 +74,8 @@ public class CheckersStart implements ActionListener{
 
         frameStart.setVisible(true);
     }
+
+    
 
     public void printComponentsList(){
         int i=0;

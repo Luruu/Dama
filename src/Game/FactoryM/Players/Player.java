@@ -11,11 +11,9 @@ import java.awt.*;
 public class Player extends MouseAdapter {
     public static int count_players = 0;
     public static final int MAX_NPLAYERS = 2;
-    public static boolean RedChosen = false;
-    public static boolean GreenChosen = false;
     private final Color PlayerColor;
     private final String PlayerName;
-    
+    private int npieces =0;
     private final InvokerList invoker;
 
     private int PlayerScore;
@@ -25,8 +23,6 @@ public class Player extends MouseAdapter {
 
         if (++count_players > MAX_NPLAYERS)
             throw new Exception("Maximum number of players exceeded [MAXIMUM " + MAX_NPLAYERS + "]");
-
-      //  if (count_players > 1 && )
 
         PlayerColor = c;
         PlayerName = n;
@@ -57,8 +53,6 @@ public class Player extends MouseAdapter {
             Piece pieceClicked = (Piece)e.getSource();
             if ( pieceClicked.getColor() == PlayerColor )
                 invoker.suggestions(pieceClicked); //Show suggestions for pieceClicked
-            else
-                return;
         }
         else if(nameClass.equals("Box")){
             Box boxClicked = (Box) e.getSource();
@@ -85,7 +79,7 @@ public class Player extends MouseAdapter {
         System.out.println(PlayerName + " score: " + PlayerScore); 
     }
 
-    //
+
 
     public Color getPlayerColor(){
         return PlayerColor;
@@ -98,5 +92,27 @@ public class Player extends MouseAdapter {
     public int getPlayerScore(){
         return PlayerScore;
     }
+
+
+    public int getNpieces() {
+        return npieces;
+    }
+
+    public void increaseNpieces(){
+        npieces += 1;
+    }
+
+    public void decreaseNpieces() {
+        npieces -= 1;
+    }
+
+    public InvokerList getInvoker() {
+        return this.invoker;
+    }
+
+    public void setPlayerScore(int PlayerScore) {
+        this.PlayerScore = PlayerScore;
+    }
+    
     
 }

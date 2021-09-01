@@ -13,7 +13,6 @@ public class PanelInfo implements ActionListener{
 
     private JPanel panelInfo;
     private ArrayList<JComponent> jlabelList = new ArrayList<>();
- 
     private int nmove = 0;
 
 
@@ -50,10 +49,17 @@ public class PanelInfo implements ActionListener{
     public void actionPerformed(ActionEvent arg0) {
         String action = arg0.getActionCommand();
         switch (action){
-            case "1": 
+            case "1":
+                String name = null;
+                try {
+                    name = CheckersTable.getInstance().getActivePlayer().getPlayerName();
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+                JOptionPane.showMessageDialog(null, "Game over! " + name +" gave up.");
                 System.exit(1);
                 break;
-            case "2": 
+            case "2":
                 System.out.println("Ricomincia, MEMENTO");
                 break;
         }

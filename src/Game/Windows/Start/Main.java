@@ -6,18 +6,15 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class Main implements Runnable {
     
     public void run(){
-        //CheckersStart.getIstance();
-        for (int i = 0; i < 60; i++) {
-            System.out.println(i + " " + Thread.currentThread().getId());
-        }
+        CheckersStart.getIstance();
     }
-
 }
 
 class ThreadPool{
     public static void main(String[] args) {
-        ThreadPoolExecutor tpe = (ThreadPoolExecutor) Executors.newFixedThreadPool(6);
-        tpe.execute(new Main());
-        tpe.shutdown();
-    }
+    final int numThreads = 5;
+    ThreadPoolExecutor exec = (ThreadPoolExecutor)Executors.newFixedThreadPool(numThreads);
+    exec.execute(new Main());
+    exec.shutdown();
+  }
 }

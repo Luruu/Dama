@@ -53,11 +53,8 @@ public class Box extends JPanel{
                     typePiece = (revisedChecker && Wizard.is_WizardStartPosition(i, j, N_ROWS, N_COLS)) ? "wizard": "pawn";
                     pieceColor = (i < N_ROWS/2 - 1) ? Color.green : Color.red;
                     Player owner = (pieceColor == Color.red) ? p1 : p2;
+                    owner.increaseNpieces();
                     piece = (Piece) factory.factoryMethod(typePiece, pieceColor, owner);
-                    //Assignment of the player based on the color of the pawn
-                    //Forse non serve. Basterebbe passargli un new Player a caso. Il controllo va fatto in base ai colori dei pezzi e del player
-                    //Probabilmente sarà una features o un bug o non serve a niente. Questo if serve perché un player potrebbe cliccaere su un pezzo di colore diverso dal suo
-                    //Quindi otterremo il mouselistener del pezzo selezionato e lo confrontiamo con il colore del pezzo. Tutto questo nella funzione player che invoca il click.
                     Boxes[i][j].add(piece, BorderLayout.CENTER);
                     Boxes[i][j].hasPiece = true;
                     piece.setCoord(i,j);
