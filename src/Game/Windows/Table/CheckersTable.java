@@ -7,6 +7,8 @@ import Game.FactoryM.Pieces.Piece;
 import Game.FactoryM.Players.Player;
 import Game.Windows.CGO;
 import Game.Windows.Start.CheckersStart;
+
+
 import java.awt.*;
 import java.lang.Exception;
 import java.util.ArrayList;
@@ -40,7 +42,10 @@ public class CheckersTable {
 
     private ArrayList<Point> pointsListToClear = new ArrayList<Point>();
 
+    private CheckersMemento memento;
+    
     public  Color activePlayer = Color.red;
+
 
     private CheckersTable(final int N_ROWS, final int N_COLS, boolean revisedChecker) {
         this.N_ROWS = N_ROWS;
@@ -74,7 +79,7 @@ public class CheckersTable {
 
     private void initializeWindow() throws Exception {
         Dimension sizeFrame = new Dimension(N_ROWS *Box.DIM_BOX, N_COLS * Box.DIM_BOX);
-        frameTable = CGO.addFrame("Checkers Table", sizeFrame.width, sizeFrame.height, Color.black, false, new BorderLayout(0,0), CheckersStart.getIstance().geticonPath(), true, CheckersStart.getIstance().centerTableY);
+        frameTable = CGO.addFrame("Checkers Table", sizeFrame.width, sizeFrame.height, Color.black, false, new BorderLayout(0,0), CheckersStart.getInstance().geticonPath(), true, CheckersStart.getInstance().centerTableY);
         panelTable = CGO.addPanel(sizeFrame.width, sizeFrame.height, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
         panelInfo = new PanelInfo(200, sizeFrame.height, Color.getHSBColor(0, 0, 15), new FlowLayout(FlowLayout.CENTER, sizeFrame.width/10, sizeFrame.height/10 - 30), p1, p2);
        
@@ -85,6 +90,7 @@ public class CheckersTable {
         frameTable.add(panelInfo.getpanelInfo(),BorderLayout.LINE_END);
         frameTable.setVisible(true);
         frameTable.pack();
+        memento = new CheckersMemento();
     }
 
     private void addBoxesToPanel(){
@@ -97,7 +103,6 @@ public class CheckersTable {
         this.p1 = p1;
         this.p2 = p2;
         initializeWindow();
-        
     }
 
     //Shows the moves allowed to click on a piece
@@ -134,7 +139,6 @@ public class CheckersTable {
             Player player = pToMove.getOwner();
             player.addPlayerPoints(enemyPiece.getPoints()); // increase player's score after eating
             panelInfo.updateScore(player);
-
         }
 
         pToMove.setCoord(dstBox.getCoord().x, dstBox.getCoord().y);
@@ -149,7 +153,6 @@ public class CheckersTable {
         }
         addOrRemove(dstBox, true, pToMove);
     }
-    
     //In Box will respawn a piece
     private void respawn(Box box) throws Exception{
         Creator factory = new ConcreteFactoryM();
@@ -212,6 +215,35 @@ public class CheckersTable {
         }
     }
 
+    public Memento createMemento(){
+        return new CheckersMemento();
+    }
+
+    public void reStart(){
+        memento.restoreState();
+        panelTable.revalidate();
+        panelTable.repaint();
+    }
+
+    //Memento class
+    public class CheckersMemento implements Memento{
+        private Player mem_p1, mem_p2;
+        private JPanel mem_panelTable;
+        private PanelInfo mem_panelInfo; 
+
+        public CheckersMemento(){
+            mem_p1 = p1;
+            mem_p2 = p2;
+            mem_panelInfo = panelInfo;
+            mem_panelTable = panelTable;
+        }
+        public void restoreState(){
+        p1 = mem_p1;
+        p2 = mem_p2;
+        panelInfo = mem_panelInfo;
+        panelTable = mem_panelTable;
+        }
+    }
 
     // Getters and Setters methods..
 

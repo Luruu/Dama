@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class Main implements Runnable {
     
     public void run(){
-        CheckersStart.getIstance();
+        CheckersStart.getInstance();
     }
 }
 

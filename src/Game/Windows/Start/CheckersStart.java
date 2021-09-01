@@ -86,7 +86,7 @@ public class CheckersStart extends CGO implements ActionListener{
     }
 
     //Singleton Eager initialization
-    public static CheckersStart getIstance(){
+    public static CheckersStart getInstance(){
         return Instance;
     }
 

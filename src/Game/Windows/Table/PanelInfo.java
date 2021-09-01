@@ -48,19 +48,21 @@ public class PanelInfo implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent arg0) {
         String action = arg0.getActionCommand();
+        CheckersTable ct= null;
+        try {
+            ct =  CheckersTable.getInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         switch (action){
             case "1":
                 String name = null;
-                try {
-                    name = CheckersTable.getInstance().getActivePlayer().getPlayerName();
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                }
+                name = ct.getActivePlayer().getPlayerName();
                 JOptionPane.showMessageDialog(null, "Game over! " + name +" gave up.");
                 System.exit(1);
                 break;
             case "2":
-                System.out.println("Ricomincia, MEMENTO");
+                ct.reStart();
                 break;
         }
     }
