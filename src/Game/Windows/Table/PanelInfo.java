@@ -21,12 +21,15 @@ public class PanelInfo implements ActionListener{
         panelInfo = CGO.addPanel(n, dim, c, lm);
         panelInfo.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         jlabelList.add(CGO.addLabel("Game Info",new Font("Verdana", Font.BOLD, 17)));
-        jlabelList.add(CGO.addLabel("Player1: " + p1.getPlayerName()));
+        jlabelList.add(CGO.addLabel(p1.getPlayerName()));
+        jlabelList.get(1).setForeground(p1.getPlayerColor());
         jlabelList.add(CGO.addLabel(p1.getPlayerName() + "'s" + " score: "+ p1.getPlayerScore()));
-        jlabelList.add(CGO.addLabel("Player2: " + p2.getPlayerName()));
+        jlabelList.add(CGO.addLabel(p2.getPlayerName()));
+        jlabelList.get(3).setForeground(p2.getPlayerColor());
         jlabelList.add(CGO.addLabel(p2.getPlayerName() + "'s" + " score: "+ p2.getPlayerScore()));
         jlabelList.add(CGO.addLabel("N° moves: " + nmove));
         jlabelList.add(CGO.addLabel("Turn: " + p1.getPlayerName()));
+        jlabelList.get(6).setForeground(p1.getPlayerColor());
         jlabelList.add(CGO.addLabel("Timer: " + "boh"));
         jlabelList.add(CGO.addButton("Give up", this, "1"));
         jlabelList.add(CGO.addButton("Restart", this, "2"));
@@ -65,6 +68,7 @@ public class PanelInfo implements ActionListener{
     public void switchTurn(Player p){
         JLabel jl = (JLabel) jlabelList.get(6);
         jl.setText("Turn: " + p.getPlayerName());
+        jl.setForeground(p.getPlayerColor());
         increaseNMOVE();
     }
 

@@ -2,3 +2,4 @@ Implementare il timer con la sua funzionalità + pattern observer.
 mostrare a schermo timer
 Tasto destro mostra l'info della pedina.
 AGGIORNARE JAVADOC E PACKAGE
+Implementare Memento per il restart.
