@@ -79,7 +79,7 @@ public class CheckersTable {
 
     private void initializeWindow() throws Exception {
         Dimension sizeFrame = new Dimension(N_ROWS *Box.DIM_BOX, N_COLS * Box.DIM_BOX);
-        frameTable = CGO.addFrame("Checkers Table", sizeFrame.width, sizeFrame.height, Color.black, false, new BorderLayout(0,0), CheckersStart.getInstance().geticonPath(), true, CheckersStart.getInstance().centerTableY);
+        frameTable = CGO.addFrame("Checkers Table", sizeFrame.width, sizeFrame.height, Color.black, false, new BorderLayout(0,0), CheckersStart.getInstance().geticonPath(), true, CheckersStart.getInstance().centerTableY, JFrame.DO_NOTHING_ON_CLOSE);
         panelTable = CGO.addPanel(sizeFrame.width, sizeFrame.height, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
         panelInfo = new PanelInfo(200, sizeFrame.height, Color.getHSBColor(0, 0, 15), new FlowLayout(FlowLayout.CENTER, sizeFrame.width/10, sizeFrame.height/10 - 30), p1, p2);
        

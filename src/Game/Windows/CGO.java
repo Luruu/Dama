@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 // Create Graphic Objects 
 public abstract class CGO {
     //Add and set a new Frame
-    public static JFrame addFrame(String titleFrame, int width, int height, Color backGroundColor, boolean resizable, LayoutManager layout, String icon, boolean centerX, boolean centerY) {
+    public static JFrame addFrame(String titleFrame, int width, int height, Color backGroundColor, boolean resizable, LayoutManager layout, String icon, boolean centerX, boolean centerY, int actionOnExit) {
         JFrame newFrame = new JFrame(titleFrame);
        
         newFrame.setSize(width, height);
@@ -20,7 +20,7 @@ public abstract class CGO {
         Image iconImg = ImageFunctions.readFile(icon);
         newFrame.setIconImage(iconImg);
 
-        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        newFrame.setDefaultCloseOperation(actionOnExit);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         Point centerScreen = null;
         int margin = 15;
