@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 // Create Graphic Objects 
 public abstract class GraphicWindow {
+    
     //Add and set a new Frame
     protected JFrame addFrame(String titleFrame, int width, int height, Color backGroundColor, boolean resizable, LayoutManager layout, String icon, boolean centerX, boolean centerY, int actionOnExit) {
         JFrame newFrame = new JFrame(titleFrame);

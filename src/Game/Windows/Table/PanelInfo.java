@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 public class PanelInfo extends GraphicWindow implements ActionListener, Observer{
 
     private JPanel panelInfo;
-    private ArrayList<JComponent> jlabelList = new ArrayList<>();
+    private ArrayList<JComponent> jComponentList = new ArrayList<>();
     private int nmove = 0;
     private int time=3;
 
@@ -22,22 +22,22 @@ public class PanelInfo extends GraphicWindow implements ActionListener, Observer
         time = n_sec;
         panelInfo = addPanel(n, dim, c, lm);
         panelInfo.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        jlabelList.add(addLabel("Game Info",new Font("Verdana", Font.BOLD, 17)));
-        jlabelList.add(addLabel(p1.getPlayerName()));
-        jlabelList.get(1).setForeground(p1.getPlayerColor());
-        jlabelList.add(addLabel(p1.getPlayerName() + "'s" + " score: "+ p1.getPlayerScore()));
-        jlabelList.add(addLabel(p2.getPlayerName()));
-        jlabelList.get(3).setForeground(p2.getPlayerColor());
-        jlabelList.add(addLabel(p2.getPlayerName() + "'s" + " score: "+ p2.getPlayerScore()));
-        jlabelList.add(addLabel("N° moves: " + nmove));
-        jlabelList.add(addLabel("Turn: " + p1.getPlayerName()));
-        jlabelList.get(6).setForeground(p1.getPlayerColor());
-        jlabelList.add(addLabel("Timer: " + time));
-        jlabelList.add(addButton("Give up", this, "1"));
-        jlabelList.add(addButton("Restart", this, "2"));
+        jComponentList.add(addLabel("Game Info",new Font("Verdana", Font.BOLD, 17)));
+        jComponentList.add(addLabel(p1.getPlayerName()));
+        jComponentList.get(1).setForeground(p1.getPlayerColor());
+        jComponentList.add(addLabel(p1.getPlayerName() + "'s" + " score: "+ p1.getPlayerScore()));
+        jComponentList.add(addLabel(p2.getPlayerName()));
+        jComponentList.get(3).setForeground(p2.getPlayerColor());
+        jComponentList.add(addLabel(p2.getPlayerName() + "'s" + " score: "+ p2.getPlayerScore()));
+        jComponentList.add(addLabel("N° moves: " + nmove));
+        jComponentList.add(addLabel("Turn: " + p1.getPlayerName()));
+        jComponentList.get(6).setForeground(p1.getPlayerColor());
+        jComponentList.add(addLabel("Timer: " + time));
+        jComponentList.add(addButton("Give up", this, "1"));
+        jComponentList.add(addButton("Restart", this, "2"));
 
 
-        for (JComponent jComponent : jlabelList) {
+        for (JComponent jComponent : jComponentList) {
             panelInfo.add(jComponent);
         }
         
@@ -73,12 +73,12 @@ public class PanelInfo extends GraphicWindow implements ActionListener, Observer
 
     public  void updateScore(Player p){
         JLabel jl;
-        jl = (p.getPlayerColor().equals(Color.RED)) ? (JLabel) jlabelList.get(2) : (JLabel) jlabelList.get(4);
+        jl = (p.getPlayerColor().equals(Color.RED)) ? (JLabel) jComponentList.get(2) : (JLabel) jComponentList.get(4);
         jl.setText(p.getPlayerName() + "'s" + " score: "+ p.getPlayerScore());
     }
 
     public void switchTurn(Player p){
-        JLabel jl = (JLabel) jlabelList.get(6);
+        JLabel jl = (JLabel) jComponentList.get(6);
         jl.setText("Turn: " + p.getPlayerName());
         jl.setForeground(p.getPlayerColor());
         increaseNMOVE();
@@ -86,14 +86,14 @@ public class PanelInfo extends GraphicWindow implements ActionListener, Observer
 
     private void increaseNMOVE(){
         nmove++;
-        JLabel jl = (JLabel) jlabelList.get(5);
+        JLabel jl = (JLabel) jComponentList.get(5);
         jl.setText("N° moves: " + nmove);
     }
 
     @Override
     public void update(Object obj){
-        JLabel jl = (JLabel) jlabelList.get(7);
-        time -= 1;
+        time--;
+        JLabel jl = (JLabel) jComponentList.get(7);
         jl.setText("Timer: " + time);
     }
 }

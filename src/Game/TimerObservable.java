@@ -21,9 +21,8 @@ public class TimerObservable implements Observable, ActionListener {
         timer = new Timer(1000, this);
         timer.start();
 
-        for (Observer player : p) {
+        for (Observer player : p)
             observer.add(player);
-        }
     }
 
     @Override
@@ -33,18 +32,20 @@ public class TimerObservable implements Observable, ActionListener {
         }
         else{
             observer.remove(index);
+            Player p1 = (Player)observer.get(0);
+            Player p2 = (Player)observer.get(1);
             Player winner;
-            Boolean flag = null;
+            Boolean noWinner = null;
             //Possibile violazione di SINGOLA RESPONSABILITA' però abbiamo la necessità di notificare il player corretto.
-            if ( ((Player)observer.get(0)).getPlayerScore() > ((Player)observer.get(1)).getPlayerScore()  )
-                winner = (Player)observer.get(0);
-            else if ( ((Player)observer.get(0)).getPlayerScore() < ((Player)observer.get(1)).getPlayerScore()  )
-                winner = (Player)observer.get(1);
-            else{
-                winner = (Player)observer.get(0);
-                flag = true;
+            if (p1.getPlayerScore() > p2.getPlayerScore())
+                winner = p1;
+            else if ( p1.getPlayerScore() < p2.getPlayerScore())
+                winner = p2;
+            else{ // p1.getPlayerScore() == p2.getPlayerScore()
+                winner = p1; //p1 is not the winner. 
+                noWinner = true; // there is no winner
             }
-            winner.update(flag); 
+            winner.update(noWinner); 
             stop();
         }
     }
