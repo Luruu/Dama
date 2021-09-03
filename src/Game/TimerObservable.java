@@ -11,12 +11,13 @@ import javax.swing.Timer;
 public class TimerObservable implements Observable, ActionListener {
     public ArrayList<Observer> observer = new ArrayList<Observer>();
     private Timer timer = null;
-    private int timerStop =7;
+    private int timerStop;
     private int index;
 
 
-    public TimerObservable(ArrayList<Observer> p, int indice){
+    public TimerObservable(ArrayList<Observer> p, int indice, int n_sec){
         index = indice;
+        timerStop = n_sec;
         timer = new Timer(1000, this);
         timer.start();
 

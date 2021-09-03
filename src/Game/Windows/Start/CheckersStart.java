@@ -32,13 +32,14 @@ public class CheckersStart extends CGO implements ActionListener{
     private ArrayList<String> listActionCommands = new ArrayList<>();
 
     public boolean centerTableY = true;
+    public int n_sec;
 
    
 
 
 
     private CheckersStart(){
-        frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 190, 300, Color.GREEN, false, new FlowLayout(), ICON_PATH, true, true, JFrame.EXIT_ON_CLOSE);
+        frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 190, 340, Color.GREEN, false, new FlowLayout(), ICON_PATH, true, true, JFrame.EXIT_ON_CLOSE);
         
         jComponentList.add(CGO.addLabel("CheckersGame",new Font("Verdana", Font.PLAIN, 18))); 
 
@@ -52,6 +53,11 @@ public class CheckersStart extends CGO implements ActionListener{
 
         String[] modeStrings = { "classic", "revised"};
         jComponentList.add(CGO.addComboBoxString(modeStrings, 1, false));
+
+        jComponentList.add(CGO.addLabel("timer"));
+
+        String[] timeStrings = {"10", "60", "120", "180", "240", "480"};
+        jComponentList.add(CGO.addComboBoxString(timeStrings, 1, false));
         
         jComponentList.add(CGO.addLabel("Choose name Player 1"));
         
@@ -105,15 +111,15 @@ public class CheckersStart extends CGO implements ActionListener{
                 break;
             case "1":
                 System.out.println("Button pressed!");
-                firstPlayerName = ((JTextField) jComponentList.get(6)).getText();
-                secondPlayerName = ((JTextField) jComponentList.get(8)).getText();
-                
+                firstPlayerName = ((JTextField) jComponentList.get(8)).getText();
+                secondPlayerName = ((JTextField) jComponentList.get(10)).getText();
+                n_sec = Integer.parseInt((String)(((JComboBox<?>)jComponentList.get(6)).getSelectedItem()));
                 dimTable = Integer.parseInt((String)(((JComboBox<?>)jComponentList.get(2)).getSelectedItem()));
                 modeRevised = ((JComboBox<?>)jComponentList.get(4)).getSelectedItem().equals("revised"); //true revised, false classic
                 if (firstPlayerName.isBlank() || secondPlayerName.isBlank()) return;
                 try {
                     frameStart.setVisible(false); //hide CheckersStart Window
-                    startGame(firstPlayerName, secondPlayerName, dimTable, Box.DIM_BOX, modeRevised);
+                    startGame(firstPlayerName, secondPlayerName, dimTable, Box.DIM_BOX, modeRevised, n_sec);
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
@@ -150,14 +156,14 @@ public class CheckersStart extends CGO implements ActionListener{
     }
     
     
-    private void startGame(String p1Name, String p2Name, int DIM_TABLE, int DIM_BOX, boolean revisedChecker) throws Exception{
+    private void startGame(String p1Name, String p2Name, int DIM_TABLE, int DIM_BOX, boolean revisedChecker, int n_sec) throws Exception{
         Box.DIM_BOX = DIM_BOX;
         scaleDimensionTable(); //N.B: Game Table sizes are always (DIM * Box.DIM_BOX, DIM * DIM_BOX)
         CheckersTable table = CheckersTable.getInstance(DIM_TABLE, DIM_TABLE, revisedChecker);
         Creator factoryM = new ConcreteFactoryM();
         Player pl1 = (Player) factoryM.factoryMethod(p1Name, Color.red, null);
         Player pl2 = (Player) factoryM.factoryMethod(p2Name, Color.green, null);
-        table.startGame(pl1, pl2); 
+        table.startGame(pl1, pl2, n_sec); 
     }
 
     public String geticonPath(){

@@ -1,5 +1,4 @@
 Aggiungere i thread al timer
 
 AGGIORNARE JAVADOC
-Implementare Memento per il restart.
 

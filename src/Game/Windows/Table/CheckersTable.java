@@ -48,6 +48,8 @@ public class CheckersTable {
     
     public  Color activePlayer = Color.red;
 
+    private int n_sec;
+
     TimerObservable timer;
 
 
@@ -85,7 +87,7 @@ public class CheckersTable {
         Dimension sizeFrame = new Dimension(N_ROWS *Box.DIM_BOX, N_COLS * Box.DIM_BOX);
         frameTable = CGO.addFrame("Checkers Table", sizeFrame.width, sizeFrame.height, Color.black, false, new BorderLayout(0,0), CheckersStart.getInstance().geticonPath(), true, CheckersStart.getInstance().centerTableY, JFrame.DO_NOTHING_ON_CLOSE);
         panelTable = CGO.addPanel(sizeFrame.width, sizeFrame.height, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
-        panelInfo = new PanelInfo(200, sizeFrame.height, Color.getHSBColor(0, 0, 15), new FlowLayout(FlowLayout.CENTER, sizeFrame.width/10, sizeFrame.height/10 - 30), p1, p2);
+        panelInfo = new PanelInfo(200, sizeFrame.height, Color.getHSBColor(0, 0, 15), new FlowLayout(FlowLayout.CENTER, sizeFrame.width/10, sizeFrame.height/10 - 30), p1, p2, n_sec);
         
         Boxes = Box.createBoxes(N_ROWS, N_COLS, Box.DIM_BOX, p1, p2); //create new Boxes (all game table)
         addBoxesToPanel();
@@ -103,15 +105,16 @@ public class CheckersTable {
                 panelTable.add(box);
     }
 
-    public void startGame(Player p1, Player p2) throws Exception {
+    public void startGame(Player p1, Player p2, int n_sec) throws Exception {
         this.p1 = p1;
         this.p2 = p2;
+        this.n_sec = n_sec;
         initializeWindow();
         ArrayList<Observer> p = new ArrayList<Observer>();
         p.add(p1);
         p.add(p2);
         p.add(panelInfo);
-        timer = new TimerObservable(p,2);
+        timer = new TimerObservable(p,2, n_sec);
     }
 
     //Shows the moves allowed to click on a piece
@@ -238,9 +241,11 @@ public class CheckersTable {
 
     public void returnToStart(){
         frameTable.dispose();
+        activePlayer = Color.red;
         Player.count_players = 0;
         CheckersStart CT = CheckersStart.getInstance();
         CT.getFrame().setVisible(true);
+        
     }
 
     public void stopTimer(){

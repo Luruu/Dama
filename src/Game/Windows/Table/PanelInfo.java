@@ -18,7 +18,8 @@ public class PanelInfo implements ActionListener, Observer{
     private int time=3;
 
 
-    public  PanelInfo(int n, int dim, Color c, LayoutManager lm, Player p1, Player p2){
+    public PanelInfo(int n, int dim, Color c, LayoutManager lm, Player p1, Player p2, int n_sec){
+        time = n_sec;
         panelInfo = CGO.addPanel(n, dim, c, lm);
         panelInfo.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         jlabelList.add(CGO.addLabel("Game Info",new Font("Verdana", Font.BOLD, 17)));
