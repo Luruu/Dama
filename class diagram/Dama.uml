@@ -1,59 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Diagram>
   <ID>JAVA</ID>
-  <OriginalElement>C:/Users/LucaPC/Desktop/Dama</OriginalElement>
+  <OriginalElement>D:/Universita/TERZO ANNO/Primo Semestre/Programmazione 3/Progetto</OriginalElement>
   <nodes>
-    <node x="154.0" y="519.0">Game.FactoryM.Players.Player</node>
-    <node x="654.0" y="36.0">Game.Windows.Table.PanelInfo</node>
-    <node x="190.0" y="150.0">Game.FactoryM.ConcreteFactoryM</node>
-    <node x="-226.0" y="378.0">Game.FactoryM.Pieces.Checkers</node>
-    <node x="958.0" y="326.0">Game.ImageFunctions</node>
-    <node x="625.0" y="326.0">Game.Windows.Start.CheckersStart</node>
-    <node x="357.0" y="429.5">Game.Windows.Table.Command</node>
-    <node x="242.0" y="251.0">Game.Windows.Table.InvokerList</node>
-    <node x="951.0" y="36.0">Game.Windows.Table.Box</node>
-    <node x="698.25" y="567.0">Game.Windows.CGO</node>
-    <node x="466.5" y="579.0">Game.Windows.Table.ConcreteCommand</node>
-    <node x="74.5" y="27.0">Game.FactoryM.Creator</node>
-    <node x="-87.25" y="273.0">Game.FactoryM.Pieces.Pawn</node>
-    <node x="697.5" y="227.0">Game.Windows.Start.MyThread</node>
-    <node x="-107.25" y="471.0">Game.FactoryM.Pieces.Piece</node>
-    <node x="1279.0" y="62.0">Game.Windows.Table.CheckersTable</node>
-    <node x="26.0" y="367.0">Game.FactoryM.Pieces.Wizard</node>
+    <node x="-254.0" y="1081.4847457627116">Game.Windows.Table.PanelInfo</node>
+    <node x="847.0" y="1741.0">Game.FactoryM.ConcreteFactoryM</node>
+    <node x="334.0" y="1741.0">Game.ThreadTimerObservable</node>
+    <node x="884.5" y="1244.0">Game.FactoryM.Pieces.Checkers</node>
+    <node x="-588.0" y="971.4847457627116">Game.Windows.Start.CheckersStart</node>
+    <node x="615.0" y="1462.0">Game.ImageFunctions</node>
+    <node x="396.0" y="1462.0">Game.Windows.Table.InvokerList</node>
+    <node x="0.0" y="1635.0">Game.Windows.Table.Box</node>
+    <node x="615.0" y="1785.0">Game.Windows.Table.ConcreteCommand</node>
+    <node x="194.0" y="2067.0">Game.Windows.Start.Thrd</node>
+    <node x="-705.5000000000001" y="370.48474576271155">Game.Windows.GraphicWindow</node>
+    <node x="371.5" y="1635.0">Game.Observable</node>
+    <node x="371.5" y="1233.0">Game.FactoryM.Pieces.Wizard</node>
+    <node x="33.0" y="971.4847457627116">Game.FactoryM.Players.Player</node>
+    <node x="0.0" y="2067.0">Game.Windows.Start.Main</node>
+    <node x="942.0" y="1462.0">Game.TimerObservable</node>
+    <node x="621.5" y="1635.0">Game.Windows.Table.Command</node>
+    <node x="-167.1288135593221" y="1635.0">Game.Windows.Table.Memento</node>
+    <node x="-41.151315789473756" y="458.48474576271155">Game.FactoryM.Players.Observer</node>
+    <node x="847.0" y="1635.0">Game.FactoryM.Creator</node>
+    <node x="684.5" y="1255.5">Game.FactoryM.Pieces.Pawn</node>
+    <node x="-272.63157894736855" y="1815.4847457627116">Game.Windows.Table.CheckersTable.CheckersMemento</node>
+    <node x="-888.0" y="652.4847457627116">Game.Windows.Table.CheckersTable</node>
+    <node x="657.0" y="642.0">Game.FactoryM.Pieces.Piece</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="Game.Windows.Table.ConcreteCommand" target="Game.Windows.Table.Command" relationship="REALIZATION">
-      <point x="0.0" y="-15.5" />
-      <point x="470.625" y="582.375" />
-      <point x="0.0" y="15.5" />
+    <edge source="Game.Windows.Table.PanelInfo" target="Game.Windows.GraphicWindow" relationship="GENERALIZATION">
+      <point x="-66.75" y="-127.5" />
+      <point x="-187.25" y="627.4847457627116" />
+      <point x="-431.0000000000001" y="627.4847457627116" />
+      <point x="0.0" y="116.0" />
     </edge>
     <edge source="Game.FactoryM.ConcreteFactoryM" target="Game.FactoryM.Creator" relationship="REALIZATION">
-      <point x="0.0" y="-15.5" />
-      <point x="248.25" y="145.375" />
-      <point x="0.0" y="15.5" />
+      <point x="0.0" y="-28.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="Game.Windows.Table.PanelInfo" target="Game.FactoryM.Players.Observer" relationship="REALIZATION">
+      <point x="66.75" y="-127.5" />
+      <point x="-53.75" y="627.4847457627116" />
+      <point x="36.348684210526244" y="627.4847457627116" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="Game.Windows.Table.CheckersTable.CheckersMemento" target="Game.Windows.Table.Memento" relationship="REALIZATION">
+      <point x="46.25" y="-72.5" />
+      <point x="-133.88157894736855" y="1790.4847457627116" />
+      <point x="-94.62881355932211" y="1790.4847457627116" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="Game.FactoryM.Players.Player" target="Game.FactoryM.Players.Observer" relationship="REALIZATION">
+      <point x="0.0" y="-237.5" />
+      <point x="144.5" y="627.4847457627116" />
+      <point x="36.348684210526244" y="627.4847457627116" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="Game.ThreadTimerObservable" target="Game.Observable" relationship="REALIZATION">
+      <point x="0.0" y="-105.5" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="Game.Windows.Table.CheckersTable" target="Game.Windows.GraphicWindow" relationship="GENERALIZATION">
+      <point x="0.0" y="-556.5" />
+      <point x="-748.0" y="627.4847457627116" />
+      <point x="-431.0000000000001" y="627.4847457627116" />
+      <point x="0.0" y="116.0" />
+    </edge>
+    <edge source="Game.Windows.Table.ConcreteCommand" target="Game.Windows.Table.Command" relationship="REALIZATION">
+      <point x="0.0" y="-61.5" />
+      <point x="0.0" y="50.0" />
+    </edge>
+    <edge source="Game.Windows.Table.CheckersTable.CheckersMemento" target="Game.Windows.Table.CheckersTable" relationship="INNER_CLASS">
+      <point x="-46.25" y="-72.5" />
+      <point x="-226.38157894736855" y="1790.4847457627116" />
+      <point x="-748.0" y="1790.4847457627116" />
+      <point x="0.0" y="556.5" />
+    </edge>
+    <edge source="Game.Windows.Start.CheckersStart" target="Game.Windows.GraphicWindow" relationship="GENERALIZATION">
+      <point x="-5.6843418860808015E-14" y="-237.5" />
+      <point x="0.0" y="116.0" />
     </edge>
     <edge source="Game.FactoryM.Pieces.Wizard" target="Game.FactoryM.Pieces.Piece" relationship="GENERALIZATION">
-      <point x="0.0" y="-15.5" />
-      <point x="154.375" y="577.4375" />
-      <point x="0.0" y="15.5" />
+      <point x="0.0" y="-61.5" />
+      <point x="518.0" y="1208.0" />
+      <point x="774.5" y="1208.0" />
+      <point x="0.0" y="270.5" />
     </edge>
     <edge source="Game.FactoryM.Pieces.Checkers" target="Game.FactoryM.Pieces.Piece" relationship="GENERALIZATION">
-      <point x="0.0" y="-15.5" />
-      <point x="0.125" y="500.3125" />
-      <point x="0.0" y="15.5" />
+      <point x="0.0" y="-50.5" />
+      <point x="974.5" y="1208.0" />
+      <point x="774.5" y="1208.0" />
+      <point x="0.0" y="270.5" />
     </edge>
     <edge source="Game.FactoryM.Pieces.Pawn" target="Game.FactoryM.Pieces.Piece" relationship="GENERALIZATION">
-      <point x="0.0" y="-15.5" />
-      <point x="95.75" y="482.5" />
-      <point x="0.0" y="15.5" />
+      <point x="0.0" y="-39.0" />
+      <point x="0.0" y="270.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic" zoom="1.0" showDependencies="false" x="695.5" y="441.5" />
-  <SelectedNodes>
-    <node>Game.FactoryM.Players.Player</node>
-  </SelectedNodes>
+  <settings layout="Hierarchic" zoom="0.5629724685020998" showDependencies="false" x="491.547639769572" y="1269.0064652492852" />
+  <SelectedNodes />
   <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
     <Category>Methods</Category>
   </Categories>
   <SCOPE>All</SCOPE>
