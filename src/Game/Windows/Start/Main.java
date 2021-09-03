@@ -3,18 +3,19 @@ package Game.Windows.Start;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class Main implements Runnable {
-    
+class Thrd implements Runnable {
     public void run(){
         CheckersStart.getInstance();
     }
 }
 
-class ThreadPool{
+public class Main{
     public static void main(String[] args) {
-    final int numThreads = 5;
-    ThreadPoolExecutor exec = (ThreadPoolExecutor)Executors.newFixedThreadPool(numThreads);
-    exec.execute(new Main());
-    exec.shutdown();
-  }
+        final int numThreads = 5;
+        ThreadPoolExecutor exec = (ThreadPoolExecutor)Executors.newFixedThreadPool(numThreads);
+        exec.execute(new Thrd());
+        exec.shutdown();
+    }
 }
+
+

@@ -26,7 +26,7 @@ public class Box extends JPanel{
         Box[][] Boxes = new Box[N_ROWS][N_COLS];
         Boolean BoxPlayable;
         Color color_BOX;
-        for (int i = 0; i < N_ROWS; i++)
+        for (int i = 0; i < N_ROWS; i++){
             for (int j = 0; j < N_COLS; j++){
                 BoxPlayable = (i%2 == 0 && j%2 != 0 || j%2 == 0 && i%2 != 0);
                 color_BOX = (BoxPlayable) ? Color.darkGray : Color.white;
@@ -35,6 +35,7 @@ public class Box extends JPanel{
                 Boxes[i][j].color = color_BOX;
                 Boxes[i][j].addMouseListener(new Player()); //ADD Player that is also handler mouse event
             }
+        }
         addPieces(Boxes, N_ROWS, N_COLS, p1,p2);
         return Boxes;
     }
@@ -45,6 +46,7 @@ public class Box extends JPanel{
         String typePiece;
         Boolean revisedChecker = CheckersTable.getInstance().getRevisedChecker();
         Piece piece;
+        Player owner;
         final int MID_TABLE = N_COLS/2;
         for (int i = 0; i < N_ROWS; i++){
             for (int j = 0; j < N_COLS; j++){
@@ -52,7 +54,7 @@ public class Box extends JPanel{
                 if ((i < MID_TABLE - 1 || i > MID_TABLE) && Boxes[i][j].color == Color.darkGray){
                     typePiece = (revisedChecker && Wizard.is_WizardStartPosition(i, j, N_ROWS, N_COLS)) ? "wizard": "pawn";
                     pieceColor = (i < N_ROWS/2 - 1) ? Color.green : Color.red;
-                    Player owner = (pieceColor == Color.red) ? p1 : p2;
+                    owner = (pieceColor == Color.red) ? p1 : p2;
                     owner.increaseNpieces();
                     piece = (Piece) factory.factoryMethod(typePiece, pieceColor, owner);
                     Boxes[i][j].add(piece, BorderLayout.CENTER);

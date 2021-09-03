@@ -34,8 +34,11 @@ public class CheckersStart extends CGO implements ActionListener{
     public boolean centerTableY = true;
     public int n_sec;
 
-   
 
+     //Singleton Eager initialization
+    public static CheckersStart getInstance(){
+        return Instance;
+    }
 
 
     private CheckersStart(){
@@ -91,16 +94,14 @@ public class CheckersStart extends CGO implements ActionListener{
         System.out.println("----------------------------------");
     }
 
-    //Singleton Eager initialization
-    public static CheckersStart getInstance(){
-        return Instance;
-    }
-
     public void addcommandtoList(String nameObject){
         listActionCommands.add(nameObject);//EVENTUALMENTE DA ELIMINAREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
         int intAction = Integer.parseInt((String)stringAction);
         stringAction = String.valueOf(++intAction); //Increase action because a nameObject is added
     }
+
+   
+   
 
     @Override
     public void actionPerformed(ActionEvent e) {

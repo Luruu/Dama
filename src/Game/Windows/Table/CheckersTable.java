@@ -28,7 +28,7 @@ public class CheckersTable {
 
     private static CheckersTable Instance; //Singleton
 
-    private final int N_ROWS, N_COLS;
+    private int N_ROWS, N_COLS;
 
     private boolean revisedChecker;
 
@@ -53,7 +53,8 @@ public class CheckersTable {
     TimerObservable timer;
 
 
-    private CheckersTable(final int N_ROWS, final int N_COLS, boolean revisedChecker) {
+    private CheckersTable(int N_ROWS, int N_COLS, boolean revisedChecker) {
+        System.out.println("CHERCIKERSTABLE 57");
         this.N_ROWS = N_ROWS;
         this.N_COLS = N_COLS;
         this.revisedChecker = revisedChecker;
@@ -64,7 +65,8 @@ public class CheckersTable {
      * @param N_ROWS number of rows in the board
      * @param N_COLS number of columns in the board
      * @param revisedChecker game mode chosen by user
-     * @return Singleton Istance
+     * @return Singleton Instance
+     * @see #getInstance()
      */
     public static synchronized CheckersTable getInstance(final int N_ROWS, final int N_COLS, boolean revisedChecker) {
         if (Instance == null)
@@ -74,8 +76,8 @@ public class CheckersTable {
     
     /**
      * Singleton method overload: get the existing instance without specifying unnecessary parameters
-     * @return Singleton Istance
-     * @throws Exception if the instance does not exist it must be created using <code>getInstance(final int N_ROWS, final int N_COLS, boolean revisedChecker)</code>
+     * @return Singleton Instance
+     * @throws Exception if the instance does not exist it must be created using <code>getInstance(final int, final int, boolean)</code>
      */
     public static synchronized CheckersTable getInstance() throws Exception {
         if (Instance == null)
@@ -241,7 +243,7 @@ public class CheckersTable {
 
     public void returnToStart(){
         frameTable.dispose();
-        activePlayer = Color.red;
+        Instance = null; // when another game is started, a new object must be instantiated to use the class constructor 
         Player.count_players = 0;
         CheckersStart CT = CheckersStart.getInstance();
         CT.getFrame().setVisible(true);
