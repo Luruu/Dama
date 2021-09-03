@@ -8,26 +8,43 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
-public class TimerObservable implements Observable, ActionListener {
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+
+public class TimerObservable{
+    public TimerObservable(ArrayList<Observer> players, int index, int timer_value){
+        final int numThreads = 5;
+        ThreadPoolExecutor exec = (ThreadPoolExecutor)Executors.newFixedThreadPool(numThreads);
+        exec.execute(new ThreadTimerObservable(players, index, timer_value));
+        exec.shutdown();
+    }
+
+    public void stop(){
+        ThreadTimerObservable.stop();
+    }
+    
+}
+class ThreadTimerObservable implements Observable, ActionListener, Runnable {
     public ArrayList<Observer> observer = new ArrayList<Observer>();
-    private Timer timer = null;
+    private static Timer timer = null;
     private int timerStop;
     private int index;
 
-
-    public TimerObservable(ArrayList<Observer> p, int indice, int timer_value){
-        index = indice;
-        timerStop = timer_value;
+    public void run(){
         timer = new Timer(1000, this);
         timer.start();
+    }
 
-        for (Observer player : p)
+    public ThreadTimerObservable(ArrayList<Observer> players, int index, int timer_value){
+        this.index = index;
+        timerStop = timer_value;
+        for (Observer player : players)
             observer.add(player);
     }
 
     @Override
     public void notifyObserver() {
-        if (timerStop != 0 ){ //notify panelInfo to update label text
+        if (timerStop != 0){ //notify panelInfo to update label text
             observer.get(index).update(null);
         }
         else{
@@ -56,7 +73,7 @@ public class TimerObservable implements Observable, ActionListener {
          timerStop -= 1;
     }
 
-    public void stop(){
+    public static void stop(){
         timer.stop();
     }
     

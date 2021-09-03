@@ -10,18 +10,22 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelInfo extends GraphicWindow implements ActionListener, Observer{
+public class PanelInfo extends GraphicWindow implements ActionListener, Observer {
 
     private JPanel panelInfo;
-    private ArrayList<JComponent> jComponentList = new ArrayList<>();
-    private int nmove = 0;
-    private int time=3;
+    private ArrayList<JComponent> jComponentList;
+    private int nmove;
+    private int time;
 
 
     public PanelInfo(int n, int dim, Color c, LayoutManager lm, Player p1, Player p2, int n_sec){
+        nmove = 0;
+        time = 3;
         time = n_sec;
         panelInfo = addPanel(n, dim, c, lm);
         panelInfo.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        
+        jComponentList = new ArrayList<>();
         jComponentList.add(addLabel("Game Info",new Font("Verdana", Font.BOLD, 17)));
         jComponentList.add(addLabel(p1.getPlayerName()));
         jComponentList.get(1).setForeground(p1.getPlayerColor());
@@ -44,10 +48,7 @@ public class PanelInfo extends GraphicWindow implements ActionListener, Observer
         panelInfo.setVisible(true);
     }
 
-    public JPanel getpanelInfo(){
-        return panelInfo;
-    }
-
+    
     @Override
     public void actionPerformed(ActionEvent arg0) {
         String action = arg0.getActionCommand();
@@ -95,5 +96,9 @@ public class PanelInfo extends GraphicWindow implements ActionListener, Observer
         time--;
         JLabel jl = (JLabel) jComponentList.get(7);
         jl.setText("Timer: " + time);
+    }
+
+    public JPanel getpanelInfo(){
+        return panelInfo;
     }
 }
