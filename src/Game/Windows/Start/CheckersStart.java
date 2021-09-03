@@ -4,7 +4,7 @@ import javax.swing.*;
 import Game.FactoryM.ConcreteFactoryM;
 import Game.FactoryM.Creator;
 import Game.FactoryM.Players.Player;
-import Game.Windows.CGO;
+import Game.Windows.GraphicWindow;
 import Game.Windows.Table.Box;
 import Game.Windows.Table.CheckersTable;
 
@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-public class CheckersStart extends CGO implements ActionListener{
+public class CheckersStart extends GraphicWindow implements ActionListener{
 
     //Singleton Eager initialization
     private static final CheckersStart Instance = new CheckersStart();
@@ -42,38 +42,38 @@ public class CheckersStart extends CGO implements ActionListener{
 
 
     private CheckersStart(){
-        frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 190, 340, Color.GREEN, false, new FlowLayout(), ICON_PATH, true, true, JFrame.EXIT_ON_CLOSE);
+        frameStart = addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 190, 340, Color.GREEN, false, new FlowLayout(), ICON_PATH, true, true, JFrame.EXIT_ON_CLOSE);
         
-        jComponentList.add(CGO.addLabel("CheckersGame",new Font("Verdana", Font.PLAIN, 18))); 
+        jComponentList.add(addLabel("CheckersGame", new Font("Verdana", Font.PLAIN, 18))); 
 
-        jComponentList.add(CGO.addLabel("table size"));
+        jComponentList.add(addLabel("table size"));
         
         String[] dimensionStrings = { "4", "6", "8", "10", "12", "14", "16"};
-        jComponentList.add(CGO.addComboBoxString(dimensionStrings, 2, false, this, stringAction));
+        jComponentList.add(addComboBoxString(dimensionStrings, 2, false, this, stringAction));
         addcommandtoList("combobox1");
 
-        jComponentList.add(CGO.addLabel("game mode"));
+        jComponentList.add(addLabel("game mode"));
 
         String[] modeStrings = { "classic", "revised"};
-        jComponentList.add(CGO.addComboBoxString(modeStrings, 1, false));
+        jComponentList.add(addComboBoxString(modeStrings, 1, false));
 
-        jComponentList.add(CGO.addLabel("timer"));
+        jComponentList.add(addLabel("timer"));
 
         String[] timeStrings = {"10", "60", "120", "180", "240", "480"};
-        jComponentList.add(CGO.addComboBoxString(timeStrings, 1, false));
+        jComponentList.add(addComboBoxString(timeStrings, 1, false));
         
-        jComponentList.add(CGO.addLabel("Choose name Player 1"));
+        jComponentList.add(addLabel("Choose name Player 1"));
         
-        jComponentList.add(CGO.addTextField("Player1", new Dimension(100, 20), true));
+        jComponentList.add(addTextField("Player1", new Dimension(100, 20), true));
         
-        jComponentList.add(CGO.addLabel("Choose name Player 2"));
+        jComponentList.add(addLabel("Choose name Player 2"));
         
-        jComponentList.add(CGO.addTextField("Player2", new Dimension(100, 20), true));
+        jComponentList.add(addTextField("Player2", new Dimension(100, 20), true));
         
-        jComponentList.add(CGO.addButton("Start Game", this, stringAction));
+        jComponentList.add(addButton("Start Game", this, stringAction));
         addcommandtoList("bStart Game");
         
-        jComponentList.add(CGO.addButton("Game Rules", this, stringAction));
+        jComponentList.add(addButton("Game Rules", this, stringAction));
         addcommandtoList("game rules");
 
         for (JComponent jb : jComponentList)
@@ -108,10 +108,8 @@ public class CheckersStart extends CGO implements ActionListener{
         String action = e.getActionCommand();
         switch(action){
             case "0":
-                System.out.println("Checkbox pressed!");
                 break;
             case "1":
-                System.out.println("Button pressed!");
                 firstPlayerName = ((JTextField) jComponentList.get(8)).getText();
                 secondPlayerName = ((JTextField) jComponentList.get(10)).getText();
                 n_sec = Integer.parseInt((String)(((JComboBox<?>)jComponentList.get(6)).getSelectedItem()));

@@ -15,9 +15,9 @@ public class TimerObservable implements Observable, ActionListener {
     private int index;
 
 
-    public TimerObservable(ArrayList<Observer> p, int indice, int n_sec){
+    public TimerObservable(ArrayList<Observer> p, int indice, int timer_value){
         index = indice;
-        timerStop = n_sec;
+        timerStop = timer_value;
         timer = new Timer(1000, this);
         timer.start();
 

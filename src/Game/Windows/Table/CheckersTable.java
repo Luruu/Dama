@@ -7,8 +7,8 @@ import Game.FactoryM.Creator;
 import Game.FactoryM.Pieces.Piece;
 import Game.FactoryM.Players.Observer;
 import Game.FactoryM.Players.Player;
-import Game.Windows.CGO;
 import Game.Windows.Start.CheckersStart;
+import Game.Windows.GraphicWindow;
 
 
 import java.awt.*;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * @since 31-08-2021
  */
 
-public class CheckersTable {
+public class CheckersTable extends GraphicWindow {
 
     private static CheckersTable Instance; //Singleton
 
@@ -48,13 +48,12 @@ public class CheckersTable {
     
     public  Color activePlayer = Color.red;
 
-    private int n_sec;
+    private int timer_value;
 
     TimerObservable timer;
 
 
     private CheckersTable(int N_ROWS, int N_COLS, boolean revisedChecker) {
-        System.out.println("CHERCIKERSTABLE 57");
         this.N_ROWS = N_ROWS;
         this.N_COLS = N_COLS;
         this.revisedChecker = revisedChecker;
@@ -87,9 +86,9 @@ public class CheckersTable {
 
     private void initializeWindow() throws Exception {
         Dimension sizeFrame = new Dimension(N_ROWS *Box.DIM_BOX, N_COLS * Box.DIM_BOX);
-        frameTable = CGO.addFrame("Checkers Table", sizeFrame.width, sizeFrame.height, Color.black, false, new BorderLayout(0,0), CheckersStart.getInstance().geticonPath(), true, CheckersStart.getInstance().centerTableY, JFrame.DO_NOTHING_ON_CLOSE);
-        panelTable = CGO.addPanel(sizeFrame.width, sizeFrame.height, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
-        panelInfo = new PanelInfo(200, sizeFrame.height, Color.getHSBColor(0, 0, 15), new FlowLayout(FlowLayout.CENTER, sizeFrame.width/10, sizeFrame.height/10 - 30), p1, p2, n_sec);
+        frameTable = addFrame("Checkers Table", sizeFrame.width, sizeFrame.height, Color.black, false, new BorderLayout(0,0), CheckersStart.getInstance().geticonPath(), true, CheckersStart.getInstance().centerTableY, JFrame.DO_NOTHING_ON_CLOSE);
+        panelTable = addPanel(sizeFrame.width, sizeFrame.height, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
+        panelInfo = new PanelInfo(200, sizeFrame.height, Color.getHSBColor(0, 0, 15), new FlowLayout(FlowLayout.CENTER, sizeFrame.width/10, sizeFrame.height/10 - 30), p1, p2, timer_value);
         
         Boxes = Box.createBoxes(N_ROWS, N_COLS, Box.DIM_BOX, p1, p2); //create new Boxes (all game table)
         addBoxesToPanel();
@@ -102,21 +101,21 @@ public class CheckersTable {
     }
 
     private void addBoxesToPanel(){
-        for (Box[] row : Boxes)
-            for (Box box : row)
+        for (Box[] rowBoxes : Boxes)
+            for (Box box : rowBoxes)
                 panelTable.add(box);
     }
 
-    public void startGame(Player p1, Player p2, int n_sec) throws Exception {
+    public void startGame(Player p1, Player p2, int timer_value) throws Exception {
         this.p1 = p1;
         this.p2 = p2;
-        this.n_sec = n_sec;
+        this.timer_value = timer_value;
         initializeWindow();
         ArrayList<Observer> p = new ArrayList<Observer>();
         p.add(p1);
         p.add(p2);
         p.add(panelInfo);
-        timer = new TimerObservable(p,2, n_sec);
+        timer = new TimerObservable(p,2, this.timer_value);
     }
 
     //Shows the moves allowed to click on a piece
