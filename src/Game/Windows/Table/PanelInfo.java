@@ -1,6 +1,7 @@
 package Game.Windows.Table;
 import javax.swing.*;
 
+import Game.FactoryM.Players.Observer;
 import Game.FactoryM.Players.Player;
 import Game.Windows.CGO;
 
@@ -9,11 +10,12 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelInfo implements ActionListener{
+public class PanelInfo implements ActionListener, Observer{
 
     private JPanel panelInfo;
     private ArrayList<JComponent> jlabelList = new ArrayList<>();
     private int nmove = 0;
+    private int time=3;
 
 
     public  PanelInfo(int n, int dim, Color c, LayoutManager lm, Player p1, Player p2){
@@ -29,7 +31,7 @@ public class PanelInfo implements ActionListener{
         jlabelList.add(CGO.addLabel("N° moves: " + nmove));
         jlabelList.add(CGO.addLabel("Turn: " + p1.getPlayerName()));
         jlabelList.get(6).setForeground(p1.getPlayerColor());
-        jlabelList.add(CGO.addLabel("Timer: " + "boh"));
+        jlabelList.add(CGO.addLabel("Timer: " + time));
         jlabelList.add(CGO.addButton("Give up", this, "1"));
         jlabelList.add(CGO.addButton("Restart", this, "2"));
 
@@ -62,7 +64,8 @@ public class PanelInfo implements ActionListener{
                 System.exit(1);
                 break;
             case "2":
-                ct.reStart();
+                ct.returnToStart();
+                ct.stopTimer();
                 break;
         }
     }
@@ -84,5 +87,12 @@ public class PanelInfo implements ActionListener{
         nmove++;
         JLabel jl = (JLabel) jlabelList.get(5);
         jl.setText("N° moves: " + nmove);
+    }
+
+    @Override
+    public void update(Object obj){
+        JLabel jl = (JLabel) jlabelList.get(7);
+        time -= 1;
+        jl.setText("Timer: " + time);
     }
 }

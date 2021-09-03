@@ -1,10 +1,5 @@
-Implementare il timer con la sua funzionalità + pattern observer.
-mostrare a schermo timer
-Tasto destro mostra l'info della pedina.
+Aggiungere i thread al timer
+
 AGGIORNARE JAVADOC
 Implementare Memento per il restart.
-Disattivare la x della finestra
-Give up oscura il frame e ritorna al frame iniziale
 
-Cambiare CGO in GraphicWindow e aggiungere come attributi i frame e i panel
-Cambiare quindi Checkerstart inserendo extends GraphicWindow

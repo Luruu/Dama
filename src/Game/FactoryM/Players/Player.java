@@ -8,14 +8,14 @@ import Game.Windows.Table.*;
 import java.awt.*;
 
 
-public class Player extends MouseAdapter {
+public class Player extends MouseAdapter implements Observer{
     public static int count_players = 0;
     public static final int MAX_NPLAYERS = 2;
     private final Color PlayerColor;
     private final String PlayerName;
     private int npieces =0;
     private final InvokerList invoker;
-
+    private CheckersTable TABLE;
     private int PlayerScore;
 
     public Player(Color c, String n) throws Exception {
@@ -27,7 +27,8 @@ public class Player extends MouseAdapter {
         PlayerColor = c;
         PlayerName = n;
         PlayerScore = 0;
-        invoker = new InvokerList(new ConcreteCommand(CheckersTable.getInstance()));
+        TABLE = CheckersTable.getInstance();
+        invoker = new InvokerList(new ConcreteCommand(TABLE));
     }
 
     //Overload del costruttore
@@ -35,16 +36,11 @@ public class Player extends MouseAdapter {
     public Player() throws Exception {
         PlayerColor  = null;
         PlayerName = null;
-        invoker = new InvokerList(new ConcreteCommand(CheckersTable.getInstance()));
+        TABLE = CheckersTable.getInstance();
+        invoker = new InvokerList(new ConcreteCommand(TABLE));
     }
 
     public void mouseClicked(MouseEvent e){
-        CheckersTable TABLE = null;
-        try {
-            TABLE = CheckersTable.getInstance();
-        } catch (Exception e2) {
-            e2.printStackTrace();
-        }
         String nameClass = e.getSource().getClass().getSimpleName();
         if (nameClass.equals("Pawn") || nameClass.equals("Wizard") ||  nameClass.equals("Checkers")){
             if (!checkTurn(TABLE.activePlayer))
@@ -70,6 +66,11 @@ public class Player extends MouseAdapter {
 
     private Boolean checkTurn(Color c){
         return (PlayerColor.equals(c));
+    }
+
+    @Override
+    public void update(Object obj) {
+        TABLE.timeElapsed(this, obj);        
     }
 
     // Getters and Setters methods..
@@ -113,6 +114,7 @@ public class Player extends MouseAdapter {
     public void setPlayerScore(int PlayerScore) {
         this.PlayerScore = PlayerScore;
     }
+
     
     
 }

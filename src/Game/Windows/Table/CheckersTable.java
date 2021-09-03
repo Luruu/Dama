@@ -1,9 +1,11 @@
 package Game.Windows.Table;
 import javax.swing.*;
 
+import Game.TimerObservable;
 import Game.FactoryM.ConcreteFactoryM;
 import Game.FactoryM.Creator;
 import Game.FactoryM.Pieces.Piece;
+import Game.FactoryM.Players.Observer;
 import Game.FactoryM.Players.Player;
 import Game.Windows.CGO;
 import Game.Windows.Start.CheckersStart;
@@ -46,6 +48,8 @@ public class CheckersTable {
     
     public  Color activePlayer = Color.red;
 
+    TimerObservable timer;
+
 
     private CheckersTable(final int N_ROWS, final int N_COLS, boolean revisedChecker) {
         this.N_ROWS = N_ROWS;
@@ -82,7 +86,7 @@ public class CheckersTable {
         frameTable = CGO.addFrame("Checkers Table", sizeFrame.width, sizeFrame.height, Color.black, false, new BorderLayout(0,0), CheckersStart.getInstance().geticonPath(), true, CheckersStart.getInstance().centerTableY, JFrame.DO_NOTHING_ON_CLOSE);
         panelTable = CGO.addPanel(sizeFrame.width, sizeFrame.height, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
         panelInfo = new PanelInfo(200, sizeFrame.height, Color.getHSBColor(0, 0, 15), new FlowLayout(FlowLayout.CENTER, sizeFrame.width/10, sizeFrame.height/10 - 30), p1, p2);
-       
+        
         Boxes = Box.createBoxes(N_ROWS, N_COLS, Box.DIM_BOX, p1, p2); //create new Boxes (all game table)
         addBoxesToPanel();
 
@@ -103,6 +107,11 @@ public class CheckersTable {
         this.p1 = p1;
         this.p2 = p2;
         initializeWindow();
+        ArrayList<Observer> p = new ArrayList<Observer>();
+        p.add(p1);
+        p.add(p2);
+        p.add(panelInfo);
+        timer = new TimerObservable(p,2);
     }
 
     //Shows the moves allowed to click on a piece
@@ -219,10 +228,30 @@ public class CheckersTable {
         return new CheckersMemento();
     }
 
+    public void timeElapsed(Player winner, Object obj){
+        if (obj != null)
+            JOptionPane.showMessageDialog(null, "Tempo scaduto! \n La partita termina in parità");
+        else
+            JOptionPane.showMessageDialog(null, "Tempo scaduto! \n Il vincitore è " + winner.getPlayerName());
+        returnToStart();
+    }
+
+    public void returnToStart(){
+        frameTable.dispose();
+        Player.count_players = 0;
+        CheckersStart CT = CheckersStart.getInstance();
+        CT.getFrame().setVisible(true);
+    }
+
+    public void stopTimer(){
+        timer.stop();
+    }
+
     public void reStart(){
-        memento.restoreState();
-        panelTable.revalidate();
-        panelTable.repaint();
+    //    memento.restoreState();
+    //    panelTable.revalidate();
+    //    panelTable.repaint();
+        System.out.println("da implementare memento");    
     }
 
     //Memento class

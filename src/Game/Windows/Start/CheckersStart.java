@@ -39,7 +39,7 @@ public class CheckersStart extends CGO implements ActionListener{
 
     private CheckersStart(){
         frameStart = CGO.addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 190, 300, Color.GREEN, false, new FlowLayout(), ICON_PATH, true, true, JFrame.EXIT_ON_CLOSE);
-    
+        
         jComponentList.add(CGO.addLabel("CheckersGame",new Font("Verdana", Font.PLAIN, 18))); 
 
         jComponentList.add(CGO.addLabel("table size"));
@@ -162,6 +162,10 @@ public class CheckersStart extends CGO implements ActionListener{
 
     public String geticonPath(){
         return ICON_PATH;
+    }
+
+    public JFrame getFrame(){
+        return frameStart;
     }
         
 }
