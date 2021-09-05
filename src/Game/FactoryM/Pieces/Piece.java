@@ -2,6 +2,7 @@ package Game.FactoryM.Pieces;
 import javax.swing.*;
 
 import Game.ImageFunctions;
+import Game.FactoryM.ObjGame;
 import Game.FactoryM.Players.Player;
 import Game.Windows.Table.Box;
 import Game.Windows.Table.CheckersTable;
@@ -12,7 +13,7 @@ import java.awt.image.BufferedImage;
 
 
 
-public abstract class Piece extends JComponent {
+public abstract class Piece extends JComponent implements ObjGame {
    private final Color color;
    protected int points;
    private BufferedImage img;

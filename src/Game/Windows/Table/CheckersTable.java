@@ -3,7 +3,7 @@ import javax.swing.*;
 
 import Game.TimerObservable;
 import Game.FactoryM.ConcreteFactoryM;
-import Game.FactoryM.Creator;
+import Game.FactoryM.Factory;
 import Game.FactoryM.Pieces.Piece;
 import Game.FactoryM.Players.Observer;
 import Game.FactoryM.Players.Player;
@@ -160,7 +160,7 @@ public class CheckersTable extends GraphicWindow {
         addOrRemove(srcBox, false, pToMove);  //remove the old piece from the previous Box
 
         if (canPieceUpgrade() || wizardEated){ //If pawn can upgrade
-            Creator factory = new ConcreteFactoryM();
+            Factory factory = new ConcreteFactoryM();
             pToMove = (Piece) factory.factoryMethod("checkers", pToMove.getColor(), pToMove.getOwner());
             pToMove.setCoord(pieceCoord.x, pieceCoord.y);
         }
@@ -168,7 +168,7 @@ public class CheckersTable extends GraphicWindow {
     }
     //In Box will respawn a piece
     private void respawn(Box box) throws Exception{
-        Creator factory = new ConcreteFactoryM();
+        Factory factory = new ConcreteFactoryM();
         Piece piece = (Piece) factory.factoryMethod("pawn", pToMove.getColor(), pToMove.getOwner());
         pToMove.getOwner().increaseNpieces();
         addOrRemove(box, true, piece);

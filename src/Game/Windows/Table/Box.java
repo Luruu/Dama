@@ -2,7 +2,7 @@ package Game.Windows.Table;
 import javax.swing.*;
 
 import Game.FactoryM.ConcreteFactoryM;
-import Game.FactoryM.Creator;
+import Game.FactoryM.Factory;
 import Game.FactoryM.Pieces.*;
 import Game.FactoryM.Players.Player;
 
@@ -41,7 +41,7 @@ public class Box extends JPanel{
     }
 
     private static void addPieces(Box[][] Boxes , int N_ROWS, int N_COLS, Player p1, Player p2) throws Exception {
-        Creator factory = new ConcreteFactoryM();
+        Factory factory = new ConcreteFactoryM();
         Color pieceColor;
         String typePiece;
         Boolean revisedChecker = CheckersTable.getInstance().getRevisedChecker();

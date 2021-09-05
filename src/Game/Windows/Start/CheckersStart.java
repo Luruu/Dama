@@ -2,7 +2,7 @@ package Game.Windows.Start;
 import javax.swing.*;
 
 import Game.FactoryM.ConcreteFactoryM;
-import Game.FactoryM.Creator;
+import Game.FactoryM.Factory;
 import Game.FactoryM.Players.Player;
 import Game.Windows.GraphicWindow;
 import Game.Windows.Table.Box;
@@ -159,7 +159,7 @@ public class CheckersStart extends GraphicWindow implements ActionListener{
         Box.DIM_BOX = DIM_BOX;
         scaleDimensionTable(); //N.B: Game Table sizes are always (DIM * Box.DIM_BOX, DIM * DIM_BOX)
         CheckersTable table = CheckersTable.getInstance(DIM_TABLE, DIM_TABLE, revisedChecker);
-        Creator factoryM = new ConcreteFactoryM();
+        Factory factoryM = new ConcreteFactoryM();
         Player pl1 = (Player) factoryM.factoryMethod(p1Name, Color.red, null);
         Player pl2 = (Player) factoryM.factoryMethod(p2Name, Color.green, null);
         table.startGame(pl1, pl2, n_sec); 

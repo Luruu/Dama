@@ -3,12 +3,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import Game.FactoryM.Pieces.*;
+import Game.FactoryM.*;
 import Game.Windows.Table.*;
 
 import java.awt.*;
 
 
-public class Player extends MouseAdapter implements Observer{
+public class Player extends MouseAdapter implements Observer, ObjGame{
     public static int count_players = 0;
     public static final int MAX_NPLAYERS = 2;
     private final Color PlayerColor;
