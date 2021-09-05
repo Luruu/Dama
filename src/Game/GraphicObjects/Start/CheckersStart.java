@@ -166,12 +166,6 @@ public class CheckersStart extends GraphicWindow implements ActionListener{
         table.startGame(pl1, pl2, n_sec); 
     }
 
-    public String geticonPath(){
-        return ICON_PATH;
-    }
-
-    public JFrame getFrame(){
-        return frame;
-    }
+    
         
 }
