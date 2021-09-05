@@ -66,7 +66,7 @@ public class PanelInfo implements objGraphics, ActionListener, Observer {
                 System.exit(1);
                 break;
             case "2":
-               // ct.returnToStart();
+               // ct.returnToStart(); PRIMA DI MEMENTO, DA TOGLIERE
                 try {
                     ct.reStart();
                 } catch (Exception e) {
