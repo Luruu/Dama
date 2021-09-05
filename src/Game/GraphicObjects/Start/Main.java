@@ -1,4 +1,4 @@
-package Game.Windows.Start;
+package Game.GraphicObjects.Start;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;

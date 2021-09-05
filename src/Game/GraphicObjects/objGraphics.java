@@ -1,4 +1,5 @@
-package Game.Windows;
+package Game.GraphicObjects;
+
 import javax.swing.*;
 
 import Game.ImageFunctions;
@@ -6,11 +7,9 @@ import Game.ImageFunctions;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-// Create Graphic Objects 
-public abstract class GraphicWindow {
-    
+public interface objGraphics {
     //Add and set a new Frame
-    protected JFrame addFrame(String titleFrame, int width, int height, Color backGroundColor, boolean resizable, LayoutManager layout, String icon, boolean centerX, boolean centerY, int actionOnExit) {
+    default JFrame addFrame(String titleFrame, int width, int height, Color backGroundColor, boolean resizable, LayoutManager layout, String icon, boolean centerX, boolean centerY, int actionOnExit) {
         JFrame newFrame = new JFrame(titleFrame);
        
         newFrame.setSize(width, height);
@@ -39,7 +38,7 @@ public abstract class GraphicWindow {
     }
 
     //Add and set a new Panel
-    protected JPanel addPanel(int width, int height, Color backGroundColor, LayoutManager layout) {
+    default JPanel addPanel(int width, int height, Color backGroundColor, LayoutManager layout) {
         JPanel newPanel = new JPanel();
         newPanel.setLayout(layout);
         newPanel.setPreferredSize(new Dimension(width, height));
@@ -47,27 +46,27 @@ public abstract class GraphicWindow {
         return newPanel;
     }
 
-    protected JPanel addPanel() {
+    default JPanel addPanel() {
         JPanel newPanel = new JPanel();
         newPanel.setLayout(null);
         return newPanel;
     }
 
 
-    protected JButton addButton(String text, ActionListener listener, String action){
+    default JButton addButton(String text, ActionListener listener, String action){
         JButton newButton = new JButton(text);
         newButton.addActionListener(listener);
         newButton.setActionCommand(action);
         return newButton;
     }
-    protected JComboBox<?> addComboBoxString(String [] str, int SelectedIndex, boolean editablebyUser) {
+    default JComboBox<?> addComboBoxString(String [] str, int SelectedIndex, boolean editablebyUser) {
         JComboBox<?> newCombobox = new JComboBox<String>(str);
         newCombobox.setSelectedIndex(SelectedIndex);
         newCombobox.setEditable(editablebyUser);
         return newCombobox;
     }
 
-    protected JComboBox<?> addComboBoxString(String [] str, int SelectedIndex, boolean editablebyUser, ActionListener listener, String action) {
+    default JComboBox<?> addComboBoxString(String [] str, int SelectedIndex, boolean editablebyUser, ActionListener listener, String action) {
         JComboBox<?> newCombobox = new JComboBox<String>(str);
         newCombobox.setSelectedIndex(SelectedIndex);
         newCombobox.setEditable(editablebyUser);
@@ -76,7 +75,7 @@ public abstract class GraphicWindow {
         return newCombobox;
     }
 
-    protected JTextField addTextField(String str, Dimension dim, boolean opaque){
+    default JTextField addTextField(String str, Dimension dim, boolean opaque){
         JTextField newTextField = new JTextField(str);
         Font smallFont = new Font("Monospaced", Font.PLAIN, 14);  
         newTextField.setPreferredSize(new Dimension(dim.width, dim.height)); 
@@ -85,17 +84,15 @@ public abstract class GraphicWindow {
         return newTextField;
     }
     
-    protected JLabel addLabel(String str){
+    default JLabel addLabel(String str){
         JLabel newLabel = new JLabel(str);
         return newLabel;
     }
 
-    protected JLabel addLabel(String str, Font font){
+    default JLabel addLabel(String str, Font font){
         JLabel newLabel = new JLabel(str);
         if (font != null)
             newLabel.setFont(font);
         return newLabel;
     }
-
-
 }

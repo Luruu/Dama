@@ -1,16 +1,16 @@
-package Game.Windows.Table;
+package Game.GraphicObjects.Table;
 import javax.swing.*;
 
-import Game.ObjGamepkg.Players.Observer;
-import Game.ObjGamepkg.Players.Player;
-import Game.Windows.GraphicWindow;
+import Game.GameObjects.Players.Observer;
+import Game.GameObjects.Players.Player;
+import Game.GraphicObjects.objGraphics;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelInfo extends GraphicWindow implements ActionListener, Observer {
+public class PanelInfo implements objGraphics, ActionListener, Observer {
 
     private JPanel panelInfo;
     private ArrayList<JComponent> jComponentList;

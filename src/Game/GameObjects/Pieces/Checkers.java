@@ -1,7 +1,7 @@
-package Game.ObjGamepkg.Pieces;
+package Game.GameObjects.Pieces;
 import java.awt.*;
 
-import Game.ObjGamepkg.Players.Player;
+import Game.GameObjects.Players.Player;
 public class Checkers extends Piece{
     public final static int CHECKERS_POINTS = 5;
     

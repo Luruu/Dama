@@ -1,11 +1,11 @@
-package Game.ObjGamepkg.Pieces;
+package Game.GameObjects.Pieces;
 import javax.swing.*;
 
 import Game.ImageFunctions;
-import Game.ObjGamepkg.ObjGame;
-import Game.ObjGamepkg.Players.Player;
-import Game.Windows.Table.Box;
-import Game.Windows.Table.CheckersTable;
+import Game.GameObjects.ObjGame;
+import Game.GameObjects.Players.Player;
+import Game.GraphicObjects.Table.Box;
+import Game.GraphicObjects.Table.CheckersTable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

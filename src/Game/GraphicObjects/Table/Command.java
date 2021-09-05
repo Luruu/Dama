@@ -1,5 +1,5 @@
-package Game.Windows.Table;
-import Game.ObjGamepkg.Pieces.*;
+package Game.GraphicObjects.Table;
+import Game.GameObjects.Pieces.*;
 
 public interface Command {
     void suggestions(Piece pClicked);

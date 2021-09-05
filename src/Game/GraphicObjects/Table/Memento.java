@@ -1,4 +1,4 @@
-package Game.Windows.Table;
+package Game.GraphicObjects.Table;
 
 public interface Memento {
     public void restoreState();

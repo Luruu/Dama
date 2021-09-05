@@ -1,10 +1,10 @@
-package Game.ObjGamepkg.Players;
+package Game.GameObjects.Players;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import Game.ObjGamepkg.*;
-import Game.ObjGamepkg.Pieces.*;
-import Game.Windows.Table.*;
+import Game.GameObjects.*;
+import Game.GameObjects.Pieces.*;
+import Game.GraphicObjects.Table.*;
 
 import java.awt.*;
 

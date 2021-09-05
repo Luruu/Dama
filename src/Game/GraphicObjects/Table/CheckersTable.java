@@ -1,15 +1,14 @@
-package Game.Windows.Table;
+package Game.GraphicObjects.Table;
 import javax.swing.*;
 
 import Game.TimerObservable;
-import Game.ObjGamepkg.ConcreteFactoryM;
-import Game.ObjGamepkg.Factory;
-import Game.ObjGamepkg.Pieces.Piece;
-import Game.ObjGamepkg.Players.Observer;
-import Game.ObjGamepkg.Players.Player;
-import Game.Windows.Start.CheckersStart;
-import Game.Windows.GraphicWindow;
-
+import Game.GameObjects.ConcreteFactoryM;
+import Game.GameObjects.Factory;
+import Game.GameObjects.Pieces.Piece;
+import Game.GameObjects.Players.Observer;
+import Game.GameObjects.Players.Player;
+import Game.GraphicObjects.GraphicWindow;
+import Game.GraphicObjects.Start.CheckersStart;
 
 import java.awt.*;
 import java.lang.Exception;
@@ -34,8 +33,7 @@ public class CheckersTable extends GraphicWindow {
 
     private Player p1, p2;
 
-    private JFrame frameTable;
-    private JPanel panelTable;
+    
     private PanelInfo panelInfo;
     
     private Piece pToMove; // Piece to move when a Box is clicked by a player
@@ -86,24 +84,24 @@ public class CheckersTable extends GraphicWindow {
 
     private void initializeWindow() throws Exception {
         Dimension sizeFrame = new Dimension(N_ROWS *Box.DIM_BOX, N_COLS * Box.DIM_BOX);
-        frameTable = addFrame("Checkers Table", sizeFrame.width, sizeFrame.height, Color.black, false, new BorderLayout(0,0), CheckersStart.getInstance().geticonPath(), true, CheckersStart.getInstance().centerTableY, JFrame.DO_NOTHING_ON_CLOSE);
-        panelTable = addPanel(sizeFrame.width, sizeFrame.height, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
+        frame = addFrame("Checkers Table", sizeFrame.width, sizeFrame.height, Color.black, false, new BorderLayout(0,0), ICON_PATH, true, CheckersStart.getInstance().centerTableY, JFrame.DO_NOTHING_ON_CLOSE);
+        panel = addPanel(sizeFrame.width, sizeFrame.height, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
         panelInfo = new PanelInfo(200, sizeFrame.height, Color.getHSBColor(0, 0, 15), new FlowLayout(FlowLayout.CENTER, sizeFrame.width/10, sizeFrame.height/10 - 30), p1, p2, timer_value);
     
         Boxes = Box.createBoxes(N_ROWS, N_COLS, Box.DIM_BOX, p1, p2); //create new Boxes (all game table)
         addBoxesToPanel();
 
-        frameTable.add(panelTable);
-        frameTable.add(panelInfo.getpanelInfo(),BorderLayout.LINE_END);
-        frameTable.setVisible(true);
-        frameTable.pack();
+        frame.add(panel);
+        frame.add(panelInfo.getpanelInfo(),BorderLayout.LINE_END);
+        frame.setVisible(true);
+        frame.pack();
         memento = new CheckersMemento();
     }
 
     private void addBoxesToPanel(){
         for (Box[] rowBoxes : Boxes)
             for (Box box : rowBoxes)
-                panelTable.add(box);
+                panel.add(box);
     }
 
     public void startGame(Player p1, Player p2, int timer_value) throws Exception {
@@ -241,7 +239,7 @@ public class CheckersTable extends GraphicWindow {
     }
 
     public void returnToStart(){
-        frameTable.dispose();
+        frame.dispose();
         Instance = null; // when another game is started, a new object must be instantiated to use the class constructor 
         Player.count_players = 0;
         CheckersStart CT = CheckersStart.getInstance();
@@ -270,13 +268,13 @@ public class CheckersTable extends GraphicWindow {
             mem_p1 = p1;
             mem_p2 = p2;
             mem_panelInfo = panelInfo;
-            mem_panelTable = panelTable;
+            mem_panelTable = panel;
         }
         public void restoreState(){
         p1 = mem_p1;
         p2 = mem_p2;
         panelInfo = mem_panelInfo;
-        panelTable = mem_panelTable;
+        panel = mem_panelTable;
         }
     }
 

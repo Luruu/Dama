@@ -1,12 +1,12 @@
-package Game.Windows.Start;
+package Game.GraphicObjects.Start;
 import javax.swing.*;
 
-import Game.ObjGamepkg.ConcreteFactoryM;
-import Game.ObjGamepkg.Factory;
-import Game.ObjGamepkg.Players.Player;
-import Game.Windows.GraphicWindow;
-import Game.Windows.Table.Box;
-import Game.Windows.Table.CheckersTable;
+import Game.GameObjects.ConcreteFactoryM;
+import Game.GameObjects.Factory;
+import Game.GameObjects.Players.Player;
+import Game.GraphicObjects.GraphicWindow;
+import Game.GraphicObjects.Table.Box;
+import Game.GraphicObjects.Table.CheckersTable;
 
 import java.awt.*;
 import java.awt.event.*;  
@@ -19,8 +19,9 @@ public class CheckersStart extends GraphicWindow implements ActionListener{
     //Singleton Eager initialization
     private static final CheckersStart Instance = new CheckersStart();
 
-    private JFrame frameStart;
-    private final String ICON_PATH = "/images/WizardRed.png";
+   /* private JFrame frame;
+    private JPanel panel; */
+    
 
     private String  firstPlayerName, secondPlayerName;
     private int     dimTable;
@@ -42,7 +43,7 @@ public class CheckersStart extends GraphicWindow implements ActionListener{
 
 
     private CheckersStart(){
-        frameStart = addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 190, 340, Color.GREEN, false, new FlowLayout(), ICON_PATH, true, true, JFrame.EXIT_ON_CLOSE);
+        frame = addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 190, 340, Color.GREEN, false, new FlowLayout(), ICON_PATH, true, true, JFrame.EXIT_ON_CLOSE);
         
         jComponentList.add(addLabel("CheckersGame", new Font("Verdana", Font.PLAIN, 18))); 
 
@@ -77,11 +78,11 @@ public class CheckersStart extends GraphicWindow implements ActionListener{
         addcommandtoList("game rules");
 
         for (JComponent jb : jComponentList)
-            frameStart.add(jb);
+        frame.add(jb);
 
         printComponentsList();
 
-        frameStart.setVisible(true);
+        frame.setVisible(true);
     }
 
     
@@ -117,7 +118,7 @@ public class CheckersStart extends GraphicWindow implements ActionListener{
                 modeRevised = ((JComboBox<?>)jComponentList.get(4)).getSelectedItem().equals("revised"); //true revised, false classic
                 if (firstPlayerName.isBlank() || secondPlayerName.isBlank()) return;
                 try {
-                    frameStart.setVisible(false); //hide CheckersStart Window
+                    frame.setVisible(false); //hide CheckersStart Window
                     startGame(firstPlayerName, secondPlayerName, dimTable, Box.DIM_BOX, modeRevised, n_sec);
                 } catch (Exception e1) {
                     e1.printStackTrace();
@@ -125,7 +126,7 @@ public class CheckersStart extends GraphicWindow implements ActionListener{
                 break;
             case "2":
                 System.out.println("label info pressed!");
-                JOptionPane.showMessageDialog(frameStart, "REVISED MODE: Ogni giocatore dispone di N pedine e 2 Arcieri (N in base alla dimensione del campo da gioco) di colore diverso rispetto a quelle dell'avversario.\n Il giocatore verde fa sempre la prima mossa.\n" +
+                JOptionPane.showMessageDialog(frame, "REVISED MODE: Ogni giocatore dispone di N pedine e 2 Arcieri (N in base alla dimensione del campo da gioco) di colore diverso rispetto a quelle dell'avversario.\n Il giocatore verde fa sempre la prima mossa.\n" +
                 "L'obiettivo del gioco è quello di mangiare tutti i pezzi dell'avversario o di fare il miglior punteggio entro il tempo limite\n" +
                 "Sul campo da gioco sono presenti i seguenti pezzi:\n" + 
                 "Pedina: pezzo classico che si muove solamente in diagonale di una casella alla volta e soltanto in avanti. Quando una pedina raggiunge una delle caselle dell'ultima riga viene promossa diventando dama.\n" +
@@ -170,7 +171,7 @@ public class CheckersStart extends GraphicWindow implements ActionListener{
     }
 
     public JFrame getFrame(){
-        return frameStart;
+        return frame;
     }
         
 }

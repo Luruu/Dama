@@ -1,10 +1,10 @@
-package Game.Windows.Table;
+package Game.GraphicObjects.Table;
 import javax.swing.*;
 
-import Game.ObjGamepkg.ConcreteFactoryM;
-import Game.ObjGamepkg.Factory;
-import Game.ObjGamepkg.Pieces.*;
-import Game.ObjGamepkg.Players.Player;
+import Game.GameObjects.ConcreteFactoryM;
+import Game.GameObjects.Factory;
+import Game.GameObjects.Pieces.*;
+import Game.GameObjects.Players.Player;
 
 import java.awt.*;
 

@@ -1,6 +1,6 @@
-package Game.Windows.Table;
+package Game.GraphicObjects.Table;
 
-import Game.ObjGamepkg.Pieces.Piece;
+import Game.GameObjects.Pieces.Piece;
 
 public class ConcreteCommand implements Command{
     private CheckersTable checkTable;
