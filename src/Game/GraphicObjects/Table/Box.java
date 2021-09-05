@@ -58,9 +58,6 @@ public class Box extends JPanel{
                     owner = (pieceColor == Color.red) ? p1 : p2;
                     owner.increaseNpieces();
                     piece = (Piece) factory.factoryMethod(typePiece, pieceColor, owner);
-                    /*Boxes[i][j].add(piece, BorderLayout.CENTER);
-                    Boxes[i][j].hasPiece = true;
-                    piece.setCoord(i,j);*/
                     addPiece(Boxes, i, j, piece);
                 }
             }
