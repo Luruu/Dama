@@ -1,8 +1,8 @@
 package Game.Windows.Table;
 import javax.swing.*;
 
-import Game.FactoryM.Players.Observer;
-import Game.FactoryM.Players.Player;
+import Game.ObjGamepkg.Players.Observer;
+import Game.ObjGamepkg.Players.Player;
 import Game.Windows.GraphicWindow;
 
 import java.awt.*;

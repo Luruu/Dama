@@ -1,9 +1,9 @@
 package Game.Windows.Start;
 import javax.swing.*;
 
-import Game.FactoryM.ConcreteFactoryM;
-import Game.FactoryM.Factory;
-import Game.FactoryM.Players.Player;
+import Game.ObjGamepkg.ConcreteFactoryM;
+import Game.ObjGamepkg.Factory;
+import Game.ObjGamepkg.Players.Player;
 import Game.Windows.GraphicWindow;
 import Game.Windows.Table.Box;
 import Game.Windows.Table.CheckersTable;

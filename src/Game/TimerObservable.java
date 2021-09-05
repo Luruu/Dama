@@ -1,12 +1,12 @@
 package Game;
 
-import Game.FactoryM.Players.Observer;
-import Game.FactoryM.Players.Player;
-
 import java.util.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
+
+import Game.ObjGamepkg.Players.Observer;
+import Game.ObjGamepkg.Players.Player;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;

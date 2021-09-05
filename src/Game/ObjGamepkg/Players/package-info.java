@@ -5,4 +5,4 @@
  * @author <a href="https://github.com/Luruu">Luca Rubino</a>
  * @author <a href="https://github.com/RenatoEsposito1999">Renato Esposito</a>
  */
-package Game.FactoryM.Players;
+package Game.ObjGamepkg.Players;

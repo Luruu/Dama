@@ -2,11 +2,11 @@ package Game.Windows.Table;
 import javax.swing.*;
 
 import Game.TimerObservable;
-import Game.FactoryM.ConcreteFactoryM;
-import Game.FactoryM.Factory;
-import Game.FactoryM.Pieces.Piece;
-import Game.FactoryM.Players.Observer;
-import Game.FactoryM.Players.Player;
+import Game.ObjGamepkg.ConcreteFactoryM;
+import Game.ObjGamepkg.Factory;
+import Game.ObjGamepkg.Pieces.Piece;
+import Game.ObjGamepkg.Players.Observer;
+import Game.ObjGamepkg.Players.Player;
 import Game.Windows.Start.CheckersStart;
 import Game.Windows.GraphicWindow;
 

@@ -1,7 +1,7 @@
-package Game.FactoryM.Pieces;
+package Game.ObjGamepkg.Pieces;
 import java.awt.*;
 
-import Game.FactoryM.Players.Player;
+import Game.ObjGamepkg.Players.Player;
 
 public class Pawn extends Piece{
     public Pawn(Color c, Player p) throws Exception{

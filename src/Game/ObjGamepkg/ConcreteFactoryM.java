@@ -1,8 +1,8 @@
-package Game.FactoryM;
+package Game.ObjGamepkg;
 import java.awt.*;
 
-import Game.FactoryM.Pieces.*;
-import Game.FactoryM.Players.*;
+import Game.ObjGamepkg.Pieces.*;
+import Game.ObjGamepkg.Players.*;
 
 
 public class ConcreteFactoryM implements Factory {

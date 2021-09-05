@@ -1,9 +1,9 @@
-package Game.FactoryM.Players;
+package Game.ObjGamepkg.Players;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import Game.FactoryM.Pieces.*;
-import Game.FactoryM.*;
+import Game.ObjGamepkg.*;
+import Game.ObjGamepkg.Pieces.*;
 import Game.Windows.Table.*;
 
 import java.awt.*;

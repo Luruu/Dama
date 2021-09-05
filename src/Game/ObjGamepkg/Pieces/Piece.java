@@ -1,9 +1,9 @@
-package Game.FactoryM.Pieces;
+package Game.ObjGamepkg.Pieces;
 import javax.swing.*;
 
 import Game.ImageFunctions;
-import Game.FactoryM.ObjGame;
-import Game.FactoryM.Players.Player;
+import Game.ObjGamepkg.ObjGame;
+import Game.ObjGamepkg.Players.Player;
 import Game.Windows.Table.Box;
 import Game.Windows.Table.CheckersTable;
 

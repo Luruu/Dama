@@ -1,7 +1,7 @@
-package Game.FactoryM.Pieces;
+package Game.ObjGamepkg.Pieces;
 import java.awt.*;
 
-import Game.FactoryM.Players.Player;
+import Game.ObjGamepkg.Players.Player;
 
 public class Wizard extends Piece{
     public final static int WIZARD_POINTS = 3;
