@@ -3,112 +3,117 @@
   <ID>JAVA</ID>
   <OriginalElement>D:/Universita/TERZO ANNO/Primo Semestre/Programmazione 3/Progetto</OriginalElement>
   <nodes>
-    <node x="517.0" y="238.0">Game.GameObjects.Factory</node>
-    <node x="0.0" y="319.0">Game.ThreadTimerObservable</node>
-    <node x="257.0" y="471.0">Game.GraphicObjects.Table.Box</node>
-    <node x="322.0288461538461" y="0.0">Game.GameObjects.Players.Observer</node>
-    <node x="210.0" y="395.0">Game.ImageFunctions</node>
-    <node x="250.0288461538461" y="81.0">Game.GraphicObjects.Table.PanelInfo</node>
-    <node x="578.0" y="395.0">Game.GraphicObjects.Table.Memento</node>
-    <node x="130.0" y="471.0">Game.GraphicObjects.Start.Thrd</node>
-    <node x="481.0" y="319.0">Game.GameObjects.ConcreteFactoryM</node>
-    <node x="256.0" y="319.0">Game.GraphicObjects.Table.ConcreteCommand</node>
-    <node x="285.5" y="238.0">Game.GraphicObjects.Table.Command</node>
-    <node x="398.0288461538461" y="81.0">Game.GameObjects.Players.Player</node>
-    <node x="411.0" y="395.0">Game.GraphicObjects.Table.InvokerList</node>
-    <node x="42.0" y="238.0">Game.Observable</node>
-    <node x="163.5288461538461" y="0.0">Game.GraphicObjects.objGraphics</node>
-    <node x="0.0" y="162.0">Game.GraphicObjects.Table.CheckersTable</node>
-    <node x="453.0288461538461" y="0.0">Game.GameObjects.ObjGame</node>
-    <node x="166.99999999999997" y="162.0">Game.GraphicObjects.Start.CheckersStart</node>
-    <node x="0.0" y="395.0">Game.TimerObservable</node>
-    <node x="536.5288461538461" y="81.0">Game.GameObjects.Pieces.Piece</node>
-    <node x="406.5288461538461" y="162.0">Game.GameObjects.Pieces.Checkers</node>
-    <node x="72.02884615384608" y="81.0">Game.GraphicObjects.GraphicWindow</node>
-    <node x="0.0" y="471.0">Game.GraphicObjects.Start.Main</node>
-    <node x="536.5288461538461" y="162.0">Game.GameObjects.Pieces.Pawn</node>
-    <node x="643.5288461538461" y="162.0">Game.GameObjects.Pieces.Wizard</node>
+    <node x="517.0" y="319.0">Game.GameObjects.Factory</node>
+    <node x="0.0" y="400.0">Game.ThreadTimerObservable</node>
+    <node x="322.5689655172414" y="0.0">Game.GameObjects.Players.Observer</node>
+    <node x="257.0" y="552.0">Game.GraphicObjects.Table.Box</node>
+    <node x="210.0" y="476.0">Game.ImageFunctions</node>
+    <node x="250.56896551724137" y="81.0">Game.GraphicObjects.Table.PanelInfo</node>
+    <node x="578.0" y="476.0">Game.GraphicObjects.Table.Memento</node>
+    <node x="130.0" y="552.0">Game.GraphicObjects.Start.Thrd</node>
+    <node x="481.0" y="400.0">Game.GameObjects.ConcreteFactoryM</node>
+    <node x="256.0" y="400.0">Game.GraphicObjects.Table.ConcreteCommand</node>
+    <node x="285.5" y="319.0">Game.GraphicObjects.Table.Command</node>
+    <node x="398.5689655172414" y="81.0">Game.GameObjects.Players.Player</node>
+    <node x="411.0" y="476.0">Game.GraphicObjects.Table.InvokerList</node>
+    <node x="42.0" y="319.0">Game.Observable</node>
+    <node x="164.06896551724137" y="0.0">Game.GraphicObjects.objGraphics</node>
+    <node x="0.0" y="243.0">Game.GraphicObjects.Table.CheckersTable</node>
+    <node x="453.5689655172414" y="0.0">Game.GameObjects.ObjGame</node>
+    <node x="165.5" y="162.0">Game.GraphicObjects.Start.CheckersStart</node>
+    <node x="0.0" y="476.0">Game.TimerObservable</node>
+    <node x="1.5" y="162.0">Game.GraphicObjects.Table.WindowTable</node>
+    <node x="530.5689655172414" y="81.0">Game.GameObjects.Pieces.Piece</node>
+    <node x="519.0689655172414" y="162.0">Game.GameObjects.Pieces.Checkers</node>
+    <node x="72.56896551724134" y="81.0">Game.GraphicObjects.GraphicWindow</node>
+    <node x="0.0" y="552.0">Game.GraphicObjects.Start.Main</node>
+    <node x="412.0689655172414" y="162.0">Game.GameObjects.Pieces.Pawn</node>
+    <node x="649.0689655172414" y="162.0">Game.GameObjects.Pieces.Wizard</node>
   </nodes>
   <notes />
   <edges>
     <edge source="Game.GraphicObjects.Table.PanelInfo" target="Game.GraphicObjects.objGraphics" relationship="REALIZATION">
       <point x="0.0" y="-15.5" />
-      <point x="307.0288461538461" y="51.0" />
-      <point x="229.0288461538461" y="51.0" />
+      <point x="307.5689655172414" y="51.0" />
+      <point x="229.56896551724137" y="51.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="Game.GraphicObjects.Table.CheckersTable" target="Game.GraphicObjects.Table.WindowTable" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.5" />
       <point x="0.0" y="15.5" />
     </edge>
     <edge source="Game.GameObjects.ConcreteFactoryM" target="Game.GameObjects.Factory" relationship="REALIZATION">
       <point x="0.0" y="-15.5" />
       <point x="0.0" y="15.5" />
     </edge>
-    <edge source="Game.GameObjects.Pieces.Piece" target="Game.GameObjects.ObjGame" relationship="REALIZATION">
-      <point x="0.0" y="-15.5" />
-      <point x="580.0288461538461" y="51.0" />
-      <point x="510.5288461538461" y="51.0" />
-      <point x="0.0" y="15.5" />
-    </edge>
     <edge source="Game.GameObjects.Players.Player" target="Game.GameObjects.Players.Observer" relationship="REALIZATION">
       <point x="0.0" y="-15.5" />
-      <point x="444.0288461538461" y="51.0" />
-      <point x="377.5288461538461" y="51.0" />
+      <point x="444.5689655172414" y="51.0" />
+      <point x="378.0689655172414" y="51.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="Game.GameObjects.Pieces.Piece" target="Game.GameObjects.ObjGame" relationship="REALIZATION">
+      <point x="0.0" y="-15.5" />
+      <point x="574.0689655172414" y="51.0" />
+      <point x="511.0689655172414" y="51.0" />
       <point x="0.0" y="15.5" />
     </edge>
     <edge source="Game.ThreadTimerObservable" target="Game.Observable" relationship="REALIZATION">
       <point x="0.0" y="-15.5" />
       <point x="0.0" y="15.5" />
     </edge>
+    <edge source="Game.GraphicObjects.Start.CheckersStart" target="Game.GraphicObjects.GraphicWindow" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.5" />
+      <point x="236.0" y="137.0" />
+      <point x="151.56896551724134" y="137.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="Game.GraphicObjects.Table.WindowTable" target="Game.GraphicObjects.GraphicWindow" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.5" />
+      <point x="73.5" y="137.0" />
+      <point x="151.56896551724134" y="137.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
     <edge source="Game.GraphicObjects.Table.ConcreteCommand" target="Game.GraphicObjects.Table.Command" relationship="REALIZATION">
       <point x="0.0" y="-15.5" />
       <point x="0.0" y="15.5" />
     </edge>
-    <edge source="Game.GraphicObjects.Start.CheckersStart" target="Game.GraphicObjects.GraphicWindow" relationship="GENERALIZATION">
-      <point x="2.8421709430404007E-14" y="-15.5" />
-      <point x="237.5" y="137.0" />
-      <point x="151.02884615384608" y="137.0" />
-      <point x="0.0" y="15.5" />
-    </edge>
     <edge source="Game.GameObjects.Pieces.Wizard" target="Game.GameObjects.Pieces.Piece" relationship="GENERALIZATION">
       <point x="0.0" y="-15.5" />
-      <point x="693.0288461538461" y="137.0" />
-      <point x="580.0288461538461" y="137.0" />
-      <point x="0.0" y="15.5" />
-    </edge>
-    <edge source="Game.GraphicObjects.Table.CheckersTable" target="Game.GraphicObjects.GraphicWindow" relationship="GENERALIZATION">
-      <point x="0.0" y="-15.5" />
-      <point x="73.5" y="137.0" />
-      <point x="151.02884615384608" y="137.0" />
+      <point x="698.5689655172414" y="137.0" />
+      <point x="574.0689655172414" y="137.0" />
       <point x="0.0" y="15.5" />
     </edge>
     <edge source="Game.GraphicObjects.Table.PanelInfo" target="Game.GameObjects.Players.Observer" relationship="REALIZATION">
       <point x="0.0" y="-15.5" />
-      <point x="307.0288461538461" y="61.0" />
-      <point x="377.5288461538461" y="61.0" />
+      <point x="307.5689655172414" y="61.0" />
+      <point x="378.0689655172414" y="61.0" />
       <point x="0.0" y="15.5" />
     </edge>
     <edge source="Game.GameObjects.Pieces.Checkers" target="Game.GameObjects.Pieces.Piece" relationship="GENERALIZATION">
       <point x="0.0" y="-15.5" />
-      <point x="461.5288461538461" y="137.0" />
-      <point x="580.0288461538461" y="137.0" />
       <point x="0.0" y="15.5" />
     </edge>
     <edge source="Game.GameObjects.Pieces.Pawn" target="Game.GameObjects.Pieces.Piece" relationship="GENERALIZATION">
       <point x="0.0" y="-15.5" />
+      <point x="455.5689655172414" y="137.0" />
+      <point x="574.0689655172414" y="137.0" />
       <point x="0.0" y="15.5" />
     </edge>
     <edge source="Game.GraphicObjects.GraphicWindow" target="Game.GraphicObjects.objGraphics" relationship="REALIZATION">
       <point x="0.0" y="-15.5" />
-      <point x="151.02884615384608" y="61.0" />
-      <point x="229.0288461538461" y="61.0" />
+      <point x="151.56896551724134" y="61.0" />
+      <point x="229.56896551724137" y="61.0" />
       <point x="0.0" y="15.5" />
     </edge>
     <edge source="Game.GameObjects.Players.Player" target="Game.GameObjects.ObjGame" relationship="REALIZATION">
       <point x="0.0" y="-15.5" />
-      <point x="444.0288461538461" y="61.0" />
-      <point x="510.5288461538461" y="61.0" />
+      <point x="444.5689655172414" y="61.0" />
+      <point x="511.0689655172414" y="61.0" />
       <point x="0.0" y="15.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic" zoom="1.0" showDependencies="false" x="371.5" y="251.0" />
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="false" x="374.5" y="291.5" />
   <SelectedNodes />
   <Categories />
   <SCOPE>All</SCOPE>
