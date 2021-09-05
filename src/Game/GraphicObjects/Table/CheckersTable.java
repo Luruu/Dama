@@ -1,5 +1,5 @@
 package Game.GraphicObjects.Table;
-import javax.swing.*;
+
 
 import Game.TimerObservable;
 import Game.GameObjects.ConcreteFactoryM;
@@ -7,10 +7,10 @@ import Game.GameObjects.Factory;
 import Game.GameObjects.Pieces.Piece;
 import Game.GameObjects.Players.Observer;
 import Game.GameObjects.Players.Player;
-import Game.GraphicObjects.GraphicWindow;
 import Game.GraphicObjects.Start.CheckersStart;
 
 import java.awt.*;
+import javax.swing.*;
 import java.lang.Exception;
 import java.util.ArrayList;
 
@@ -23,37 +23,22 @@ import java.util.ArrayList;
  * @since 31-08-2021
  */
 
-public class CheckersTable extends GraphicWindow {
+public class CheckersTable extends WindowTable {
 
     private static CheckersTable Instance; //Singleton
 
-    private int N_ROWS, N_COLS;
-
-    private boolean revisedChecker;
-
-    private Player p1, p2;
-
-    
-    private PanelInfo panelInfo;
-    
-    private Piece pToMove; // Piece to move when a Box is clicked by a player
-
-    private Box[][] Boxes; // Matrix of all the Boxes of the board 
-
-    private ArrayList<Point> pointsListToClear = new ArrayList<Point>();
-
-    private CheckersMemento memento;
-    
     public  Color activePlayer = Color.red;
 
-    private int timer_value;
+    private boolean revisedChecker;
+    private Piece pToMove; // Piece to move when a Box is clicked by a player
+
+    private ArrayList<Point> pointsListToClear = new ArrayList<Point>();
 
     TimerObservable timer;
 
 
     private CheckersTable(int N_ROWS, int N_COLS, boolean revisedChecker) {
-        this.N_ROWS = N_ROWS;
-        this.N_COLS = N_COLS;
+        super(N_ROWS, N_COLS);
         this.revisedChecker = revisedChecker;
     }
 
@@ -82,27 +67,6 @@ public class CheckersTable extends GraphicWindow {
         return Instance;
     }
 
-    private void initializeWindow() throws Exception {
-        Dimension sizeFrame = new Dimension(N_ROWS *Box.DIM_BOX, N_COLS * Box.DIM_BOX);
-        frame = addFrame("Checkers Table", sizeFrame.width, sizeFrame.height, Color.black, false, new BorderLayout(0,0), ICON_PATH, true, CheckersStart.getInstance().centerTableY, JFrame.DO_NOTHING_ON_CLOSE);
-        panel = addPanel(sizeFrame.width, sizeFrame.height, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
-        panelInfo = new PanelInfo(200, sizeFrame.height, Color.getHSBColor(0, 0, 15), new FlowLayout(FlowLayout.CENTER, sizeFrame.width/10, sizeFrame.height/10 - 30), p1, p2, timer_value);
-    
-        Boxes = Box.createBoxes(N_ROWS, N_COLS, Box.DIM_BOX, p1, p2); //create new Boxes (all game table)
-        addBoxesToPanel();
-
-        frame.add(panel);
-        frame.add(panelInfo.getpanelInfo(),BorderLayout.LINE_END);
-        frame.setVisible(true);
-        frame.pack();
-        memento = new CheckersMemento();
-    }
-
-    private void addBoxesToPanel(){
-        for (Box[] rowBoxes : Boxes)
-            for (Box box : rowBoxes)
-                panel.add(box);
-    }
 
     public void startGame(Player p1, Player p2, int timer_value) throws Exception {
         this.p1 = p1;
@@ -164,6 +128,7 @@ public class CheckersTable extends GraphicWindow {
         }
         addOrRemove(dstBox, true, pToMove);
     }
+
     //In Box will respawn a piece
     private void respawn(Box box) throws Exception{
         Factory factory = new ConcreteFactoryM();
@@ -221,13 +186,8 @@ public class CheckersTable extends GraphicWindow {
     }
 
     private void checkGameEnd(Piece enemyPiece){
-        if (enemyPiece.getOwner().getNpieces() == 0){
+        if (enemyPiece.getOwner().getNpieces() == 0)
             JOptionPane.showMessageDialog(null, "Game over! " + enemyPiece.getOwner().getPlayerName() + " lost.");
-        }
-    }
-
-    public Memento createMemento(){
-        return new CheckersMemento();
     }
 
     public void timeElapsed(Player winner, Object obj){
@@ -250,66 +210,12 @@ public class CheckersTable extends GraphicWindow {
     public void stopTimer(){
         timer.stop();
     }
-
-    public void reStart(){
-    //    memento.restoreState();
-    //    panelTable.revalidate();
-    //    panelTable.repaint();
-        System.out.println("da implementare memento");    
-    }
-
-    //Memento class
-    public class CheckersMemento implements Memento{
-        private Player mem_p1, mem_p2;
-        private JPanel mem_panelTable;
-        private PanelInfo mem_panelInfo; 
-
-        public CheckersMemento(){
-            mem_p1 = p1;
-            mem_p2 = p2;
-            mem_panelInfo = panelInfo;
-            mem_panelTable = panel;
-        }
-        public void restoreState(){
-        p1 = mem_p1;
-        p2 = mem_p2;
-        panelInfo = mem_panelInfo;
-        panel = mem_panelTable;
-        }
-    }
+    
 
     // Getters and Setters methods..
 
-    public Box getBoxfromList(int row, int col){
-        return Boxes[row][col];
-    }
-
-    public final int getN_ROWS(){
-        return N_ROWS;
-    }
-
-    public final int getN_COLS(){
-        return N_COLS;
-    }
-
-    public Player getP1() {
-        return p1;
-    }
-
-    public void setP1(Player p1) {
-        this.p1 = p1;
-    }
-
     public Player getActivePlayer(){
         return (activePlayer.equals(Color.red)) ? p1 : p2;
-    }
-
-    public Player getP2() {
-        return p2;
-    }
-
-    public void setP2(Player p2) {
-        this.p2 = p2;
     }
 
     public Piece getPToMove() {
