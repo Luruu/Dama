@@ -39,8 +39,9 @@ public class Box extends JPanel{
         addPieces(Boxes, N_ROWS, N_COLS, p1,p2);
         return Boxes;
     }
+    
 
-    private static void addPieces(Box[][] Boxes , int N_ROWS, int N_COLS, Player p1, Player p2) throws Exception {
+    public static void addPieces(Box[][] Boxes , int N_ROWS, int N_COLS, Player p1, Player p2) throws Exception {
         Factory factory = new ConcreteFactoryM();
         Color pieceColor;
         String typePiece;
@@ -57,13 +58,28 @@ public class Box extends JPanel{
                     owner = (pieceColor == Color.red) ? p1 : p2;
                     owner.increaseNpieces();
                     piece = (Piece) factory.factoryMethod(typePiece, pieceColor, owner);
-                    Boxes[i][j].add(piece, BorderLayout.CENTER);
+                    /*Boxes[i][j].add(piece, BorderLayout.CENTER);
                     Boxes[i][j].hasPiece = true;
-                    piece.setCoord(i,j);
+                    piece.setCoord(i,j);*/
+                    addPiece(Boxes, i, j, piece);
                 }
             }
         }
     }
+
+    public static void addPiece(Box[][] Boxes, int i, int j, Piece piece){
+        Boxes[i][j].add(piece, BorderLayout.CENTER);
+        Boxes[i][j].hasPiece = true;
+        piece.setCoord(i,j);
+    }
+
+    public static void removePiece(Box[][] Boxes, int i, int j){
+        if (Boxes[i][j].getComponentCount() > 0){
+            Boxes[i][j].remove(0);
+            Boxes[i][j].HasPiece(false);
+        }
+    }
+
 
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -81,12 +97,12 @@ public class Box extends JPanel{
     }
 
     //sets a value indicating whether the Box contains a piece 
-    public void HasPiece(boolean x){
-        hasPiece = x;
+    public void HasPiece(boolean hasPiece){
+        this.hasPiece = hasPiece;
     }
 
-    public void setColor(Color c){
-        color = c;
+    public void setColor(Color color){
+        this.color = color;
     }
 
     public Color getColor(){

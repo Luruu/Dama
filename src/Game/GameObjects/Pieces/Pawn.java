@@ -4,8 +4,9 @@ import java.awt.*;
 import Game.GameObjects.Players.Player;
 
 public class Pawn extends Piece{
+    public final static int PAWN_POINTS = 1;
     public Pawn(Color c, Player p) throws Exception{
-        super(c, 1, p);
+        super(c, PAWN_POINTS, p);
     }
    
     @Override

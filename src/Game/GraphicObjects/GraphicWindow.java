@@ -2,7 +2,7 @@ package Game.GraphicObjects;
 
 import javax.swing.*;
 
-// Create Graphic Objects 
+
 public abstract class GraphicWindow implements objGraphics {
     protected JFrame frame;
     protected JPanel panel;

@@ -1,4 +1,2 @@
-Aggiungere i thread al timer
-
 AGGIORNARE JAVADOC
 

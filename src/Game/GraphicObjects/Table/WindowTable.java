@@ -10,30 +10,44 @@ import javax.swing.*;
 import java.lang.Exception;
 
 public abstract class WindowTable extends GraphicWindow {
-    public void reStart(){
-        //    memento.restoreState();
-        //    panelTable.revalidate();
-        //    panelTable.repaint();
-            System.out.println("da implementare memento");    
-        }
+    public void reStart() throws Exception{
+
+        for (int i = 0; i < Boxes.length; i++)
+            for (int j = 0; j < Boxes.length; j++)
+                Box.removePiece(Boxes, i, j);
+
+        memento.restoreState();
+
+        panel.revalidate();
+        panel.repaint();
+
+        JPanel p = panelInfo.getpanelInfo();
+        p.revalidate();
+        p.repaint();
+
+        System.out.println("game restarted!");    
+    }
     
 // Memento class--------------------------------------------------------------------------
         public class CheckersMemento implements Memento{
             private Player mem_p1, mem_p2;
-            private JPanel mem_panelTable;
-            private PanelInfo mem_panelInfo; 
+            private Box[][] mem_boxes;
+            //private JComponent mem_components;
     
             public CheckersMemento(){
                 mem_p1 = p1;
                 mem_p2 = p2;
-                mem_panelInfo = panelInfo;
-                mem_panelTable = panel;
+                mem_boxes = Boxes.clone();
+                    /*
+                for (JComponent component : panelInfo.getListComponent()) {
+                    mem_components = component.clon;
+                } */
             }
-            public void restoreState(){
-            p1 = mem_p1;
-            p2 = mem_p2;
-            panelInfo = mem_panelInfo;
-            panel = mem_panelTable;
+            public void restoreState() throws Exception{
+                p1 = mem_p1;
+                p2 = mem_p2;
+                Boxes = mem_boxes.clone();
+                Box.addPieces(Boxes, N_ROWS, N_COLS, p1, p2);
             }
         }
 //--------------------------------------------------------------------------
@@ -41,7 +55,7 @@ public abstract class WindowTable extends GraphicWindow {
     protected PanelInfo panelInfo;
     protected Box[][] Boxes; // Matrix of all the Boxes of the board
     protected Player p1, p2;
-    protected CheckersMemento memento;
+    protected Memento memento;
     protected int timer_value;
 
     public WindowTable(int N_ROWS, int N_COLS){
@@ -60,20 +74,21 @@ public abstract class WindowTable extends GraphicWindow {
         addBoxesToPanel();
 
         frame.add(panel);
-        frame.add(panelInfo.getpanelInfo(),BorderLayout.LINE_END);
+        frame.add(panelInfo.getpanelInfo(), BorderLayout.LINE_END);
         frame.setVisible(true);
         frame.pack();
-        memento = new CheckersMemento();
+        
+        memento = createMemento();
+    }
+
+    public Memento createMemento(){
+        return new CheckersMemento();
     }
 
     private void addBoxesToPanel(){
         for (Box[] rowBoxes : Boxes)
             for (Box box : rowBoxes)
                 panel.add(box);
-    }
-
-    public Memento createMemento(){
-        return new CheckersMemento();
     }
 
     // Getters and Setters methods..

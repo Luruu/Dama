@@ -66,7 +66,13 @@ public class PanelInfo implements objGraphics, ActionListener, Observer {
                 System.exit(1);
                 break;
             case "2":
-                ct.returnToStart();
+               // ct.returnToStart();
+                try {
+                    ct.reStart();
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
                 ct.stopTimer();
                 break;
         }
@@ -101,4 +107,5 @@ public class PanelInfo implements objGraphics, ActionListener, Observer {
     public JPanel getpanelInfo(){
         return panelInfo;
     }
+
 }
