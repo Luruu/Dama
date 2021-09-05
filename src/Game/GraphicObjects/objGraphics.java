@@ -52,13 +52,13 @@ public interface objGraphics {
         return newPanel;
     }
 
-
     default JButton addButton(String text, ActionListener listener, String action){
         JButton newButton = new JButton(text);
         newButton.addActionListener(listener);
         newButton.setActionCommand(action);
         return newButton;
     }
+
     default JComboBox<?> addComboBoxString(String [] str, int SelectedIndex, boolean editablebyUser) {
         JComboBox<?> newCombobox = new JComboBox<String>(str);
         newCombobox.setSelectedIndex(SelectedIndex);
