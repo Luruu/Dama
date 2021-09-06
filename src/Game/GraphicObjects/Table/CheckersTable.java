@@ -5,7 +5,6 @@ import Game.TimerObservable;
 import Game.GameObjects.ConcreteFactoryM;
 import Game.GameObjects.Factory;
 import Game.GameObjects.Pieces.Piece;
-import Game.GameObjects.Players.Observer;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.Start.CheckersStart;
 
@@ -32,11 +31,7 @@ public class CheckersTable extends WindowTable {
     private boolean revisedChecker;
     private Piece pToMove; // Piece to move when a Box is clicked by a player
 
-    private ArrayList<Point> pointsListToClear = new ArrayList<>();
     
-    private  ArrayList<Observer> observerList = new ArrayList<>();
-
-    private TimerObservable timer;
 
 
     private CheckersTable(int N_ROWS, int N_COLS, boolean revisedChecker) {

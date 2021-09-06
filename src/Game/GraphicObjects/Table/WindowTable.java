@@ -5,10 +5,13 @@ import javax.swing.JFrame;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.GraphicWindow;
 import Game.GraphicObjects.Start.CheckersStart;
+import Game.GameObjects.Players.Observer;
+import Game.TimerObservable;
 import java.awt.*;
 import javax.swing.*;
 import java.lang.Exception;
 import java.awt.event.WindowAdapter;
+import java.util.ArrayList;
 
 public abstract class WindowTable extends GraphicWindow {
     
@@ -16,22 +19,19 @@ public abstract class WindowTable extends GraphicWindow {
         public class CheckersMemento implements Memento{
             private Player mem_p1, mem_p2;
             private Box[][] mem_boxes;
-            //private JComponent mem_components;
+
     
             public CheckersMemento() throws CloneNotSupportedException{
                 mem_p1 = (Player)p1.clone();
                 mem_p2 = (Player)p2.clone();
                 mem_boxes = Boxes.clone();
-                    /*
-                for (JComponent component : panelInfo.getListComponent()) {
-                    mem_components = component.clon;
-                } */
             }
             public void restoreState() throws Exception{
                 p1 =(Player) mem_p1.clone();
                 p2 = (Player)mem_p2.clone();
                 Boxes = mem_boxes.clone();
                 Box.addPieces(Boxes, N_ROWS, N_COLS, p1, p2);
+                clearSuggestions();
                 reStartPanelInfo();
             }
         }
@@ -43,12 +43,21 @@ public abstract class WindowTable extends GraphicWindow {
     protected Memento memento;
     protected int timer_value;
 
+    protected ArrayList<Point> pointsListToClear = new ArrayList<>();
+    
+    protected ArrayList<Observer> observerList = new ArrayList<>();
+
+    protected TimerObservable timer;
+
     public WindowTable(int N_ROWS, int N_COLS){
         this.N_ROWS = N_ROWS;
         this.N_COLS = N_COLS;
     }
 
+    public abstract void clearSuggestions();
+
     public abstract void reStartPanelInfo();
+
 
     protected void initializeWindow() throws Exception {
         Dimension sizeFrame = new Dimension(N_ROWS *Box.DIM_BOX, N_COLS * Box.DIM_BOX);
