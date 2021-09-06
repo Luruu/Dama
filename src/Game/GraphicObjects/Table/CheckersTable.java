@@ -187,15 +187,18 @@ public class CheckersTable extends WindowTable {
     }
 
     private void checkGameEnd(Piece enemyPiece){
-        if (enemyPiece.getOwner().getNpieces() == 0)
+        if (enemyPiece.getOwner().getNpieces() == 0){
             JOptionPane.showMessageDialog(null, "Game over! " + enemyPiece.getOwner().getPlayerName() + " lost.");
+            returnToStart();
+        }
+        
     }
 
     public void timeElapsed(Player winner, Object obj){
         if (obj != null)
-            JOptionPane.showMessageDialog(null, "Time out! \n Game is a draw");
+            JOptionPane.showMessageDialog(null, "Time out! \n The games is draw");
         else
-            JOptionPane.showMessageDialog(null, "Time out! \n the winner is " + winner.getPlayerName());
+            JOptionPane.showMessageDialog(null, "Time out! \n The winner is " + winner.getPlayerName());
         returnToStart();
     }
 
