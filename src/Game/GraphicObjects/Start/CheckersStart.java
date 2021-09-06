@@ -21,9 +21,6 @@ public class CheckersStart extends GraphicWindow implements ActionListener{
     //Singleton Eager initialization
     private static final CheckersStart Instance = new CheckersStart();
 
-   /* private JFrame frame;
-    private JPanel panel; */
-    
 
     private String  firstPlayerName, secondPlayerName;
     private int     dimTable;
