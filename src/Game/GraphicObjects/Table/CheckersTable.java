@@ -187,15 +187,18 @@ public class CheckersTable extends WindowTable {
     }
 
     private void checkGameEnd(Piece enemyPiece){
-        if (enemyPiece.getOwner().getNpieces() == 0)
+        if (enemyPiece.getOwner().getNpieces() == 0){
             JOptionPane.showMessageDialog(null, "Game over! " + enemyPiece.getOwner().getPlayerName() + " lost.");
+            returnToStart();
+        }
+        
     }
 
     public void timeElapsed(Player winner, Object obj){
         if (obj != null)
-            JOptionPane.showMessageDialog(null, "Tempo scaduto! \n La partita termina in parità");
+            JOptionPane.showMessageDialog(null, "Time out! \n The games ends in a draw");
         else
-            JOptionPane.showMessageDialog(null, "Tempo scaduto! \n Il vincitore è " + winner.getPlayerName());
+            JOptionPane.showMessageDialog(null, "Time out! \n The winner is " + winner.getPlayerName());
         returnToStart();
     }
 
