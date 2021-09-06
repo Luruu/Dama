@@ -140,20 +140,20 @@ public class CheckersStart extends GraphicWindow implements ActionListener{
                 }
                 break;
             case "2":
-                JOptionPane.showMessageDialog(frame, "REVISED MODE: Ogni giocatore dispone di N pedine e 2 Arcieri (N in base alla dimensione del campo da gioco) di colore diverso rispetto a quelle dell'avversario.\n Il giocatore verde fa sempre la prima mossa.\n" +
+                JOptionPane.showMessageDialog(frame, "REVISED MODE: Ogni giocatore dispone di N pedine e 2 maghi (N in base alla dimensione del campo da gioco) di colore diverso rispetto a quelle dell'avversario.\n Il giocatore verde fa sempre la prima mossa.\n" +
                 "L'obiettivo del gioco è quello di mangiare tutti i pezzi dell'avversario o di fare il miglior punteggio entro il tempo limite\n" +
                 "Sul campo da gioco sono presenti i seguenti pezzi:\n" + 
                 "Pedina: pezzo classico che si muove solamente in diagonale di una casella alla volta e soltanto in avanti. Quando una pedina raggiunge una delle caselle dell'ultima riga viene promossa diventando dama.\n" +
                 "Dama: upgrade della pedina. Può muoversi in più direzioni ad un passo alla volta.\n"+
                 "Mago: Se il mago mangia un pezzo, resuscita una pedina. Invece se viene mangiato la pedina avversaria diventa dama. Un mago non può diventare dama e non può mangiare un altro mago.\n" +
                 "Il punteggio è dato dalla tipologia e dalla quantità di pezzi mangiati, in particolare:\n Pedina: 1 punto.\n Mago: 3 punti.\n Dama: 5 punti\n\n" +
-                "REVISED MODE: Each player has N pieces and 2 Archers (N according to the size of the playing field) of a different color than the opponent's. \n The green player always makes the first move. \n "+
+                "REVISED MODE: Each player has N pieces and 2 Wizard (N according to the size of the playing field) of a different color than the opponent's. \n The green player always makes the first move. \n "+
                 "The goal of the game is to eat all the opponent's pieces or to get the best score within the time limit \n" +
                 "The following pieces are on the playing field: \n" +
                 "Pawn: classic piece that only moves diagonally one square at a time and only forward. When a pawn reaches one of the squares in the last row it is promoted to become king. \n" +
                 "Checkers: checker upgrade. Can move in multiple directions one step at a time. \n" +
-                "Mage: If the mage eats a piece, he resurrects a piece. If it is eaten, the opposing piece becomes a checker. A mage cannot become a checker and cannot eat another mage. \n" +
-                "The score is given by the type and quantity of pieces eaten, in particular: \n Pawn: 1 point. \n Magician: 3 points. \n Lady: 5 points");
+                "Wizard: If the Wizard eats a piece, he resurrects a piece. If it is eaten, the opposing piece becomes a checker. A Wizard cannot become a checker and cannot eat another mage. \n" +
+                "The score is given by the type and quantity of pieces eaten, in particular: \n Pawn: 1 point. \n Wizard: 3 points. \n Checkers: 5 points");
             default:
             break;
        }
