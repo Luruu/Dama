@@ -193,9 +193,9 @@ public class CheckersTable extends WindowTable {
 
     public void timeElapsed(Player winner, Object obj){
         if (obj != null)
-            JOptionPane.showMessageDialog(null, "Tempo scaduto! \n La partita termina in parità");
+            JOptionPane.showMessageDialog(null, "Time out! \n Game is a draw");
         else
-            JOptionPane.showMessageDialog(null, "Tempo scaduto! \n Il vincitore è " + winner.getPlayerName());
+            JOptionPane.showMessageDialog(null, "Time out! \n the winner is " + winner.getPlayerName());
         returnToStart();
     }
 

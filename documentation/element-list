@@ -1,7 +1,7 @@
 Game
-Game.FactoryM
-Game.FactoryM.Pieces
-Game.FactoryM.Players
-Game.Windows
-Game.Windows.Start
-Game.Windows.Table
+Game.GameObjects
+Game.GameObjects.Pieces
+Game.GameObjects.Players
+Game.GraphicObjects
+Game.GraphicObjects.Start
+Game.GraphicObjects.Table

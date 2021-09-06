@@ -1,6 +1,7 @@
 package Game.GraphicObjects.Start;
 import javax.swing.*;
 
+import Game.ImageFunctions;
 import Game.GameObjects.ConcreteFactoryM;
 import Game.GameObjects.Factory;
 import Game.GameObjects.Players.Player;
@@ -12,6 +13,7 @@ import java.awt.*;
 import java.awt.event.*;  
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.awt.image.BufferedImage;
 
 
 public class CheckersStart extends GraphicWindow implements ActionListener{
@@ -43,7 +45,22 @@ public class CheckersStart extends GraphicWindow implements ActionListener{
 
 
     private CheckersStart(){
-        frame = addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 190, 340, Color.GREEN, false, new FlowLayout(), ICON_PATH, true, true, JFrame.EXIT_ON_CLOSE);
+        
+        frame = addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 190, 380, Color.WHITE, false, new BorderLayout(0,0), ICON_PATH, true, true, JFrame.EXIT_ON_CLOSE);
+        panel = addPanel(190, 380, frame.getBackground(), new FlowLayout());
+        class showImg extends JComponent{
+            BufferedImage img;
+            Dimension Imgdim;
+            public showImg(String path){
+                Imgdim = new Dimension(38,38);
+                img =  ImageFunctions.scale(ImageFunctions.readFile(path), Imgdim.width, Imgdim.height);
+                setPreferredSize(new Dimension(Imgdim.width, Imgdim.height));
+            }
+            protected void paintComponent(Graphics g){
+                super.paintComponent(g);
+                g.drawImage(img, 0, 0,null);
+             }
+        } 
         
         jComponentList.add(addLabel("CheckersGame", new Font("Verdana", Font.PLAIN, 18))); 
 
@@ -72,18 +89,21 @@ public class CheckersStart extends GraphicWindow implements ActionListener{
         jComponentList.add(addTextField("Player2", new Dimension(100, 20), true));
         
         jComponentList.add(addButton("Start Game", this, stringAction));
-        addcommandtoList("bStart Game");
+        addcommandtoList("Start Game");
         
         jComponentList.add(addButton("Game Rules", this, stringAction));
         addcommandtoList("game rules");
 
-
+        
+        panel.add(new showImg("/images/PawnGreen.png"));
+        panel.add(new showImg("/images/CheckersGreen.png"));
+        panel.add(new showImg("/images/WizardRed.png"));
+        panel.add(new showImg("/images/PawnRed.png"));
+        
 
         for (JComponent jb : jComponentList)
-        frame.add(jb);
-
-
-
+        panel.add(jb);
+        frame.add(panel);
         frame.setVisible(true);
     }
 
