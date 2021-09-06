@@ -1,32 +1,16 @@
 package Game.GraphicObjects.Table;
 
-
+import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.GraphicWindow;
 import Game.GraphicObjects.Start.CheckersStart;
-
 import java.awt.*;
 import javax.swing.*;
 import java.lang.Exception;
+import java.awt.event.WindowAdapter;
 
 public abstract class WindowTable extends GraphicWindow {
-    public void reStart() throws Exception{
-
-        for (int i = 0; i < Boxes.length; i++)
-            for (int j = 0; j < Boxes.length; j++)
-                Box.removePiece(Boxes, i, j);
-
-        memento.restoreState();
-
-        panel.revalidate();
-        panel.repaint();
-
-        JPanel p = panelInfo.getpanelInfo();
-        p.revalidate();
-        p.repaint();
-
-        System.out.println("game restarted!");    
-    }
     
 // Memento class--------------------------------------------------------------------------
         public class CheckersMemento implements Memento{
@@ -34,9 +18,9 @@ public abstract class WindowTable extends GraphicWindow {
             private Box[][] mem_boxes;
             //private JComponent mem_components;
     
-            public CheckersMemento(){
-                mem_p1 = p1;
-                mem_p2 = p2;
+            public CheckersMemento() throws CloneNotSupportedException{
+                mem_p1 = (Player)p1.clone();
+                mem_p2 = (Player)p2.clone();
                 mem_boxes = Boxes.clone();
                     /*
                 for (JComponent component : panelInfo.getListComponent()) {
@@ -44,10 +28,11 @@ public abstract class WindowTable extends GraphicWindow {
                 } */
             }
             public void restoreState() throws Exception{
-                p1 = mem_p1;
-                p2 = mem_p2;
+                p1 =(Player) mem_p1.clone();
+                p2 = (Player)mem_p2.clone();
                 Boxes = mem_boxes.clone();
                 Box.addPieces(Boxes, N_ROWS, N_COLS, p1, p2);
+                reStartPanelInfo();
             }
         }
 //--------------------------------------------------------------------------
@@ -63,13 +48,27 @@ public abstract class WindowTable extends GraphicWindow {
         this.N_COLS = N_COLS;
     }
 
+    public abstract void reStartPanelInfo();
 
     protected void initializeWindow() throws Exception {
         Dimension sizeFrame = new Dimension(N_ROWS *Box.DIM_BOX, N_COLS * Box.DIM_BOX);
         frame = addFrame("Checkers Table", sizeFrame.width, sizeFrame.height, Color.black, false, new BorderLayout(0,0), ICON_PATH, true, CheckersStart.getInstance().centerTableY, JFrame.DO_NOTHING_ON_CLOSE);
         panel = addPanel(sizeFrame.width, sizeFrame.height, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
         panelInfo = new PanelInfo(200, sizeFrame.height, Color.getHSBColor(0, 0, 15), new FlowLayout(FlowLayout.CENTER, sizeFrame.width/10, sizeFrame.height/10 - 30), p1, p2, timer_value);
-    
+
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                if (JOptionPane.showConfirmDialog(frame, 
+                    "Are you sure you want to close this game?", "Close game?", 
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                    System.exit(0);
+                }
+            }
+        });
+
+
         Boxes = Box.createBoxes(N_ROWS, N_COLS, Box.DIM_BOX, p1, p2); //create new Boxes (all game table)
         addBoxesToPanel();
 
@@ -77,11 +76,27 @@ public abstract class WindowTable extends GraphicWindow {
         frame.add(panelInfo.getpanelInfo(), BorderLayout.LINE_END);
         frame.setVisible(true);
         frame.pack();
-        
         memento = createMemento();
     }
 
-    public Memento createMemento(){
+    public void reStartGame() throws Exception{
+
+        for (int i = 0; i < Boxes.length; i++)
+            for (int j = 0; j < Boxes.length; j++)
+                Box.removePiece(Boxes, i, j);
+
+        
+        memento.restoreState();
+
+        panel.revalidate();
+        panel.repaint();
+
+        JPanel p = panelInfo.getpanelInfo();
+        p.revalidate();
+        p.repaint();
+    }
+
+    public Memento createMemento() throws CloneNotSupportedException{
         return new CheckersMemento();
     }
 
@@ -120,4 +135,5 @@ public abstract class WindowTable extends GraphicWindow {
     public void setP2(Player p2) {
         this.p2 = p2;
     }
+
 }

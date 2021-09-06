@@ -3,6 +3,7 @@ package Game;
 import java.util.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.Timer;
 
 import Game.GameObjects.Players.Observer;
@@ -12,22 +13,30 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class TimerObservable{
+    ThreadTimerObservable obv; 
     public TimerObservable(ArrayList<Observer> players, int index, int timer_value){
         final int numThreads = 5;
         ThreadPoolExecutor exec = (ThreadPoolExecutor)Executors.newFixedThreadPool(numThreads);
-        exec.execute(new ThreadTimerObservable(players, index, timer_value));
+        obv = new ThreadTimerObservable(players, index, timer_value);
+        exec.execute(obv);
         exec.shutdown();
     }
 
     public void stop(){
-        ThreadTimerObservable.stop();
+        obv.stop();
     }
-    
+
+    public void reStartTimer(){
+        obv.reStartTimer();
+    }
+
 }
+
 class ThreadTimerObservable implements Observable, ActionListener, Runnable {
     public ArrayList<Observer> observer = new ArrayList<Observer>();
-    private static Timer timer = null;
-    private int timerStop;
+    private  Timer timer = null;
+    private  int timerStop;
+    private  int timerValueStart;
     private int index;
 
     public void run(){
@@ -38,14 +47,19 @@ class ThreadTimerObservable implements Observable, ActionListener, Runnable {
     public ThreadTimerObservable(ArrayList<Observer> players, int index, int timer_value){
         this.index = index;
         timerStop = timer_value;
+        timerValueStart = timer_value;
         for (Observer player : players)
             observer.add(player);
+    }
+    
+    public void updateText(Object obj){
+        observer.get(index).update(obj);
     }
 
     @Override
     public void notifyObserver() {
         if (timerStop != 0){ //notify panelInfo to update label text
-            observer.get(index).update(null);
+            updateText(null);
         }
         else{
             observer.remove(index);
@@ -73,8 +87,15 @@ class ThreadTimerObservable implements Observable, ActionListener, Runnable {
          timerStop -= 1;
     }
 
-    public static void stop(){
+    public void stop(){
         timer.stop();
     }
+
+    public void reStartTimer(){
+        timerStop = timerValueStart;
+        timer.start();
+        updateText(timerStop);
+    }
+    
     
 }

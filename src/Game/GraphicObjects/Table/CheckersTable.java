@@ -32,9 +32,11 @@ public class CheckersTable extends WindowTable {
     private boolean revisedChecker;
     private Piece pToMove; // Piece to move when a Box is clicked by a player
 
-    private ArrayList<Point> pointsListToClear = new ArrayList<Point>();
+    private ArrayList<Point> pointsListToClear = new ArrayList<>();
+    
+    private  ArrayList<Observer> observerList = new ArrayList<>();
 
-    TimerObservable timer;
+    private TimerObservable timer;
 
 
     private CheckersTable(int N_ROWS, int N_COLS, boolean revisedChecker) {
@@ -73,11 +75,10 @@ public class CheckersTable extends WindowTable {
         this.p2 = p2;
         this.timer_value = timer_value;
         initializeWindow();
-        ArrayList<Observer> p = new ArrayList<Observer>();
-        p.add(p1);
-        p.add(p2);
-        p.add(panelInfo);
-        timer = new TimerObservable(p,2, this.timer_value);
+        observerList.add(p1);
+        observerList.add(p2);
+        observerList.add(panelInfo);
+        timer = new TimerObservable(observerList,2, this.timer_value);
     }
 
     //Shows the moves allowed to click on a piece
@@ -204,14 +205,23 @@ public class CheckersTable extends WindowTable {
         Player.count_players = 0;
         CheckersStart CT = CheckersStart.getInstance();
         CT.getFrame().setVisible(true);
-        
     }
 
     public void stopTimer(){
         timer.stop();
     }
-    
 
+    @Override
+    public  void reStartPanelInfo(){
+        timer.reStartTimer();
+        panelInfo.switchTurn(p1);
+        activePlayer = p1.getPlayerColor();
+        panelInfo.updateScore(p1);
+        panelInfo.updateScore(p2);
+        panelInfo.reSetNMOVE();
+    }
+
+    
     // Getters and Setters methods..
 
     public Player getActivePlayer(){
@@ -236,5 +246,6 @@ public class CheckersTable extends WindowTable {
     public void setPointsListToClear(ArrayList<Point> pointsListToClear) {
         this.pointsListToClear = pointsListToClear;
     }
+
 
 }

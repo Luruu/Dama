@@ -63,17 +63,16 @@ public class PanelInfo implements objGraphics, ActionListener, Observer {
                 String name = null;
                 name = ct.getActivePlayer().getPlayerName();
                 JOptionPane.showMessageDialog(null, "Game over! " + name +" gave up.");
-                System.exit(1);
+                ct.returnToStart();
+                ct.stopTimer();
                 break;
             case "2":
-               // ct.returnToStart(); PRIMA DI MEMENTO, DA TOGLIERE
                 try {
-                    ct.reStart();
+                    ct.stopTimer();
+                    ct.reStartGame();
                 } catch (Exception e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-                ct.stopTimer();
                 break;
         }
     }
@@ -89,16 +88,31 @@ public class PanelInfo implements objGraphics, ActionListener, Observer {
         jl.setText("Turn: " + p.getPlayerName());
         jl.setForeground(p.getPlayerColor());
         increaseNMOVE();
+        
+        
     }
 
-    private void increaseNMOVE(){
-        nmove++;
+    private void updateNMOVE(){
         JLabel jl = (JLabel) jComponentList.get(5);
         jl.setText("N° moves: " + nmove);
     }
 
+    private void increaseNMOVE(){
+        nmove++;
+        updateNMOVE();
+    }
+
+    public void reSetNMOVE(){
+        nmove = 0;
+        updateNMOVE();
+    }
+
     @Override
     public void update(Object obj){
+        if (obj instanceof Integer){
+            time = (int)obj;
+            time++;
+        }
         time--;
         JLabel jl = (JLabel) jComponentList.get(7);
         jl.setText("Timer: " + time);

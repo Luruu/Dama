@@ -9,7 +9,7 @@ import Game.GraphicObjects.Table.*;
 import java.awt.*;
 
 
-public class Player extends MouseAdapter implements Observer, ObjGame{
+public class Player extends MouseAdapter implements Observer, ObjGame, Cloneable{
     public static int count_players = 0;
     public static final int MAX_NPLAYERS = 2;
     private final Color PlayerColor;
@@ -74,11 +74,15 @@ public class Player extends MouseAdapter implements Observer, ObjGame{
         TABLE.timeElapsed(this, obj);        
     }
 
+    @Override
+    public Object clone() throws CloneNotSupportedException{
+        return super.clone();
+    }
+
     // Getters and Setters methods..
     
     public void addPlayerPoints(int points){
         PlayerScore += points;
-        System.out.println(PlayerName + " score: " + PlayerScore); 
     }
 
 
