@@ -31,8 +31,6 @@ public class CheckersTable extends WindowTable {
     private boolean revisedChecker;
     private Piece pToMove; // Piece to move when a Box is clicked by a player
 
-    
-
 
     private CheckersTable(int N_ROWS, int N_COLS, boolean revisedChecker) {
         super(N_ROWS, N_COLS);
@@ -73,7 +71,7 @@ public class CheckersTable extends WindowTable {
         observerList.add(p1);
         observerList.add(p2);
         observerList.add(panelInfo);
-        timer = new TimerObservable(observerList,2, this.timer_value);
+        timer = new TimerObservable(observerList, 2, this.timer_value);
     }
 
     //Shows the moves allowed to click on a piece

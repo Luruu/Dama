@@ -78,21 +78,6 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
         jComponentList.add(addButton("Game Rules", this, stringAction));
         addcommandtoList("game rules");
 
-        /*
-        class showImg extends JComponent{
-            BufferedImage img;
-            Dimension Imgdim;
-            public showImg(String path){
-                Imgdim = new Dimension(38,38);
-                img =  ImageFunctions.scale(ImageFunctions.readFile(path), Imgdim.width, Imgdim.height);
-                setPreferredSize(new Dimension(Imgdim.width, Imgdim.height));
-            }
-            protected void paintComponent(Graphics g){
-                super.paintComponent(g);
-                g.drawImage(img, 0, 0,null);
-             }
-        } 
-         */
         Dimension Imgdim = new Dimension(38,38);
         panel.add(new ImageObj("/images/PawnGreen.png", Imgdim));
         panel.add(new ImageObj("/images/CheckersGreen.png", Imgdim));

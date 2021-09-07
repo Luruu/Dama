@@ -9,12 +9,12 @@ import Game.GraphicObjects.Table.*;
 import java.awt.*;
 
 
-public class Player extends MouseAdapter implements Observer, ObjGame, Cloneable{
+public class Player extends MouseAdapter implements Observer, ObjGame, Prototype{
     public static int count_players = 0;
     public static final int MAX_NPLAYERS = 2;
     private final Color PlayerColor;
     private final String PlayerName;
-    private int npieces =0;
+    private int npieces = 0;
     private final InvokerList invoker;
     private CheckersTable TABLE;
     private int PlayerScore;
