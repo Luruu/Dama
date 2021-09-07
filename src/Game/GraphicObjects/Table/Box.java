@@ -49,8 +49,8 @@ public class Box extends JPanel{
         for (int i = MID_TABLE + 1; i < N_ROWS; i++) //Add Pieces Red (Pl1)
             for (int j = (i % 2 == 0) ? 1 : 0; j < N_COLS; j += 2)
                 CreatePiece(Boxes, p1, Color.red, i, j,N_ROWS, N_COLS); 
-
     }
+    
     public static void CreatePiece(Box[][] Boxes, Player pl, Color col, int i, int j, int N_ROWS, int N_COLS) throws Exception{
         Boolean revisedChecker = CheckersTable.getInstance().getRevisedChecker();
         Factory factory = new ConcreteFactoryM();
