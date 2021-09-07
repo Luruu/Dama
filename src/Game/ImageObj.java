@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class ImageObj extends JComponent implements ImageFunctions{
+public class ImageObj extends JComponent implements ImageFunctions, Cloneable{
     private BufferedImage img;
 
     public ImageObj(){};
@@ -21,5 +21,10 @@ public class ImageObj extends JComponent implements ImageFunctions{
     public void setImg(String pathImg, Dimension dim) {
         this.img = scale(readFile(pathImg), dim.width, dim.height);
         setPreferredSize(dim);
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException{
+        return super.clone();
     }
 }

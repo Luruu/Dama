@@ -6,6 +6,7 @@ import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.Table.Box;
 import Game.GraphicObjects.Table.CheckersTable;
 
+
 import java.awt.*;
 
 
@@ -27,7 +28,7 @@ public abstract class Piece extends ImageObj implements ObjGame {
       addMouseListener(owner);
       TABLE = CheckersTable.getInstance();
       DIM_IMG = Box.DIM_BOX - 10; //Dimension of a Box - margin
-      setImg(getPathIMG(), new Dimension( DIM_IMG, DIM_IMG));
+      setImg(getPathIMG(), new Dimension(DIM_IMG, DIM_IMG));
       
       coord = new Point();
    }
