@@ -9,7 +9,14 @@ import Game.GraphicObjects.Table.CheckersTable;
 
 import java.awt.*;
 
-
+/**
+ * <h1>Piece Class</h1> 
+ * This class represents the abstraction of the game piece, therefore it encapsulates the logic of movement.
+ * @author <a href="https://github.com/Luruu">Luca Rubino</a>
+ * @author <a href="https://github.com/RenatoEsposito1999">Renato Esposito</a>
+ * @version 1.0
+ * @since 31-08-2021
+ */
 public abstract class Piece extends ImageComponent implements ElementGame {
    private final Color color;
    protected int points;
@@ -21,6 +28,11 @@ public abstract class Piece extends ImageComponent implements ElementGame {
    protected final CheckersTable TABLE;
    private static Point posAfterMove = new Point(); //free position on which to show suggestion 
    
+   /**
+ * @param c the color of the piece piece
+ * @param p the points to be awarded to the player who eats this piece
+ * @param ply the owner player who has the ability to move the piece
+ */
    public Piece(Color c, int p, Player ply) throws Exception{
       color = c;
       points = p;
@@ -33,9 +45,18 @@ public abstract class Piece extends ImageComponent implements ElementGame {
       coord = new Point();
    }
 
+      /**
+ * abstract method which is used by the constructor and to be implemented by subclasses.
+ * @return the string that represents the path of the image
+ */
    protected abstract String getPathIMG();
 
-   //return values: 2 (deve mangiare) -  0(si può muovere o meno (non verificato!!))
+
+/**
+ * This method determines the possible movements of the piece that implements it.
+ * @param direction the direction of the boxes to be analyzed
+ * @return 2 if have to eat, 0 otherwise
+ */
    public int showSuggestions(int direction){
       final int GOLEFT_COL = coord.y - 1, GORIGHT_COL = coord.y + 1;
       int esito_left, esito_right;
@@ -65,21 +86,37 @@ public abstract class Piece extends ImageComponent implements ElementGame {
       return 0;
   }
   
-   //Indica la colonna da colorare quando occorre mangiare
+/**
+ * @param col column index of the piece to eat
+ * @return the column index of the Box to color when you need to eat
+ */
    public int setColonEat(int col){
       return (col > coord.y) ? coord.y + 2 : coord.y - 2;
    }
       
-   // Indica la riga da colorare quando occorre mangiare
-   //Position indica il rettangolo nel quale si trova il pezzo da mangiare.
+/**
+ * @param position indicates the rectangle in which the piece to eat is located.
+ * @return the row index of the Box to color when you need to eat
+ */
    public int setRowonEat(Point position){
       return (coord.x - position.x > 0) ? coord.x - 2 : coord.x + 2; 
    }
 
+/**
+ * @return the row index of the Box to color, it depends on the color of the piece to be moved 
+ */
    public int setRowbyColor(){
       return (getColor() == Color.red) ? coord.x - 1 : coord.x + 1;
    }
 
+/** 
+ * This method implements the analysis of the box whose coordinates are passed in input.
+ * @param row row index of the rectangle to be analyzed.
+ * @param COL_DIRECTION col index of the rectangle to be analyzed.
+ * @return 0 if FIRST box is free so piece can move. <br> 1 if FIRST box is not free , so 
+ * piece cannot eat first box or move or because of wizard trying eat another wizard. <br> 
+ * 2 if second box is FREE and Piece MUST EAT enemy piece in first box
+ */
    public int checkMove(int row, final int COL_DIRECTION){
       Point boxToAnalize = new Point(row, COL_DIRECTION); //First Box to analyze
       int r = enemyPiece_inBox(boxToAnalize);
@@ -95,7 +132,13 @@ public abstract class Piece extends ImageComponent implements ElementGame {
       else //r == 2 but wizard trying eat another wizard
          return 1; 
    }
-   //returns true if an Wizard try eat another Wizard, else returns false
+
+
+/** 
+ * This method implements the rule that a wizard cannot eat another wizard
+ * @param position represents the coordinates of the box containing the enemy piece.
+ * @return true if an Wizard try eat another Wizard, else returns false
+ */
    public boolean WizardTryEatWizard(Point position) {
       Box box = TABLE.getBoxfromList(position.x, position.y);
       String enemy_pieceClass = box.getPiece().getClass().getSimpleName();
@@ -104,6 +147,13 @@ public abstract class Piece extends ImageComponent implements ElementGame {
       return pieceClass.equals("Wizard") && enemy_pieceClass.equals("Wizard");
    }
 
+/** 
+ * This method check if there is an enemy in a box
+ * @param position represents the coordinates of the box to analyze.
+ * @return 1 if piece cannot go over the table or there is a there is a friendly piece. <br>
+ * 2 there is a enemy piece. <br>
+ * 0 rectangle is free.
+ */
    public int enemyPiece_inBox(Point position){
       if (TABLE.illegalMove(position.x) || TABLE.illegalMove(position.y))
          return 1; //Piece cannot go over the table (ex: for 6x6 matrix piece cannot go in -1,-1 or 6,6: only 0 to 5)
@@ -120,27 +170,48 @@ public abstract class Piece extends ImageComponent implements ElementGame {
 
    // Getters and Setters methods..
 
+
+/** 
+ * Sets the coordinates of the piece in a two-dimensional data structure
+ * @param x row index of the position that the piece occupies in the structure.
+ * @param y column index of the position that the piece occupies in the structure.
+ */
    public void setCoord(int x, int y){
       coord.x = x;
       coord.y = y;
    }
 
+/** 
+ * @return the row and column indices that the piece occupies in the data structure in the form of coordinates.
+ */
    public Point getCoord() {
       return coord;
    }
 
+/** 
+   * @return piece color.
+ */
    public Color getColor(){
       return color;
    }
 
+   /** 
+    * @return the object instance.
+    */
    public Piece getPtoMove(){
       return this;
    }
 
+   /** 
+    * @return the player owning the piece.
+ */
    public Player getOwner(){
       return owner;
    }
 
+   /** 
+    * @return the value of the score associated with the piece.
+ */
    public int getPoints(){
       return points;
    }

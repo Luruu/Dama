@@ -76,7 +76,7 @@ public class CheckersTable extends WindowTable {
 
     //Shows the moves allowed to click on a piece
     protected void suggestions(Piece pClicked) {
-        pToMove = pClicked; 
+        pToMove = pClicked;
         pToMove.showSuggestions(pToMove.setRowbyColor());
     }
 

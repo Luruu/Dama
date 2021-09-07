@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"Game"},{"l":"Game.GameObjects"},{"l":"Game.GameObjects.Pieces"},{"l":"Game.GameObjects.Players"},{"l":"Game.GraphicObjects"},{"l":"Game.GraphicObjects.Start"},{"l":"Game.GraphicObjects.Table"}]
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"Game"},{"l":"Game.GameObjects"},{"l":"Game.GameObjects.Pieces"},{"l":"Game.GameObjects.Players"},{"l":"Game.GraphicObjects"},{"l":"Game.GraphicObjects.Start"},{"l":"Game.GraphicObjects.Table"}];updateSearchResults();
