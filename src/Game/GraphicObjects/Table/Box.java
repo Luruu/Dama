@@ -41,40 +41,23 @@ public class Box extends JPanel{
     }
     
     public static void addPieces(Box[][] Boxes , int N_ROWS, int N_COLS, Player p1, Player p2) throws Exception {
-        Factory factory = new ConcreteFactoryM();
-        String typePiece;
-        Boolean revisedChecker = CheckersTable.getInstance().getRevisedChecker();
-        Piece piece = null;
         final int MID_TABLE = N_ROWS/2;
-        for (int i = 0; i < MID_TABLE - 1; i++){
-            for (int j = (i % 2 == 0) ? 1 : 0; j < N_COLS; j += 2){
-                typePiece = (revisedChecker && Wizard.is_WizardStartPosition(i, j, N_ROWS, N_COLS)) ? "wizard": "pawn";
-                piece = (Piece) factory.factoryMethod(typePiece, Color.green, p2);
-                addPiece(Boxes, i, j, piece);
-                p2.increaseNpieces();
-            }
-        }
-        for (int i = MID_TABLE + 1; i < N_ROWS; i++){
-            for (int j = (i % 2 == 0) ? 1 : 0; j < N_COLS; j += 2){
-                typePiece = (revisedChecker && Wizard.is_WizardStartPosition(i, j, N_ROWS, N_COLS)) ? "wizard": "pawn";
-                piece = (Piece) factory.factoryMethod(typePiece, Color.red, p1);
-                addPiece(Boxes, i, j, piece);
-                p1.increaseNpieces();
-            }
-        }
-        /*for (int i = 0; i < N_ROWS; i++)
-            for (int j = 0; j < N_COLS; j++)
-                //Add Pieces in the correct position
-                if ((i < MID_TABLE - 1 || i > MID_TABLE) && Boxes[i][j].color == Color.darkGray){
-                    typePiece = (revisedChecker && Wizard.is_WizardStartPosition(i, j, N_ROWS, N_COLS)) ? "wizard": "pawn";
-                    pieceColor = (i < N_ROWS/2 - 1) ? Color.green : Color.red;
-                    owner = (pieceColor == Color.red) ? p1 : p2;
-                    owner.increaseNpieces();
-                    piece = (Piece) factory.factoryMethod(typePiece, pieceColor, owner);
-                    addPiece(Boxes, i, j, piece);
-                } 
-            }
-        } */
+        for (int i = 0; i < MID_TABLE - 1; i++) //Add Pieces Green (Pl2)
+            for (int j = (i % 2 == 0) ? 1 : 0; j < N_COLS; j += 2)
+                CreatePiece(Boxes, p2, Color.green, i, j,N_ROWS, N_COLS);
+
+        for (int i = MID_TABLE + 1; i < N_ROWS; i++) //Add Pieces Red (Pl1)
+            for (int j = (i % 2 == 0) ? 1 : 0; j < N_COLS; j += 2)
+                CreatePiece(Boxes, p1, Color.red, i, j,N_ROWS, N_COLS); 
+
+    }
+    public static void CreatePiece(Box[][] Boxes, Player pl, Color col, int i, int j, int N_ROWS, int N_COLS) throws Exception{
+        Boolean revisedChecker = CheckersTable.getInstance().getRevisedChecker();
+        Factory factory = new ConcreteFactoryM();
+        String typePiece = (revisedChecker && Wizard.is_WizardStartPosition(i, j, N_ROWS, N_COLS)) ? "wizard": "pawn";
+        Piece piece = (Piece) factory.factoryMethod(typePiece, col, pl);
+        addPiece(Boxes, i, j, piece);
+        pl.increaseNpieces();
     }
 
     public static void addPiece(Box[][] Boxes, int i, int j, Piece piece){
