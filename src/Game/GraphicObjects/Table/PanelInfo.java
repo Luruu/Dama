@@ -3,14 +3,14 @@ import javax.swing.*;
 
 import Game.GameObjects.Players.Observer;
 import Game.GameObjects.Players.Player;
-import Game.GraphicObjects.objGraphics;
+import Game.GraphicObjects.GraphicComponents;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelInfo implements objGraphics, ActionListener, Observer {
+public class PanelInfo implements GraphicComponents, ActionListener, Observer {
 
     private JPanel panelInfo;
     private ArrayList<JComponent> jComponentList;

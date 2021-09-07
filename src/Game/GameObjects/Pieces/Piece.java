@@ -1,7 +1,7 @@
 package Game.GameObjects.Pieces;
 
-import Game.ImageObj;
-import Game.GameObjects.ObjGame;
+import Game.ImageComponent;
+import Game.GameObjects.ElementGame;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.Table.Box;
 import Game.GraphicObjects.Table.CheckersTable;
@@ -10,7 +10,7 @@ import Game.GraphicObjects.Table.CheckersTable;
 import java.awt.*;
 
 
-public abstract class Piece extends ImageObj implements ObjGame {
+public abstract class Piece extends ImageComponent implements ElementGame {
    private final Color color;
    protected int points;
    

@@ -3,7 +3,7 @@ package Game.GraphicObjects;
 import javax.swing.*;
 
 
-public abstract class GraphicWindow implements objGraphics {
+public abstract class GraphicWindow implements GraphicComponents {
     protected JFrame frame;
     protected JPanel panel;
     protected String ICON_PATH = "/images/CheckersGameIcon.png"; //a frame can change his ICON_PATH

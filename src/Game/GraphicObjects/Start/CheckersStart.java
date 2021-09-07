@@ -8,7 +8,7 @@ import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.GraphicWindow;
 import Game.GraphicObjects.Table.Box;
 import Game.GraphicObjects.Table.CheckersTable;
-import Game.ImageObj;
+import Game.ImageComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -79,10 +79,10 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
         addcommandtoList("game rules");
 
         Dimension Imgdim = new Dimension(38,38);
-        panel.add(new ImageObj("/images/PawnGreen.png", Imgdim));
-        panel.add(new ImageObj("/images/CheckersGreen.png", Imgdim));
-        panel.add(new ImageObj("/images/WizardRed.png", Imgdim));
-        panel.add(new ImageObj("/images/PawnRed.png", Imgdim));
+        panel.add(new ImageComponent("/images/PawnGreen.png", Imgdim));
+        panel.add(new ImageComponent("/images/CheckersGreen.png", Imgdim));
+        panel.add(new ImageComponent("/images/WizardRed.png", Imgdim));
+        panel.add(new ImageComponent("/images/PawnRed.png", Imgdim));
        
 
         for (JComponent jb : jComponentList)

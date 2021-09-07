@@ -9,7 +9,7 @@ import Game.GraphicObjects.Table.*;
 import java.awt.*;
 
 
-public class Player extends MouseAdapter implements Observer, ObjGame, Prototype{
+public class Player extends MouseAdapter implements Observer, ElementGame, Prototype{
     public static int count_players = 0;
     public static final int MAX_NPLAYERS = 2;
     private final Color PlayerColor;

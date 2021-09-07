@@ -7,7 +7,7 @@ import Game.GameObjects.Players.*;
 
 public class ConcreteFactoryM implements Factory {
     @Override
-    public ObjGame factoryMethod(String name, Color color, Player pl) throws Exception {
+    public ElementGame factoryMethod(String name, Color color, Player pl) throws Exception {
         switch (name) {
             case "pawn":
                 return new Pawn(color, pl);

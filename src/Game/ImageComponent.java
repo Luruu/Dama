@@ -3,11 +3,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class ImageObj extends JComponent implements ImageFunctions {
+public class ImageComponent extends JComponent implements ImageFunctions {
     private BufferedImage img;
 
-    public ImageObj(){};
-    public ImageObj(String pathImg, Dimension dim){ setImg(pathImg, dim);}
+    public ImageComponent(){};
+    public ImageComponent(String pathImg, Dimension dim){ setImg(pathImg, dim);}
 
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
