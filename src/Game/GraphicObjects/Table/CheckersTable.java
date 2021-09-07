@@ -31,7 +31,12 @@ public class CheckersTable extends WindowTable {
     private boolean revisedChecker;
     private Piece pToMove; // Piece to move when a Box is clicked by a player
 
-
+    /**
+     * Constructor.
+     * @param N_ROWS number of rows in the field.
+     * @param N_COLS number of columns in the field.
+     * @param revisedChecker game mode.
+     */
     private CheckersTable(int N_ROWS, int N_COLS, boolean revisedChecker) {
         super(N_ROWS, N_COLS);
         this.revisedChecker = revisedChecker;
@@ -62,7 +67,13 @@ public class CheckersTable extends WindowTable {
         return Instance;
     }
 
-
+    /**
+     * Set player and timer.
+     * @param p1 first player. 
+     * @param p2 secondo player.
+     * @param timer_value value of the timer.
+     * @throws Exception
+     */
     public void startGame(Player p1, Player p2, int timer_value) throws Exception {
         this.p1 = p1;
         this.p2 = p2;
@@ -74,13 +85,22 @@ public class CheckersTable extends WindowTable {
         timer = new TimerObservable(observerList, 2, this.timer_value);
     }
 
-    //Shows the moves allowed to click on a piece
+    
+    /**
+     * Shows the moves allowed to click on a piece.
+     * @param pClicked piece clicked on the table.
+     */
     protected void suggestions(Piece pClicked) {
         pToMove = pClicked;
         pToMove.showSuggestions(pToMove.setRowbyColor());
     }
 
-    //Move pToMove into destBox
+
+    /**
+     * Move piece into dstBox.
+     * @param dstBox destination box of the piece.
+     * @throws Exception
+     */
     public void move(Box dstBox) throws Exception {
         boolean wizardEated = false; 
 
@@ -110,6 +130,7 @@ public class CheckersTable extends WindowTable {
             panelInfo.updateScore(player);
         }
 
+
         pToMove.setCoord(dstBox.getCoord().x, dstBox.getCoord().y);
         Point pieceCoord = pToMove.getCoord();
       
@@ -123,7 +144,11 @@ public class CheckersTable extends WindowTable {
         addOrRemove(dstBox, true, pToMove);
     }
 
-    //In Box will respawn a piece
+    /**
+     * Respawn a piece in the input box.
+     * @param box box in which to insert the respawn piece.
+     * @throws Exception
+     */
     private void respawn(Box box) throws Exception{
         Factory factory = new ConcreteFactoryM();
         Piece piece = (Piece) factory.factoryMethod("pawn", pToMove.getColor(), pToMove.getOwner());
@@ -131,6 +156,11 @@ public class CheckersTable extends WindowTable {
         addOrRemove(box, true, piece);
     }
 
+    /**
+     * highlights the boxes on which it is possible to move the selected piece.
+     * @param row x coordinate of the box to be highlighted.
+     * @param col y coordinate of the box to be highlighted.
+     */
     public void showFreeBox(int row, int col){
         Color c = (pToMove.getColor().equals(Color.red)) ? Color.red : Color.green;
             Boxes[row][col].setColor(c);
@@ -138,6 +168,9 @@ public class CheckersTable extends WindowTable {
             pointsListToClear.add(new Point(row, col));
     }
 
+    /**
+     * Eliminates the highlighting of the boxes on which it is possible to move.
+     */
     public void clearSuggestions(){
         for (Point pointToClear : pointsListToClear){
             Boxes[pointToClear.x][pointToClear.y].setColor(Color.darkGray);
@@ -147,6 +180,12 @@ public class CheckersTable extends WindowTable {
     }
 
     //true: adds a new piece - false: remove a piece
+    /**
+     * Add or remove piece from box
+     * @param box box from which remove or add a piece.
+     * @param action true if want add, false to remove a piece.
+     * @param piece piece to remove or to add.
+     */
     private void addOrRemove(Box box, boolean action, Piece piece){
         if(action == true){
             if (!piece.equals(pToMove)) {
@@ -161,6 +200,10 @@ public class CheckersTable extends WindowTable {
         box.repaint();
     }
 
+    /**
+     * Return true if pawn can become a checker.
+     * @return true if pawn can become a checker.
+     */
     private boolean canPieceUpgrade(){
         String StrPiece = pToMove.getClass().getSimpleName();
         boolean isRedOnEnemyFstLine = pToMove.getColor() == Color.red && pToMove.getCoord().x == 0;
@@ -169,16 +212,28 @@ public class CheckersTable extends WindowTable {
         return StrPiece.equals("Pawn") && (isGreenOnEnemyFstLine || isRedOnEnemyFstLine);
     }
 
+    /**
+     * Check if you are moving out of bounds.
+     * @param k index to check.
+     * @return true if the move is illegal, false otherwise.
+     */
     public boolean illegalMove(int k){
         return k >= N_ROWS || k < 0;
     }
 
+    /**
+     * Switch player turn.
+     */
     public void switchTurn(){
         activePlayer = (activePlayer.equals(Color.red)) ? Color.green : Color.red;
         Player p = (activePlayer.equals(Color.red)) ? p1 : p2;
         panelInfo.switchTurn(p);
     }
 
+    /**
+     * Check if the game is over.
+     * @param enemyPiece piece of the enemy eaten.
+     */
     private void checkGameEnd(Piece enemyPiece){
         if (enemyPiece.getOwner().getNpieces() == 0){
             JOptionPane.showMessageDialog(null, "Game over! " + enemyPiece.getOwner().getPlayerName() + " lost.");
@@ -187,6 +242,11 @@ public class CheckersTable extends WindowTable {
         
     }
 
+    /**
+     * Determine the winner if the time runs out.
+     * @param winner the winner of the game
+     * @param obj null if the games is draw.
+     */
     public void timeElapsed(Player winner, Object obj){
         if (obj != null)
             JOptionPane.showMessageDialog(null, "Time out! \n The games is draw");
@@ -195,6 +255,9 @@ public class CheckersTable extends WindowTable {
         returnToStart();
     }
 
+    /**
+     * Return to the initial panel.
+     */
     public void returnToStart(){
         frame.dispose();
         Instance = null; // when another game is started, a new object must be instantiated to use the class constructor 
@@ -203,10 +266,16 @@ public class CheckersTable extends WindowTable {
         CT.getFrame().setVisible(true);
     }
 
+    /**
+     * Stop the timer.
+     */
     public void stopTimer(){
         timer.stop();
     }
 
+    /**
+     * Reset the timer and return the game to the starting state.
+     */
     @Override
     public  void reStartPanelInfo(){
         timer.reStartTimer();
@@ -219,26 +288,49 @@ public class CheckersTable extends WindowTable {
 
     
     // Getters and Setters methods..
-
+    /**
+     * Return the player who can move his pieces.
+     * @return the player who can move his pieces.
+     */
     public Player getActivePlayer(){
         return (activePlayer.equals(Color.red)) ? p1 : p2;
     }
 
+    /**
+     * Return piece to move.
+     * @return piece to move.
+     */
     public Piece getPToMove() {
         return this.pToMove;
     }
 
+    /**
+     * Set piece to move.
+     * @param pToMove piece to move
+     */
     public void setPToMove(Piece pToMove) {
         this.pToMove = pToMove;
-    }
+    }   
+    /**
+     * Return the game mode.
+     * @return the game mode.
+     */
     public boolean getRevisedChecker(){
         return revisedChecker;
     }
 
+    /**
+     * Return the list containing the suggestions to clean.
+     * @return the list containing the suggestions to clean.
+     */
     public ArrayList<Point> getPointsListToClear() {
         return this.pointsListToClear;
     }
 
+    /**
+     * Set the list containing the suggestions to clean.
+     * @param pointsListToClear the list containing the suggestions to clean.
+     */
     public void setPointsListToClear(ArrayList<Point> pointsListToClear) {
         this.pointsListToClear = pointsListToClear;
     }

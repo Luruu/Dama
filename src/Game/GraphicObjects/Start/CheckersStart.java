@@ -16,7 +16,10 @@ import java.awt.event.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-
+/**
+ * <h1>CheckersStart class</h1>
+ * This class encapsulates the mechanism for setting settings before starting the concrete game.
+ */
 public class CheckersStart extends GraphicWindow implements ActionListener {
 
     //Singleton Eager initialization
@@ -36,11 +39,18 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
     public int n_sec;
 
 
-     //Singleton Eager initialization
+    /**
+     * Singleton Eager initialization.
+     * @return CheckersStart instance.
+     * @see #getInstance()
+     */
     public static CheckersStart getInstance(){
         return Instance;
     }
 
+    /**
+     * Private constructor of the class, it sets the initial panel from which to modify the settings and start the game.
+     */
     private CheckersStart(){
         
         frame = addFrame("Checkers Game - Luca Rubino 1934 / Renato Esposito 1881", 190, 380, Color.WHITE, false, new BorderLayout(0,0), ICON_PATH, true, true, JFrame.EXIT_ON_CLOSE);
@@ -92,13 +102,19 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
         frame.setVisible(true);
     }
 
+    /**
+     * This method adds a string to an action list. This string represents a specific action performed on the initial panel.
+     * @param nameObject
+     */
     public void addcommandtoList(String nameObject){
         listActionCommands.add(nameObject);
         int intAction = Integer.parseInt((String)stringAction);
         stringAction = String.valueOf(++intAction); //Increase action because a nameObject is added
     }
 
-   
+   /**
+    * This method analyzes the selected item on the panel and starts the associated procedure.
+    */
     @Override
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
@@ -138,6 +154,10 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
             break;
        }
     }
+
+    /**
+     * Scale the size of the game table according to the display on which the game is started.
+     */
     private void scaleDimensionTable(){
         Dimension dimensionTableFrame = new Dimension(dimTable * Box.DIM_BOX, dimTable * Box.DIM_BOX);
         Dimension dimensionScreenPC = Toolkit.getDefaultToolkit().getScreenSize();
@@ -156,7 +176,16 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
         }
     }
     
-    
+    /**
+     * Set the players and call the game table. The game begins.
+     * @param p1Name the name of the first player
+     * @param p2Name the name of the second player
+     * @param DIM_TABLE the size of the table
+     * @param DIM_BOX the size of every single box
+     * @param revisedChecker game mode
+     * @param n_sec timer value
+     * @throws Exception
+     */
     private void startGame(String p1Name, String p2Name, int DIM_TABLE, int DIM_BOX, boolean revisedChecker, int n_sec) throws Exception{
         Box.DIM_BOX = DIM_BOX;
         scaleDimensionTable(); //N.B: Game Table sizes are always (DIM * Box.DIM_BOX, DIM * DIM_BOX)
