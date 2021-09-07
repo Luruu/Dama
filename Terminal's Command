@@ -1,0 +1,7 @@
+--------------------Javadoc
+Go in: \Dama
+Use: javadoc -d documentation -sourcepath src -subpackages Game
+
+---------------Compile
+Go in \Dama
+javac -d out -sourcepath src src/Game/GraphicObjects/Start/Main.java

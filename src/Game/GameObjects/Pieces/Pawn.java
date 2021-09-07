@@ -14,9 +14,9 @@ public class Pawn extends Piece{
     public final static int PAWN_POINTS = 1;
 
 /**
- * @param c the color of the pawn piece
- * @param p the owner player who has the ability to move the piece
- * * @throws CheckersTable Exception
+ * @param c the color of the pawn piece.
+ * @param p the owner player who has the ability to move the piece.
+ * * @throws CheckersTable Exception.
  */
     public Pawn(Color c, Player p) throws Exception{
         super(c, PAWN_POINTS, p);
@@ -24,8 +24,8 @@ public class Pawn extends Piece{
 
 /**
  * This method determines the possible movements of the checker piece.
- * @param direction the direction of the boxes to be analyzed
- * @return 0: //It's useless but necessary because of override
+ * @param direction the direction of the boxes to be analyzed.
+ * @return 0: //It's useless but necessary because of override.
  */
     @Override
     public int showSuggestions(int direction){
@@ -34,7 +34,8 @@ public class Pawn extends Piece{
     }
     
 /**
- * This method determines the path of the image to be drawn on the game table
+ * This method determines the path of the image to be drawn on the game table.
+ * @return the path of the image to be drawn on the game table.
  */
     @Override
     public String getPathIMG(){

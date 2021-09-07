@@ -1,2 +1,0 @@
-Go in: \Dama
-Use: javadoc -d documentation -sourcepath src -subpackages Game

@@ -15,9 +15,9 @@ public class Checkers extends Piece{
 
 
 /**
- * @param colorPiece the color of the checkers piece
- * @param playerowner the owner player who has the ability to move the piece
- * @throws CheckersTable Exception
+ * @param colorPiece the color of the checkers piece.
+ * @param playerowner the owner player who has the ability to move the piece.
+ * @throws CheckersTable Exception.
  */
     public Checkers(Color colorPiece, Player playerowner) throws Exception{
         super(colorPiece, CHECKERS_POINTS, playerowner);
@@ -25,8 +25,8 @@ public class Checkers extends Piece{
 
 /**
  * This method determines the possible movements of the checker piece.
- * @param direction the direction of the boxes to be analyzed
- * @return 1: //It's useless but necessary because of override
+ * @param direction the direction of the boxes to be analyzed.
+ * @return 1: //It's useless but necessary because of override.
  */
     @Override
     public int showSuggestions(int direction){
@@ -42,7 +42,8 @@ public class Checkers extends Piece{
     }
 
 /**
- * This method determines the path of the image to be drawn on the game table
+ * This method determines the path of the image to be drawn on the game table.
+ * @return  the path of the image to be drawn on the game table.
 */
     @Override
     public String getPathIMG(){

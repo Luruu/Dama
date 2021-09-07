@@ -15,8 +15,8 @@ public class Wizard extends Piece{
     public final static int WIZARD_POINTS = 3;
     
 /**
- * @param colorPiece the color of the checkers piece
- * @param playerowner the owner player who has the ability to move the piece
+ * @param colorPiece the color of the checkers piece.
+ * @param playerowner the owner player who has the ability to move the piece.
  * @throws CheckersTable Exception
  */
     public Wizard(Color colorPiece, Player playerowner) throws Exception{
@@ -25,8 +25,8 @@ public class Wizard extends Piece{
 
 /**
  * This method determines the possible movements of the wizard piece.
- * @param direction the direction of the boxes to be analyzed
- * @return 1: //It's useless but necessary because of override
+ * @param direction the direction of the boxes to be analyzed.
+ * @return 1: //It's useless but necessary because of override.
  */
     @Override
     public int showSuggestions(int direction){
@@ -40,18 +40,22 @@ public class Wizard extends Piece{
         return 1; //It's useless but necessary because of override
     }
 
-/**This method determines the path of the image to be drawn on the game table*/
+/**
+*This method determines the path of the image to be drawn on the game table.
+*/
     @Override
     public String getPathIMG(){
         return (getColor() == Color.red) ? "/images/WizardRed.png" : "/images/WizardGreen.png";
     }
 
 
-/**@param i_row row index
- * @param j_col column index
- * @param n_rows number of lines
- * @param n_cols number of columns
- * @return if a wizard must be inserted in the input position, false otherwise
+/**
+ * Return if a wizard must be inserted in the input position, false otherwise.
+ * @param i_row row index.
+ * @param j_col column index.
+ * @param n_rows number of lines.
+ * @param n_cols number of columns.
+ * @return if a wizard must be inserted in the input position, false otherwise.
 */
     public static boolean is_WizardStartPosition(int i_row, int j_col, int n_rows, int n_cols){
         return (i_row == 0 && j_col == n_rows - 1) || (i_row == n_cols - 1 && j_col == 0);
