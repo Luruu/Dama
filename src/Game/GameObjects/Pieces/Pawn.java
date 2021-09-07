@@ -16,6 +16,7 @@ public class Pawn extends Piece{
 /**
  * @param c the color of the pawn piece
  * @param p the owner player who has the ability to move the piece
+ * * @throws CheckersTable Exception
  */
     public Pawn(Color c, Player p) throws Exception{
         super(c, PAWN_POINTS, p);

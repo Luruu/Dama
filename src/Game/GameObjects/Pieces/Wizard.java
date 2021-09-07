@@ -17,6 +17,7 @@ public class Wizard extends Piece{
 /**
  * @param colorPiece the color of the checkers piece
  * @param playerowner the owner player who has the ability to move the piece
+ * @throws CheckersTable Exception
  */
     public Wizard(Color colorPiece, Player playerowner) throws Exception{
         super(colorPiece, WIZARD_POINTS, playerowner);
