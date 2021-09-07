@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
-public abstract class ImageFunctions {
+public interface ImageFunctions {
 
-    public static BufferedImage readFile(String pathRelative){
+    default BufferedImage readFile(String pathRelative){
         String absPath = getAbsolutePath(pathRelative);
         BufferedImage img = null;
         try {
@@ -19,12 +19,12 @@ public abstract class ImageFunctions {
     }
     
     //this method is necessary to access file on the file system
-    public static String getAbsolutePath(String pathRelative){
+    default String getAbsolutePath(String pathRelative){
         String filePath = new File("").getAbsolutePath();
         return filePath.concat(pathRelative);
     }
 
-    public static BufferedImage scale(BufferedImage imgIn, int wid, int hei) {
+    default BufferedImage scale(BufferedImage imgIn, int wid, int hei) {
         if (imgIn == null)
             return null;
         BufferedImage imgOut = new BufferedImage(wid, hei, imgIn.getType());

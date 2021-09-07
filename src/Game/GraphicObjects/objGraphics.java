@@ -8,7 +8,7 @@ import Game.ImageFunctions;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public interface objGraphics {
+public interface objGraphics extends ImageFunctions {
     //Add and set a new Frame
     default JFrame addFrame(String titleFrame, int width, int height, Color backGroundColor, boolean resizable, LayoutManager layout, String icon, boolean centerX, boolean centerY, int actionOnExit) {
         JFrame newFrame = new JFrame(titleFrame);
@@ -18,7 +18,7 @@ public interface objGraphics {
         newFrame.setResizable(resizable);
         newFrame.setLayout(layout);
 
-        Image iconImg = ImageFunctions.readFile(icon);
+        Image iconImg = readFile(icon);
         newFrame.setIconImage(iconImg);
 
         newFrame.setDefaultCloseOperation(actionOnExit);

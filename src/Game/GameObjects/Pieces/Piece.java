@@ -1,22 +1,18 @@
 package Game.GameObjects.Pieces;
-import javax.swing.*;
 
-import Game.ImageFunctions;
+import Game.ImageObj;
 import Game.GameObjects.ObjGame;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.Table.Box;
 import Game.GraphicObjects.Table.CheckersTable;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 
-
-
-public abstract class Piece extends JComponent implements ObjGame {
+public abstract class Piece extends ImageObj implements ObjGame {
    private final Color color;
    protected int points;
-   private BufferedImage img;
+   
    private final int DIM_IMG;
    private Point coord;
    private Player owner;
@@ -31,17 +27,12 @@ public abstract class Piece extends JComponent implements ObjGame {
       addMouseListener(owner);
       TABLE = CheckersTable.getInstance();
       DIM_IMG = Box.DIM_BOX - 10; //Dimension of a Box - margin
-      img = ImageFunctions.scale(ImageFunctions.readFile(getPathIMG()), DIM_IMG, DIM_IMG);
-      setPreferredSize(new Dimension(DIM_IMG, DIM_IMG));
+      setImg(getPathIMG(), new Dimension( DIM_IMG, DIM_IMG));
+      
       coord = new Point();
    }
 
    protected abstract String getPathIMG();
-
-   protected void paintComponent(Graphics g){
-      super.paintComponent(g);
-      g.drawImage(img, 0, 0,null);
-   }
 
    //return values: 2 (deve mangiare) -  0(si può muovere o meno (non verificato!!))
    public int showSuggestions(int direction){
