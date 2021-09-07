@@ -2,6 +2,7 @@ package Game.GraphicObjects;
 
 import javax.swing.*;
 
+import Game.EnumIndices;
 import Game.ImageFunctions;
 
 import java.awt.*;
@@ -59,16 +60,16 @@ public interface objGraphics {
         return newButton;
     }
 
-    default JComboBox<?> addComboBoxString(String [] str, int SelectedIndex, boolean editablebyUser) {
+    default JComboBox<?> addComboBoxString(String [] str, EnumIndices SelectedIndex, boolean editablebyUser) {
         JComboBox<?> newCombobox = new JComboBox<String>(str);
-        newCombobox.setSelectedIndex(SelectedIndex);
+        newCombobox.setSelectedIndex(SelectedIndex.getValue());
         newCombobox.setEditable(editablebyUser);
         return newCombobox;
     }
 
-    default JComboBox<?> addComboBoxString(String [] str, int SelectedIndex, boolean editablebyUser, ActionListener listener, String action) {
+    default JComboBox<?> addComboBoxString(String [] str, EnumIndices SelectedIndex, boolean editablebyUser, ActionListener listener, String action) {
         JComboBox<?> newCombobox = new JComboBox<String>(str);
-        newCombobox.setSelectedIndex(SelectedIndex);
+        newCombobox.setSelectedIndex(SelectedIndex.getValue());
         newCombobox.setEditable(editablebyUser);
         newCombobox.addActionListener(listener);
         newCombobox.setActionCommand(action);

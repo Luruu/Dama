@@ -1,6 +1,7 @@
 package Game.GraphicObjects.Start;
 import javax.swing.*;
 
+import Game.EnumIndices;
 import Game.ImageFunctions;
 import Game.GameObjects.ConcreteFactoryM;
 import Game.GameObjects.Factory;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.awt.image.BufferedImage;
 
 
-public class CheckersStart extends GraphicWindow implements ActionListener{
+public class CheckersStart extends GraphicWindow implements ActionListener {
 
     //Singleton Eager initialization
     private static final CheckersStart Instance = new CheckersStart();
@@ -64,18 +65,18 @@ public class CheckersStart extends GraphicWindow implements ActionListener{
         jComponentList.add(addLabel("table size"));
         
         String[] dimensionStrings = { "4", "6", "8", "10", "12", "14", "16"};
-        jComponentList.add(addComboBoxString(dimensionStrings, 2, false, this, stringAction));
+        jComponentList.add(addComboBoxString(dimensionStrings, EnumIndices.THIRD, false, this, stringAction));
         addcommandtoList("combobox1");
 
         jComponentList.add(addLabel("game mode"));
 
         String[] modeStrings = { "classic", "revised"};
-        jComponentList.add(addComboBoxString(modeStrings, 1, false));
+        jComponentList.add(addComboBoxString(modeStrings, EnumIndices.FIRST, false));
 
         jComponentList.add(addLabel("timer"));
 
         String[] timeStrings = {"10", "60", "120", "180", "240", "480"};
-        jComponentList.add(addComboBoxString(timeStrings, 1, false));
+        jComponentList.add(addComboBoxString(timeStrings, EnumIndices.FOURTH, false));
         
         jComponentList.add(addLabel("Choose name Player 1"));
         
@@ -99,7 +100,8 @@ public class CheckersStart extends GraphicWindow implements ActionListener{
         
 
         for (JComponent jb : jComponentList)
-        panel.add(jb);
+            panel.add(jb);
+
         frame.add(panel);
         frame.setVisible(true);
     }
