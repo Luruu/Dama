@@ -1,12 +1,12 @@
 package Game.GraphicObjects.Table;
 
 
-import Game.TimerObservable;
-import Game.GameObjects.ConcreteFactoryM;
-import Game.GameObjects.Factory;
+import Game.GameObjects.FactoryM.ConcreteFactoryM;
+import Game.GameObjects.FactoryM.Factory;
 import Game.GameObjects.Pieces.Piece;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.Start.CheckersStart;
+import Game.Observer.TimerObservable;
 
 import java.awt.*;
 import javax.swing.*;
@@ -239,7 +239,6 @@ public class CheckersTable extends WindowTable {
             JOptionPane.showMessageDialog(null, "Game over! " + enemyPiece.getOwner().getPlayerName() + " lost.");
             returnToStart();
         }
-        
     }
 
     /**

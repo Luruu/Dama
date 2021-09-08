@@ -1,4 +1,4 @@
-package Game.GameObjects;
+package Game.GameObjects.FactoryM;
 import java.awt.*;
 
 import Game.GameObjects.Players.*;

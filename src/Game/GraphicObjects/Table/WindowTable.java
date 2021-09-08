@@ -4,9 +4,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.GraphicWindow;
-import Game.GraphicObjects.Start.CheckersStart;
-import Game.Observer;
-import Game.TimerObservable;
+import Game.Observer.Observer;
+import Game.Observer.TimerObservable;
+
 import java.awt.*;
 import javax.swing.*;
 import java.lang.Exception;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * This class abstracts the concept of the game window.
  */
 public abstract class WindowTable extends GraphicWindow {
-    
+/*-------------------------------------------------------------------------------------- MEMENTO */
         /**
          * This nested class implements the memento pattern.
          */
@@ -47,7 +47,7 @@ public abstract class WindowTable extends GraphicWindow {
                 reStartPanelInfo();
             }
         }
-
+/*----------------------------------------------------------------------------------*/
 
     protected int N_ROWS, N_COLS;
     protected PanelInfo panelInfo;
@@ -55,6 +55,7 @@ public abstract class WindowTable extends GraphicWindow {
     protected Player p1, p2;
     protected Memento memento;
     protected int timer_value;
+    
 
     protected ArrayList<Point> pointsListToClear = new ArrayList<>();
     
@@ -81,16 +82,40 @@ public abstract class WindowTable extends GraphicWindow {
      * This abstract method allows to define the settings to be made for a new game.
      */
     public abstract void reStartPanelInfo();
-
+    
+    /**
+     * Scale the size of the game table according to the display on which the game is started.
+     */
+    public boolean scaleDimensionTable(){
+        Box.DIM_BOX = 96; //change every time Window Table is showed so I set DIM_BOX to the default value.
+        //centerTableY = true;
+        Dimension dimensionTableFrame = new Dimension(N_ROWS * Box.DIM_BOX, N_ROWS * Box.DIM_BOX);
+        Dimension dimensionScreenPC = Toolkit.getDefaultToolkit().getScreenSize();
+        Boolean dimensions_Too_large = dimensionTableFrame.height > dimensionScreenPC.height || dimensionTableFrame.width > dimensionScreenPC.width;
+        if (dimensions_Too_large){
+            int diff = dimensionTableFrame.height - dimensionScreenPC.height;
+            if (diff > 400)
+                Box.DIM_BOX -= (Box.DIM_BOX/2 - 14);
+            else if (diff > 300)
+                Box.DIM_BOX -= (Box.DIM_BOX/2 - 18);
+            else if (diff > 200)
+                Box.DIM_BOX -= (Box.DIM_BOX/2 - 22);
+            else if (diff > 50)
+                Box.DIM_BOX -= (Box.DIM_BOX/2 - 33);
+                
+            return false;
+        }
+       return true;
+    }
+    
     /**
      * This function allows you to initialize the game table.
      * @throws Exception exception.
      */
     protected void initializeWindow() throws Exception {
-        System.out.println("DIM_BOX" + Box.DIM_BOX);
-        System.out.println("DIM_BOX" + Box.DIM_BOX);
+        boolean centerScreen = scaleDimensionTable(); //N.B: Game Table sizes are always (DIM * Box.DIM_BOX, DIM * DIM_BOX)
         Dimension sizeFrame = new Dimension(N_ROWS * Box.DIM_BOX, N_COLS * Box.DIM_BOX);
-        frame = addFrame("Checkers Table", sizeFrame.width, sizeFrame.height, Color.black, false, new BorderLayout(0,0), ICON_PATH, true, CheckersStart.getInstance().centerTableY, JFrame.DO_NOTHING_ON_CLOSE);
+        frame = addFrame("Checkers Table", sizeFrame.width, sizeFrame.height, Color.black, false, new BorderLayout(0,0), ICON_PATH, true, centerScreen, JFrame.DO_NOTHING_ON_CLOSE);
         panel = addPanel(sizeFrame.width, sizeFrame.height, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
         panelInfo = new PanelInfo(200, sizeFrame.height, Color.getHSBColor(0, 0, 15), new FlowLayout(FlowLayout.CENTER, sizeFrame.width/10, sizeFrame.height/10 - 30), p1, p2, timer_value);
 
@@ -215,5 +240,4 @@ public abstract class WindowTable extends GraphicWindow {
     public void setP2(Player p2) {
         this.p2 = p2;
     }
-
 }

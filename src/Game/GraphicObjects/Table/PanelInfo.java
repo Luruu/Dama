@@ -1,9 +1,9 @@
 package Game.GraphicObjects.Table;
 import javax.swing.*;
 
-import Game.Observer;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.GraphicComponents;
+import Game.Observer.Observer;
 
 import java.awt.*;
 import java.util.ArrayList;

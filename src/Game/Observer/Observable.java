@@ -1,4 +1,4 @@
-package Game;
+package Game.Observer;
 /**
  * <h1>Observerable pattern Interface</h1>
  * Represents the observervables.

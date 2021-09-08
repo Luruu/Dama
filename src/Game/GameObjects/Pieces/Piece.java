@@ -1,11 +1,10 @@
 package Game.GameObjects.Pieces;
 
-import Game.ImageComponent;
-import Game.GameObjects.ElementGame;
+import Game.GameObjects.FactoryM.ElementGame;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.Table.Box;
 import Game.GraphicObjects.Table.CheckersTable;
-
+import Game.ImageComponents.ComponentImage;
 
 import java.awt.*;
 
@@ -17,7 +16,7 @@ import java.awt.*;
  * @version 1.0
  * @since 31-08-2021
  */
-public abstract class Piece extends ImageComponent implements ElementGame {
+public abstract class Piece extends ComponentImage implements ElementGame {
    private final Color color;
    protected int points;
    

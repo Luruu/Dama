@@ -1,4 +1,4 @@
-package Game;
+package Game.GraphicObjects.Start;
 
 public enum EnumIndices {
     FIRST(0),       SECOND(1),      THIRD(2), 

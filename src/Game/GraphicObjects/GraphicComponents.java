@@ -2,8 +2,8 @@ package Game.GraphicObjects;
 
 import javax.swing.*;
 
-import Game.EnumIndices;
-import Game.ImageFunctions;
+import Game.GraphicObjects.Start.EnumIndices;
+import Game.ImageComponents.ImageFunctions;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -22,7 +22,7 @@ public interface GraphicComponents extends ImageFunctions {
         newFrame.setResizable(resizable);
         newFrame.setLayout(layout);
 
-        Image iconImg = readFile(icon);
+        Image iconImg = ImageFunctions.readFile(icon);
         newFrame.setIconImage(iconImg);
 
         newFrame.setDefaultCloseOperation(actionOnExit);

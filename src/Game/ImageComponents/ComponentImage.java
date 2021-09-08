@@ -1,13 +1,17 @@
-package Game;
+package Game.ImageComponents;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
-
-public class ImageComponent extends JComponent implements ImageFunctions {
+/**
+ * <h1>ComponentImage class</h1>
+ * Represents an image as a JComponent 
+ */
+public class ComponentImage extends JComponent implements ImageFunctions {
     private BufferedImage img;
 
-    public ImageComponent(){};
-    public ImageComponent(String pathImg, Dimension dim){ setImg(pathImg, dim);}
+    public ComponentImage(){};
+    public ComponentImage(String pathImg, Dimension dim){ setImg(pathImg, dim);}
 
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -19,7 +23,7 @@ public class ImageComponent extends JComponent implements ImageFunctions {
     }
 
     public void setImg(String pathImg, Dimension dim) {
-        this.img = scale(readFile(pathImg), dim.width, dim.height);
+        this.img = ImageFunctions.scale(pathImg, dim.width, dim.height);
         setPreferredSize(dim);
     }
 }

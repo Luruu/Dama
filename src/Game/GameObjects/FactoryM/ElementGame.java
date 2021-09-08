@@ -1,4 +1,4 @@
-package Game.GameObjects;
+package Game.GameObjects.FactoryM;
 
 /**
  * This interface is implemented by Player and Piece because both are game objects.

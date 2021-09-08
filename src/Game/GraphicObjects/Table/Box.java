@@ -1,8 +1,8 @@
 package Game.GraphicObjects.Table;
 import javax.swing.*;
 
-import Game.GameObjects.ConcreteFactoryM;
-import Game.GameObjects.Factory;
+import Game.GameObjects.FactoryM.ConcreteFactoryM;
+import Game.GameObjects.FactoryM.Factory;
 import Game.GameObjects.Pieces.*;
 import Game.GameObjects.Players.Player;
 

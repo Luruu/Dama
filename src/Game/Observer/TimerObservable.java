@@ -1,4 +1,4 @@
-package Game;
+package Game.Observer;
 
 import java.util.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +10,10 @@ import Game.GameObjects.Players.Player;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
-
+/**
+ * <h1>TimerObservable</h1>
+ * Represents the observervable which starts a TimerObsvervable with a new thread
+ */
 public class TimerObservable{
     ThreadTimerObservable obv; 
     public TimerObservable(ArrayList<Observer> players, int index, int timer_value){
@@ -30,13 +33,16 @@ public class TimerObservable{
     }
 
 }
-
+/**
+ * <h1>TimerObservable</h1>
+ * Represents the observervable Timer.
+ */
 class ThreadTimerObservable implements Observable, ActionListener, Runnable {
-    public ArrayList<Observer> observer = new ArrayList<Observer>();
+    public   ArrayList<Observer> observer = new ArrayList<Observer>();
     private  Timer timer = null;
     private  int timerStop;
     private  int timerValueStart;
-    private int index;
+    private  int index;
 
     public void run(){
         timer = new Timer(1000, this);
@@ -66,10 +72,10 @@ class ThreadTimerObservable implements Observable, ActionListener, Runnable {
             Player p2 = (Player)observer.get(1);
             Player winner;
             Boolean noWinner = null;
-            //Possibile violazione di SINGOLA RESPONSABILITA' però abbiamo la necessità di notificare il player corretto.
-            if (p1.getPlayerScore() > p2.getPlayerScore())
+
+            if (p1.getPlayerScore() > p2.getPlayerScore()) //P1 is the winner
                 winner = p1;
-            else if ( p1.getPlayerScore() < p2.getPlayerScore())
+            else if ( p1.getPlayerScore() < p2.getPlayerScore()) //P2 is the winner
                 winner = p2;
             else{ // p1.getPlayerScore() == p2.getPlayerScore()
                 winner = p1; //p1 is not the winner. 

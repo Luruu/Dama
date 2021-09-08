@@ -1,4 +1,4 @@
-package Game;
+package Game.Observer;
 /**
  * <h1>Observer pattern Interface</h1>
  * Represents the observers.

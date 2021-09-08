@@ -1,14 +1,12 @@
 package Game.GraphicObjects.Start;
 
 
-import Game.EnumIndices;
-import Game.GameObjects.ConcreteFactoryM;
-import Game.GameObjects.Factory;
+import Game.GameObjects.FactoryM.ConcreteFactoryM;
+import Game.GameObjects.FactoryM.Factory;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.GraphicWindow;
-import Game.GraphicObjects.Table.Box;
 import Game.GraphicObjects.Table.CheckersTable;
-import Game.ImageComponent;
+import Game.ImageComponents.ComponentImage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,16 +25,13 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
 
 
     private String  firstPlayerName, secondPlayerName;
-    private int     dimTable;
+    private int     dimTable , time;
     private Boolean modeRevised;
 
     private ArrayList<JComponent> jComponentList = new ArrayList<>();
 
     private String stringAction = "0";
     private ArrayList<String> listActionCommands = new ArrayList<>();
-
-    public boolean centerTableY = true;
-    public int n_sec;
 
 
     /**
@@ -82,16 +77,16 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
         jComponentList.add(addTextField("Player2", new Dimension(100, 20), true));
         
         jComponentList.add(addButton("Start Game", this, stringAction));
-        addcommandtoList("Start Game");
+        addtoCommandsList("Start Game");
         
         jComponentList.add(addButton("Game Rules", this, stringAction));
-        addcommandtoList("game rules");
+        addtoCommandsList("game rules");
 
         Dimension Imgdim = new Dimension(38,38);
-        panel.add(new ImageComponent("/images/PawnGreen.png", Imgdim));
-        panel.add(new ImageComponent("/images/CheckersGreen.png", Imgdim));
-        panel.add(new ImageComponent("/images/WizardRed.png", Imgdim));
-        panel.add(new ImageComponent("/images/PawnRed.png", Imgdim));
+        panel.add(new ComponentImage("/images/PawnGreen.png", Imgdim));
+        panel.add(new ComponentImage("/images/CheckersGreen.png", Imgdim));
+        panel.add(new ComponentImage("/images/WizardRed.png", Imgdim));
+        panel.add(new ComponentImage("/images/PawnRed.png", Imgdim));
        
 
         for (JComponent jb : jComponentList)
@@ -105,7 +100,7 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
      * This method adds a string to an action list.
      * @param nameObject represents a specific action performed on the initial panel.
      */
-    public void addcommandtoList(String nameObject){
+    public void addtoCommandsList(String nameObject){
         listActionCommands.add(nameObject);
         int intAction = Integer.parseInt((String)stringAction);
         stringAction = String.valueOf(++intAction); //Increase action because a nameObject is added
@@ -121,13 +116,13 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
             case "0":
                 firstPlayerName = ((JTextField) jComponentList.get(8)).getText();
                 secondPlayerName = ((JTextField) jComponentList.get(10)).getText();
-                n_sec = Integer.parseInt((String)(((JComboBox<?>)jComponentList.get(6)).getSelectedItem()));
+                time = Integer.parseInt((String)(((JComboBox<?>)jComponentList.get(6)).getSelectedItem()));
                 dimTable = Integer.parseInt((String)(((JComboBox<?>)jComponentList.get(2)).getSelectedItem()));
                 modeRevised = ((JComboBox<?>)jComponentList.get(4)).getSelectedItem().equals("revised"); //true revised, false classic
                 if (firstPlayerName.isBlank() || secondPlayerName.isBlank()) return;
                 try {
                     frame.setVisible(false); //hide CheckersStart Window
-                    startGame(firstPlayerName, secondPlayerName, dimTable, modeRevised, n_sec);
+                    openWindowTable(firstPlayerName, secondPlayerName, dimTable, modeRevised, time);
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
@@ -153,29 +148,6 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
     }
 
     /**
-     * Scale the size of the game table according to the display on which the game is started.
-     */
-    private void scaleDimensionTable(){
-        Box.DIM_BOX = 96;
-        centerTableY = true;
-        Dimension dimensionTableFrame = new Dimension(dimTable * Box.DIM_BOX, dimTable * Box.DIM_BOX);
-        Dimension dimensionScreenPC = Toolkit.getDefaultToolkit().getScreenSize();
-        Boolean dimensions_Too_large = dimensionTableFrame.height > dimensionScreenPC.height || dimensionTableFrame.width > dimensionScreenPC.width;
-        if (dimensions_Too_large){
-            int diff = dimensionTableFrame.height - dimensionScreenPC.height;
-            centerTableY = false; //Table will start at the position (x,15)
-            if (diff > 400)
-                Box.DIM_BOX -= (Box.DIM_BOX/2 - 14);
-            else if (diff > 300)
-                Box.DIM_BOX -= (Box.DIM_BOX/2 - 18);
-            else if (diff > 200)
-                Box.DIM_BOX -= (Box.DIM_BOX/2 - 22);
-            else if (diff > 50)
-                Box.DIM_BOX -= (Box.DIM_BOX/2 - 33);
-        }
-    }
-    
-    /**
      * Set the players and call the game table. The game begins.
      * @param p1Name the name of the first player
      * @param p2Name the name of the second player
@@ -185,14 +157,11 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
      * @param n_sec timer value
      * @throws Exception
      */
-    private void startGame(String p1Name, String p2Name, int DIM_TABLE, boolean revisedChecker, int n_sec) throws Exception{
-        scaleDimensionTable(); //N.B: Game Table sizes are always (DIM * Box.DIM_BOX, DIM * DIM_BOX)
+    private void openWindowTable(String p1Name, String p2Name, int DIM_TABLE, boolean revisedChecker, int n_sec) throws Exception{
         CheckersTable table = CheckersTable.getInstance(DIM_TABLE, DIM_TABLE, revisedChecker);
         Factory factoryM = new ConcreteFactoryM();
         Player pl1 = (Player) factoryM.factoryMethod(p1Name, Color.red, null);
         Player pl2 = (Player) factoryM.factoryMethod(p2Name, Color.green, null);
         table.startGame(pl1, pl2, n_sec); 
     }
-
-        
 }
