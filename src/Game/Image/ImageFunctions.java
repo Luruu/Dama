@@ -1,4 +1,4 @@
-package Game.ImageComponents;
+package Game.Image;
 
 import java.awt.*;
 import java.io.File;

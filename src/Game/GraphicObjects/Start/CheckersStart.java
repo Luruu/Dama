@@ -6,7 +6,7 @@ import Game.GameObjects.FactoryM.Factory;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.GraphicWindow;
 import Game.GraphicObjects.Table.CheckersTable;
-import Game.ImageComponents.ComponentImage;
+import Game.Image.ComponentImage;
 
 import javax.swing.*;
 import java.awt.*;

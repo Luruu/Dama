@@ -4,7 +4,7 @@ import Game.GameObjects.FactoryM.ElementGame;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.Table.Box;
 import Game.GraphicObjects.Table.CheckersTable;
-import Game.ImageComponents.ComponentImage;
+import Game.Image.ComponentImage;
 
 import java.awt.*;
 

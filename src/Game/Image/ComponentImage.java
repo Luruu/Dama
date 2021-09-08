@@ -1,4 +1,4 @@
-package Game.ImageComponents;
+package Game.Image;
 import javax.swing.*;
 
 import java.awt.*;

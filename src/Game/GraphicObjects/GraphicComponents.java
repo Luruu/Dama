@@ -3,7 +3,7 @@ package Game.GraphicObjects;
 import javax.swing.*;
 
 import Game.GraphicObjects.Start.EnumIndices;
-import Game.ImageComponents.ImageFunctions;
+import Game.Image.ImageFunctions;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
