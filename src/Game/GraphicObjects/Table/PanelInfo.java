@@ -9,7 +9,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * This class abstracts the panel containing information about the course of the game, including the timer.
+ */
 public class PanelInfo implements GraphicComponents, ActionListener, Observer {
 
     private JPanel panelInfo;
@@ -18,6 +20,16 @@ public class PanelInfo implements GraphicComponents, ActionListener, Observer {
     private int time;
 
 
+    /**
+     * Costructor.
+     * @param n widht of the panel.
+     * @param dim height of the panel.
+     * @param c background color.
+     * @param lm LayoutManager of the panel.
+     * @param p1 first player.
+     * @param p2 second player.
+     * @param n_sec number of seconds of the timer.
+     */
     public PanelInfo(int n, int dim, Color c, LayoutManager lm, Player p1, Player p2, int n_sec){
         nmove = 0;
         time = 3;
@@ -48,7 +60,9 @@ public class PanelInfo implements GraphicComponents, ActionListener, Observer {
         panelInfo.setVisible(true);
     }
 
-    
+    /**
+     * This method associates operations with buttons on the panel.
+     */
     @Override
     public void actionPerformed(ActionEvent arg0) {
         String action = arg0.getActionCommand();
@@ -77,12 +91,20 @@ public class PanelInfo implements GraphicComponents, ActionListener, Observer {
         }
     }
 
+    /**
+     * This method update the score of the match.
+     * @param p player to update the score to.
+     */
     public  void updateScore(Player p){
         JLabel jl;
         jl = (p.getPlayerColor().equals(Color.RED)) ? (JLabel) jComponentList.get(2) : (JLabel) jComponentList.get(4);
         jl.setText(p.getPlayerName() + "'s" + " score: "+ p.getPlayerScore());
     }
 
+    /**
+     * This method changes the player's turn.
+     * @param p player who can move the pieces.
+     */
     public void switchTurn(Player p){
         JLabel jl = (JLabel) jComponentList.get(6);
         jl.setText("Turn: " + p.getPlayerName());
@@ -92,16 +114,25 @@ public class PanelInfo implements GraphicComponents, ActionListener, Observer {
         
     }
 
+    /**
+     * This method updates the NMOVE field of the panel.
+     */
     private void updateNMOVE(){
         JLabel jl = (JLabel) jComponentList.get(5);
         jl.setText("N° moves: " + nmove);
     }
 
+    /**
+     * This method increases the number of movements.
+     */
     private void increaseNMOVE(){
         nmove++;
         updateNMOVE();
     }
 
+    /**
+     * 
+     */
     public void reSetNMOVE(){
         nmove = 0;
         updateNMOVE();

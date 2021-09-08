@@ -1,7 +1,9 @@
-package Game.GraphicObjects.Start;
+package Game;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
+
+import Game.GraphicObjects.Start.CheckersStart;
 
 /**
  * <h1>Main class</h1>

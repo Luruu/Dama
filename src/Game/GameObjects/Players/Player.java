@@ -76,7 +76,7 @@ public class Player extends MouseAdapter implements Observer, ElementGame, Proto
             Box boxClicked = (Box) e.getSource();
             if (Boolean.logicalOr(boxClicked.getColor().equals(Color.red), boxClicked.getColor().equals(Color.green))){
                 try {
-                    invoker.move(boxClicked, boxClicked.getCoord().x, boxClicked.getCoord().y);
+                    invoker.move(boxClicked);
                 } catch (Exception e1) {
                     e1.getMessage();
                 }

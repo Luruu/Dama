@@ -5,3 +5,7 @@ Use: javadoc -d docs -sourcepath src -subpackages Game
 ---------------Compile
 Go in \Dama
 javac -d out -sourcepath src src/Game/GraphicObjects/Start/Main.java
+
+--------------- Execute
+Go in \Dama\out (NOTE: OUT NOT SRC)
+java Game.GraphicObjects.Start.Main
