@@ -2,7 +2,7 @@ package Game.GraphicObjects.Table;
 import Game.GameObjects.Pieces.*;
 
 /**
- * Command pattern interface.
+ * <h1>Command pattern interface</h1> 
  */
 public interface Command {
     /**

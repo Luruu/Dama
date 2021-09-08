@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 /**
+ * <h1>PanelInfo class</h1> 
  * This class abstracts the panel containing information about the course of the game, including the timer.
  */
 public class PanelInfo implements GraphicComponents, ActionListener, Observer {
@@ -131,13 +132,16 @@ public class PanelInfo implements GraphicComponents, ActionListener, Observer {
     }
 
     /**
-     * 
+     * Reset the number of movements.
      */
     public void reSetNMOVE(){
         nmove = 0;
         updateNMOVE();
     }
 
+    /**
+     * This method updates the timer value within the panel.
+     */
     @Override
     public void update(Object obj){
         if (obj instanceof Integer){
@@ -149,6 +153,10 @@ public class PanelInfo implements GraphicComponents, ActionListener, Observer {
         jl.setText("Timer: " + time);
     }
 
+    /**
+     *  Returns the panel with information on the game in progress.
+     * @return the panel with information on the game in progress.
+     */
     public JPanel getpanelInfo(){
         return panelInfo;
     }

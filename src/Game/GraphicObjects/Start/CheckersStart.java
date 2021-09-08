@@ -61,8 +61,8 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
         jComponentList.add(addLabel("table size"));
         
         String[] dimensionStrings = { "4", "6", "8", "10", "12", "14", "16"};
-        jComponentList.add(addComboBoxString(dimensionStrings, EnumIndices.THIRD, false, this, stringAction));
-        addcommandtoList("combobox1");
+        jComponentList.add(addComboBoxString(dimensionStrings, EnumIndices.THIRD, false));
+
 
         jComponentList.add(addLabel("game mode"));
 
@@ -120,8 +120,6 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
         String action = e.getActionCommand();
         switch(action){
             case "0":
-                break;
-            case "1":
                 firstPlayerName = ((JTextField) jComponentList.get(8)).getText();
                 secondPlayerName = ((JTextField) jComponentList.get(10)).getText();
                 n_sec = Integer.parseInt((String)(((JComboBox<?>)jComponentList.get(6)).getSelectedItem()));
@@ -135,7 +133,7 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
                     e1.printStackTrace();
                 }
                 break;
-            case "2":
+            case "1":
                 JOptionPane.showMessageDialog(frame, "REVISED MODE: Ogni giocatore dispone di N pedine e 2 maghi (N in base alla dimensione del campo da gioco) di colore diverso rispetto a quelle dell'avversario.\n Il giocatore verde fa sempre la prima mossa.\n" +
                 "L'obiettivo del gioco è quello di mangiare tutti i pezzi dell'avversario o di fare il miglior punteggio entro il tempo limite\n" +
                 "Sul campo da gioco sono presenti i seguenti pezzi:\n" + 

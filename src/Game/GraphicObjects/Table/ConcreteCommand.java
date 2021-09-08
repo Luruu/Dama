@@ -2,6 +2,7 @@ package Game.GraphicObjects.Table;
 
 import Game.GameObjects.Pieces.Piece;
 /**
+ * <h1>ConcreteCommand class</h1> 
  * Implementation of the Command pattern concrete Command.
  */
 public class ConcreteCommand implements Command{

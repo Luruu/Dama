@@ -1,6 +1,7 @@
 package Game.GraphicObjects.Table;
 import Game.GameObjects.Pieces.*;
 /**
+ * <h1>InvokerList class</h1> 
  * This class is the implementation of the Command pattern invoker.
  */
 public class InvokerList {

@@ -1,5 +1,6 @@
 package Game.GraphicObjects.Table;
 /**
+ * <h1>Memento class</h1> 
  * Pattern Memento
  */
 @FunctionalInterface
