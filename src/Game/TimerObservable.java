@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-import Game.GameObjects.Players.Observer;
 import Game.GameObjects.Players.Player;
 
 import java.util.concurrent.Executors;

@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.GraphicWindow;
 import Game.GraphicObjects.Start.CheckersStart;
-import Game.GameObjects.Players.Observer;
+import Game.Observer;
 import Game.TimerObservable;
 import java.awt.*;
 import javax.swing.*;

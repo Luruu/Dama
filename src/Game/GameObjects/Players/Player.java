@@ -2,6 +2,7 @@ package Game.GameObjects.Players;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import Game.Observer;
 import Game.GameObjects.*;
 import Game.GameObjects.Pieces.*;
 import Game.GraphicObjects.Table.*;

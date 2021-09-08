@@ -1,7 +1,7 @@
 package Game.GraphicObjects.Table;
 import javax.swing.*;
 
-import Game.GameObjects.Players.Observer;
+import Game.Observer;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.GraphicComponents;
 
