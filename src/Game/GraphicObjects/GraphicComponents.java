@@ -29,15 +29,9 @@ public interface GraphicComponents extends ImageFunctions {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         Point centerScreen = null;
         int margin = 15;
-        if (centerX && centerY)
-            centerScreen = new Point(dim.width/2 - newFrame.getSize().width/2, dim.height/2 - newFrame.getSize().height/2);
-        else if (!centerX && centerY)
-            centerScreen = new Point(margin, dim.height/2 - newFrame.getSize().height/2);
-        else if (centerX && !centerY)
-            centerScreen = new Point(dim.width/2 - newFrame.getSize().width/2, margin);
-        else if (!centerX && !centerY)
-            centerScreen = new Point(margin, margin);
-
+        int x = centerX ? dim.width/2 - newFrame.getSize().width/2 : margin;
+        int y = centerY ? dim.height/2 - newFrame.getSize().height/2 : margin;
+        centerScreen = new Point(x,y);
         newFrame.setLocation(centerScreen);
         return newFrame;
     }

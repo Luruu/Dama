@@ -74,14 +74,14 @@ public class PanelInfo implements GraphicComponents, ActionListener, Observer {
             e.printStackTrace();
         }
         switch (action){
-            case "1":
+            case "1": //give up
                 String name = null;
                 name = ct.getActivePlayer().getPlayerName();
                 JOptionPane.showMessageDialog(null, "Game over! " + name +" gave up.");
                 ct.returnToStart();
                 ct.stopTimer();
                 break;
-            case "2":
+            case "2": // restart game (memento)
                 try {
                     ct.stopTimer();
                     ct.reStartGame();
@@ -111,8 +111,6 @@ public class PanelInfo implements GraphicComponents, ActionListener, Observer {
         jl.setText("Turn: " + p.getPlayerName());
         jl.setForeground(p.getPlayerColor());
         increaseNMOVE();
-        
-        
     }
 
     /**

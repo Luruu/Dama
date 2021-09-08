@@ -42,7 +42,6 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
     /**
      * Singleton Eager initialization.
      * @return CheckersStart instance.
-     * @see #getInstance()
      */
     public static CheckersStart getInstance(){
         return Instance;
@@ -128,7 +127,7 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
                 if (firstPlayerName.isBlank() || secondPlayerName.isBlank()) return;
                 try {
                     frame.setVisible(false); //hide CheckersStart Window
-                    startGame(firstPlayerName, secondPlayerName, dimTable, Box.DIM_BOX, modeRevised, n_sec);
+                    startGame(firstPlayerName, secondPlayerName, dimTable, modeRevised, n_sec);
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
@@ -157,6 +156,8 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
      * Scale the size of the game table according to the display on which the game is started.
      */
     private void scaleDimensionTable(){
+        Box.DIM_BOX = 96;
+        centerTableY = true;
         Dimension dimensionTableFrame = new Dimension(dimTable * Box.DIM_BOX, dimTable * Box.DIM_BOX);
         Dimension dimensionScreenPC = Toolkit.getDefaultToolkit().getScreenSize();
         Boolean dimensions_Too_large = dimensionTableFrame.height > dimensionScreenPC.height || dimensionTableFrame.width > dimensionScreenPC.width;
@@ -184,8 +185,7 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
      * @param n_sec timer value
      * @throws Exception
      */
-    private void startGame(String p1Name, String p2Name, int DIM_TABLE, int DIM_BOX, boolean revisedChecker, int n_sec) throws Exception{
-        Box.DIM_BOX = DIM_BOX;
+    private void startGame(String p1Name, String p2Name, int DIM_TABLE, boolean revisedChecker, int n_sec) throws Exception{
         scaleDimensionTable(); //N.B: Game Table sizes are always (DIM * Box.DIM_BOX, DIM * DIM_BOX)
         CheckersTable table = CheckersTable.getInstance(DIM_TABLE, DIM_TABLE, revisedChecker);
         Factory factoryM = new ConcreteFactoryM();

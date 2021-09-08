@@ -256,7 +256,7 @@ public class CheckersTable extends WindowTable {
     }
 
     /**
-     * Return to the initial panel.
+     * Return to the initial checkersStart window.
      */
     public void returnToStart(){
         frame.dispose();

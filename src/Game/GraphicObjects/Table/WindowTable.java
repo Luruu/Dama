@@ -87,7 +87,9 @@ public abstract class WindowTable extends GraphicWindow {
      * @throws Exception exception.
      */
     protected void initializeWindow() throws Exception {
-        Dimension sizeFrame = new Dimension(N_ROWS *Box.DIM_BOX, N_COLS * Box.DIM_BOX);
+        System.out.println("DIM_BOX" + Box.DIM_BOX);
+        System.out.println("DIM_BOX" + Box.DIM_BOX);
+        Dimension sizeFrame = new Dimension(N_ROWS * Box.DIM_BOX, N_COLS * Box.DIM_BOX);
         frame = addFrame("Checkers Table", sizeFrame.width, sizeFrame.height, Color.black, false, new BorderLayout(0,0), ICON_PATH, true, CheckersStart.getInstance().centerTableY, JFrame.DO_NOTHING_ON_CLOSE);
         panel = addPanel(sizeFrame.width, sizeFrame.height, Color.black, new GridLayout(N_ROWS, N_COLS, 0, 0));
         panelInfo = new PanelInfo(200, sizeFrame.height, Color.getHSBColor(0, 0, 15), new FlowLayout(FlowLayout.CENTER, sizeFrame.width/10, sizeFrame.height/10 - 30), p1, p2, timer_value);
