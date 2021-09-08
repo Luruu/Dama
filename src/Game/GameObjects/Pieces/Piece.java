@@ -32,7 +32,7 @@ public abstract class Piece extends ImageComponent implements ElementGame {
  * @param c the color of the piece piece.
  * @param p the points to be awarded to the player who eats this piece.
  * @param ply the owner player who has the ability to move the piece.
- * @throws Exception CheckersTable Exception.
+ * @throws Exception CheckersTable getInstance() Exception.
  */
    public Piece(Color c, int p, Player ply) throws Exception{
       color = c;

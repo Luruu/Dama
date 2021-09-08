@@ -39,7 +39,7 @@ public class Box extends JPanel{
      * @param p1 first player.
      * @param p2 second player.
      * @return an array of boxes initialized.
-     * @throws Exception
+     * @throws Exception Player constructor use getInstance() (it throws Exception) of CheckersTable
      */
     public static Box[][] createBoxes(int N_ROWS, int N_COLS, int DIM_BOX, Player p1, Player p2) throws Exception {
         Box[][] Boxes = new Box[N_ROWS][N_COLS];
@@ -66,9 +66,9 @@ public class Box extends JPanel{
      * @param N_COLS number of columns in the field.
      * @param p1 first player.
      * @param p2 second player.
-     * @throws Exception
+     * @throws Exception Exception of getInstance method (CheckersTable class)
      */
-    public static void addPieces(Box[][] Boxes , int N_ROWS, int N_COLS, Player p1, Player p2) throws Exception {
+    public static void addPieces(Box[][] Boxes , int N_ROWS, int N_COLS, Player p1, Player p2) throws Exception  {
         final int MID_TABLE = N_ROWS/2;
         for (int i = 0; i < MID_TABLE - 1; i++) //Add Pieces Green (Pl2)
             for (int j = (i % 2 == 0) ? 1 : 0; j < N_COLS; j += 2)
@@ -88,7 +88,7 @@ public class Box extends JPanel{
      * @param j y coordinate of the input box.
      * @param N_ROWS number of rows in the field.
      * @param N_COLS number of columns in the field.
-     * @throws Exception
+     * @throws Exception Exception of getInstance method (CheckersTable class)
      */
     public static void CreatePiece(Box[][] Boxes, Player pl, Color col, int i, int j, int N_ROWS, int N_COLS) throws Exception{
         Boolean revisedChecker = CheckersTable.getInstance().getRevisedChecker();

@@ -30,7 +30,7 @@ public class Player extends MouseAdapter implements Observer, ElementGame, Proto
  * 
  * @param c colors of the pieces that can move.
  * @param n player's name.
- * @throws Exception
+ * @throws Exception Player Exception: Maximum number of players exceeded
  */
     public Player(Color c, String n) throws Exception {
         super();
@@ -48,7 +48,7 @@ public class Player extends MouseAdapter implements Observer, ElementGame, Proto
 
     /**
      * Overload of the constructor, used for rectangles that need a mouseadapter.
-     * @throws Exception
+     * @throws Exception Exception checkersTable getInstance() 
      */
     public Player() throws Exception {
         PlayerColor  = null;
@@ -111,8 +111,7 @@ public class Player extends MouseAdapter implements Observer, ElementGame, Proto
     // Getters and Setters methods..
     
     /**
-     * This method adds points to the PlayerScore.
-     * @param points
+     * @param points This method adds points to the PlayerScore.
      */
     public void addPlayerPoints(int points){
         PlayerScore += points;

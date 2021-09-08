@@ -72,9 +72,9 @@ public class CheckersTable extends WindowTable {
      * @param p1 first player. 
      * @param p2 secondo player.
      * @param timer_value value of the timer.
-     * @throws Exception
+     * @throws Exception Exception checkersTable getInstance() 
      */
-    public void startGame(Player p1, Player p2, int timer_value) throws Exception {
+    public void startGame(Player p1, Player p2, int timer_value) throws Exception  {
         this.p1 = p1;
         this.p2 = p2;
         this.timer_value = timer_value;
@@ -99,7 +99,7 @@ public class CheckersTable extends WindowTable {
     /**
      * Move piece into dstBox.
      * @param dstBox destination box of the piece.
-     * @throws Exception
+     * @throws Exception Exception checkersTable getInstance() 
      */
     public void move(Box dstBox) throws Exception {
         boolean wizardEated = false; 

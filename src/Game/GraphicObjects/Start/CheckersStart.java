@@ -103,8 +103,8 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
     }
 
     /**
-     * This method adds a string to an action list. This string represents a specific action performed on the initial panel.
-     * @param nameObject
+     * This method adds a string to an action list.
+     * @param nameObject represents a specific action performed on the initial panel.
      */
     public void addcommandtoList(String nameObject){
         listActionCommands.add(nameObject);

@@ -1,6 +1,6 @@
 --------------------Javadoc
 Go in: \Dama
-Use: javadoc -d documentation -sourcepath src -subpackages Game
+Use: javadoc -d docs -sourcepath src -subpackages Game
 
 ---------------Compile
 Go in \Dama
