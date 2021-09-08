@@ -1,11 +1,12 @@
---------------------Javadoc
+-------------------- Javadoc
 Go in: \Dama
 Use: javadoc -d docs -sourcepath src -subpackages Game
 
----------------Compile
+--------------- Compile
 Go in \Dama
-javac -d out -sourcepath src src/Game/GraphicObjects/Start/Main.java
+javac -d out -sourcepath src src/Game/Main.java
 
 --------------- Execute
-Go in \Dama\out (NOTE: OUT NOT SRC)
-java Game.GraphicObjects.Start.Main
+Go in \Dama
+java Game.Main
+java -cp out 'Game.Main'
