@@ -23,7 +23,7 @@ public class Player extends MouseAdapter implements Observer, ElementGame, Proto
     private final Color PlayerColor;
     private final String PlayerName;
     private int npieces = 0;
-    private final InvokerList invoker;
+    private final Invoker invoker;
     private CheckersTable TABLE;
     private int PlayerScore;
 
@@ -44,7 +44,7 @@ public class Player extends MouseAdapter implements Observer, ElementGame, Proto
         PlayerName = n;
         PlayerScore = 0;
         TABLE = CheckersTable.getInstance();
-        invoker = new InvokerList(new ConcreteCommand(TABLE));
+        invoker = new Invoker(new ConcreteCommand(TABLE));
     }
 
 
@@ -56,7 +56,7 @@ public class Player extends MouseAdapter implements Observer, ElementGame, Proto
         PlayerColor  = null;
         PlayerName = null;
         TABLE = CheckersTable.getInstance();
-        invoker = new InvokerList(new ConcreteCommand(TABLE));
+        invoker = new Invoker(new ConcreteCommand(TABLE));
     }
 
     /**
@@ -170,7 +170,7 @@ public class Player extends MouseAdapter implements Observer, ElementGame, Proto
      * Return the invoker of the pattern command.
      * @return the invoker of the pattern command.
      */
-    public InvokerList getInvoker() {
+    public Invoker getInvoker() {
         return this.invoker;
     }
 

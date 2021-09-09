@@ -7,7 +7,7 @@ import Game.GameObjects.Pieces.Piece;
 import Game.GameObjects.Players.NPlayerExceededException;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.Start.CheckersStart;
-import Game.Observer.TimerObservable;
+import Game.Observer.CreateTimerObservable;
 
 import java.awt.*;
 import javax.swing.*;
@@ -85,7 +85,7 @@ public class CheckersTable extends WindowTable {
         observerList.add(p1);
         observerList.add(p2);
         observerList.add(panelInfo);
-        timer = new TimerObservable(observerList, 2, this.timer_value);
+        timer = new CreateTimerObservable(observerList, 2, this.timer_value);
     }
 
     

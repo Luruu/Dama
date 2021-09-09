@@ -4,13 +4,13 @@ import Game.GameObjects.Pieces.*;
  * <h1>InvokerList class</h1> 
  * This class is the implementation of the Command pattern invoker.
  */
-public class InvokerList {
+public class Invoker {
     private Command command;
     /**
      * Constructor.
      * @param command Element that implements the commands.
      */
-    public InvokerList(Command command){
+    public Invoker(Command command){
         this.command = command;
     }
 
