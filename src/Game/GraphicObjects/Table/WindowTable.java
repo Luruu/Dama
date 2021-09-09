@@ -2,6 +2,8 @@ package Game.GraphicObjects.Table;
 
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
+
+import Game.GameObjects.Players.NPlayerExceededException;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.GraphicWindow;
 import Game.Observer.Observer;
@@ -110,9 +112,11 @@ public abstract class WindowTable extends GraphicWindow {
     
     /**
      * This function allows you to initialize the game table.
-     * @throws Exception exception.
+     * @throws IstanceException exception
+     * @throws CloneNotSupportedException
+     * @throws NPlayerExceededException
      */
-    protected void initializeWindow() throws Exception {
+    protected void initializeWindow() throws IstanceException, CloneNotSupportedException, NPlayerExceededException {
         boolean centerScreen = scaleDimensionTable(); //N.B: Game Table sizes are always (DIM * Box.DIM_BOX, DIM * DIM_BOX)
         Dimension sizeFrame = new Dimension(N_ROWS * Box.DIM_BOX, N_COLS * Box.DIM_BOX);
         frame = addFrame("Checkers Table", sizeFrame.width, sizeFrame.height, Color.black, false, new BorderLayout(0,0), ICON_PATH, true, centerScreen, JFrame.DO_NOTHING_ON_CLOSE);

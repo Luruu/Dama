@@ -3,7 +3,7 @@ package Game.GameObjects.Pieces;
 import Game.GameObjects.FactoryM.ElementGame;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.Table.Box;
-import Game.GraphicObjects.Table.CheckersTable;
+import Game.GraphicObjects.Table.*;
 import Game.Image.ComponentImage;
 
 import java.awt.*;
@@ -31,9 +31,9 @@ public abstract class Piece extends ComponentImage implements ElementGame {
  * @param c the color of the piece piece.
  * @param p the points to be awarded to the player who eats this piece.
  * @param ply the owner player who has the ability to move the piece.
- * @throws Exception CheckersTable getInstance() Exception.
+ * @throws IstanceException CheckersTable getInstance() Exception.
  */
-   public Piece(Color c, int p, Player ply) throws Exception{
+   public Piece(Color c, int p, Player ply) throws IstanceException{
       color = c;
       points = p;
       owner = ply;

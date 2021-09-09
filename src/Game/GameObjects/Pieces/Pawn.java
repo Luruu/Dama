@@ -1,7 +1,9 @@
 package Game.GameObjects.Pieces;
 import java.awt.*;
 
+import Game.GameObjects.Players.NPlayerExceededException;
 import Game.GameObjects.Players.Player;
+import Game.GraphicObjects.Table.IstanceException;
 /**
  * <h1>Pawn Class</h1> 
  * This class represents the pawn object and encapsulates its movement logic.
@@ -18,9 +20,10 @@ public class Pawn extends Piece{
 /**
  * @param c the color of the pawn piece.
  * @param p the owner player who has the ability to move the piece.
+ * @throws IstanceException
  * @throws Exception CheckersTable getInstance() Exception.
  */
-    public Pawn(Color c, Player p) throws Exception{
+    public Pawn(Color c, Player p) throws NPlayerExceededException, IstanceException{
         super(c, PAWN_POINTS, p);
     }
 

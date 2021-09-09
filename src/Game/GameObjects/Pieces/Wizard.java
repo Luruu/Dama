@@ -1,7 +1,9 @@
 package Game.GameObjects.Pieces;
 import java.awt.*;
 
+import Game.GameObjects.Players.NPlayerExceededException;
 import Game.GameObjects.Players.Player;
+import Game.GraphicObjects.Table.IstanceException;
 
 /**
  * <h1>Wizard Class</h1> 
@@ -19,9 +21,10 @@ public class Wizard extends Piece{
 /**
  * @param colorPiece the color of the checkers piece.
  * @param playerowner the owner player who has the ability to move the piece.
+ * @throws IstanceException
  * @throws Exception CheckersTable getInstance() Exception.
  */
-    public Wizard(Color colorPiece, Player playerowner) throws Exception{
+    public Wizard(Color colorPiece, Player playerowner) throws NPlayerExceededException, IstanceException{
         super(colorPiece, WIZARD_POINTS, playerowner);
     }
 

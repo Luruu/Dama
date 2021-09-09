@@ -3,6 +3,7 @@ import java.awt.*;
 
 import Game.GameObjects.Pieces.*;
 import Game.GameObjects.Players.*;
+import Game.GraphicObjects.Table.IstanceException;
 
 /**
  * Represents the concrete factory of the pattern factory methods.
@@ -10,7 +11,7 @@ import Game.GameObjects.Players.*;
  */
 public class ConcreteFactoryM implements Factory {
     @Override
-    public ElementGame factoryMethod(String name, Color color, Player pl) throws Exception {
+    public ElementGame factoryMethod(String name, Color color, Player pl) throws NPlayerExceededException, IstanceException{
         switch (name) {
             case "pawn":
                 return new Pawn(color, pl);

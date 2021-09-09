@@ -1,6 +1,7 @@
 package Game.GameObjects.Pieces;
 import java.awt.*;
-import Game.GameObjects.Players.Player;
+import Game.GameObjects.Players.*;
+import Game.GraphicObjects.Table.IstanceException;
 
 /**
  * <h1>Checkers Class</h1> 
@@ -19,9 +20,10 @@ public class Checkers extends Piece{
 /**
  * @param colorPiece the color of the checkers piece.
  * @param playerowner the owner player who has the ability to move the piece.
- * @throws Exception CheckersTable getInstance() Exception.
+ * @throws NPlayerExceededException CheckersTable getInstance() Exception.
+ * @throws IstanceException
  */
-    public Checkers(Color colorPiece, Player playerowner) throws Exception{
+    public Checkers(Color colorPiece, Player playerowner) throws NPlayerExceededException, IstanceException{
         super(colorPiece, CHECKERS_POINTS, playerowner);
     }
 

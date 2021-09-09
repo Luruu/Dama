@@ -4,6 +4,7 @@ package Game.GraphicObjects.Table;
 import Game.GameObjects.FactoryM.ConcreteFactoryM;
 import Game.GameObjects.FactoryM.Factory;
 import Game.GameObjects.Pieces.Piece;
+import Game.GameObjects.Players.NPlayerExceededException;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.Start.CheckersStart;
 import Game.Observer.TimerObservable;
@@ -59,11 +60,11 @@ public class CheckersTable extends WindowTable {
     /**
      * Singleton method overload: get the existing instance without specifying unnecessary parameters
      * @return Singleton Instance
-     * @throws Exception if the instance does not exist it must be created using <code>getInstance(final int, final int, boolean)</code>
+     * @throws IstanceException if the instance does not exist it must be created using <code>getInstance(final int, final int, boolean)</code>
      */
-    public static synchronized CheckersTable getInstance() throws Exception {
+    public static synchronized CheckersTable getInstance() throws IstanceException {
         if (Instance == null)
-            throw new Exception("ISTANCE NULL. Please use method: public static synchronized CheckersTable getInstance(<see args into code>)");
+            throw new IstanceException("ISTANCE NULL. Please use method: public static synchronized CheckersTable getInstance(<see args into code>)");
         return Instance;
     }
 
@@ -72,9 +73,11 @@ public class CheckersTable extends WindowTable {
      * @param p1 first player. 
      * @param p2 secondo player.
      * @param timer_value value of the timer.
-     * @throws Exception Exception checkersTable getInstance() 
+     * @throws IstanceException Exception checkersTable getInstance() 
+     * @throws CloneNotSupportedException
+     * @throws NPlayerExceededException
      */
-    public void startGame(Player p1, Player p2, int timer_value) throws Exception  {
+    public void startGame(Player p1, Player p2, int timer_value) throws IstanceException, CloneNotSupportedException, NPlayerExceededException {
         this.p1 = p1;
         this.p2 = p2;
         this.timer_value = timer_value;
