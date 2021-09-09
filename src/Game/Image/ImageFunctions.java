@@ -5,7 +5,10 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-
+/**
+ * <h1>ImageFunctions Interface</h1>
+ * Interface that contains all methods to manage images.
+ */
 public interface ImageFunctions {
 
        public static BufferedImage readFile(String pathRelative){
@@ -20,7 +23,9 @@ public interface ImageFunctions {
     }
     
     /**
-     * this method is necessary to access file on the file system
+     * this method is necessary to access file on the file system.
+     * @param pathRelative path to convert to AbsolutePath
+     * @return absolute path string
      */
     static String getAbsolutePath(String pathRelative){
         String filePath = new File("").getAbsolutePath();
@@ -28,7 +33,12 @@ public interface ImageFunctions {
     }
 
     /**
-     * this method is necessary to access file on the file system
+     * This method scales the image to the desired size.
+     * @return BufferedImage scaled
+     * @param imgIn BufferedImage input
+     * @param wid width BufferedImage scaled oputput 
+     * @param hei height BufferedImage scaled oputput 
+     * @see #scale(String pathAbs, int wid, int hei)
      */
     static BufferedImage scale(BufferedImage imgIn, int wid, int hei) {
         if (imgIn == null)
@@ -46,6 +56,14 @@ public interface ImageFunctions {
         return imgOut;
     } 
 
+    /**
+     * This method scales the image to the desired size.
+     * @return BufferedImage scaled
+     * @param pathAbs path of input BufferedImage 
+     * @param wid width BufferedImage scaled oputput 
+     * @param hei height BufferedImage scaled oputput 
+     * @see #scale(BufferedImage imgIn, int wid, int hei)
+     */
     static BufferedImage scale(String pathAbs, int wid, int hei) {
         BufferedImage imgIn = readFile(pathAbs);
         return scale(imgIn,wid,hei);

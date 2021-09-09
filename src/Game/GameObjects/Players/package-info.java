@@ -1,5 +1,5 @@
 /**
- * contains the Player Class
+ * contains the <b>Player class</b>
  * @version 1.0
  * @since 31-08-2021
  * @author <a href="https://github.com/Luruu">Luca Rubino</a>

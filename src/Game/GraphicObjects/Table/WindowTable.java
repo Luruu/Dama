@@ -85,10 +85,10 @@ public abstract class WindowTable extends GraphicWindow {
     
     /**
      * Scale the size of the game table according to the display on which the game is started.
+     * @return true if windowTable must be centered, false otherwise 
      */
     public boolean scaleDimensionTable(){
         Box.DIM_BOX = 96; //change every time Window Table is showed so I set DIM_BOX to the default value.
-        //centerTableY = true;
         Dimension dimensionTableFrame = new Dimension(N_ROWS * Box.DIM_BOX, N_ROWS * Box.DIM_BOX);
         Dimension dimensionScreenPC = Toolkit.getDefaultToolkit().getScreenSize();
         Boolean dimensions_Too_large = dimensionTableFrame.height > dimensionScreenPC.height || dimensionTableFrame.width > dimensionScreenPC.width;
@@ -235,7 +235,7 @@ public abstract class WindowTable extends GraphicWindow {
 
     /**
      * Set the second player.
-     * @param p1 second player.
+     * @param p2 second player.
      */
     public void setP2(Player p2) {
         this.p2 = p2;

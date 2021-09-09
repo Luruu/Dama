@@ -17,7 +17,7 @@ public class InvokerList {
     /**
      * /**
      * Show board suggestions based on the clicked piece.
-     * @param pClicked clicked piece to move.
+     * @param p clicked piece to move.
      */
     public void suggestions(Piece p){
         command.suggestions(p);
@@ -32,10 +32,10 @@ public class InvokerList {
     
     /**
      * Move a piece from one position to another.
-     * @param r Destination box.
+     * @param box Destination box.
      * @throws Exception exception.
      */
-    public void move(Box b) throws Exception{
-        command.move(b);
+    public void move(Box box) throws Exception{
+        command.move(box);
     }
 }

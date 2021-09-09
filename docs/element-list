@@ -1,7 +1,10 @@
 Game
 Game.GameObjects
+Game.GameObjects.FactoryM
 Game.GameObjects.Pieces
 Game.GameObjects.Players
 Game.GraphicObjects
 Game.GraphicObjects.Start
 Game.GraphicObjects.Table
+Game.Image
+Game.Observer

@@ -11,7 +11,7 @@ import java.awt.*;
 
 /**
  * <h1>Player Class</h1> 
- * This class represents the abstraction of the player,so it encapsulates the click logic.
+ * This class represents the abstraction of the player.
  * @author <a href="https://github.com/Luruu">Luca Rubino</a>
  * @author <a href="https://github.com/RenatoEsposito1999">Renato Esposito</a>
  * @version 1.0

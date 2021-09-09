@@ -26,10 +26,10 @@ public class ConcreteCommand implements Command{
     
     /**
      * Move a piece from one position to another.
-     * @param r Destination box.
+     * @param box Destination box.
      * @throws Exception exception.
      */
-    public void move(Box b) throws Exception{ 
-        checkTable.move(b);
+    public void move(Box box) throws Exception{ 
+        checkTable.move(box);
     }
 }
