@@ -74,8 +74,8 @@ public class CheckersTable extends WindowTable {
      * @param p2 secondo player.
      * @param timer_value value of the timer.
      * @throws IstanceException Exception checkersTable getInstance() 
-     * @throws CloneNotSupportedException
-     * @throws NPlayerExceededException
+     * @throws CloneNotSupportedException Exception
+     * @throws NPlayerExceededException Exception
      */
     public void startGame(Player p1, Player p2, int timer_value) throws IstanceException, CloneNotSupportedException, NPlayerExceededException {
         this.p1 = p1;

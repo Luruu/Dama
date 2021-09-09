@@ -112,9 +112,9 @@ public abstract class WindowTable extends GraphicWindow {
     
     /**
      * This function allows you to initialize the game table.
-     * @throws IstanceException exception
-     * @throws CloneNotSupportedException
-     * @throws NPlayerExceededException
+     * @throws IstanceException Exception
+     * @throws NPlayerExceededException Exception
+     * @throws CloneNotSupportedException Exception
      */
     protected void initializeWindow() throws IstanceException, CloneNotSupportedException, NPlayerExceededException {
         boolean centerScreen = scaleDimensionTable(); //N.B: Game Table sizes are always (DIM * Box.DIM_BOX, DIM * DIM_BOX)

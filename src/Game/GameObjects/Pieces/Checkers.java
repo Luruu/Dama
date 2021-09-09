@@ -20,8 +20,8 @@ public class Checkers extends Piece{
 /**
  * @param colorPiece the color of the checkers piece.
  * @param playerowner the owner player who has the ability to move the piece.
- * @throws NPlayerExceededException CheckersTable getInstance() Exception.
- * @throws IstanceException
+ * @throws IstanceException Exception
+ * @throws NPlayerExceededException Exception
  */
     public Checkers(Color colorPiece, Player playerowner) throws NPlayerExceededException, IstanceException{
         super(colorPiece, CHECKERS_POINTS, playerowner);
