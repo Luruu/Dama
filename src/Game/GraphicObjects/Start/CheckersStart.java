@@ -3,6 +3,9 @@ package Game.GraphicObjects.Start;
 
 import Game.GameObjects.FactoryM.ConcreteFactoryM;
 import Game.GameObjects.FactoryM.Factory;
+import Game.GameObjects.Pieces.Checkers;
+import Game.GameObjects.Pieces.Pawn;
+import Game.GameObjects.Pieces.Wizard;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.GraphicWindow;
 import Game.GraphicObjects.Table.CheckersTable;
@@ -43,7 +46,7 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
     }
 
     /**
-     * Private constructor of the class, it sets the initial panel from which to modify the settings and start the game.
+     * Private constructor of the class, it sets the initial window from which to modify the settings and start the game.
      */
     private CheckersStart(){
         
@@ -83,10 +86,10 @@ public class CheckersStart extends GraphicWindow implements ActionListener {
         addtoCommandsList("game rules");
 
         Dimension Imgdim = new Dimension(38,38);
-        panel.add(new ComponentImage("/images/PawnGreen.png", Imgdim));
-        panel.add(new ComponentImage("/images/CheckersGreen.png", Imgdim));
-        panel.add(new ComponentImage("/images/WizardRed.png", Imgdim));
-        panel.add(new ComponentImage("/images/PawnRed.png", Imgdim));
+        panel.add(new ComponentImage(Pawn.PAWGREEN_Path, Imgdim));
+        panel.add(new ComponentImage(Checkers.CHECKGREEN_Path, Imgdim));
+        panel.add(new ComponentImage(Wizard.WIZRED_Path, Imgdim));
+        panel.add(new ComponentImage(Pawn.PAWRED_Path, Imgdim));
        
 
         for (JComponent jb : jComponentList)

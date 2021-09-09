@@ -11,13 +11,13 @@ public interface Command {
      */
     void suggestions(Piece pClicked);
     /**
-     * Cleans the suggestions of the movements.
+     * Cleans movement suggestions.
      */
     void clear();
     /**
      * Move a piece from one position to another.
-     * @param r Destination box.
+     * @param b Destination box.
      * @throws Exception exception.
      */
-    void move(Box r) throws Exception;
+    void move(Box b) throws Exception;
 }

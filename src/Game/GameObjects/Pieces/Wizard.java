@@ -13,6 +13,8 @@ import Game.GameObjects.Players.Player;
  */
 public class Wizard extends Piece{
     public final static int WIZARD_POINTS = 3;
+    public final static String WIZGREEN_Path    = "/images/WizardGreen.png";
+    public final static String WIZRED_Path      = "/images/WizardRed.png";
     
 /**
  * @param colorPiece the color of the checkers piece.
@@ -45,7 +47,7 @@ public class Wizard extends Piece{
 */
     @Override
     public String getPathIMG(){
-        return (getColor() == Color.red) ? "/images/WizardRed.png" : "/images/WizardGreen.png";
+        return (getColor() == Color.red) ? WIZRED_Path : WIZGREEN_Path;
     }
 
 

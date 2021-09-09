@@ -12,6 +12,8 @@ import Game.GameObjects.Players.Player;
  */
 public class Pawn extends Piece{
     public final static int PAWN_POINTS = 1;
+    public final static String PAWGREEN_Path    = "/images/PawnGreen.png";
+    public final static String PAWRED_Path      = "/images/PawnRed.png";
 
 /**
  * @param c the color of the pawn piece.
@@ -39,6 +41,6 @@ public class Pawn extends Piece{
  */
     @Override
     public String getPathIMG(){
-        return (getColor() == Color.red) ? "/images/PawnRed.png" : "/images/PawnGreen.png";
+        return (getColor() == Color.red) ? PAWRED_Path : PAWGREEN_Path ;
     }
 }

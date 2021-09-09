@@ -12,6 +12,8 @@ import Game.GameObjects.Players.Player;
  */
 public class Checkers extends Piece{
     public final static int CHECKERS_POINTS = 5;
+    public final static String CHECKGREEN_Path    = "/images/CheckersGreen.png";
+    public final static String CHECKRED_Path      = "/images/CheckersRed.png";
 
 
 /**
@@ -47,7 +49,7 @@ public class Checkers extends Piece{
 */
     @Override
     public String getPathIMG(){
-        return (getColor() == Color.red) ? "/images/CheckersRed.png" : "/images/CheckersGreen.png";
+        return (getColor() == Color.red) ? CHECKRED_Path : CHECKGREEN_Path;
     }
 
 }
