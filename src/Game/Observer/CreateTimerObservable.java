@@ -14,9 +14,9 @@ import java.util.concurrent.ThreadPoolExecutor;
  * <h1>TimerObservable</h1>
  * Represents the observervable which starts a TimerObsvervable with a new thread
  */
-public class TimerObservable{
+public class CreateTimerObservable{
     ThreadTimerObservable obv; 
-    public TimerObservable(ArrayList<Observer> players, int index, int timer_value){
+    public CreateTimerObservable(ArrayList<Observer> players, int index, int timer_value){
         final int numThreads = 5;
         ThreadPoolExecutor exec = (ThreadPoolExecutor)Executors.newFixedThreadPool(numThreads);
         obv = new ThreadTimerObservable(players, index, timer_value);

@@ -7,7 +7,7 @@ import Game.GameObjects.Players.NPlayerExceededException;
 import Game.GameObjects.Players.Player;
 import Game.GraphicObjects.GraphicWindow;
 import Game.Observer.Observer;
-import Game.Observer.TimerObservable;
+import Game.Observer.CreateTimerObservable;
 
 import java.awt.*;
 import javax.swing.*;
@@ -63,7 +63,7 @@ public abstract class WindowTable extends GraphicWindow {
     
     protected ArrayList<Observer> observerList = new ArrayList<>();
 
-    protected TimerObservable timer;
+    protected CreateTimerObservable timer;
 
     /**
      * Constructor.
