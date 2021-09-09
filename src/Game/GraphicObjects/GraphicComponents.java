@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
  * <h1>GrapicComponents class</h1>
  * This interface abstracts the concept of graphic component, therefore encapsulates the methods for managing the swing components.
  */
-public interface GraphicComponents extends ImageFunctions {
+public interface GraphicComponents {
     //Add and set a new Frame
     default JFrame addFrame(String titleFrame, int width, int height, Color backGroundColor, boolean resizable, LayoutManager layout, String icon, boolean centerX, boolean centerY, int actionOnExit) {
         JFrame newFrame = new JFrame(titleFrame);
