@@ -2,11 +2,13 @@
 Go in: \Dama
 Use: javadoc -d docs -sourcepath src -subpackages Game
 
+
+
+
 --------------- Compile
 Go in \Dama
 javac -d out -sourcepath src src/Game/Main.java
 
 --------------- Execute
 Go in \Dama
-java Game.Main
 java -cp out 'Game.Main'
