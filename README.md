@@ -1,4 +1,4 @@
-# Checkers Game
+# Checkers Game Revised
  Game of CheckersTable revised for university project by Luca Rubino and Renato Esposito.
 
 <h2>Game Rules: </h2>
