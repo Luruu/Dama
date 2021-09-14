@@ -1,4 +1,5 @@
-# Checkers Game Revised
+<img align="right" width="86" height="86" src="../main/images/CheckersGameIcon.png" >
+# Checkers Game 
  Game of CheckersTable revised for university project by Luca Rubino and Renato Esposito.
 
 <h2>Game Rules: </h2>
@@ -18,9 +19,9 @@ He can eat any other piece.</li>
 
 When a player eats an opponent's piece he scores points based on the piece eaten, in particular:
 <ul>
-<li>Pawn: 1 point.</li>
-<li>Magician: 3 points.</li></li>
-<li>Checkers: 5 points.</li>
+<li><b>Pawn:</b> 1 point.</li>
+<li><b>Magician:</b> 3 points.</li></li>
+<li><b>Checkers:</b> 5 points.</li>
 </ul>
 The game ends when one of the following situations occurs:
 <ol>
