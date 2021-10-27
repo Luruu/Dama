@@ -1,8 +1,8 @@
 # Checkers Game
 <img align="right" width="86" height="86" src="../main/images/CheckersGameIcon.png" >
 
-Game of CheckersTable revised for university project by Luca Rubino and Renato Esposito.
-
+Game of CheckersTable revised for university project by Luca Rubino and Renato Esposito 
+<br>(<a href="https://www.uniparthenope.it/ugov/degreecourse/43357"><i><b>PROGRAMMING III AND PROGRAMMING LABORATORY III</i></b></a> - course of the <b><i><a href="https://www.uniparthenope.it/">Parthenope University of Naples</a></i></strong>).
 <h3>Game Rules: </h3>
 
 Each player has N pieces where N is a number that varies according to size of the playing field that is chosen by the player before starting one match.
