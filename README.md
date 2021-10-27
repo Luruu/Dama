@@ -33,5 +33,5 @@ The timer expires and in this case the winner is determined on the basis of the 
 
 A piece must eat when it can eat to be able to move.<br>
 Player1 always makes the first move.
-<h3>Output Example</h3>
-<img  src="../main/images/example.png" style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+<h3><p align="center">OUTPUT EXAMPLE (Green: Player1, Red: Player2)</p></h3>
+<p align="center"><img  src="../main/images/example.png" style="display: block; margin-left: auto; margin-right: auto; width: 50%;"></p>
