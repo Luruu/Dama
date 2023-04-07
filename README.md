@@ -1,10 +1,11 @@
 # Checkers Game
 <img align="right" width="86" height="86" src="../main/images/CheckersGameIcon.png" >
 
-Game of CheckersTable revised for university project by Luca Rubino and Renato Esposito.
+Game of CheckersTable revised for university project by Luca Rubino and Renato Esposito 
+<br>(<a href="https://www.uniparthenope.it/ugov/degreecourse/43357"><i><b>PROGRAMMING III AND PROGRAMMING LABORATORY III</i></b></a> - course of the <b><i><a href="https://www.uniparthenope.it/">Parthenope University of Naples</a></i></strong>).
 
+## Design Patterns in this project: <i>Singleton, Observer, Factory Method, Memento, Command, Prototype</i>.
 <h3>Game Rules: </h3>
-
 Each player has N pieces where N is a number that varies according to size of the playing field that is chosen by the player before starting one match.
 The following pieces are present on the playing field:
 <ul>
@@ -33,5 +34,5 @@ The timer expires and in this case the winner is determined on the basis of the 
 
 A piece must eat when it can eat to be able to move.<br>
 Player1 always makes the first move.
-<h3>Output Example</h3>
-<img  src="../main/images/example.png" style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+<h3><p align="center">OUTPUT EXAMPLE (Green: Player1, Red: Player2)</p></h3>
+<p align="center"><img  src="../main/images/example.png" style="display: block; margin-left: auto; margin-right: auto; width: 50%;"></p>
