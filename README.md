@@ -3,8 +3,9 @@
 
 Game of CheckersTable revised for university project by Luca Rubino and Renato Esposito 
 <br>(<a href="https://www.uniparthenope.it/ugov/degreecourse/43357"><i><b>PROGRAMMING III AND PROGRAMMING LABORATORY III</i></b></a> - course of the <b><i><a href="https://www.uniparthenope.it/">Parthenope University of Naples</a></i></strong>).
-<h3>Game Rules: </h3>
 
+## Design Patterns in this project: <i>Singleton, Observer, Factory Method, Memento, Command, Prototype</i>.
+<h3>Game Rules: </h3>
 Each player has N pieces where N is a number that varies according to size of the playing field that is chosen by the player before starting one match.
 The following pieces are present on the playing field:
 <ul>
